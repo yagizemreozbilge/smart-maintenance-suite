@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
+  <compounddef id="dir_900ce474183f1558f88cd51ef5f4efb7" kind="dir">
+    <compoundname>src/smart_maintenance_suite/header</compoundname>
+    <innerfile refid="smart__maintenance__suite_8h">smart_maintenance_suite.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/smart_maintenance_suite/header/"/>
+  </compounddef>
+</doxygen>

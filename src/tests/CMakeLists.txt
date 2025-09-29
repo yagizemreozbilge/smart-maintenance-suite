@@ -37,8 +37,8 @@ if(ENABLE_UTILITY)
 	add_subdirectory(utility)
 endif()
 
-# Calculator tests
-if(ENABLE_CALCULATOR)
-	add_subdirectory(calculator)
+# Smart Maintenance tests
+if(ENABLE_SMART_MAINTENANCE_SUITE)
+	add_subdirectory(smart_maintenance_suite)
 endif()
 

@@ -82,14 +82,14 @@ cd ..
 
 
 echo Generate Test Coverage Data for Smart Maintenance Suite
-call OpenCppCoverage.exe --export_type=binary:calculator_tests_unit_win.cov --sources src\calculator\src --sources src\calculator\header --sources src\tests\calculator -- build_win\build\Debug\calculator_tests.exe
+call OpenCppCoverage.exe --export_type=binary:smart_maintenance_suite_tests_unit_win.cov --sources src\smart_maintenance_suite\src --sources src\smart_maintenance_suite\header --sources src\tests\smart_maintenance_suite -- build_win\build\Debug\smart_maintenance_suite_tests.exe
 
 echo Generate Test Coverage Data for Smart Maintenance Suite App and Combine Results
-call OpenCppCoverage.exe --input_coverage=utility_tests_unit_win.cov --input_coverage=smart_maintenance_suite_tests_unit_win.cov --export_type=cobertura:smart_maintenance_suite_app_unit_win_cobertura.xml --sources src\utility\src --sources src\utility\header --sources src\smart_maintenance_suite\src --sources src\calculator\header --sources src\calculatorapp\src --sources src\calculatorapp\header --sources src\tests\utility --sources src\tests\calculator -- build_win\build\Debug\calculatorapp.exe
+call OpenCppCoverage.exe --input_coverage=utility_tests_unit_win.cov --input_coverage=smart_maintenance_suite_tests_unit_win.cov --export_type=cobertura:smart_maintenance_suite_app_unit_win_cobertura.xml --sources src\utility\src --sources src\utility\header --sources src\smart_maintenance_suite\src --sources src\smart_maintenance_suite\header --sources src\smart_maintenance_suite_app\src --sources src\smart_maintenance_suite_app\header --sources src\tests\utility --sources src\tests\smart_maintenance_suite -- build_win\build\Debug\smart_maintenance_suite_app.exe
 
 echo Generate Unit Test Coverage Report
-call reportgenerator "-title:Calculator Library Unit Test Coverage Report (Windows)" "-targetdir:docs/coveragereportlibwin" "-reporttypes:Html" "-reports:**/calculatorapp_unit_win_cobertura.xml" "-sourcedirs:src/utility/src;src/utility/header;src/calculator/src;src/calculator/header;src/calculatorapp/src;src/calculatorapp/header;src/tests/utility;src/tests/calculator" "-filefilters:-*minkernel\*;-*gtest*;-*a\_work\*;-*gtest-*;-*gtest.cc;-*gtest.h;-*build*" "-historydir:report_test_hist_win"
-call reportgenerator "-targetdir:assets/codecoveragelibwin" "-reporttypes:Badges" "-reports:**/calculatorapp_unit_win_cobertura.xml" "-sourcedirs:src/utility/src;src/utility/header;src/calculator/src;src/calculator/header;src/calculatorapp/src;src/calculatorapp/header;src/tests/utility;src/tests/calculator" "-filefilters:-*minkernel\*;-*gtest*;-*a\_work\*;-*gtest-*;-*gtest.cc;-*gtest.h;-*build*"
+call reportgenerator "-title:Smart Maintenance Suite Library Unit Test Coverage Report (Windows)" "-targetdir:docs/coveragereportlibwin" "-reporttypes:Html" "-reports:**/smart_maintenance_suite_app_unit_win_cobertura.xml" "-sourcedirs:src/utility/src;src/utility/header;src/smart_maintenance_suite/src;src/smart_maintenance_suite/header;src/smart_maintenance_suite_app/src;src/smart_maintenance_suite_app/header;src/tests/utility;src/tests/smart_maintenance_suite" "-filefilters:-*minkernel\*;-*gtest*;-*a\_work\*;-*gtest-*;-*gtest.cc;-*gtest.h;-*build*" "-historydir:report_test_hist_win"
+call reportgenerator "-targetdir:assets/codecoveragelibwin" "-reporttypes:Badges" "-reports:**/smart_maintenance_suite_app_unit_win_cobertura.xml" "-sourcedirs:src/utility/src;src/utility/header;src/smart_maintenance_suite/src;src/smart_maintenance_suite/header;src/smart_maintenance_suite_app/src;src/smart_maintenance_suite_app/header;src/tests/utility;src/tests/smart_maintenance_suite" "-filefilters:-*minkernel\*;-*gtest*;-*a\_work\*;-*gtest-*;-*gtest.cc;-*gtest.h;-*build*"
 
 echo Copy the "assets" folder and its contents to "docs" recursively
 call robocopy assets "docs\assets" /E
@@ -122,14 +122,14 @@ tar -czvf release_win\windows-publish-binaries.tar.gz -C publish_win .
 
 echo Package Publish Windows Binaries
 call robocopy src\utility\header "build_win\build\Release" /E
-call robocopy src\calculator\header "build_win\build\Release" /E
-call robocopy src\calculatorapp\header "build_win\build\Release" /E
+call robocopy src\smart_maintenance_suite\header "build_win\build\Release" /E
+call robocopy src\smart_maintenance_suite_app\header "build_win\build\Release" /E
 tar -czvf release_win\windows-release-binaries.tar.gz -C build_win\build\Release .
 
 echo Package Publish Debug Windows Binaries
 call robocopy src\utility\header "build_win\build\Debug" /E
-call robocopy src\calculator\header "build_win\build\Debug" /E
-call robocopy src\calculatorapp\header "build_win\build\Debug" /E
+call robocopy src\smart_maintenance_suite\header "build_win\build\Debug" /E
+call robocopy src\smart_maintenance_suite_app\header "build_win\build\Debug" /E
 tar -czvf release_win\windows-debug-binaries.tar.gz -C build_win\build\Debug .
 
 echo Package Publish Test Coverage Report
