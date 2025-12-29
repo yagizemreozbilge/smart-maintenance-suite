@@ -1,11 +1,11 @@
 /**
- * @file calculator.h
+ * @file smart_maintenance_suite.h
  *
  * @brief Provides functions for math. utilities
  */
 
-#ifndef CALCULATOR_H
-#define CALCULATOR_H
+#ifndef SMART_MAINTENANCE_SUITE_H
+#define SMART_MAINTENANCE_SUITE_H
 
 #include "../../utility/header/commonTypes.h"
 
@@ -56,4 +56,4 @@ class Calculator {
 }
 }
 
-#endif // CALCULATOR_H
+#endif // SMART_MAINTENANCE_SUITE_H

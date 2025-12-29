@@ -1,6 +1,6 @@
 /**
- * @file calculatorapp.cpp
- * @brief A simple program to demonstrate the usage of the calculator model class.
+ * @file smart_maintenance_suite_app.cpp
+ * @brief A simple program to demonstrate the usage of the smart maintenance suite model class.
  *
  * This program process infix notations and calculate operations
  *
@@ -12,7 +12,7 @@
 #include <string>
 #include <sstream>
 #include <stdexcept>
-#include "../../calculator/header/calculator.h"  // Adjust this include path based on your project structure
+#include "../../smart_maintenance_suite/header/smart_maintenance_suite.h"  // Adjust this include path based on your project structure
 
 using namespace Coruh::Calculator;
 

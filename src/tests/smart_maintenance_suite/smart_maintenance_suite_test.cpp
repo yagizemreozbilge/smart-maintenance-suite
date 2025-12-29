@@ -1,7 +1,7 @@
 //#define ENABLE_SMART_MAINTENANCE_SUITE_TEST  // Uncomment this line to enable the Smart Maintenance Suite tests
 
 #include "gtest/gtest.h"
-#include "../../calculator/header/calculator.h"  // Adjust this include path based on your project structure
+#include "../../smart_maintenance_suite/header/smart_maintenance_suite.h"  // Adjust this include path based on your project structure
 
 using namespace Coruh::Calculator;
 

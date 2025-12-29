@@ -1,6 +1,6 @@
 /**
- * @file calculatorapp.h
- * @brief Calculator Application header file
+ * @file smart_maintenance_suite_app.h
+ * @brief Smart Maintenance Suite Application header file
  *
  */
 
