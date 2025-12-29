@@ -1,0 +1,1 @@
+-- This file is a template for 002_seed_data.sql. Content will be filled by yagiz on 2025-12-29.
