@@ -221,13 +221,13 @@ var assemblies = [
   {
     "name": "Default",
     "classes": [
-      { "name": "C:\\Users\\yagiz\\Desktop\\Project\\smart-maintenance-suite\\src\\tests\\smart_maintenance_suite\\smart_maintenance_suite_test.cpp", "rp": "C__Users_yagiz_Desktop_Project_smart_maintenance_se_suite_smart_maintenance_suite_test.cpp.html", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [9], "bch": [], "mch": [], "hc": [{ "et": "9/29/2025 - 8:37:56 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "9/29/2025 - 8:45:08 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }], "metrics": { } },
+      { "name": "C:\\Users\\yagiz\\Desktop\\Project\\smart-maintenance-suite\\src\\tests\\smart_maintenance_suite\\smart_maintenance_suite_test.cpp", "rp": "C__Users_yagiz_Desktop_Project_smart_maintenance_se_suite_smart_maintenance_suite_test.cpp.html", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [9], "bch": [], "mch": [], "hc": [{ "et": "9/29/2025 - 8:37:56 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "9/29/2025 - 8:45:08 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "12/29/2025 - 11:39:39 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "12/29/2025 - 11:43:41 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "12/29/2025 - 11:45:27 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "12/29/2025 - 11:49:48 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "12/29/2025 - 11:52:27 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }, { "et": "12/29/2025 - 11:55:03 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "tm": 0, "mcq": 0 }], "metrics": { } },
     ]},
 ];
 
 var metrics = [];
 
-var historicCoverageExecutionTimes = ["9/29/2025 - 8:37:56 PM"];
+var historicCoverageExecutionTimes = ["12/29/2025 - 11:52:27 PM", "12/29/2025 - 11:49:48 PM", "12/29/2025 - 11:45:27 PM", "12/29/2025 - 11:43:41 PM", "12/29/2025 - 11:39:39 PM", "9/29/2025 - 8:45:08 PM", "9/29/2025 - 8:37:56 PM"];
 
 var riskHotspotMetrics = [
 ];

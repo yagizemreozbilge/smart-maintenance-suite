@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="29" column="27" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="6" bodyend="8"/>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="26" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="6" bodyend="8"/>
       </memberdef>
       <memberdef kind="function" id="class_coruh_1_1_calculator_1_1_calculator_1ad8a28a8b990342d4bfde65ab85ec7596" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="37" column="27" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="10" bodyend="12"/>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="34" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="10" bodyend="12"/>
       </memberdef>
       <memberdef kind="function" id="class_coruh_1_1_calculator_1_1_calculator_1a319373a53b4e84f92c207e4f7bb9dfce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="45" column="27" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="14" bodyend="16"/>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="42" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="14" bodyend="16"/>
       </memberdef>
       <memberdef kind="function" id="class_coruh_1_1_calculator_1_1_calculator_1a7da73cdbcc434a4f28d614f7f036b74a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="55" column="27" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="18" bodyend="23"/>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="52" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="18" bodyend="24"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -193,7 +193,7 @@
         <link refid="class_coruh_1_1_calculator_1_1_calculator"/>
       </node>
     </collaborationgraph>
-    <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="20" column="9" bodyfile="src/smart_maintenance_suite/header/smart_maintenance_suite.h" bodystart="21" bodyend="58"/>
+    <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="18" column="1" bodyfile="src/smart_maintenance_suite/header/smart_maintenance_suite.h" bodystart="18" bodyend="55"/>
     <listofallmembers>
       <member refid="class_coruh_1_1_calculator_1_1_calculator_1a54ca827c4b408c795576d48503eee6aa" prot="public" virt="non-virtual"><scope>Coruh::Calculator::Calculator</scope><name>add</name></member>
       <member refid="class_coruh_1_1_calculator_1_1_calculator_1a7da73cdbcc434a4f28d614f7f036b74a" prot="public" virt="non-virtual"><scope>Coruh::Calculator::Calculator</scope><name>divide</name></member>

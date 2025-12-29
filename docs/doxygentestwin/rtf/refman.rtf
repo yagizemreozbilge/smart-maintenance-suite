@@ -637,7 +637,7 @@ src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp File Referenc
 {\bkmkend AAAAAAAAAB}
 {
 \pard\plain \s18\widctlpar\fs22\cgrid {\f2 #include "gtest/gtest.h"}\par
-{\f2 #include "../../calculator/header/calculator.h"}\par
+{\f2 #include "../../smart_maintenance_suite/header/smart_maintenance_suite.h"}\par
 }
 {
 \pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid Include dependency graph for smart_maintenance_suite_test.cpp:{
@@ -832,13 +832,13 @@ smart_maintenance_suite_test.cpp\par \pard\plain
 {
 \par
 \pard\plain \s40\li0\widctlpar\adjustright \shading1000\cbpat8 \f2\fs16\cgrid {\bkmkstart AAAAAAAAAC}{\bkmkend AAAAAAAAAC}
-00001 {\cf20 //#define ENABLE_CALCULATOR_TEST  // Uncomment this line to enable the Calculator tests}\par
+00001 {\cf20 //#define ENABLE_SMART_MAINTENANCE_SUITE_TEST  // Uncomment this line to enable the Smart Maintenance Suite tests}\par
 {\bkmkstart AAAAAAAAAD}{\bkmkend AAAAAAAAAD}
 00002 \par
 {\bkmkstart AAAAAAAAAE}{\bkmkend AAAAAAAAAE}
 00003 {\cf21 #include "gtest/gtest.h"}\par
 {\bkmkstart AAAAAAAAAF}{\bkmkend AAAAAAAAAF}
-00004 {\cf21 #include "../../calculator/header/calculator.h"}  {\cf20 // Adjust this include path based on your project structure}\par
+00004 {\cf21 #include "../../smart_maintenance_suite/header/smart_maintenance_suite.h"}  {\cf20 // Adjust this include path based on your project structure}\par
 {\bkmkstart AAAAAAAAAG}{\bkmkend AAAAAAAAAG}
 00005 \par
 {\bkmkstart AAAAAAAAAH}{\bkmkend AAAAAAAAAH}
@@ -850,25 +850,25 @@ smart_maintenance_suite_test.cpp\par \pard\plain
  {\cf17 class }{\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAK" }{}}{\fldrslt {\cs37\ul\cf2 CalculatorTest}}}
  : {\cf17 public} ::testing::Test \{\par
 {\bkmkstart AAAAAAAAAL}{\bkmkend AAAAAAAAAL}
-00009 {\cf17 protected}:\par
+00009  {\cf17 protected}:\par
 {\bkmkstart AAAAAAAAAM}{\bkmkend AAAAAAAAAM}
 {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAN" }{}}{\fldrslt {\cs37\ul\cf2 00010}}}
-     {\cf18 void} {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAN" }{}}{\fldrslt {\cs37\ul\cf2 SetUp}}}
+   {\cf18 void} {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAN" }{}}{\fldrslt {\cs37\ul\cf2 SetUp}}}
 (){\cf17  override }\{\par
 {\bkmkstart AAAAAAAAAO}{\bkmkend AAAAAAAAAO}
-00011         {\cf20 // Setup test data}\par
+00011     {\cf20 // Setup test data}\par
 {\bkmkstart AAAAAAAAAP}{\bkmkend AAAAAAAAAP}
-00012     \}\par
+00012   \}\par
 {\bkmkstart AAAAAAAAAQ}{\bkmkend AAAAAAAAAQ}
 00013 \par
 {\bkmkstart AAAAAAAAAR}{\bkmkend AAAAAAAAAR}
 {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAS" }{}}{\fldrslt {\cs37\ul\cf2 00014}}}
-     {\cf18 void} {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAS" }{}}{\fldrslt {\cs37\ul\cf2 TearDown}}}
+   {\cf18 void} {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAS" }{}}{\fldrslt {\cs37\ul\cf2 TearDown}}}
 (){\cf17  override }\{\par
 {\bkmkstart AAAAAAAAAT}{\bkmkend AAAAAAAAAT}
-00015         {\cf20 // Clean up test data}\par
+00015     {\cf20 // Clean up test data}\par
 {\bkmkstart AAAAAAAAAU}{\bkmkend AAAAAAAAAU}
-00016     \}\par
+00016   \}\par
 {\bkmkstart AAAAAAAAAV}{\bkmkend AAAAAAAAAV}
 00017 \};\par
 {\bkmkstart AAAAAAAAAW}{\bkmkend AAAAAAAAAW}
@@ -879,9 +879,9 @@ smart_maintenance_suite_test.cpp\par \pard\plain
 ({\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAK" }{}}{\fldrslt {\cs37\ul\cf2 CalculatorTest}}}
 , TestAdd) \{\par
 {\bkmkstart AAAAAAAAAZ}{\bkmkend AAAAAAAAAZ}
-00020     {\cf18 double} result = Calculator::add(5.0, 3.0);\par
+00020   {\cf18 double} result = Calculator::add(5.0, 3.0);\par
 {\bkmkstart AAAAAAAABA}{\bkmkend AAAAAAAABA}
-00021     EXPECT_DOUBLE_EQ(result, 8.0);\par
+00021   EXPECT_DOUBLE_EQ(result, 8.0);\par
 {\bkmkstart AAAAAAAABB}{\bkmkend AAAAAAAABB}
 00022 \}\par
 {\bkmkstart AAAAAAAABC}{\bkmkend AAAAAAAABC}
@@ -892,9 +892,9 @@ smart_maintenance_suite_test.cpp\par \pard\plain
 ({\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAK" }{}}{\fldrslt {\cs37\ul\cf2 CalculatorTest}}}
 , TestSubtract) \{\par
 {\bkmkstart AAAAAAAABF}{\bkmkend AAAAAAAABF}
-00025     {\cf18 double} result = Calculator::subtract(5.0, 3.0);\par
+00025   {\cf18 double} result = Calculator::subtract(5.0, 3.0);\par
 {\bkmkstart AAAAAAAABG}{\bkmkend AAAAAAAABG}
-00026     EXPECT_DOUBLE_EQ(result, 2.0);\par
+00026   EXPECT_DOUBLE_EQ(result, 2.0);\par
 {\bkmkstart AAAAAAAABH}{\bkmkend AAAAAAAABH}
 00027 \}\par
 {\bkmkstart AAAAAAAABI}{\bkmkend AAAAAAAABI}
@@ -905,9 +905,9 @@ smart_maintenance_suite_test.cpp\par \pard\plain
 ({\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAK" }{}}{\fldrslt {\cs37\ul\cf2 CalculatorTest}}}
 , TestMultiply) \{\par
 {\bkmkstart AAAAAAAABL}{\bkmkend AAAAAAAABL}
-00030     {\cf18 double} result = Calculator::multiply(5.0, 3.0);\par
+00030   {\cf18 double} result = Calculator::multiply(5.0, 3.0);\par
 {\bkmkstart AAAAAAAABM}{\bkmkend AAAAAAAABM}
-00031     EXPECT_DOUBLE_EQ(result, 15.0);\par
+00031   EXPECT_DOUBLE_EQ(result, 15.0);\par
 {\bkmkstart AAAAAAAABN}{\bkmkend AAAAAAAABN}
 00032 \}\par
 {\bkmkstart AAAAAAAABO}{\bkmkend AAAAAAAABO}
@@ -918,9 +918,9 @@ smart_maintenance_suite_test.cpp\par \pard\plain
 ({\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAK" }{}}{\fldrslt {\cs37\ul\cf2 CalculatorTest}}}
 , TestDivide) \{\par
 {\bkmkstart AAAAAAAABR}{\bkmkend AAAAAAAABR}
-00035     {\cf18 double} result = Calculator::divide(6.0, 3.0);\par
+00035   {\cf18 double} result = Calculator::divide(6.0, 3.0);\par
 {\bkmkstart AAAAAAAABS}{\bkmkend AAAAAAAABS}
-00036     EXPECT_DOUBLE_EQ(result, 2.0);\par
+00036   EXPECT_DOUBLE_EQ(result, 2.0);\par
 {\bkmkstart AAAAAAAABT}{\bkmkend AAAAAAAABT}
 00037 \}\par
 {\bkmkstart AAAAAAAABU}{\bkmkend AAAAAAAABU}
@@ -931,7 +931,7 @@ smart_maintenance_suite_test.cpp\par \pard\plain
 ({\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAAAK" }{}}{\fldrslt {\cs37\ul\cf2 CalculatorTest}}}
 , TestDivideByZero) \{\par
 {\bkmkstart AAAAAAAABX}{\bkmkend AAAAAAAABX}
-00040     EXPECT_THROW(Calculator::divide(5.0, 0.0), std::invalid_argument);\par
+00040   EXPECT_THROW(Calculator::divide(5.0, 0.0), std::invalid_argument);\par
 {\bkmkstart AAAAAAAABY}{\bkmkend AAAAAAAABY}
 00041 \}\par
 {\bkmkstart AAAAAAAABZ}{\bkmkend AAAAAAAABZ}
@@ -939,17 +939,17 @@ smart_maintenance_suite_test.cpp\par \pard\plain
 {\bkmkstart AAAAAAAACA}{\bkmkend AAAAAAAACA}
 {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAACB" }{}}{\fldrslt {\cs37\ul\cf2 00050}}}
  {\cf18 int} {\field {\*\fldinst { HYPERLINK  \\l "AAAAAAAACB" }{}}{\fldrslt {\cs37\ul\cf2 main}}}
-({\cf18 int} argc, {\cf18 char}** argv) \{\par
+({\cf18 int} argc, {\cf18 char} **argv) \{\par
 {\bkmkstart AAAAAAAACC}{\bkmkend AAAAAAAACC}
-00051 {\cf21 #ifdef ENABLE_CALCULATOR_TEST}\par
+00051 {\cf21 #ifdef ENABLE_SMART_MAINTENANCE_SUITE_TEST}\par
 {\bkmkstart AAAAAAAACD}{\bkmkend AAAAAAAACD}
-00052     ::testing::InitGoogleTest(&argc, argv);\par
+00052   ::testing::InitGoogleTest(&argc, argv);\par
 {\bkmkstart AAAAAAAACE}{\bkmkend AAAAAAAACE}
-00053     {\cf19 return} RUN_ALL_TESTS();\par
+00053   {\cf19 return} RUN_ALL_TESTS();\par
 {\bkmkstart AAAAAAAACF}{\bkmkend AAAAAAAACF}
 00054 {\cf21 #else}\par
 {\bkmkstart AAAAAAAACG}{\bkmkend AAAAAAAACG}
-00055     {\cf19 return} 0;\par
+00055   {\cf19 return} 0;\par
 {\bkmkstart AAAAAAAACH}{\bkmkend AAAAAAAACH}
 00056 {\cf21 #endif}\par
 {\bkmkstart AAAAAAAACI}{\bkmkend AAAAAAAACI}
