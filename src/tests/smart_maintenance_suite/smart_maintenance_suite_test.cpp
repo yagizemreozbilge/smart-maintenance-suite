@@ -1,4 +1,4 @@
-//#define ENABLE_CALCULATOR_TEST  // Uncomment this line to enable the Calculator tests
+//#define ENABLE_SMART_MAINTENANCE_SUITE_TEST  // Uncomment this line to enable the Smart Maintenance Suite tests
 
 #include "gtest/gtest.h"
 #include "../../calculator/header/calculator.h"  // Adjust this include path based on your project structure
@@ -48,7 +48,7 @@ TEST_F(CalculatorTest, TestDivideByZero) {
  * @return int The exit status of the program.
  */
 int main(int argc, char **argv) {
-#ifdef ENABLE_CALCULATOR_TEST
+#ifdef ENABLE_SMART_MAINTENANCE_SUITE_TEST
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 #else
