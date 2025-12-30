@@ -5,6 +5,15 @@
 #include <stdbool.h>
 #include "../../common/types.h"
 
+// Check if Windows
+#if defined(_WIN32) || defined(_WIN64)
+  #include <windows.h>
+  typedef CRITICAL_SECTION Mutex;
+#else
+  #include <pthread.h>
+  typedef pthread_mutex_t Mutex;
+#endif
+
 // Fixed size for factory scenario
 #define MAX_QUEUE_SIZE 100
 
@@ -16,9 +25,8 @@ typedef struct {
   int tail;  // Write index
   int count; // Current element count
 
-  // Simple lock simulation for thread safety (pthread_mutex_t would be used in real implementation)
-  // Keeping it logical for now as you are learning C.
-  int lock;
+  // Mutex for Thread Safety
+  Mutex lock;
 } Queue;
 
 // Function Prototypes
@@ -28,5 +36,8 @@ bool isQueueFull(Queue *q);
 bool enqueue(Queue *q, SensorData data);
 bool dequeue(Queue *q, SensorData *outData); // Extracts data via pointer
 int getQueueSize(Queue *q);
+
+// Helper for cleaning up
+void destroyQueue(Queue *q);
 
 #endif

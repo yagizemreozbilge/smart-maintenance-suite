@@ -3,17 +3,56 @@
 #include <stdlib.h>
 #include "queue.h"
 
+// Internal Helper for Mutex
+static void lockMutex(Mutex *m) {
+#if defined(_WIN32) || defined(_WIN64)
+  EnterCriticalSection(m);
+#else
+  pthread_mutex_lock(m);
+#endif
+}
+
+static void unlockMutex(Mutex *m) {
+#if defined(_WIN32) || defined(_WIN64)
+  LeaveCriticalSection(m);
+#else
+  pthread_mutex_unlock(m);
+#endif
+}
+
+static void initMutex(Mutex *m) {
+#if defined(_WIN32) || defined(_WIN64)
+  InitializeCriticalSection(m);
+#else
+  pthread_mutex_init(m, NULL);
+#endif
+}
+
+static void destroyMutex(Mutex *m) {
+#if defined(_WIN32) || defined(_WIN64)
+  DeleteCriticalSection(m);
+#else
+  pthread_mutex_destroy(m);
+#endif
+}
+
 // Function to initialize the queue
 void initQueue(Queue *q) {
   q->head = 0;
   q->tail = 0;
   q->count = 0;
-  q->lock = 0; // Lock is open
+  // Initialize standard mutex
+  initMutex(&q->lock);
 }
 
-// Is Queue empty?
+// Helper to destroy queue resources
+void destroyQueue(Queue *q) {
+  destroyMutex(&q->lock);
+}
+
+// Is Queue empty? (Not thread-safe on its own, usually called within lock or for checks)
+// But for strict safety, we can lock it too.
 bool isQueueEmpty(Queue *q) {
-  // Checking count is sufficient
   return (q->count == 0);
 }
 
@@ -22,46 +61,48 @@ bool isQueueFull(Queue *q) {
   return (q->count == MAX_QUEUE_SIZE);
 }
 
-// Enqueue element (Thread-safe simulation)
+// Enqueue element (Thread-safe)
 bool enqueue(Queue *q, SensorData data) {
-  // 1. LOCK (Mutex Lock)
-  // pthread_mutex_lock(&q->lock);
+  lockMutex(&q->lock);
+
   if (isQueueFull(q)) {
     printf("ERROR: Queue is full! Data lost: %.2f\n", data.value);
-    // UNLOCK
+    unlockMutex(&q->lock);
     return false;
   }
 
-  // 2. Write data to tail
+  // Write data to tail
   q->items[q->tail] = data;
-  // 3. Circular Buffer logic: Wrap around if at end
+  // Circular Buffer logic
   q->tail = (q->tail + 1) % MAX_QUEUE_SIZE;
-  // 4. Increment count
   q->count++;
-  // 5. UNLOCK (Mutex Unlock)
-  // pthread_mutex_unlock(&q->lock);
+  unlockMutex(&q->lock);
   return true;
 }
 
-// Dequeue element
+// Dequeue element (Thread-safe)
 bool dequeue(Queue *q, SensorData *outData) {
-  // LOCK
+  lockMutex(&q->lock);
+
   if (isQueueEmpty(q)) {
-    printf("ERROR: Queue is empty, cannot read.\n");
-    // UNLOCK
+    // printf("Queue is empty.\n"); // Logging might be noisy
+    unlockMutex(&q->lock);
     return false;
   }
 
-  // 1. Read data from head
+  // Read data from head
   *outData = q->items[q->head];
-  // 2. Circular Buffer logic: Advance head
+  // Circular Buffer logic
   q->head = (q->head + 1) % MAX_QUEUE_SIZE;
-  // 3. Decrement count
   q->count--;
-  // UNLOCK
+  unlockMutex(&q->lock);
   return true;
 }
 
 int getQueueSize(Queue *q) {
-  return q->count;
+  int size;
+  lockMutex(&q->lock);
+  size = q->count;
+  unlockMutex(&q->lock);
+  return size;
 }
