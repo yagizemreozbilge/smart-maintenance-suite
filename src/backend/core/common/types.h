@@ -28,4 +28,11 @@ typedef struct {
   char timestamp[30];  // Operation time
 } Operation;
 
+// Task Structure for Priority Queue (Heap)
+typedef struct {
+  int id;          // Task ID
+  int priority;    // 0-100 (100 = Highest Priority)
+  time_t timestamp;// Creation time (Tie-breaker: Older is more urgent)
+} Task;
+
 #endif
