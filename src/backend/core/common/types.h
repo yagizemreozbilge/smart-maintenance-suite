@@ -35,4 +35,13 @@ typedef struct {
   time_t timestamp;// Creation time (Tie-breaker: Older is more urgent)
 } Task;
 
+// Machine Structure for Inventory (BST)
+typedef struct {
+  int machine_id;          // Unique Key
+  char name[50];           // e.g., "CNC-Machine-01"
+  char location[50];       // e.g., "Zone-A, Floor-2"
+  char last_maintenance[20]; // e.g., "2025-01-01"
+  int service_interval_days; // e.g., 90
+} Machine;
+
 #endif
