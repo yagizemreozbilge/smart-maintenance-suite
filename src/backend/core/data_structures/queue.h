@@ -3,7 +3,7 @@
 #define QUEUE_H
 
 #include <stdbool.h>
-#include "../../common/types.h"
+#include "../common/types.h"
 
 // Check if Windows
 #if defined(_WIN32) || defined(_WIN64)

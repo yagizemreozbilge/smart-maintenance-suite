@@ -60,6 +60,18 @@ bool addDependency(Graph *g, int from_id, int to_id) {
   return true;
 }
 
+bool removeDependency(Graph *g, int from_id, int to_id) {
+  int u = getIndex(g, from_id);
+  int v = getIndex(g, to_id);
+
+  if(u == -1 || v == -1) {
+    return false;
+  }
+
+  g->adjMatrix[u][v] = 0;
+  return true;
+}
+
 bool hasDependency(Graph *g, int from_id, int to_id) {
   int u = getIndex(g, from_id);
   int v = getIndex(g, to_id);

@@ -3,7 +3,7 @@
 #define HEAP_H
 
 #include <stdbool.h>
-#include "../../common/types.h"
+#include "../common/types.h"
 
 #define MAX_HEAP_SIZE 100
 

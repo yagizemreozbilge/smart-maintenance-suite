@@ -3,7 +3,7 @@
 #define STACK_H
 
 #include <stdbool.h>
-#include "../../common/types.h"
+#include "../common/types.h"
 
 // Max Undo Limit (User decision: 5)
 #define MAX_UNDO_LEVEL 5

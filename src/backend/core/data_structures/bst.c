@@ -97,3 +97,17 @@ void printInventory(BST *tree) {
   printRecursive(tree->root);
   printf("----------------------------------------\n");
 }
+
+static void destroyRecursive(BSTNode *node) {
+  if (node != NULL) {
+    destroyRecursive(node->left);
+    destroyRecursive(node->right);
+    free(node);
+  }
+}
+
+void destroyBST(BST *tree) {
+  destroyRecursive(tree->root);
+  tree->root = NULL;
+  tree->count = 0;
+}

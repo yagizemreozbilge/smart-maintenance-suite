@@ -3,7 +3,7 @@
 #define BST_H
 
 #include <stdbool.h>
-#include "../../common/types.h"
+#include "../common/types.h"
 
 // Binary Search Tree Node
 typedef struct BSTNode {

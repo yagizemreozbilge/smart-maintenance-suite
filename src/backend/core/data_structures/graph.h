@@ -3,7 +3,7 @@
 #define GRAPH_H
 
 #include <stdbool.h>
-#include "../../common/types.h"
+#include "../common/types.h"
 
 // Fixed max machines for Matrix implementation
 #define MAX_MACHINES 100
