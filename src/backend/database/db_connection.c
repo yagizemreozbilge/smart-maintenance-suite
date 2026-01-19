@@ -72,7 +72,7 @@ typedef struct {
   DatabaseConfig cfg;                /* stored so we can lazily create connections */
 } ConnectionPool;
 
-/* --- 5.5. Bekleme Kuyruğu Yapısı (FIFO için) --- */
+/* --- FIFO Queue Structure for Waiting Threads --- */
 typedef struct WaitNode {
   pthread_cond_t cond;
   struct WaitNode *next;
