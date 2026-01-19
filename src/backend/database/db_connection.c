@@ -1,1 +1,345 @@
-/* This file is a template for db_connection.c. Content will be filled by yagiz on 2025-12-29. */
+/*
+ * db_connection.c
+ * ----------------
+ * A learning‑focused implementation of a PostgreSQL connection pool.
+ * The code is heavily commented so that a newcomer can follow each
+ * design decision and understand how the pool works in a real‑world
+ * factory setting (50+ machines sending sensor data).
+ *
+ * NOTE: This file pairs with `db_connection.h` which declares the public
+ * API and data structures.  For brevity the header is not reproduced
+ * here – the important parts are duplicated as static definitions.
+ */
+
+/* ------------------------------------------------------------ */
+/* 1.  Standard library includes                                 */
+/* ------------------------------------------------------------ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <pthread.h>
+#include <libpq-fe.h>          /* libpq – PostgreSQL C client library */
+
+/* ------------------------------------------------------------ */
+/* 2.  Pool‑exhaustion policy enum (public in the header)      */
+/* ------------------------------------------------------------ */
+typedef enum {
+  BLOCK_WITH_TIMEOUT,   /* Wait up to a timeout, then fail */
+  QUEUE_REQUESTS,       /* Enqueue the caller and wake later   */
+  FAIL_FAST             /* Return NULL immediately            */
+} PoolExhaustionPolicy;
+
+/* ------------------------------------------------------------ */
+/* 3.  Configuration structure – normally filled from .env      */
+/* ------------------------------------------------------------ */
+typedef struct {
+  char host[64];
+  int  port;
+  char dbname[64];
+  char user[64];
+  char password[64];   /* kept only while building the conn string */
+  char sslmode[16];
+  int  connect_timeout; /* seconds */
+} DatabaseConfig;
+
+/* ------------------------------------------------------------ */
+/* 4.  Per‑connection wrapper                                   */
+/* ------------------------------------------------------------ */
+typedef struct {
+  PGconn *pg_conn;   /* opaque libpq connection handle */
+  bool    in_use;    /* true while handed out to a caller */
+  int     index;     /* position inside the pool array – O(1) release */
+} DBConnection;
+
+/* ------------------------------------------------------------ */
+/* 5.  The pool structure (private – defined here for simplicity) */
+/* ------------------------------------------------------------ */
+typedef struct {
+  DBConnection *connections;          /* array of size max_size */
+  int           max_size;            /* e.g. 25 */
+  int           min_size;            /* e.g. 5  */
+  int           used_cnt;            /* how many are currently in_use */
+  int          *free_stack;          /* stack of free indices */
+  int           free_top;            /* index of the top element */
+  pthread_mutex_t lock;              /* protects all mutable fields */
+  pthread_cond_t  free_cond;         /* signalled when a slot becomes free */
+  PoolExhaustionPolicy policy;       /* chosen by the integrator */
+  int           timeout_ms;          /* used when policy == BLOCK_WITH_TIMEOUT */
+  DatabaseConfig cfg;                /* stored so we can lazily create connections */
+} ConnectionPool;
+
+/* ------------------------------------------------------------ */
+/* 6.  Global pool instance – one pool per process                */
+/* ------------------------------------------------------------ */
+static ConnectionPool g_pool = {0};
+
+/* ------------------------------------------------------------ */
+/* 7.  Helper: build a libpq connection string from DatabaseConfig */
+/* ------------------------------------------------------------ */
+static char *build_conn_str(const DatabaseConfig *cfg) {
+  /* The string is allocated on the heap; the caller must free it. */
+  size_t needed = 256 + strlen(cfg->host) + strlen(cfg->dbname) +
+                  strlen(cfg->user) + strlen(cfg->password) + strlen(cfg->sslmode);
+  char *buf = (char *)malloc(needed);
+
+  if (!buf) return NULL;
+
+  snprintf(buf, needed,
+           "host=%s port=%d dbname=%s user=%s password=%s sslmode=%s connect_timeout=%d",
+           cfg->host, cfg->port, cfg->dbname, cfg->user, cfg->password,
+           cfg->sslmode, cfg->connect_timeout);
+  return buf;
+}
+
+/* ------------------------------------------------------------ */
+/* 8.  Stack utilities – very small, lock‑free because the pool lock
+ *    already protects them.
+ * ------------------------------------------------------------ */
+static inline void stack_push(int *stack, int *top, int value) {
+  stack[(*top)++] = value;   /* store then increment */
+}
+
+static inline int stack_pop(int *stack, int *top) {
+  return stack[--(*top)];    /* decrement then retrieve */
+}
+
+static inline bool stack_is_empty(int top) {
+  return top == 0;
+}
+
+/* ------------------------------------------------------------ */
+/* 9.  Public API – initialise the pool                         */
+/* ------------------------------------------------------------ */
+ConnectionPool *db_pool_init(const DatabaseConfig *cfg,
+                             PoolExhaustionPolicy policy,
+                             int timeout_ms) {
+  /* 1️ Allocate the connection array */
+  g_pool.max_size = 25;          /* hard‑coded for the demo */
+  g_pool.min_size = 5;
+  g_pool.used_cnt = 0;
+  g_pool.policy    = policy;
+  g_pool.timeout_ms = timeout_ms;
+  g_pool.cfg = *cfg;             /* copy – we own the data */
+  g_pool.connections = calloc(g_pool.max_size, sizeof(DBConnection));
+
+  if (!g_pool.connections) return NULL;
+
+  /* 2️ Allocate the free‑slot stack (size = max_size) */
+  g_pool.free_stack = malloc(g_pool.max_size *sizeof(int));
+
+  if (!g_pool.free_stack) {
+    free(g_pool.connections);
+    return NULL;
+  }
+
+  g_pool.free_top = 0;
+  /* 3️ Initialise mutex / condition variable */
+  pthread_mutex_init(&g_pool.lock, NULL);
+  pthread_cond_init(&g_pool.free_cond, NULL);
+  /* 4 Eagerly create the *minimum* number of connections */
+  char *conn_str = build_conn_str(&g_pool.cfg);
+
+  if (!conn_str) return NULL;   /* out‑of‑memory */
+
+  for (int i = 0; i < g_pool.min_size; ++i) {
+    PGconn *c = PQconnectdb(conn_str);
+
+    if (PQstatus(c) != CONNECTION_OK) {
+      fprintf(stderr, "[db_pool_init] failed to connect: %s\n", PQerrorMessage(c));
+      PQfinish(c);
+      continue;   /* we keep the slot NULL – lazy creation later */
+    }
+
+    g_pool.connections[i].pg_conn = c;
+    g_pool.connections[i].in_use = false;
+    g_pool.connections[i].index   = i;
+    stack_push(g_pool.free_stack, &g_pool.free_top, i);
+  }
+
+  free(conn_str);
+
+  /* 5️ Remaining slots stay NULL (lazy) */
+  for (int i = g_pool.min_size; i < g_pool.max_size; ++i) {
+    g_pool.connections[i].pg_conn = NULL;
+    g_pool.connections[i].in_use = false;
+    g_pool.connections[i].index   = i;
+  }
+
+  return &g_pool;
+}
+
+/* ------------------------------------------------------------ */
+/* 10. Acquire a connection – respects the exhaustion policy      */
+/* ------------------------------------------------------------ */
+DBConnection *db_pool_acquire(void) {
+  pthread_mutex_lock(&g_pool.lock);
+
+  /* Fast path – a free slot is already on the stack */
+  if (!stack_is_empty(g_pool.free_top)) {
+    int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
+    DBConnection *c = &g_pool.connections[idx];
+    c->in_use = true;
+    g_pool.used_cnt++;
+    pthread_mutex_unlock(&g_pool.lock);
+    return c;
+  }
+
+  /* No free slot – try lazy creation if we still have capacity */
+  for (int i = g_pool.min_size; i < g_pool.max_size; ++i) {
+    if (g_pool.connections[i].pg_conn == NULL) {
+      char *cs = build_conn_str(&g_pool.cfg);
+
+      if (!cs) break;   /* out‑of‑memory */
+
+      PGconn *c = PQconnectdb(cs);
+      free(cs);
+
+      if (PQstatus(c) != CONNECTION_OK) {
+        fprintf(stderr, "[db_pool_acquire] lazy connect failed: %s\n", PQerrorMessage(c));
+        PQfinish(c);
+        continue;   /* treat as exhausted for now */
+      }
+
+      g_pool.connections[i].pg_conn = c;
+      g_pool.connections[i].in_use = true;
+      g_pool.connections[i].index   = i;
+      g_pool.used_cnt++;
+      pthread_mutex_unlock(&g_pool.lock);
+      return &g_pool.connections[i];
+    }
+  }
+
+  /* -------------------------------------------------------- */
+  /* 3 Pool exhausted – apply the selected policy            */
+  /* -------------------------------------------------------- */
+  switch (g_pool.policy) {
+    case BLOCK_WITH_TIMEOUT: {
+      /* Dynamically adjust timeout based on current load.
+       * The more connections in use, the longer we are willing to wait.
+       * Simple heuristic: base_timeout * (1 + used_cnt / max_size). */
+      double load_factor = (double)g_pool.used_cnt / (double)g_pool.max_size;
+      int effective_timeout_ms = (int)(g_pool.timeout_ms * (1.0 + load_factor));
+      struct timespec ts;
+      clock_gettime(CLOCK_REALTIME, &ts);
+      ts.tv_sec  += effective_timeout_ms / 1000;
+      ts.tv_nsec += (effective_timeout_ms % 1000) * 1000000;
+
+      if (ts.tv_nsec >= 1000000000) {
+        ts.tv_sec++;
+        ts.tv_nsec -= 1000000000;
+      }
+
+      /* Measure how long we actually waited. */
+      struct timespec wait_start, wait_end;
+      clock_gettime(CLOCK_REALTIME, &wait_start);
+      int rc = 0;
+
+      while (rc != ETIMEDOUT && stack_is_empty(g_pool.free_top)) {
+        rc = pthread_cond_timedwait(&g_pool.free_cond, &g_pool.lock, &ts);
+      }
+
+      clock_gettime(CLOCK_REALTIME, &wait_end);
+      double waited_ms = (wait_end.tv_sec - wait_start.tv_sec) * 1000.0 +
+                         (wait_end.tv_nsec - wait_start.tv_nsec) / 1000000.0;
+      g_pool.total_wait_ms += waited_ms;
+
+      if (!stack_is_empty(g_pool.free_top)) {
+        int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
+        DBConnection *c = &g_pool.connections[idx];
+        c->in_use = true;
+        g_pool.used_cnt++;
+        g_pool.acquire_count++;
+        pthread_mutex_unlock(&g_pool.lock);
+        return c;
+      }
+
+      /* timeout – fall through to failure */
+      break;
+    }
+
+    case QUEUE_REQUESTS: {
+      /* Very simple queue implementation: we block on the same
+       * condition variable until a slot becomes free.  In a real
+       * system you would keep a FIFO of waiting threads; here we
+       * just wait – the effect is the same for a single caller. */
+      while (stack_is_empty(g_pool.free_top)) {
+        pthread_cond_wait(&g_pool.free_cond, &g_pool.lock);
+      }
+
+      int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
+      DBConnection *c = &g_pool.connections[idx];
+      c->in_use = true;
+      g_pool.used_cnt++;
+      pthread_mutex_unlock(&g_pool.lock);
+      return c;
+    }
+
+    case FAIL_FAST:
+    default:
+      /* Immediate failure – caller must decide what to do */
+      break;
+  }
+
+  pthread_mutex_unlock(&g_pool.lock);
+  return NULL;   /* pool exhausted and policy dictated failure */
+}
+
+/* ------------------------------------------------------------ */
+/* 11. Release a connection back to the pool                     */
+/* ------------------------------------------------------------ */
+void db_pool_release(DBConnection *conn) {
+  if (!conn) return;
+
+  pthread_mutex_lock(&g_pool.lock);
+  int idx = conn->index;
+  conn->in_use = false;
+  stack_push(g_pool.free_stack, &g_pool.free_top, idx);
+  g_pool.used_cnt--;
+  g_pool.release_count++;
+  /* Wake one waiting thread (if any) */
+  pthread_cond_signal(&g_pool.free_cond);
+  pthread_mutex_unlock(&g_pool.lock);
+}
+
+/* ------------------------------------------------------------ */
+/* 12. Destroy the pool – close all libpq connections          */
+/* ------------------------------------------------------------ */
+void db_pool_destroy(void) {
+  /* Student‑style cleanup: close all libpq connections and free memory. */
+  pthread_mutex_lock(&g_pool.lock);
+
+  for (int i = 0; i < g_pool.max_size; ++i) {
+    if (g_pool.connections[i].pg_conn) {
+      PQfinish(g_pool.connections[i].pg_conn);
+      g_pool.connections[i].pg_conn = NULL;
+    }
+  }
+
+  free(g_pool.connections);
+  free(g_pool.free_stack);
+  pthread_mutex_unlock(&g_pool.lock);
+  pthread_mutex_destroy(&g_pool.lock);
+  pthread_cond_destroy(&g_pool.free_cond);
+  memset(&g_pool, 0, sizeof(g_pool));
+}
+
+/* ------------------------------------------------------------ */
+/* 13. Example usage (commented out – keep it for learning)   */
+/* ------------------------------------------------------------ */
+/*
+int main(void)
+{
+    DatabaseConfig cfg = {"localhost", 5432, "factorydb", "admin", "secret", "require", 5};
+    ConnectionPool *p = db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 200); // 200 ms timeout
+    if (!p) { fprintf(stderr, "Failed to init pool\n"); return 1; }
+
+    DBConnection *c = db_pool_acquire();
+    if (!c) { fprintf(stderr, "Could not acquire connection\n"); return 1; }
+
+    /* Use the connection, e.g. PQexec(c->pg_conn, "SELECT 1"); */
+
+db_pool_release(c);
+db_pool_destroy();
+return 0;
+/*}
