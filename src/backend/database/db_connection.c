@@ -62,12 +62,24 @@ typedef struct {
   int           used_cnt;            /* how many are currently in_use */
   int          *free_stack;          /* stack of free indices */
   int           free_top;            /* index of the top element */
+  size_t acquire_cnt;
+  size_t release_cnt;
+  double total_wait_ms;
   pthread_mutex_t lock;              /* protects all mutable fields */
   pthread_cond_t  free_cond;         /* signalled when a slot becomes free */
   PoolExhaustionPolicy policy;       /* chosen by the integrator */
   int           timeout_ms;          /* used when policy == BLOCK_WITH_TIMEOUT */
   DatabaseConfig cfg;                /* stored so we can lazily create connections */
 } ConnectionPool;
+
+/* --- 5.5. Bekleme Kuyruğu Yapısı (FIFO için) --- */
+typedef struct WaitNode {
+  pthread_cond_t cond;
+  struct WaitNode *next;
+} WaitNode;
+
+static WaitNode *wait_head = NULL;
+static WaitNode *wait_tail = NULL;
 
 /* ------------------------------------------------------------ */
 /* 6.  Global pool instance – one pool per process                */
@@ -115,8 +127,12 @@ ConnectionPool *db_pool_init(const DatabaseConfig *cfg,
                              PoolExhaustionPolicy policy,
                              int timeout_ms) {
   /* 1️ Allocate the connection array */
-  g_pool.max_size = 25;          /* hard‑coded for the demo */
-  g_pool.min_size = 5;
+  g_pool.acquire_cnt = 0;
+  g_pool.release_cnt = 0;
+  g_pool.total_wait_ms = 0;
+  // Konfigürasyondan boyutları oku, belirtilmemişse varsayılanları kullan
+  g_pool.max_size = (cfg->pool_max > 0) ? cfg->pool_max : 25;
+  g_pool.min_size = (cfg->pool_min > 0) ? cfg->pool_min : 5;
   g_pool.used_cnt = 0;
   g_pool.policy    = policy;
   g_pool.timeout_ms = timeout_ms;
@@ -249,7 +265,7 @@ DBConnection *db_pool_acquire(void) {
         DBConnection *c = &g_pool.connections[idx];
         c->in_use = true;
         g_pool.used_cnt++;
-        g_pool.acquire_count++;
+        g_pool.acquire_cnt++;
         pthread_mutex_unlock(&g_pool.lock);
         return c;
       }
@@ -259,18 +275,36 @@ DBConnection *db_pool_acquire(void) {
     }
 
     case QUEUE_REQUESTS: {
-      /* Very simple queue implementation: we block on the same
-       * condition variable until a slot becomes free.  In a real
-       * system you would keep a FIFO of waiting threads; here we
-       * just wait – the effect is the same for a single caller. */
-      while (stack_is_empty(g_pool.free_top)) {
-        pthread_cond_wait(&g_pool.free_cond, &g_pool.lock);
+      /* FIFO Bekleme Kuyruğu Uygulaması:
+       * Her thread kendi condition variable'ı ile kuyruğa eklenir. */
+      WaitNode *my_node = malloc(sizeof(WaitNode));
+      pthread_cond_init(&my_node->cond, NULL);
+      my_node->next = NULL;
+
+      if (wait_tail == NULL) {
+        wait_head = my_node;
+      } else {
+        wait_tail->next = my_node;
+      }
+
+      wait_tail = my_node;
+
+      while (stack_is_empty(g_pool.free_top) || wait_head != my_node) {
+        pthread_cond_wait(&my_node->cond, &g_pool.lock);
       }
 
       int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
       DBConnection *c = &g_pool.connections[idx];
       c->in_use = true;
       g_pool.used_cnt++;
+      g_pool.acquire_cnt++;
+      /* Kendini kuyruktan çıkar */
+      wait_head = my_node->next;
+
+      if (wait_head == NULL) wait_tail = NULL;
+
+      pthread_cond_destroy(&my_node->cond);
+      free(my_node);
       pthread_mutex_unlock(&g_pool.lock);
       return c;
     }
@@ -296,9 +330,16 @@ void db_pool_release(DBConnection *conn) {
   conn->in_use = false;
   stack_push(g_pool.free_stack, &g_pool.free_top, idx);
   g_pool.used_cnt--;
-  g_pool.release_count++;
-  /* Wake one waiting thread (if any) */
-  pthread_cond_signal(&g_pool.free_cond);
+  g_pool.release_cnt++;
+
+  /* Kuyruktaki ilk kişiyi uyandır (FIFO) */
+  if (wait_head != NULL) {
+    pthread_cond_signal(&wait_head->cond);
+  } else {
+    /* Kimse kuyrukta değilse BLOCK_WITH_TIMEOUT bekleyenleri uyar */
+    pthread_cond_signal(&g_pool.free_cond);
+  }
+
   pthread_mutex_unlock(&g_pool.lock);
 }
 

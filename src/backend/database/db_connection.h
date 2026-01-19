@@ -34,6 +34,8 @@ typedef struct {
   char password[64];   /* kept only while building the conn string */
   char sslmode[16];
   int  connect_timeout; /* seconds */
+  int pool_min;
+  int pool_max;
 } DatabaseConfig;
 
 /* ------------------------------------------------------------ */
