@@ -7,8 +7,7 @@
  * factory setting (50+ machines sending sensor data).
  *
  * NOTE: This file pairs with `db_connection.h` which declares the public
- * API and data structures.  For brevity the header is not reproduced
- * here – the important parts are duplicated as static definitions.
+ * API and data structures.
  */
 
 /* ------------------------------------------------------------ */
@@ -21,42 +20,13 @@
 #include <pthread.h>
 #include <libpq-fe.h>          /* libpq – PostgreSQL C client library */
 #include "logger.h"
+#include "db_connection.h"
 
-/* ------------------------------------------------------------ */
-/* 2.  Pool‑exhaustion policy enum (public in the header)      */
-/* ------------------------------------------------------------ */
-typedef enum {
-  BLOCK_WITH_TIMEOUT,   /* Wait up to a timeout, then fail */
-  QUEUE_REQUESTS,       /* Enqueue the caller and wake later   */
-  FAIL_FAST             /* Return NULL immediately            */
-} PoolExhaustionPolicy;
-
-/* ------------------------------------------------------------ */
-/* 3.  Configuration structure – normally filled from .env      */
-/* ------------------------------------------------------------ */
-typedef struct {
-  char host[64];
-  int  port;
-  char dbname[64];
-  char user[64];
-  char password[64];   /* kept only while building the conn string */
-  char sslmode[16];
-  int  connect_timeout; /* seconds */
-} DatabaseConfig;
-
-/* ------------------------------------------------------------ */
-/* 4.  Per‑connection wrapper                                   */
-/* ------------------------------------------------------------ */
-typedef struct {
-  PGconn *pg_conn;   /* opaque libpq connection handle */
-  bool    in_use;    /* true while handed out to a caller */
-  int     index;     /* position inside the pool array – O(1) release */
-} DBConnection;
 
 /* ------------------------------------------------------------ */
 /* 5.  The pool structure (private – defined here for simplicity) */
 /* ------------------------------------------------------------ */
-typedef struct {
+struct ConnectionPool {
   DBConnection *connections;          /* array of size max_size */
   int           max_size;            /* e.g. 25 */
   int           min_size;            /* e.g. 5  */
@@ -71,7 +41,7 @@ typedef struct {
   PoolExhaustionPolicy policy;       /* chosen by the integrator */
   int           timeout_ms;          /* used when policy == BLOCK_WITH_TIMEOUT */
   DatabaseConfig cfg;                /* stored so we can lazily create connections */
-} ConnectionPool;
+};
 
 /* --- FIFO Queue Structure for Waiting Threads --- */
 typedef struct WaitNode {
@@ -386,18 +356,17 @@ PoolMetrics db_pool_get_metrics(void) {
 /*
 int main(void)
 {
-    DatabaseConfig cfg = {"localhost", 5432, "factorydb", "admin", "secret", "require", 5};
-    ConnectionPool *p = db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 200); // 200 ms timeout
+    DatabaseConfig cfg = {"localhost", 5432, "factorydb", "admin", "secret", "require", 5, 5, 25};
+    ConnectionPool *p = db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 200);
     if (!p) { LOG_ERROR("Failed to init pool"); return 1; }
 
     DBConnection *c = db_pool_acquire();
     if (!c) { LOG_ERROR("Could not acquire connection"); return 1; }
 
-    /* Use the connection, e.g. PQexec(c->pg_conn, "SELECT 1"); */
+    // Use the connection, e.g. PQexec(c->pg_conn, "SELECT 1");
 
-db_pool_release(c);
-db_pool_destroy();
-return 0;
+    db_pool_release(c);
+    db_pool_destroy();
+    return 0;
 }
-
 */
