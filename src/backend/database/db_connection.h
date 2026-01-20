@@ -72,6 +72,17 @@ DBConnection *db_pool_acquire(void);
 /** Release a previously‑acquired connection back to the pool. */
 void db_pool_release(DBConnection *conn);
 
+/** Metrics structure for pool monitoring. */
+typedef struct {
+  size_t acquire_cnt;
+  size_t release_cnt;
+  int    used_cnt;
+  double total_wait_ms;
+} PoolMetrics;
+
+/** Retrieve current pool metrics. */
+PoolMetrics db_pool_get_metrics(void);
+
 /** Destroy the pool and free all resources. */
 void db_pool_destroy(void);
 

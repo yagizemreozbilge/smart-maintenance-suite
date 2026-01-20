@@ -15,6 +15,7 @@ gcc -g -Wall \
     "$BACKEND_ROOT/tests/runners/run_unit_tests.c" \
     "$BACKEND_ROOT/tests/unit/"*.c \
     "$BACKEND_ROOT/core/data_structures/"*.c \
+    -lpq -lpthread \
     -o "$BACKEND_ROOT/tests/unit_test_runner"
 
 if [ $? -eq 0 ]; then

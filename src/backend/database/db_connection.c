@@ -20,6 +20,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <libpq-fe.h>          /* libpq – PostgreSQL C client library */
+#include "logger.h"
 
 /* ------------------------------------------------------------ */
 /* 2.  Pool‑exhaustion policy enum (public in the header)      */
@@ -162,7 +163,7 @@ ConnectionPool *db_pool_init(const DatabaseConfig *cfg,
     PGconn *c = PQconnectdb(conn_str);
 
     if (PQstatus(c) != CONNECTION_OK) {
-      fprintf(stderr, "[db_pool_init] failed to connect: %s\n", PQerrorMessage(c));
+      LOG_ERROR("[db_pool_init] failed to connect: %s", PQerrorMessage(c));
       PQfinish(c);
       continue;   /* we keep the slot NULL – lazy creation later */
     }
@@ -212,7 +213,7 @@ DBConnection *db_pool_acquire(void) {
       free(cs);
 
       if (PQstatus(c) != CONNECTION_OK) {
-        fprintf(stderr, "[db_pool_acquire] lazy connect failed: %s\n", PQerrorMessage(c));
+        LOG_ERROR("[db_pool_acquire] lazy connect failed: %s", PQerrorMessage(c));
         PQfinish(c);
         continue;   /* treat as exhausted for now */
       }
@@ -366,6 +367,20 @@ void db_pool_destroy(void) {
 }
 
 /* ------------------------------------------------------------ */
+/* 12.5 Get current metrics                                     */
+/* ------------------------------------------------------------ */
+PoolMetrics db_pool_get_metrics(void) {
+  PoolMetrics m;
+  pthread_mutex_lock(&g_pool.lock);
+  m.acquire_cnt = g_pool.acquire_cnt;
+  m.release_cnt = g_pool.release_cnt;
+  m.used_cnt    = g_pool.used_cnt;
+  m.total_wait_ms = g_pool.total_wait_ms;
+  pthread_mutex_unlock(&g_pool.lock);
+  return m;
+}
+
+/* ------------------------------------------------------------ */
 /* 13. Example usage (commented out – keep it for learning)   */
 /* ------------------------------------------------------------ */
 /*
@@ -373,14 +388,16 @@ int main(void)
 {
     DatabaseConfig cfg = {"localhost", 5432, "factorydb", "admin", "secret", "require", 5};
     ConnectionPool *p = db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 200); // 200 ms timeout
-    if (!p) { fprintf(stderr, "Failed to init pool\n"); return 1; }
+    if (!p) { LOG_ERROR("Failed to init pool"); return 1; }
 
     DBConnection *c = db_pool_acquire();
-    if (!c) { fprintf(stderr, "Could not acquire connection\n"); return 1; }
+    if (!c) { LOG_ERROR("Could not acquire connection"); return 1; }
 
     /* Use the connection, e.g. PQexec(c->pg_conn, "SELECT 1"); */
 
 db_pool_release(c);
 db_pool_destroy();
 return 0;
-/*}
+}
+
+*/
