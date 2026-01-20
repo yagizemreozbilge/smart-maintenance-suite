@@ -1,1 +1,0 @@
--- This file is a template for 001_create_tables.sql. Content will be filled by yagiz on 2025-12-29.
