@@ -57,3 +57,31 @@ int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors)
   LOG_INFO("Fetched health data for machine %d (%d sensors found).", machine_id, count);
   return count;
 }
+
+bool add_sensor_reading(int sensor_id, double value) {
+  // 1. Havuzdan bağlantı al
+  DBConnection *conn_wrapper = db_pool_acquire();
+
+  if (!conn_wrapper) {
+    LOG_ERROR("Could not acquire connection to add sensor reading.");
+    return false;
+  }
+
+  // 2. Query hazırla
+  char query[256];
+  snprintf(query, sizeof(query), "INSERT INTO sensor_data (sensor_id, value) VALUES (%d, %.2f);", sensor_id, value);
+  // 3. Çalıştır
+  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+
+  if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+    LOG_ERROR("Failed to insert sensor data: %s", PQerrorMessage(conn_wrapper->pg_conn));
+    PQclear(res);
+    db_pool_release(conn_wrapper);
+    return false;
+  }
+
+  // 4. Temizlik
+  PQclear(res);
+  db_pool_release(conn_wrapper);
+  return true;
+}

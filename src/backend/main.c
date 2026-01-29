@@ -69,6 +69,19 @@ int main() {
     } else {
       printf("No sensor data available for this machine.\n");
     }
+
+    // 5. Data Ingestion Simulation
+    if (s_count > 0) {
+      printf("\n>>> Simulating Data Ingestion... (Adding new 85.5 value to Sensor %d)\n", sensors[0].sensor_id);
+
+      if (add_sensor_reading(sensors[0].sensor_id, 85.5)) {
+        LOG_INFO("New sensor reading saved to database!");
+        // Let's verify by fetching again
+        get_machine_health(machine_list[0].id, sensors, 5);
+        printf("Verification - Newest Value: %.2f %s (at %s)\n",
+               sensors[0].last_value, sensors[0].unit, sensors[0].recorded_at);
+      }
+    }
   } else {
     LOG_INFO("No machines found or database is empty.");
   }

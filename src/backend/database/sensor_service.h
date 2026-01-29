@@ -1,6 +1,8 @@
 #ifndef SENSOR_SERVICE_H
 #define SENSOR_SERVICE_H
 
+#include <stdbool.h>
+
 /** Sensor data representation for health monitoring */
 typedef struct {
   int sensor_id;
@@ -12,13 +14,15 @@ typedef struct {
 
 /**
  * Fetches the latest health metrics for all sensors on a specific machine.
- * Uses the connection pool to safely interact with PostgreSQL.
- *
- * @param machine_id  The ID of the machine in the database.
- * @param out_stats   Pointer to an array of SensorStatus (allocated by caller).
- * @param max_sensors Capacity of the out_stats array.
- * @return Number of sensor statuses recovered.
  */
 int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors);
+
+/**
+ * Adds a new sensor reading to the database.
+ * @param sensor_id  The ID of the sensor.
+ * @param value      The measured value.
+ * @return true on success, false otherwise.
+ */
+bool add_sensor_reading(int sensor_id, double value);
 
 #endif
