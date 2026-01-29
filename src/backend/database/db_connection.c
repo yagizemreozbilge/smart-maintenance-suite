@@ -91,6 +91,29 @@ static inline bool stack_is_empty(int top) {
   return top == 0;
 }
 
+/* --- Internal: Reconnect a dead connection --- */
+static bool reconnect_connection(DBConnection *c, const DatabaseConfig *cfg) {
+  if (c->pg_conn) {
+    PQfinish(c->pg_conn);
+    c->pg_conn = NULL;
+  }
+
+  char *cs = build_conn_str(cfg);
+
+  if (!cs) return false;
+
+  LOG_INFO("[db_pool] Reconnecting dead connection at slot %d...", c->index);
+  c->pg_conn = PQconnectdb(cs);
+  free(cs);
+
+  if (PQstatus(c->pg_conn) != CONNECTION_OK) {
+    LOG_ERROR("[db_pool] Reconnect failed: %s", PQerrorMessage(c->pg_conn));
+    return false;
+  }
+
+  return true;
+}
+
 /* ------------------------------------------------------------ */
 /* 9.  Public API – initialise the pool                         */
 /* ------------------------------------------------------------ */
@@ -166,6 +189,19 @@ DBConnection *db_pool_acquire(void) {
   if (!stack_is_empty(g_pool.free_top)) {
     int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
     DBConnection *c = &g_pool.connections[idx];
+
+    /* --- RECONNECTION LOGIC START --- */
+    /* Check if the connection is still alive */
+    if (PQstatus(c->pg_conn) != CONNECTION_OK) {
+      if (!reconnect_connection(c, &g_pool.cfg)) {
+        /* If reconnect fails, we effectively lost a slot.
+           In a real system, we might retry or return NULL. */
+        pthread_mutex_unlock(&g_pool.lock);
+        return NULL;
+      }
+    }
+
+    /* --- RECONNECTION LOGIC END --- */
     c->in_use = true;
     g_pool.used_cnt++;
     pthread_mutex_unlock(&g_pool.lock);

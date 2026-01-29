@@ -75,3 +75,47 @@ int get_maintenance_history(int machine_id, MaintenanceLog *out_logs, int max_lo
   LOG_INFO("Fetched %d maintenance logs for Machine %d.", count, machine_id);
   return count;
 }
+
+bool update_maintenance_log(int log_id, const char *description, double cost) {
+  DBConnection *conn_wrapper = db_pool_acquire();
+
+  if (!conn_wrapper) return false;
+
+  char query[1024];
+  snprintf(query, sizeof(query),
+           "UPDATE maintenance_logs SET description = '%s', cost = %.2f WHERE id = %d;",
+           description, cost, log_id);
+  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+  bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
+
+  if (!success) {
+    LOG_ERROR("Failed to update log: %s", PQerrorMessage(conn_wrapper->pg_conn));
+  } else {
+    LOG_INFO("Maintenance log %d updated successfully.", log_id);
+  }
+
+  PQclear(res);
+  db_pool_release(conn_wrapper);
+  return success;
+}
+
+bool delete_maintenance_log(int log_id) {
+  DBConnection *conn_wrapper = db_pool_acquire();
+
+  if (!conn_wrapper) return false;
+
+  char query[128];
+  snprintf(query, sizeof(query), "DELETE FROM maintenance_logs WHERE id = %d;", log_id);
+  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+  bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
+
+  if (!success) {
+    LOG_ERROR("Failed to delete log: %s", PQerrorMessage(conn_wrapper->pg_conn));
+  } else {
+    LOG_INFO("Maintenance log %d deleted.", log_id);
+  }
+
+  PQclear(res);
+  db_pool_release(conn_wrapper);
+  return success;
+}

@@ -8,8 +8,21 @@
 #include <stdlib.h>
 #include <libpq-fe.h>
 
+void show_menu() {
+  printf("\n======================================================\n");
+  printf("          SMART MAINTENANCE SUITE - ADMIN             \n");
+  printf("======================================================\n");
+  printf(" 1. List All Machines (Factory Floor)\n");
+  printf(" 2. Detailed Health Check (Sensors)\n");
+  printf(" 3. View Maintenance History\n");
+  printf(" 4. Add New Maintenance Log\n");
+  printf(" 5. Simulate Sensor Data (Manual Input)\n");
+  printf(" 0. Exit System\n");
+  printf("======================================================\n");
+  printf("Choice: ");
+}
+
 int main() {
-  // 1. Database Configuration
   DatabaseConfig cfg = {
     .host = "localhost",
     .port = 5432,
@@ -21,86 +34,127 @@ int main() {
     .pool_min = 2,
     .pool_max = 5
   };
-  // 2. Start the Connection Pool
   LOG_INFO("--- Smart Maintenance Suite System Booting ---");
 
   if (!db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 2000)) {
-    LOG_ERROR("System failure: Pool initialization failed. Check DB credentials.");
+    LOG_ERROR("System failure: Pool initialization failed.");
     return EXIT_FAILURE;
   }
 
-  // 3. Fetch Machines from the Factory Floor
-  Machine machine_list[10];
-  int count = get_all_machines(machine_list, 10);
+  int choice = -1;
 
-  if (count > 0) {
-    printf("\n======================================================\n");
-    printf("               FACTORY FLOOR MONITOR                 \n");
-    printf("======================================================\n");
-    printf("%-3s | %-22s | %-12s | %-15s\n", "ID", "Name", "Status", "Location");
-    printf("----+------------------------+--------------+-----------\n");
+  while (choice != 0) {
+    show_menu();
 
-    for (int i = 0; i < count; i++) {
-      printf("%02d  | %-22s | %-12s | %-15s\n",
-             machine_list[i].id,
-             machine_list[i].name,
-             machine_list[i].status,
-             machine_list[i].location);
+    if (scanf("%d", &choice) != 1) {
+      while (getchar() != '\n'); // Clear buffer
+
+      continue;
     }
 
-    printf("======================================================\n");
-    // 4. Detailed Health Check for the first machine
-    printf("\n>>> Detailed Health Check: [ID: %02d] %s\n", machine_list[0].id, machine_list[0].name);
-    SensorStatus sensors[5];
-    int s_count = get_machine_health(machine_list[0].id, sensors, 5);
+    switch (choice) {
+      case 1: {
+        Machine machines[10];
+        int count = get_all_machines(machines, 10);
+        printf("\n%-3s | %-22s | %-12s | %-15s\n", "ID", "Name", "Status", "Location");
+        printf("----+------------------------+--------------+-----------\n");
 
-    if (s_count > 0) {
-      printf("------------------------------------------------------\n");
-      printf("%-15s | %-10s | %-8s | %-19s\n", "Sensor Type", "Value", "Unit", "Last Updated");
-      printf("----------------+------------+----------+---------------------\n");
+        for (int i = 0; i < count; i++) {
+          printf("%02d  | %-22s | %-12s | %-15s\n",
+                 machines[i].id, machines[i].name, machines[i].status, machines[i].location);
+        }
 
-      for (int i = 0; i < s_count; i++) {
-        printf("%-15s | %-10.2f | %-8s | %-19s\n",
-               sensors[i].sensor_type,
-               sensors[i].last_value,
-               sensors[i].unit,
-               sensors[i].recorded_at);
+        break;
       }
 
-      printf("------------------------------------------------------\n");
-    }
+      case 2: {
+        int mid;
+        printf("Enter Machine ID: ");
+        scanf("%d", &mid);
+        SensorStatus sensors[10];
+        int s_count = get_machine_health(mid, sensors, 10);
 
-    // 5. Data Ingestion & Alerting Simulation
-    if (s_count > 0) {
-      printf("\n>>> Simulating CRITICAL Data Ingestion... (Sensor: %s, Value: 95.5)\n", sensors[0].sensor_type);
+        if (s_count > 0) {
+          printf("\n--- HEALTH REPORT ---\n");
+          printf("%-15s | %-10s | %-8s\n", "Type", "Value", "Unit");
 
-      if (add_sensor_reading(sensors[0].sensor_id, sensors[0].sensor_type, 95.5)) {
-        LOG_INFO("New sensor reading saved. Check logs for triggered alerts!");
-      }
-    }
+          for (int i = 0; i < s_count; i++) {
+            printf("%-15s | %-10.2f | %-8s\n", sensors[i].sensor_type, sensors[i].last_value, sensors[i].unit);
+          }
+        } else {
+          printf("No sensor data for this machine.\n");
+        }
 
-    // 6. Maintenance Logs Simulation
-    printf("\n>>> Adding Maintenance Log for %s\n", machine_list[0].name);
-    add_maintenance_log(machine_list[0].id, "Yagiz Emre", "Fixed high temperature issue by replacing the cooling pump.", 250.0);
-    MaintenanceLog logs[5];
-    int l_count = get_maintenance_history(machine_list[0].id, logs, 5);
-
-    if (l_count > 0) {
-      printf("\n--- MAINTENANCE HISTORY ---\n");
-
-      for (int i = 0; i < l_count; i++) {
-        printf("[%s] Tech: %-12s | Cost: $%-7.2f | Desc: %s\n",
-               logs[i].log_date, logs[i].technician_name, logs[i].cost, logs[i].description);
+        break;
       }
 
-      printf("---------------------------\n");
+      case 3: {
+        int mid;
+        printf("Enter Machine ID: ");
+        scanf("%d", &mid);
+        MaintenanceLog logs[10];
+        int l_count = get_maintenance_history(mid, logs, 10);
+
+        if (l_count > 0) {
+          printf("\n--- MAINTENANCE LOGS ---\n");
+
+          for (int i = 0; i < l_count; i++) {
+            printf("[%s] %-12s: %s ($%.2f)\n", logs[i].log_date, logs[i].technician_name, logs[i].description, logs[i].cost);
+          }
+        } else {
+          printf("No logs found.\n");
+        }
+
+        break;
+      }
+
+      case 4: {
+        int mid;
+        char tech[100], desc[512];
+        double cost;
+        printf("Machine ID: ");
+        scanf("%d", &mid);
+        printf("Technician: ");
+        scanf(" %99[^\n]", tech);
+        printf("Description: ");
+        scanf(" %511[^\n]", desc);
+        printf("Cost: ");
+        scanf("%lf", &cost);
+
+        if (add_maintenance_log(mid, tech, desc, cost)) {
+          printf("Log saved successfully.\n");
+        }
+
+        break;
+      }
+
+      case 5: {
+        int sid;
+        char type[32];
+        double val;
+        printf("Sensor ID: ");
+        scanf("%d", &sid);
+        printf("Sensor Type (e.g. Temperature): ");
+        scanf("%s", type);
+        printf("Recorded Value: ");
+        scanf("%lf", &val);
+
+        if (add_sensor_reading(sid, type, val)) {
+          printf("Data saved. Rule engine triggered.\n");
+        }
+
+        break;
+      }
+
+      case 0:
+        LOG_INFO("Shutting down system...");
+        break;
+
+      default:
+        printf("Invalid choice!\n");
     }
-  } else {
-    LOG_INFO("No machines found or database is empty.");
   }
 
-  // 7. Secure System Shutdown
   db_pool_destroy();
-  LOG_INFO("System shutdown successfully.");
   return EXIT_SUCCESS;
 }
