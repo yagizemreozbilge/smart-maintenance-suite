@@ -6,35 +6,47 @@
 #include "database/logger.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <libpq-fe.h>
 
+/* ANSI Color Codes - High Intensity for that "Electric" Look */
+#define RESET     "\033[0m"
+#define BOLD_BLUE "\033[1;34m"
+#define B_CYAN    "\033[1;36m"
+#define B_RED     "\033[1;31m"
+#define B_YELLOW  "\033[1;33m"
+#define B_GREEN   "\033[1;32m"
+#define B_MAGENTA "\033[1;35m"
+
+void clear_screen() {
+#ifdef _WIN32
+  system("cls");
+#else
+  system("clear");
+#endif
+}
+
 void show_menu() {
-  printf("\n======================================================\n");
-  printf("          SMART MAINTENANCE SUITE - ADMIN             \n");
-  printf("======================================================\n");
-  printf(" 1. List All Machines (Factory Floor)\n");
-  printf(" 2. Detailed Health Check (Sensors)\n");
-  printf(" 3. View Maintenance History\n");
-  printf(" 4. Add New Maintenance Log\n");
-  printf(" 5. Simulate Sensor Data (Manual Input)\n");
-  printf(" 0. Exit System\n");
-  printf("======================================================\n");
+  printf("\n%s======================================================%s\n", BOLD_BLUE, RESET);
+  printf("%s          SMART MAINTENANCE SUITE - DASHBOARD         %s\n", BOLD_BLUE, RESET);
+  printf("%s======================================================%s\n", BOLD_BLUE, RESET);
+  printf(" 1. %sList All Machines (Factory Floor)%s\n", B_CYAN, RESET);
+  printf(" 2. %sDetailed Health Check (Sensors)%s\n", B_CYAN, RESET);
+  printf(" 3. %sView Maintenance History%s\n", B_CYAN, RESET);
+  printf(" 4. %sAdd New Maintenance Log%s\n", B_CYAN, RESET);
+  printf(" 5. %sView Recent Alerts (%sSecurity Dashboard%s%s)\n", B_CYAN, B_RED, B_CYAN, RESET);
+  printf(" 6. %sSimulate Sensor Data (Test Engine)%s\n", B_YELLOW, RESET);
+  printf(" 0. %sExit System%s\n", B_RED, RESET);
+  printf("%s======================================================%s\n", BOLD_BLUE, RESET);
   printf("Choice: ");
 }
 
 int main() {
   DatabaseConfig cfg = {
-    .host = "localhost",
-    .port = 5432,
-    .dbname = "smart_maintenance",
-    .user = "postgres",
-    .password = "grup7_123",
-    .sslmode = "disable",
-    .connect_timeout = 5,
-    .pool_min = 2,
-    .pool_max = 5
+    .host = "localhost", .port = 5432, .dbname = "smart_maintenance",
+    .user = "postgres", .password = "grup7_123", .sslmode = "disable",
+    .connect_timeout = 5, .pool_min = 2, .pool_max = 5
   };
-  LOG_INFO("--- Smart Maintenance Suite System Booting ---");
 
   if (!db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 2000)) {
     LOG_ERROR("System failure: Pool initialization failed.");
@@ -44,10 +56,11 @@ int main() {
   int choice = -1;
 
   while (choice != 0) {
+    clear_screen();
     show_menu();
 
     if (scanf("%d", &choice) != 1) {
-      while (getchar() != '\n'); // Clear buffer
+      while (getchar() != '\n');
 
       continue;
     }
@@ -56,14 +69,18 @@ int main() {
       case 1: {
         Machine machines[10];
         int count = get_all_machines(machines, 10);
-        printf("\n%-3s | %-22s | %-12s | %-15s\n", "ID", "Name", "Status", "Location");
+        printf("\n%s%-3s | %-22s | %-12s | %-15s%s\n", B_YELLOW, "ID", "Name", "Status", "Location", RESET);
         printf("----+------------------------+--------------+-----------\n");
 
         for (int i = 0; i < count; i++) {
-          printf("%02d  | %-22s | %-12s | %-15s\n",
-                 machines[i].id, machines[i].name, machines[i].status, machines[i].location);
+          const char *status_color = (strcmp(machines[i].status, "operational") == 0) ? B_GREEN : B_RED;
+          printf("%02d  | %-22s | %s%-12s%s | %-15s\n",
+                 machines[i].id, machines[i].name, status_color, machines[i].status, RESET, machines[i].location);
         }
 
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
         break;
       }
 
@@ -75,16 +92,20 @@ int main() {
         int s_count = get_machine_health(mid, sensors, 10);
 
         if (s_count > 0) {
-          printf("\n--- HEALTH REPORT ---\n");
+          printf("\n%s--- HEALTH REPORT (Machine %d) ---%s\n", B_MAGENTA, mid, RESET);
           printf("%-15s | %-10s | %-8s\n", "Type", "Value", "Unit");
+          printf("----------------+------------+----------\n");
 
           for (int i = 0; i < s_count; i++) {
-            printf("%-15s | %-10.2f | %-8s\n", sensors[i].sensor_type, sensors[i].last_value, sensors[i].unit);
+            printf("%-15s | %s%-10.2f%s | %-8s\n", sensors[i].sensor_type, B_YELLOW, sensors[i].last_value, RESET, sensors[i].unit);
           }
         } else {
-          printf("No sensor data for this machine.\n");
+          printf("%sNo sensor data for this machine.%s\n", B_RED, RESET);
         }
 
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
         break;
       }
 
@@ -96,15 +117,18 @@ int main() {
         int l_count = get_maintenance_history(mid, logs, 10);
 
         if (l_count > 0) {
-          printf("\n--- MAINTENANCE LOGS ---\n");
+          printf("\n%s--- MAINTENANCE LOGS ---%s\n", B_GREEN, RESET);
 
           for (int i = 0; i < l_count; i++) {
-            printf("[%s] %-12s: %s ($%.2f)\n", logs[i].log_date, logs[i].technician_name, logs[i].description, logs[i].cost);
+            printf("[%s] %s%-12s%s: %s ($%.2f)\n", logs[i].log_date, B_CYAN, logs[i].technician_name, RESET, logs[i].description, logs[i].cost);
           }
         } else {
-          printf("No logs found.\n");
+          printf("%sNo logs found.%s\n", B_YELLOW, RESET);
         }
 
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
         break;
       }
 
@@ -122,27 +146,56 @@ int main() {
         scanf("%lf", &cost);
 
         if (add_maintenance_log(mid, tech, desc, cost)) {
-          printf("Log saved successfully.\n");
+          printf("%sLog saved successfully.%s\n", B_GREEN, RESET);
         }
 
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
         break;
       }
 
       case 5: {
+        AlertInfo alerts[10];
+        int a_count = get_recent_alerts(alerts, 10);
+
+        if (a_count > 0) {
+          printf("\n%s--- RECENT SYSTEM ALERTS ---%s\n", B_RED, RESET);
+          printf("%-20s | %-10s | %s\n", "Time", "Severity", "Message");
+          printf("---------------------+------------+----------------------\n");
+
+          for (int i = 0; i < a_count; i++) {
+            const char *sev_col = (strcmp(alerts[i].severity, "CRITICAL") == 0) ? B_RED : B_YELLOW;
+            printf("%-20s | %s%-10s%s | %s\n", alerts[i].created_at, sev_col, alerts[i].severity, RESET, alerts[i].message);
+          }
+        } else {
+          printf("%sNo alerts found. System is healthy.%s\n", B_GREEN, RESET);
+        }
+
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
+        break;
+      }
+
+      case 6: {
         int sid;
         char type[32];
         double val;
         printf("Sensor ID: ");
         scanf("%d", &sid);
-        printf("Sensor Type (e.g. Temperature): ");
+        printf("Sensor Type: ");
         scanf("%s", type);
         printf("Recorded Value: ");
         scanf("%lf", &val);
 
         if (add_sensor_reading(sid, type, val)) {
-          printf("Data saved. Rule engine triggered.\n");
+          printf("%sData saved. Engine checks triggered.%s\n", B_GREEN, RESET);
         }
 
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
         break;
       }
 
@@ -151,7 +204,10 @@ int main() {
         break;
 
       default:
-        printf("Invalid choice!\n");
+        printf("%sInvalid choice!%s\n", B_RED, RESET);
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
     }
   }
 

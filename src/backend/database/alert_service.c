@@ -30,8 +30,6 @@ bool create_alert(int sensor_id, AlertSeverity severity, const char *message) {
   }
 
   char query[1024];
-  // We use PQescapeStringConn or simple snprintf if we trust the message.
-  // For this learning project, we'll use snprintf but be mindful of SQL injection in real apps.
   snprintf(query, sizeof(query),
            "INSERT INTO alerts (sensor_id, severity, message) VALUES (%d, '%s', '%s');",
            sensor_id, severity_to_str(severity), message);
@@ -51,7 +49,6 @@ bool create_alert(int sensor_id, AlertSeverity severity, const char *message) {
 }
 
 void check_and_trigger_alerts(int sensor_id, const char *sensor_type, double value) {
-  // Simple Rule Engine Logic
   if (strcmp(sensor_type, "Temperature") == 0) {
     if (value > 90.0) {
       char msg[128];
@@ -75,4 +72,42 @@ void check_and_trigger_alerts(int sensor_id, const char *sensor_type, double val
       create_alert(sensor_id, SEVERITY_WARNING, msg);
     }
   }
+}
+
+int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
+  DBConnection *conn_wrapper = db_pool_acquire();
+
+  if (!conn_wrapper) return 0;
+
+  char query[256];
+  snprintf(query, sizeof(query),
+           "SELECT id, sensor_id, severity, message, to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') "
+           "FROM alerts ORDER BY created_at DESC LIMIT %d;",
+           max_alerts);
+  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+
+  if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+    LOG_ERROR("Failed to fetch alerts: %s", PQerrorMessage(conn_wrapper->pg_conn));
+    PQclear(res);
+    db_pool_release(conn_wrapper);
+    return 0;
+  }
+
+  int rows = PQntuples(res);
+  int count = (rows < max_alerts) ? rows : max_alerts;
+
+  for (int i = 0; i < count; i++) {
+    out_alerts[i].id = atoi(PQgetvalue(res, i, 0));
+    out_alerts[i].sensor_id = atoi(PQgetvalue(res, i, 1));
+    strncpy(out_alerts[i].severity, PQgetvalue(res, i, 2), 15);
+    out_alerts[i].severity[15] = '\0';
+    strncpy(out_alerts[i].message, PQgetvalue(res, i, 3), 255);
+    out_alerts[i].message[255] = '\0';
+    strncpy(out_alerts[i].created_at, PQgetvalue(res, i, 4), 31);
+    out_alerts[i].created_at[31] = '\0';
+  }
+
+  PQclear(res);
+  db_pool_release(conn_wrapper);
+  return count;
 }
