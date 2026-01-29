@@ -3,6 +3,7 @@
 #include "database/sensor_service.h"
 #include "database/alert_service.h"
 #include "database/maintenance_service.h"
+#include "database/inventory_service.h"
 #include "database/logger.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,6 +37,7 @@ void show_menu() {
   printf(" 4. %sAdd New Maintenance Log%s\n", B_CYAN, RESET);
   printf(" 5. %sView Recent Alerts (%sSecurity Dashboard%s%s)\n", B_CYAN, B_RED, B_CYAN, RESET);
   printf(" 6. %sSimulate Sensor Data (Test Engine)%s\n", B_YELLOW, RESET);
+  printf(" 7. %sInventory Management%s\n", B_CYAN, RESET);
   printf(" 0. %sExit System%s\n", B_RED, RESET);
   printf("%s======================================================%s\n", BOLD_BLUE, RESET);
   printf("Choice: ");
@@ -191,6 +193,25 @@ int main() {
 
         if (add_sensor_reading(sid, type, val)) {
           printf("%sData saved. Engine checks triggered.%s\n", B_GREEN, RESET);
+        }
+
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
+        break;
+      }
+
+      case 7: {
+        InventoryItem items[50];
+        int count = get_all_inventory(items, 50);
+        printf("\n%s--- INVENTORY STATUS ---%s\n", B_CYAN, RESET);
+        printf("%-20s | %-12s | %-8s | %-8s\n", "Part Name", "SKU", "Stock", "Min Level");
+        printf("---------------------+--------------+----------+----------\n");
+
+        for (int i = 0; i < count; i++) {
+          const char *col = (items[i].quantity < items[i].min_stock_level) ? B_RED : B_GREEN;
+          printf("%-20s | %-12s | %s%-8d%s | %-8d\n",
+                 items[i].part_name, items[i].sku, col, items[i].quantity, RESET, items[i].min_stock_level);
         }
 
         printf("\nPress Enter to continue...");
