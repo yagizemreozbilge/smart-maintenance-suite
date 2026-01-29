@@ -1,6 +1,8 @@
 #include "database/db_connection.h"
 #include "database/machine_service.h"
 #include "database/sensor_service.h"
+#include "database/alert_service.h"
+#include "database/maintenance_service.h"
 #include "database/logger.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,7 +49,7 @@ int main() {
     }
 
     printf("======================================================\n");
-    // 4. Detailed Health Check for the first machine (Demonstration)
+    // 4. Detailed Health Check for the first machine
     printf("\n>>> Detailed Health Check: [ID: %02d] %s\n", machine_list[0].id, machine_list[0].name);
     SensorStatus sensors[5];
     int s_count = get_machine_health(machine_list[0].id, sensors, 5);
@@ -59,34 +61,45 @@ int main() {
 
       for (int i = 0; i < s_count; i++) {
         printf("%-15s | %-10.2f | %-8s | %-19s\n",
-               sensors[i].type,
+               sensors[i].sensor_type,
                sensors[i].last_value,
                sensors[i].unit,
                sensors[i].recorded_at);
       }
 
       printf("------------------------------------------------------\n");
-    } else {
-      printf("No sensor data available for this machine.\n");
     }
 
-    // 5. Data Ingestion Simulation
+    // 5. Data Ingestion & Alerting Simulation
     if (s_count > 0) {
-      printf("\n>>> Simulating Data Ingestion... (Adding new 85.5 value to Sensor %d)\n", sensors[0].sensor_id);
+      printf("\n>>> Simulating CRITICAL Data Ingestion... (Sensor: %s, Value: 95.5)\n", sensors[0].sensor_type);
 
-      if (add_sensor_reading(sensors[0].sensor_id, 85.5)) {
-        LOG_INFO("New sensor reading saved to database!");
-        // Let's verify by fetching again
-        get_machine_health(machine_list[0].id, sensors, 5);
-        printf("Verification - Newest Value: %.2f %s (at %s)\n",
-               sensors[0].last_value, sensors[0].unit, sensors[0].recorded_at);
+      if (add_sensor_reading(sensors[0].sensor_id, sensors[0].sensor_type, 95.5)) {
+        LOG_INFO("New sensor reading saved. Check logs for triggered alerts!");
       }
+    }
+
+    // 6. Maintenance Logs Simulation
+    printf("\n>>> Adding Maintenance Log for %s\n", machine_list[0].name);
+    add_maintenance_log(machine_list[0].id, "Yagiz Emre", "Fixed high temperature issue by replacing the cooling pump.", 250.0);
+    MaintenanceLog logs[5];
+    int l_count = get_maintenance_history(machine_list[0].id, logs, 5);
+
+    if (l_count > 0) {
+      printf("\n--- MAINTENANCE HISTORY ---\n");
+
+      for (int i = 0; i < l_count; i++) {
+        printf("[%s] Tech: %-12s | Cost: $%-7.2f | Desc: %s\n",
+               logs[i].log_date, logs[i].technician_name, logs[i].cost, logs[i].description);
+      }
+
+      printf("---------------------------\n");
     }
   } else {
     LOG_INFO("No machines found or database is empty.");
   }
 
-  // 5. Secure System Shutdown
+  // 7. Secure System Shutdown
   db_pool_destroy();
   LOG_INFO("System shutdown successfully.");
   return EXIT_SUCCESS;

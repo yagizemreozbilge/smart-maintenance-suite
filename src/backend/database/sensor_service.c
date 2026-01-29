@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "alert_service.h"
 
 int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors) {
   // 1. Acquire a connection from the pool
@@ -15,16 +16,15 @@ int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors)
   }
 
   // 2. Prepare the SQL query
-  // We use "DISTINCT ON (s.id)" to get exactly one row (the newest one) per sensor.
   char query[512];
   snprintf(query, sizeof(query),
            "SELECT DISTINCT ON (s.id) "
-           "s.id, s.type, sd.value, s.unit, "
-           "to_char(sd.recorded_at, 'YYYY-MM-DD HH24:MI:SS') "
+           "s.id, s.sensor_type, sd.value, s.unit, "
+           "to_char(sd.timestamp, 'YYYY-MM-DD HH24:MI:SS') "
            "FROM sensors s "
            "JOIN sensor_data sd ON s.id = sd.sensor_id "
            "WHERE s.machine_id = %d "
-           "ORDER BY s.id, sd.recorded_at DESC;",
+           "ORDER BY s.id, sd.timestamp DESC;",
            machine_id);
   // 3. Execute the query
   PGresult *res = PQexec(conn_wrapper->pg_conn, query);
@@ -42,8 +42,8 @@ int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors)
 
   for (int i = 0; i < count; i++) {
     out_stats[i].sensor_id = atoi(PQgetvalue(res, i, 0));
-    strncpy(out_stats[i].type, PQgetvalue(res, i, 1), 31);
-    out_stats[i].type[31] = '\0';
+    strncpy(out_stats[i].sensor_type, PQgetvalue(res, i, 1), 31);
+    out_stats[i].sensor_type[31] = '\0';
     out_stats[i].last_value = atof(PQgetvalue(res, i, 2));
     strncpy(out_stats[i].unit, PQgetvalue(res, i, 3), 9);
     out_stats[i].unit[9] = '\0';
@@ -58,7 +58,7 @@ int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors)
   return count;
 }
 
-bool add_sensor_reading(int sensor_id, double value) {
+bool add_sensor_reading(int sensor_id, const char *sensor_type, double value) {
   // 1. Havuzdan bağlantı al
   DBConnection *conn_wrapper = db_pool_acquire();
 
@@ -80,8 +80,9 @@ bool add_sensor_reading(int sensor_id, double value) {
     return false;
   }
 
-  // 4. Temizlik
   PQclear(res);
   db_pool_release(conn_wrapper);
+  // 4. Kural Motorunu Tetikle (Alert Engine)
+  check_and_trigger_alerts(sensor_id, sensor_type, value);
   return true;
 }
