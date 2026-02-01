@@ -151,6 +151,32 @@ echo Package Publish Test Results Report
 tar -czvf release_win\windows-test-results-report.tar.gz -C docs\testresultswin .
 
 echo ....................
+echo  Build Backend API
+echo ....................
+set BACKEND_PATH=src\backend
+set PG_PATH=C:\Program Files\PostgreSQL\17
+set DB_FILES=database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c
+
+pushd %BACKEND_PATH%
+echo [CLEAN] Closing any running instances of app.exe...
+taskkill /F /IM app.exe >nul 2>&1
+
+echo [BUILD] Compiling C source files...
+gcc main.c %DB_FILES% ^
+    -I./database ^
+    -I"%PG_PATH%\include" ^
+    "%PG_PATH%\lib\libpq.lib" ^
+    -lws2_32 -lsecur32 -ladvapi32 -lshell32 -lpthread ^
+    -o app.exe
+
+if %ERRORLEVEL% EQU 0 (
+    echo [SUCCESS] Backend API built successfully.
+) else (
+    echo [ERROR] Backend build failed!
+)
+popd
+
+echo ....................
 echo Operation Completed!
 echo ....................
 pause
