@@ -171,6 +171,8 @@ gcc main.c %DB_FILES% ^
 
 if %ERRORLEVEL% EQU 0 (
     echo [SUCCESS] Backend API built successfully.
+    echo [LAUNCH] Starting Backend Dashboard in a new window...
+    start app.exe
 ) else (
     echo [ERROR] Backend build failed!
 )

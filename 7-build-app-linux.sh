@@ -141,4 +141,28 @@ echo Package Publish Test Results Report
 tar -czvf release_linux/linux-test-results-report.tar.gz -C docs/testresultslinux .
 
 echo "...................."
+echo " Build Backend API "
+echo "...................."
+BACKEND_PATH="src/backend"
+# Linux'ta PostgreSQL genellikle standart yollardadır (/usr/include/postgresql)
+# Bu yüzden ek yol belirtmemize gerek kalmayabilir ama standart bayrakları ekliyoruz.
+DB_FILES="database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c"
+
+pushd $BACKEND_PATH > /dev/null
+echo "[BUILD] Compiling C source files for Linux..."
+# Linux'ta -lpq postgres kütüphanesidir, -lpthread ise iş parçacıkları için.
+gcc main.c $DB_FILES \
+    -I./database \
+    -lpq -lpthread -lm \
+    -o app_linux
+
+if [ $? -eq 0 ]; then
+    echo "[SUCCESS] Backend API (Linux) built successfully."
+else
+    echo "[ERROR] Backend build for Linux failed!"
+fi
+popd > /dev/null
+
+echo "...................."
 echo "Operation Completed!"
+echo "...................."
