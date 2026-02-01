@@ -5,6 +5,7 @@
 #include "database/maintenance_service.h"
 #include "database/inventory_service.h"
 #include "database/api_handlers.h"
+#include "database/http_server.h"
 #include "database/logger.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,6 +56,11 @@ int main() {
   if (!db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 2000)) {
     LOG_ERROR("System failure: Pool initialization failed.");
     return EXIT_FAILURE;
+  }
+
+  // Start the Web API Server
+  if (start_http_server(8080)) {
+    printf("%s[WEB] API is live at http://localhost:8080/api/machines%s\n", B_GREEN, RESET);
   }
 
   int choice = -1;
@@ -250,6 +256,7 @@ int main() {
     }
   }
 
+  stop_http_server();
   db_pool_destroy();
   return EXIT_SUCCESS;
 }
