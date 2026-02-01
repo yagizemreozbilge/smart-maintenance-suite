@@ -4,6 +4,7 @@
 #include "database/alert_service.h"
 #include "database/maintenance_service.h"
 #include "database/inventory_service.h"
+#include "database/api_handlers.h"
 #include "database/logger.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,6 +39,7 @@ void show_menu() {
   printf(" 5. %sView Recent Alerts (%sSecurity Dashboard%s%s)\n", B_CYAN, B_RED, B_CYAN, RESET);
   printf(" 6. %sSimulate Sensor Data (Test Engine)%s\n", B_YELLOW, RESET);
   printf(" 7. %sInventory Management%s\n", B_CYAN, RESET);
+  printf(" 8. %sJSON Export Test%s (" B_GREEN "API Simulation" RESET ")\n", B_CYAN, RESET);
   printf(" 0. %sExit System%s\n", B_RED, RESET);
   printf("%s======================================================%s\n", BOLD_BLUE, RESET);
   printf("Choice: ");
@@ -214,6 +216,22 @@ int main() {
                  items[i].part_name, items[i].sku, col, items[i].quantity, RESET, items[i].min_stock_level);
         }
 
+        printf("\nPress Enter to continue...");
+        getchar();
+        getchar();
+        break;
+      }
+
+      case 8: {
+        printf("\n%s--- JSON SERIALIZATION TEST ---%s\n", B_MAGENTA, RESET);
+        printf("\n%s[Machines API Output]:%s\n", B_YELLOW, RESET);
+        char *machine_json = serialize_machines_to_json();
+        printf("%s\n", machine_json);
+        free(machine_json);
+        printf("\n%s[Inventory API Output]:%s\n", B_YELLOW, RESET);
+        char *inv_json = serialize_inventory_to_json();
+        printf("%s\n", inv_json);
+        free(inv_json);
         printf("\nPress Enter to continue...");
         getchar();
         getchar();
