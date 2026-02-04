@@ -44,6 +44,14 @@ DWORD WINAPI handle_request(LPVOID client_ptr) {
       char *json = serialize_inventory_to_json();
       send_response(client_socket, "application/json", json, 200);
       free(json);
+    } else if (strstr(buffer, "GET /api/alerts")) {
+      char *json = serialize_alerts_to_json();
+      send_response(client_socket, "application/json", json, 200);
+      free(json);
+    } else if (strstr(buffer, "GET /api/sensors")) {
+      char *json = serialize_sensors_to_json();
+      send_response(client_socket, "application/json", json, 200);
+      free(json);
     } else {
       const char *not_found = "{\"error\": \"Not Found\"}";
       send_response(client_socket, "application/json", not_found, 404);

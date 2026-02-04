@@ -1,6 +1,8 @@
 #include "api_handlers.h"
 #include "machine_service.h"
 #include "inventory_service.h"
+#include "alert_service.h"
+#include "sensor_service.h"
 #include "cJSON.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -44,6 +46,49 @@ char *serialize_inventory_to_json() {
     cJSON_AddNumberToObject(item, "min_stock", items[i].min_stock_level);
     cJSON_AddNumberToObject(item, "cost", items[i].unit_cost);
     cJSON_AddItemToArray(root, item);
+  }
+
+  char *json_output = cJSON_Print(root);
+  cJSON_Delete(root);
+  return json_output;
+}
+
+char *serialize_alerts_to_json() {
+  AlertInfo alerts[50];
+  int count = get_recent_alerts(alerts, 50);
+  cJSON *root = cJSON_CreateArray();
+
+  for (int i = 0; i < count; i++) {
+    cJSON *alert = cJSON_CreateObject();
+    cJSON_AddNumberToObject(alert, "id", alerts[i].id);
+    cJSON_AddNumberToObject(alert, "sensor_id", alerts[i].sensor_id);
+    cJSON_AddStringToObject(alert, "severity", alerts[i].severity);
+    cJSON_AddStringToObject(alert, "message", alerts[i].message);
+    cJSON_AddStringToObject(alert, "created_at", alerts[i].created_at);
+    cJSON_AddItemToArray(root, alert);
+  }
+
+  char *json_output = cJSON_Print(root);
+  cJSON_Delete(root);
+  return json_output;
+}
+
+// Helper: We might need a function to get all sensors status, currently we only have per machine.
+// Let's assume for now we provide health for machine ID 1 as a placeholder or we can add a global fetcher.
+char *serialize_sensors_to_json() {
+  SensorStatus stats[50];
+  // For now, let's fetch for machine 1 just to see it working, or we can improve the service.
+  int count = get_machine_health(1, stats, 50);
+  cJSON *root = cJSON_CreateArray();
+
+  for (int i = 0; i < count; i++) {
+    cJSON *s = cJSON_CreateObject();
+    cJSON_AddNumberToObject(s, "sensor_id", stats[i].sensor_id);
+    cJSON_AddStringToObject(s, "type", stats[i].sensor_type);
+    cJSON_AddNumberToObject(s, "value", stats[i].last_value);
+    cJSON_AddStringToObject(s, "unit", stats[i].unit);
+    cJSON_AddStringToObject(s, "timestamp", stats[i].recorded_at);
+    cJSON_AddItemToArray(root, s);
   }
 
   char *json_output = cJSON_Print(root);

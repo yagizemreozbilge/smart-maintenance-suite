@@ -6,10 +6,8 @@
  * This string must be freed by the caller using free().
  */
 char *serialize_machines_to_json();
-
-/**
- * Converts the inventory list to a JSON string.
- */
 char *serialize_inventory_to_json();
+char *serialize_alerts_to_json();
+char *serialize_sensors_to_json();
 
 #endif
