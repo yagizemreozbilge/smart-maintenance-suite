@@ -19,6 +19,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <libpq-fe.h>          /* libpq – PostgreSQL C client library */
+#include <errno.h>
 #include "logger.h"
 #include "db_connection.h"
 

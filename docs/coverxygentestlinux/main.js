@@ -213,13 +213,13 @@ var assemblies = [
   {
     "name": "Default",
     "classes": [
-      { "name": "/mnt/c/Users/yagiz/Desktop/Project/smart-maintenance-suite/src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp", "rp": "_mnt_c_Users_yagiz_Desktop_Project_smart_maintenane_suite_smart_maintenance_suite_test.cpp.html", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [9], "bch": [], "mch": [], "mfch": [], "hc": [{ "et": "2/7/2026 - 10:08:34 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }, { "et": "2/7/2026 - 10:17:01 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }], "metrics": { } },
+      { "name": "/mnt/c/Users/yagiz/Desktop/Project/smart-maintenance-suite/src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp", "rp": "_mnt_c_Users_yagiz_Desktop_Project_smart_maintenane_suite_smart_maintenance_suite_test.cpp.html", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [9], "bch": [], "mch": [], "mfch": [], "hc": [{ "et": "2/7/2026 - 10:08:34 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }, { "et": "2/7/2026 - 10:17:01 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }, { "et": "2/7/2026 - 10:34:07 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }, { "et": "2/7/2026 - 10:41:01 PM", "cl": 1, "ucl": 10, "cal": 11, "tl": 57, "lcq": 9, "cb": 0, "tb": 0, "bcq": 0, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }], "metrics": { } },
     ]},
 ];
 
 var metrics = [];
 
-var historicCoverageExecutionTimes = ["2/7/2026 - 10:08:34 PM"];
+var historicCoverageExecutionTimes = ["2/7/2026 - 10:34:07 PM", "2/7/2026 - 10:17:01 PM", "2/7/2026 - 10:08:34 PM"];
 
 var riskHotspotMetrics = [
 ];
