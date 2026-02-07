@@ -158,11 +158,31 @@ gcc main.c $DB_FILES \
 
 if [ $? -eq 0 ]; then
     echo "[SUCCESS] Backend API (Linux) built successfully."
+    echo "[LAUNCH] Starting Backend in background..."
+    ./app_linux &
 else
     echo "[ERROR] Backend build for Linux failed!"
 fi
 popd > /dev/null
 
 echo "...................."
-echo "Operation Completed!"
+echo " Build/Launch Frontend "
+echo "...................."
+FRONTEND_PATH="src/frontend"
+if [ -d "$FRONTEND_PATH" ]; then
+    pushd $FRONTEND_PATH > /dev/null
+    if [ ! -d "node_modules" ]; then
+        echo "[INSTALL] node_modules not found. Installing..."
+        npm install
+    fi
+    echo "[LAUNCH] Starting Frontend dev server..."
+    # Linux üzerinde genellikle x-terminal-emulator veya '&' kullanarak arka planda başlatırız
+    npm run dev &
+    popd > /dev/null
+else
+    echo "[SKIP] Frontend directory not found."
+fi
+
+echo "...................."
+echo "Operation Completed! (Services starting in background...)"
 echo "...................."

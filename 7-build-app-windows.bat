@@ -179,7 +179,24 @@ if %ERRORLEVEL% EQU 0 (
 popd
 
 echo ....................
-echo Operation Completed!
+echo  Build/Launch Frontend
+echo ....................
+set FRONTEND_PATH=src\frontend
+if exist %FRONTEND_PATH% (
+    pushd %FRONTEND_PATH%
+    if not exist node_modules (
+        echo [INSTALL] node_modules not found. This might take a while...
+        call npm install
+    )
+    echo [LAUNCH] Starting Frontend dev server in a new window...
+    start cmd /k "npm run dev"
+    popd
+) else (
+    echo [SKIP] Frontend directory not found at %FRONTEND_PATH%
+)
+
+echo ....................
+echo Operation Completed! (Backend & Frontend are starting...)
 echo ....................
 pause
 
