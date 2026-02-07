@@ -1,0 +1,72 @@
+\hypertarget{smart__maintenance__suite__app_8cpp}{}\doxysection{src/smart\+\_\+maintenance\+\_\+suite\+\_\+app/src/smart\+\_\+maintenance\+\_\+suite\+\_\+app.cpp File Reference}
+\label{smart__maintenance__suite__app_8cpp}\index{src/smart\_maintenance\_suite\_app/src/smart\_maintenance\_suite\_app.cpp@{src/smart\_maintenance\_suite\_app/src/smart\_maintenance\_suite\_app.cpp}}
+
+
+A simple program to demonstrate the usage of the smart maintenance suite model class.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include \char`\"{}../../smart\+\_\+maintenance\+\_\+suite/header/smart\+\_\+maintenance\+\_\+suite.\+h\char`\"{}}\newline
+Include dependency graph for smart\+\_\+maintenance\+\_\+suite\+\_\+app.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{smart__maintenance__suite__app_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{smart__maintenance__suite__app_8cpp_ac792f08ed5f8708833ac64a61310dd03}{is\+Operator}} (char c)
+\item 
+int \mbox{\hyperlink{smart__maintenance__suite__app_8cpp_ae3f55e40ed8f0a2cde99d2b36e919cbf}{precedence}} (char c)
+\item 
+std\+::string \mbox{\hyperlink{smart__maintenance__suite__app_8cpp_a897077446c75caaf157031854034ac9f}{infix\+To\+Postfix}} (const std\+::string \&infix)
+\item 
+double \mbox{\hyperlink{smart__maintenance__suite__app_8cpp_af347a06ef4464029cd26e699842332cb}{evaluate\+Postfix}} (const std\+::string \&postfix)
+\item 
+int \mbox{\hyperlink{smart__maintenance__suite__app_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A simple program to demonstrate the usage of the smart maintenance suite model class. 
+
+This program process infix notations and calculate operations 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{smart__maintenance__suite__app_8cpp_af347a06ef4464029cd26e699842332cb}\label{smart__maintenance__suite__app_8cpp_af347a06ef4464029cd26e699842332cb}} 
+\index{smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}!evaluatePostfix@{evaluatePostfix}}
+\index{evaluatePostfix@{evaluatePostfix}!smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}}
+\doxysubsubsection{\texorpdfstring{evaluatePostfix()}{evaluatePostfix()}}
+{\footnotesize\ttfamily double evaluate\+Postfix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{postfix }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{smart__maintenance__suite__app_8cpp_a897077446c75caaf157031854034ac9f}\label{smart__maintenance__suite__app_8cpp_a897077446c75caaf157031854034ac9f}} 
+\index{smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}!infixToPostfix@{infixToPostfix}}
+\index{infixToPostfix@{infixToPostfix}!smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}}
+\doxysubsubsection{\texorpdfstring{infixToPostfix()}{infixToPostfix()}}
+{\footnotesize\ttfamily std\+::string infix\+To\+Postfix (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{infix }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{smart__maintenance__suite__app_8cpp_ac792f08ed5f8708833ac64a61310dd03}\label{smart__maintenance__suite__app_8cpp_ac792f08ed5f8708833ac64a61310dd03}} 
+\index{smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}!isOperator@{isOperator}}
+\index{isOperator@{isOperator}!smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}}
+\doxysubsubsection{\texorpdfstring{isOperator()}{isOperator()}}
+{\footnotesize\ttfamily bool is\+Operator (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{smart__maintenance__suite__app_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{smart__maintenance__suite__app_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}!main@{main}}
+\index{main@{main}!smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{smart__maintenance__suite__app_8cpp_ae3f55e40ed8f0a2cde99d2b36e919cbf}\label{smart__maintenance__suite__app_8cpp_ae3f55e40ed8f0a2cde99d2b36e919cbf}} 
+\index{smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}!precedence@{precedence}}
+\index{precedence@{precedence}!smart\_maintenance\_suite\_app.cpp@{smart\_maintenance\_suite\_app.cpp}}
+\doxysubsubsection{\texorpdfstring{precedence()}{precedence()}}
+{\footnotesize\ttfamily int precedence (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})}
+
