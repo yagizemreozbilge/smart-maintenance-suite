@@ -1,50 +1,56 @@
 import React from 'react';
+import { Package, AlertTriangle, CheckCircle } from 'lucide-react';
 
-// Point 1: Passing Props (label, value, isLowStock, onRestock)
-// Point 5 (from your list): children prop is also used here
 export function StatusCard({ label, value, isLowStock, onRestock, children }) {
-
-    const statusColor = isLowStock ? '#ff4d4d' : '#2ecc71';
+    const statusColor = isLowStock ? '#e74c3c' : '#2ecc71';
 
     return (
         <div className="status-card" style={{
-            border: `2px solid ${statusColor}`,
-            padding: '15px',
-            margin: '10px',
-            borderRadius: '8px',
-            backgroundColor: '#f9f9f9'
+            border: `none`,
+            borderLeft: `6px solid ${statusColor}`,
+            padding: '20px',
+            marginBottom: '20px',
+            borderRadius: '12px',
+            backgroundColor: 'white',
+            boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
         }}>
-            <h3 style={{ margin: '0 0 10px 0' }}>{label}</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+                <Package size={20} color="#34495e" />
+                <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2c3e50' }}>{label}</h3>
+            </div>
 
-            <p>Current Level: <strong>{value}</strong></p>
+            <div style={{ fontSize: '1.8rem', fontWeight: '800', margin: '10px 0' }}>{value}</div>
 
-            {/* Point 6 (Conditional Rendering) */}
             {isLowStock ? (
-                <p style={{ color: 'red', fontWeight: 'bold' }}>⚠️ CRITICAL: Stock is below threshold!</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#e74c3c', fontSize: '0.85rem', fontWeight: '600' }}>
+                    <AlertTriangle size={16} /> LOW STOCK WARNING
+                </div>
             ) : (
-                <p style={{ color: 'green' }}>✅ Status: Operational</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#2ecc71', fontSize: '0.85rem', fontWeight: '600' }}>
+                    <CheckCircle size={16} /> LEVELS OPTIMAL
+                </div>
             )}
 
-            {/* Point 3: Events (onClick) 
-          Wait! We don't call the function like onRestock(), 
-          we pass the reference so React calls it when clicked. */}
             {isLowStock && (
                 <button
                     onClick={onRestock}
                     style={{
+                        width: '100%',
+                        marginTop: '15px',
                         backgroundColor: '#3498db',
                         color: 'white',
                         border: 'none',
-                        padding: '8px 12px',
-                        borderRadius: '4px',
-                        cursor: 'pointer'
+                        padding: '12px',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
                     }}
                 >
-                    Order Restock
+                    Quick Restock
                 </button>
             )}
 
-            <div style={{ marginTop: '10px', fontStyle: 'italic', fontSize: '0.9em' }}>
+            <div style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid #f0f0f0', color: '#7f8c8d', fontSize: '0.85rem' }}>
                 {children}
             </div>
         </div>

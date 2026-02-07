@@ -81,8 +81,8 @@ int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
 
   char query[256];
   snprintf(query, sizeof(query),
-           "SELECT id, sensor_id, severity, message, to_char(created_at, 'YYYY-MM-DD HH24:MI:SS') "
-           "FROM alerts ORDER BY created_at DESC LIMIT %d;",
+           "SELECT id, sensor_id, severity, message, to_char(alert_time, 'YYYY-MM-DD HH24:MI:SS') "
+           "FROM alerts ORDER BY alert_time DESC LIMIT %d;",
            max_alerts);
   PGresult *res = PQexec(conn_wrapper->pg_conn, query);
 

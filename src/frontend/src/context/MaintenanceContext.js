@@ -23,7 +23,12 @@ const initialState = {
         { id: 1, name: "CNC Lathe-01", status: "Operational" },
         { id: 2, name: "Robot Arm-04", status: "Warning" },
     ],
-    appStatus: 'idle' // Points 1 & 2: Status-based state
+    alerts: [
+        { id: 3, sensor_id: 1, severity: "CRITICAL", message: "Critical Temperature detected: 95.50 C", created_at: "2026-01-29 22:51:38" },
+        { id: 2, sensor_id: 1, severity: "CRITICAL", message: "Critical Temperature detected: 95.50 C", created_at: "2026-01-29 22:44:41" },
+        { id: 1, sensor_id: 1, severity: "Medium", message: "Temperature is approaching the critical threshold (85C)!", created_at: "2026-01-20 23:08:38" }
+    ],
+    appStatus: 'idle'
 };
 
 // Point 6: Context - Data teleportation

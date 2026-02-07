@@ -5,6 +5,7 @@ import WelcomeMessage, { Header } from './components/Header.js';
 import { StatusCard } from './components/StatusCard.js';
 import { MachineList } from './components/MachineList.js';
 import { MaintenanceForm } from './components/MaintenanceForm.js';
+import { AlertsPanel } from './components/AlertsPanel.js';
 
 function Dashboard() {
     const { stock, machines } = useMaintenance();
@@ -54,6 +55,10 @@ function Dashboard() {
 
                     <div style={{ marginTop: '20px' }}>
                         <MaintenanceForm />
+                    </div>
+
+                    <div style={{ marginTop: '20px', backgroundColor: 'white', padding: '15px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+                        <AlertsPanel />
                     </div>
                 </aside>
 
