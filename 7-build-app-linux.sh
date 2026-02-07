@@ -153,6 +153,7 @@ echo "[BUILD] Compiling C source files for Linux..."
 # Linux'ta -lpq postgres kütüphanesidir, -lpthread ise iş parçacıkları için.
 gcc main.c $DB_FILES \
     -I./database \
+    -I/usr/include/postgresql \
     -lpq -lpthread -lm \
     -o app_linux
 

@@ -8,6 +8,9 @@ sudo apt install astyle -y
 echo "Installing Ninja and Cmake..."
 sudo apt install ninja-build cmake -y
 
+echo "Installing Postgres Dev Headers and Build Essentials..."
+sudo apt install build-essential libpq-dev -y
+
 echo "Installing Doxygen..."
 sudo apt install doxygen -y
 
