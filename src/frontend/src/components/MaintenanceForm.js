@@ -1,42 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useMaintenanceDispatch } from '../context/MaintenanceContext.js';
 
 export function MaintenanceForm() {
-    // Point 1: Reacting to Input with state
-    // Point 2: Simple structure
     const [name, setName] = useState('');
     const [status, setStatus] = useState('Operational');
+
+    // Point 3: useRef - DOM focus
+    const inputRef = useRef(null);
+
     const dispatch = useMaintenanceDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!name) return;
+        if (!name) {
+            // Point 3: Direct DOM manipulation for UX
+            inputRef.current.focus();
+            return;
+        }
 
-        // Point 5: Dispatching an action
         dispatch({
             type: 'ADD_MACHINE',
             payload: { id: Date.now(), name, status }
         });
 
-        setName(''); // Reset local state
+        setName('');
+        // Auto focus back to input for better workflow
+        inputRef.current.focus();
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ padding: '15px', border: '1px dashed #666', borderRadius: '8px' }}>
-            <h4>Add New Equipment</h4>
-            <input
-                type="text"
-                placeholder="Machine Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                style={{ marginRight: '10px', padding: '5px' }}
-            />
-            <select value={status} onChange={(e) => setStatus(e.target.value)} style={{ padding: '5px' }}>
-                <option value="Operational">Operational</option>
-                <option value="Warning">Warning</option>
-                <option value="Maintenance">Maintenance</option>
-            </select>
-            <button type="submit" style={{ marginLeft: '10px', padding: '5px 10px', cursor: 'pointer' }}>Add</button>
-        </form>
+        <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+            <h3 style={{ marginTop: 0 }}>Equipment Onboarding</h3>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div>
+                    <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9em' }}>Machine Designation</label>
+                    <input
+                        ref={inputRef} // Point 3: Hooking the DOM
+                        type="text"
+                        placeholder="e.g. Laser Cutter X-1"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '10px',
+                            borderRadius: '4px',
+                            border: '1px solid #ddd',
+                            boxSizing: 'border-box'
+                        }}
+                    />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                    <div>
+                        <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9em' }}>Initial Status</label>
+                        <select
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ddd' }}
+                        >
+                            <option value="Operational">Operational</option>
+                            <option value="Warning">Warning</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
+                    </div>
+                    <button type="submit" style={{
+                        alignSelf: 'end',
+                        padding: '10px',
+                        backgroundColor: '#27ae60',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        fontWeight: 'bold'
+                    }}>Register Asset</button>
+                </div>
+            </form>
+        </div>
     );
 }
