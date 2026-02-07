@@ -8,6 +8,12 @@ const maintenanceReducer = (state, action) => {
             return { ...state, stock: action.payload };
         case 'ADD_MACHINE':
             return { ...state, machines: [...state.machines, action.payload] };
+        case 'SET_MACHINES':
+            return { ...state, machines: action.payload };
+        case 'SET_INVENTORY':
+            return { ...state, inventory: action.payload, stock: action.payload.reduce((acc, item) => acc + item.quantity, 0) };
+        case 'SET_ALERTS':
+            return { ...state, alerts: action.payload };
         case 'SET_STATUS':
             return { ...state, appStatus: action.payload };
         case 'REMOVE_MACHINE':
@@ -18,16 +24,10 @@ const maintenanceReducer = (state, action) => {
 };
 
 const initialState = {
-    stock: 3,
-    machines: [
-        { id: 1, name: "CNC Lathe-01", status: "Operational" },
-        { id: 2, name: "Robot Arm-04", status: "Warning" },
-    ],
-    alerts: [
-        { id: 3, sensor_id: 1, severity: "CRITICAL", message: "Critical Temperature detected: 95.50 C", created_at: "2026-01-29 22:51:38" },
-        { id: 2, sensor_id: 1, severity: "CRITICAL", message: "Critical Temperature detected: 95.50 C", created_at: "2026-01-29 22:44:41" },
-        { id: 1, sensor_id: 1, severity: "Medium", message: "Temperature is approaching the critical threshold (85C)!", created_at: "2026-01-20 23:08:38" }
-    ],
+    stock: 0,
+    machines: [],
+    inventory: [],
+    alerts: [],
     appStatus: 'idle'
 };
 

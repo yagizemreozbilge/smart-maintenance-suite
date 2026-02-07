@@ -14,19 +14,41 @@ function Dashboard() {
     // Point 5: Using Custom Hook for calculations
     const stats = useMachineStats();
 
-    // Point 2: useEffect for Simulation / Real Fetch
+    // Point 2: useEffect for Real Fetch from C Backend
     const [isSyncing, setIsSyncing] = useState(false);
 
-    useEffect(() => {
-        // Simulated fetching from C Backend
+    const syncWithBackend = async () => {
         setIsSyncing(true);
-        const timeout = setTimeout(() => {
-            setIsSyncing(false);
-            console.log("System data synchronized with C backend.");
-        }, 1500);
+        try {
+            // Parallel fetching for performance
+            const [mRes, iRes, aRes] = await Promise.all([
+                fetch('http://localhost:8080/api/machines'),
+                fetch('http://localhost:8080/api/inventory'),
+                fetch('http://localhost:8080/api/alerts')
+            ]);
 
-        return () => clearTimeout(timeout);
-    }, [machines]); // Re-sync when machines list changes
+            const machinesData = await mRes.json();
+            const inventoryData = await iRes.json();
+            const alertsData = await aRes.json();
+
+            dispatch({ type: 'SET_MACHINES', payload: machinesData });
+            dispatch({ type: 'SET_INVENTORY', payload: inventoryData });
+            dispatch({ type: 'SET_ALERTS', payload: alertsData });
+
+            console.log("System data synchronized with C backend.");
+        } catch (error) {
+            console.error("Backend connection failed:", error);
+        } finally {
+            setIsSyncing(false);
+        }
+    };
+
+    useEffect(() => {
+        syncWithBackend();
+        // Option: Poll every 30 seconds for real-time updates
+        const interval = setInterval(syncWithBackend, 30000);
+        return () => clearInterval(interval);
+    }, [dispatch]);
 
     return (
         <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', backgroundColor: '#f4f7f6', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
