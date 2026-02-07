@@ -1,42 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMaintenance, useMaintenanceDispatch } from '../context/MaintenanceContext.js';
 
-// This component shows how to turn a Data Array into a Visual List
-export function MachineList({ machines, filterStatus }) {
+export function MachineList() {
+    // Point 3: Sharing State - Accessing central data
+    const { machines } = useMaintenance();
+    const dispatch = useMaintenanceDispatch();
 
-    // Point 2: Filter (Ayıklama)
-    // We only show machines that match the filter, or all if filter is 'All'
+    const [filterStatus, setFilterStatus] = useState('All');
+
     const filteredMachines = filterStatus === 'All'
         ? machines
         : machines.filter(m => m.status === filterStatus);
 
     return (
-        <div className="machine-list">
-            <h3>Active Machines ({filteredMachines.length})</h3>
+        <div className="machine-list" style={{ marginTop: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3>Monitoring Unit ({filteredMachines.length})</h3>
+                <div>
+                    <select onChange={(e) => setFilterStatus(e.target.value)} style={{ padding: '5px' }}>
+                        <option value="All">Show All</option>
+                        <option value="Operational">Operational</option>
+                        <option value="Warning">Warning</option>
+                        <option value="Maintenance">Maintenance</option>
+                    </select>
+                </div>
+            </div>
 
-            {/* Point 2: Map (Dönüştürme) */}
             <ul style={{ listStyle: 'none', padding: 0 }}>
                 {filteredMachines.map((machine) => (
-                    // Point 2: Key (TC Kimlik No) - CRITICAL for React
                     <li key={machine.id} style={{
-                        padding: '10px',
-                        borderBottom: '1px solid #ddd',
+                        padding: '12px',
+                        borderBottom: '1px solid #eee',
                         display: 'flex',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
                     }}>
                         <span><strong>{machine.name}</strong></span>
-                        <span style={{
-                            color: machine.status === 'Operational' ? 'green' : 'orange',
-                            fontSize: '0.8em',
-                            fontWeight: 'bold'
-                        }}>
-                            {machine.status.toUpperCase()}
-                        </span>
+                        <div>
+                            <span style={{
+                                color: machine.status === 'Operational' ? '#2ecc71' : '#f39c12',
+                                marginRight: '15px',
+                                fontWeight: 'bold'
+                            }}>
+                                {machine.status.toUpperCase()}
+                            </span>
+                            {/* Point 5: Triggering logic change via reducer */}
+                            <button
+                                onClick={() => dispatch({ type: 'REMOVE_MACHINE', payload: machine.id })}
+                                style={{ color: 'red', border: 'none', background: 'none', cursor: 'pointer' }}
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
-
-            {/* Point 6: Conditional Rendering for empty lists */}
-            {filteredMachines.length === 0 && <p>No machines found for this category.</p>}
         </div>
     );
 }

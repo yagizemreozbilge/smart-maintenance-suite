@@ -1,71 +1,64 @@
-import React, { useState } from 'react'; // Point 4: useState import
+import React from 'react';
+import { MaintenanceProvider, useMaintenance, useMaintenanceDispatch } from './context/MaintenanceContext.js';
 import WelcomeMessage, { Header } from './components/Header.js';
 import { StatusCard } from './components/StatusCard.js';
 import { MachineList } from './components/MachineList.js';
+import { MaintenanceForm } from './components/MaintenanceForm.js';
 
-function App() {
-    // Point 4: State (Hafıza)
-    // [Değişken, Onu Güncelleyen Fonksiyon] = useState(Başlangıç Değeri)
-    const [stock, setStock] = useState(3);
-    const [filter, setFilter] = useState('All');
-
-    // Static Data for demonstration (Point 2)
-    const machinesData = [
-        { id: 1, name: "CNC Lathe-01", status: "Operational" },
-        { id: 2, name: "Robot Arm-04", status: "Warning" },
-        { id: 3, name: "Heat Furnace", status: "Operational" },
-    ];
-
-    // Point 3: Event Handler (React'e teslim edilecek fonksiyon)
-    const handleRestock = () => {
-        // Point 4: Normal bir değişken olsa (stock = 10) ekran yenilenmezdi.
-        // setStock ile hem değeri değiştiriyoruz hem de React'e "Yeniden çiz!" diyoruz.
-        setStock(10);
-        alert("Restock order placed. System state updated.");
-    };
+function Dashboard() {
+    // Point 7: Accessing state and dispatch anywhere
+    const { stock } = useMaintenance();
+    const dispatch = useMaintenanceDispatch();
 
     return (
-        <div style={{ fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif', maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
-            <Header title="Smart Maintenance Control Suite" />
+        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+            <Header title="Professional Maintenance Suite" />
             <WelcomeMessage />
 
-            <section style={{ marginTop: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '30px', marginTop: '30px' }}>
 
-                {/* Module 1: Inventory (State & Props & Events) */}
-                <div>
+                {/* Left Column: Alerts & Manual Actions */}
+                <section>
+                    {/* Point 3: Sending state updates to the shared store */}
                     <StatusCard
-                        label="Engine Coolant"
+                        label="Oil Pressure System"
                         value={stock}
                         isLowStock={stock < 5}
-                        onRestock={handleRestock} // Point 3: Fonksiyonun referansı iletiliyor
+                        onRestock={() => dispatch({ type: 'UPDATE_STOCK', payload: 15 })}
                     >
-                        <p>Storage: Sector B-12</p>
+                        <p>Critical threshold: 5 units</p>
                     </StatusCard>
-                </div>
 
-                {/* Module 2: Machines (Map & Filter & State Control) */}
-                <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '8px' }}>
-                    <div style={{ marginBottom: '10px' }}>
-                        {/* Point 3: Event for changing state */}
-                        <button onClick={() => setFilter('All')}>All</button>
-                        <button onClick={() => setFilter('Operational')}>Operational</button>
-                        <button onClick={() => setFilter('Warning')}>Warnings</button>
+                    <div style={{ marginTop: '20px' }}>
+                        {/* Point 1, 4: Form state is local, but affects global via dispatch */}
+                        {/* Point 4: Key could be used here to reset the whole form if needed */}
+                        <MaintenanceForm key="main-form" />
                     </div>
+                </section>
 
-                    <MachineList machines={machinesData} filterStatus={filter} />
-                </div>
+                {/* Right Column: Global Monitoring */}
+                <section style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                    <MachineList />
+                </section>
 
-            </section>
+            </div>
 
-            {/* Point 6: Conditional Rendering at root level */}
-            <footer style={{ marginTop: '40px', borderTop: '1px dotted #aaa', paddingTop: '10px' }}>
-                {stock < 5 ? (
-                    <span style={{ color: 'red', fontWeight: 'bold' }}>SİSTEM DURUMU: DİKKAT GEREKİYOR</span>
-                ) : (
-                    <span style={{ color: 'green' }}>SİSTEM DURUMU: NORMAL</span>
-                )}
+            <footer style={{ marginTop: '50px', borderTop: '1px solid #eee', paddingTop: '20px', textAlign: 'center' }}>
+                {/* Point 2: Computed information from state */}
+                <p style={{ color: stock < 5 ? 'red' : 'green', fontWeight: 'bold' }}>
+                    System Health Index: {stock < 5 ? 'ATTENTION REQUIRED' : 'OPTIMAL'}
+                </p>
             </footer>
         </div>
+    );
+}
+
+// Point 7: The Top Level Provider
+function App() {
+    return (
+        <MaintenanceProvider>
+            <Dashboard />
+        </MaintenanceProvider>
     );
 }
 
