@@ -1,5 +1,6 @@
 #include "http_server.h"
 #include "api_handlers.h"
+#include "jwt.h"
 #include "logger.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,6 +70,33 @@ void *handle_request(void *client_ptr) {
       char *json = serialize_sensors_to_json();
       send_response(client_socket, "application/json", json, 200);
       free(json);
+    } else if (strstr(buffer, "GET /api/login")) {
+      // Basitlik için username/password field'larını query string'den okuyoruz
+      // Gerçekten güvenli olması için POST olmalı, ancak student-style şimdilik bu şekilde ilerliyoruz.
+      char username[50] = {0}, password[50] = {0}, role[20] = {0};
+      // Örnek: GET /api/login?u=admin&p=admin123
+      char *u_ptr = strstr(buffer, "u=");
+      char *p_ptr = strstr(buffer, "p=");
+
+      if (u_ptr && p_ptr) {
+        sscanf(u_ptr, "u=%[^& \r\n]", username);
+        sscanf(p_ptr, "p=%[^& \r\n]", password);
+        int uid = verify_user_credentials(username, password, role);
+
+        if (uid != -1) {
+          char *token = generate_auth_token(uid, username, role);
+          char response[256];
+          snprintf(response, sizeof(response),
+                   "{\"success\": true, \"token\": \"%s\", \"role\": \"%s\", \"username\": \"%s\"}",
+                   token, role, username);
+          send_response(client_socket, "application/json", response, 200);
+          free(token);
+        } else {
+          send_response(client_socket, "application/json", "{\"success\": false, \"message\": \"Hatali giris\"}", 401);
+        }
+      } else {
+        send_response(client_socket, "application/json", "{\"error\": \"Eksik parametre\"}", 400);
+      }
     } else {
       const char *not_found = "{\"error\": \"Not Found\"}";
       send_response(client_socket, "application/json", not_found, 404);
