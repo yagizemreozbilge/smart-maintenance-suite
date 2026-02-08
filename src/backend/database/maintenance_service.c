@@ -76,6 +76,41 @@ int get_maintenance_history(int machine_id, MaintenanceLog *out_logs, int max_lo
   return count;
 }
 
+int get_all_maintenance_logs(MaintenanceLog *out_logs, int max_logs) {
+  DBConnection *conn_wrapper = db_pool_acquire();
+
+  if (!conn_wrapper) return 0;
+
+  const char *query = "SELECT id, machine_id, performer, to_char(ts, 'YYYY-MM-DD'), description, cost "
+                      "FROM maintenance_logs ORDER BY ts DESC;";
+  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+
+  if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+    PQclear(res);
+    db_pool_release(conn_wrapper);
+    return 0;
+  }
+
+  int rows = PQntuples(res);
+  int count = (rows < max_logs) ? rows : max_logs;
+
+  for (int i = 0; i < count; i++) {
+    out_logs[i].id = atoi(PQgetvalue(res, i, 0));
+    out_logs[i].machine_id = atoi(PQgetvalue(res, i, 1));
+    strncpy(out_logs[i].technician_name, PQgetvalue(res, i, 2), 99);
+    out_logs[i].technician_name[99] = '\0';
+    strncpy(out_logs[i].log_date, PQgetvalue(res, i, 3), 31);
+    out_logs[i].log_date[31] = '\0';
+    strncpy(out_logs[i].description, PQgetvalue(res, i, 4), 511);
+    out_logs[i].description[511] = '\0';
+    out_logs[i].cost = atof(PQgetvalue(res, i, 5));
+  }
+
+  PQclear(res);
+  db_pool_release(conn_wrapper);
+  return count;
+}
+
 bool update_maintenance_log(int log_id, const char *description, double cost) {
   DBConnection *conn_wrapper = db_pool_acquire();
 

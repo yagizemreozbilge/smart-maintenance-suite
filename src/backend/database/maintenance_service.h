@@ -23,6 +23,7 @@ bool add_maintenance_log(int machine_id, const char *technician, const char *des
  * @return Number of logs fetched.
  */
 int get_maintenance_history(int machine_id, MaintenanceLog *out_logs, int max_logs);
+int get_all_maintenance_logs(MaintenanceLog *out_logs, int max_logs);
 
 /**
  * Updates an existing maintenance log.

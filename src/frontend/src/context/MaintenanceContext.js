@@ -14,6 +14,8 @@ const maintenanceReducer = (state, action) => {
             return { ...state, inventory: action.payload, stock: action.payload.reduce((acc, item) => acc + item.quantity, 0) };
         case 'SET_ALERTS':
             return { ...state, alerts: action.payload };
+        case 'SET_MAINTENANCE_LOGS':
+            return { ...state, maintenanceLogs: action.payload };
         case 'SET_STATUS':
             return { ...state, appStatus: action.payload };
         case 'REMOVE_MACHINE':
@@ -28,6 +30,7 @@ const initialState = {
     machines: [],
     inventory: [],
     alerts: [],
+    maintenanceLogs: [],
     appStatus: 'idle'
 };
 

@@ -6,7 +6,7 @@ CREATE TYPE user_role AS ENUM ('admin', 'teknisyen', 'operator');
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL, -- Şifreleri açık tutmuyoruz!
+    password_hash VARCHAR(255) NOT NULL,
     full_name VARCHAR(100),
     role user_role DEFAULT 'operator',
     last_login TIMESTAMP,
@@ -16,6 +16,6 @@ CREATE TABLE users (
 -- İlk admin hesabını oluşturalım (Test için şifre: admin123)
 -- Not: Normalde burada hashlenmiş şifre olur, biz şimdilik mock olarak ekliyoruz.
 INSERT INTO users (username, password_hash, full_name, role) VALUES 
-('admin', 'admin123', 'Sistem Yöneticisi', 'admin'),
-('teknik1', 'tech123', 'Baş Teknisyen', 'teknisyen'),
-('op1', 'op123', 'Makine Operatörü', 'operator');
+('admin', 'admin123', 'Sistem Yoneticisi', 'admin'),
+('teknik1', 'tech123', 'Bas Teknisyen', 'teknisyen'),
+('op1', 'op123', 'Makine Operatoru', 'operator');

@@ -1,6 +1,6 @@
 #include "http_server.h"
 #include "api_handlers.h"
-#include "jwt.h"
+#include "../security/jwt.h"
 #include "logger.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -67,7 +67,16 @@ void *handle_request(void *client_ptr) {
       send_response(client_socket, "application/json", json, 200);
       free(json);
     } else if (strstr(buffer, "GET /api/sensors")) {
-      char *json = serialize_sensors_to_json();
+      int mid = 1;
+      char *id_ptr = strstr(buffer, "id=");
+
+      if (id_ptr) sscanf(id_ptr, "id=%d", &mid);
+
+      char *json = serialize_sensors_to_json(mid);
+      send_response(client_socket, "application/json", json, 200);
+      free(json);
+    } else if (strstr(buffer, "GET /api/maintenance")) {
+      char *json = serialize_maintenance_to_json();
       send_response(client_socket, "application/json", json, 200);
       free(json);
     } else if (strstr(buffer, "GET /api/login")) {

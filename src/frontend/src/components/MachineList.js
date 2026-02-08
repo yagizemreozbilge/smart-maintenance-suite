@@ -45,37 +45,99 @@ export function MachineList() {
                 </div>
             </div>
 
-            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
                 {finalItems.map((machine) => (
-                    <div key={machine.id} style={{
-                        padding: '15px',
-                        marginBottom: '10px',
-                        backgroundColor: '#f8f9fa',
-                        borderRadius: '6px',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        borderLeft: `5px solid ${machine.status === 'Operational' ? '#2ecc71' : machine.status === 'Warning' ? '#f1c40f' : '#e74c3c'}`
-                    }}>
-                        <div>
-                            <h4 style={{ margin: 0 }}>{machine.name}</h4>
-                            <small style={{ color: '#666' }}>ID: {machine.id}</small>
-                        </div>
-                        <div style={{ textAlign: 'right' }}>
-                            <span style={{ display: 'block', fontWeight: 'bold', fontSize: '0.8em', marginBottom: '5px' }}>
-                                {machine.status.toUpperCase()}
-                            </span>
-                            <button
-                                onClick={() => dispatch({ type: 'REMOVE_MACHINE', payload: machine.id })}
-                                style={{ color: '#e74c3c', border: 'none', background: 'none', cursor: 'pointer', fontSize: '0.8em' }}
-                            >
-                                Deactivate
-                            </button>
-                        </div>
-                    </div>
+                    <MachineCard key={machine.id} machine={machine} />
                 ))}
-                {finalItems.length === 0 && <p style={{ textAlign: 'center', color: '#999' }}>No assets match your criteria.</p>}
             </div>
+        </div>
+    );
+}
+
+function MachineCard({ machine }) {
+    const dispatch = useMaintenanceDispatch();
+    const [showSensors, setShowSensors] = useState(false);
+    const [sensors, setSensors] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const toggleSensors = async () => {
+        if (!showSensors) {
+            setLoading(true);
+            try {
+                const res = await fetch(`http://localhost:8080/api/sensors?id=${machine.id}`);
+                const data = await res.json();
+                setSensors(data);
+            } catch (err) {
+                console.error("Sensor fetch error:", err);
+            } finally {
+                setLoading(false);
+            }
+        }
+        setShowSensors(!showSensors);
+    };
+
+    return (
+        <div style={{
+            padding: '15px',
+            marginBottom: '15px',
+            backgroundColor: '#f8f9fa',
+            borderRadius: '10px',
+            borderLeft: `6px solid ${machine.status === 'operational' ? '#2ecc71' : machine.status === 'warning' ? '#f1c40f' : '#e74c3c'}`,
+            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+        }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                    <h4 style={{ margin: 0, fontSize: '1.1rem' }}>{machine.name}</h4>
+                    <div style={{ fontSize: '0.8rem', color: '#7f8c8d' }}>📍 {machine.location} | ID: {machine.id}</div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                    <span style={{
+                        padding: '4px 8px',
+                        borderRadius: '4px',
+                        backgroundColor: machine.status === 'operational' ? '#e1f9e1' : '#fff4e5',
+                        color: machine.status === 'operational' ? '#1e7e34' : '#d39e00',
+                        fontSize: '0.75rem',
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase'
+                    }}>
+                        {machine.status}
+                    </span>
+                    <div style={{ marginTop: '10px' }}>
+                        <button
+                            onClick={toggleSensors}
+                            style={{ fontSize: '0.75rem', marginRight: '10px', border: 'none', background: 'none', color: '#3498db', cursor: 'pointer', fontWeight: 'bold' }}
+                        >
+                            {showSensors ? 'CLOSE TELEMETRY' : 'VIEW SENSORS'}
+                        </button>
+                        <button
+                            onClick={() => dispatch({ type: 'REMOVE_MACHINE', payload: machine.id })}
+                            style={{ color: '#e74c3c', border: 'none', background: 'none', cursor: 'pointer', fontSize: '0.75rem' }}
+                        >
+                            Deactivate
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {showSensors && (
+                <div style={{ marginTop: '15px', padding: '10px', backgroundColor: '#fff', borderRadius: '6px', border: '1px solid #eee' }}>
+                    <h5 style={{ margin: '0 0 10px 0', fontSize: '0.8rem', color: '#666' }}>LIVE TELEMETRY</h5>
+                    {loading ? (
+                        <p style={{ fontSize: '0.8rem' }}>Loading sensors...</p>
+                    ) : sensors.length > 0 ? (
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                            {sensors.map(s => (
+                                <div key={s.sensor_id} style={{ padding: '8px', border: '1px solid #f0f0f0', borderRadius: '4px' }}>
+                                    <div style={{ fontSize: '0.7rem', color: '#95a5a6' }}>{s.type.toUpperCase()}</div>
+                                    <div style={{ fontSize: '1rem', fontWeight: 'bold' }}>{s.value} <span style={{ fontSize: '0.7rem' }}>{s.unit}</span></div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p style={{ fontSize: '0.8rem', color: '#999' }}>No active sensors for this unit.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 }

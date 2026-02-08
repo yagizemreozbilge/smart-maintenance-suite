@@ -3,6 +3,7 @@
 #include "inventory_service.h"
 #include "alert_service.h"
 #include "sensor_service.h"
+#include "maintenance_service.h"
 #include "cJSON.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -75,10 +76,9 @@ char *serialize_alerts_to_json() {
 
 // Helper: We might need a function to get all sensors status, currently we only have per machine.
 // Let's assume for now we provide health for machine ID 1 as a placeholder or we can add a global fetcher.
-char *serialize_sensors_to_json() {
+char *serialize_sensors_to_json(int machine_id) {
   SensorStatus stats[50];
-  // For now, let's fetch for machine 1 just to see it working, or we can improve the service.
-  int count = get_machine_health(1, stats, 50);
+  int count = get_machine_health(machine_id, stats, 50);
   cJSON *root = cJSON_CreateArray();
 
   for (int i = 0; i < count; i++) {
@@ -89,6 +89,26 @@ char *serialize_sensors_to_json() {
     cJSON_AddStringToObject(s, "unit", stats[i].unit);
     cJSON_AddStringToObject(s, "timestamp", stats[i].recorded_at);
     cJSON_AddItemToArray(root, s);
+  }
+
+  char *json_output = cJSON_Print(root);
+  cJSON_Delete(root);
+  return json_output;
+}
+
+char *serialize_maintenance_to_json() {
+  MaintenanceLog logs[50];
+  int count = get_all_maintenance_logs(logs, 50);
+  cJSON *root = cJSON_CreateArray();
+
+  for (int i = 0; i < count; i++) {
+    cJSON *log = cJSON_CreateObject();
+    cJSON_AddNumberToObject(log, "id", logs[i].id);
+    cJSON_AddNumberToObject(log, "machine_id", logs[i].machine_id);
+    cJSON_AddStringToObject(log, "performer", logs[i].technician_name);
+    cJSON_AddStringToObject(log, "description", logs[i].description);
+    cJSON_AddStringToObject(log, "date", logs[i].log_date);
+    cJSON_AddItemToArray(root, log);
   }
 
   char *json_output = cJSON_Print(root);

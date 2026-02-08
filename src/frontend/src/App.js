@@ -2,38 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { MaintenanceProvider, useMaintenance, useMaintenanceDispatch } from './context/MaintenanceContext.js';
 import { useMachineStats } from './context/useHooks.js';
 import WelcomeMessage, { Header } from './components/Header.js';
-import { StatusCard } from './components/StatusCard.js';
 import { MachineList } from './components/MachineList.js';
 import { MaintenanceForm } from './components/MaintenanceForm.js';
 import { AlertsPanel } from './components/AlertsPanel.js';
+import LoginPage from './components/LoginPage.js';
+import { InventoryPanel } from './components/InventoryPanel.js';
+import { MaintenanceHistory } from './components/MaintenanceHistory.js';
 
 function Dashboard() {
-    const { stock, machines } = useMaintenance();
+    const { machines = [], alerts = [], maintenanceLogs = [] } = useMaintenance();
     const dispatch = useMaintenanceDispatch();
-
-    // Point 5: Using Custom Hook for calculations
     const stats = useMachineStats();
-
-    // Point 2: useEffect for Real Fetch from C Backend
     const [isSyncing, setIsSyncing] = useState(false);
 
     const syncWithBackend = async () => {
         setIsSyncing(true);
         try {
-            // Parallel fetching for performance
-            const [mRes, iRes, aRes] = await Promise.all([
-                fetch('http://localhost:8080/api/machines'),
-                fetch('http://localhost:8080/api/inventory'),
-                fetch('http://localhost:8080/api/alerts')
+            const [mRes, iRes, aRes, maintRes] = await Promise.all([
+                fetch('http://127.0.0.1:8080/api/machines'),
+                fetch('http://127.0.0.1:8080/api/inventory'),
+                fetch('http://127.0.0.1:8080/api/alerts'),
+                fetch('http://127.0.0.1:8080/api/maintenance')
             ]);
 
             const machinesData = await mRes.json();
             const inventoryData = await iRes.json();
             const alertsData = await aRes.json();
+            const maintData = await maintRes.json();
 
-            dispatch({ type: 'SET_MACHINES', payload: machinesData });
-            dispatch({ type: 'SET_INVENTORY', payload: inventoryData });
-            dispatch({ type: 'SET_ALERTS', payload: alertsData });
+            dispatch({ type: 'SET_MACHINES', payload: machinesData || [] });
+            dispatch({ type: 'SET_INVENTORY', payload: inventoryData || [] });
+            dispatch({ type: 'SET_ALERTS', payload: alertsData || [] });
+            dispatch({ type: 'SET_MAINTENANCE_LOGS', payload: maintData || [] });
 
             console.log("System data synchronized with C backend.");
         } catch (error) {
@@ -45,59 +45,51 @@ function Dashboard() {
 
     useEffect(() => {
         syncWithBackend();
-        // Option: Poll every 30 seconds for real-time updates
         const interval = setInterval(syncWithBackend, 30000);
         return () => clearInterval(interval);
     }, [dispatch]);
 
     return (
-        <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', backgroundColor: '#f4f7f6', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ padding: '20px', maxWidth: '1440px', margin: '0 auto', backgroundColor: '#f4f7f6', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
             <Header title="Smart Maintenance Control" />
             <WelcomeMessage />
 
-            {/* Stats Bar - Demonstrating useMemo result */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', margin: '20px 0' }}>
-                <StatTile label="Total Assets" value={stats.total} color="#3498db" />
-                <StatTile label="Healthy" value={stats.operational} color="#2ecc71" />
-                <StatTile label="Warnings" value={stats.warning} color="#f1c40f" />
-                <StatTile label="Health Score" value={`${stats.healthScore}%`} color="#9b59b6" />
+                <StatTile label="Total Assets" value={stats?.total || 0} color="#3498db" />
+                <StatTile label="Healthy" value={stats?.operational || 0} color="#2ecc71" />
+                <StatTile label="Critical Issues" value={alerts.filter(a => a.severity === 'CRITICAL').length} color="#e74c3c" />
+                <StatTile label="Recent Logs" value={maintenanceLogs.length} color="#9b59b6" />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '350px 1fr', gap: '30px' }}>
-
-                <aside>
-                    <StatusCard
-                        label="Oil Inventory"
-                        value={stock}
-                        isLowStock={stock < 5}
-                        onRestock={() => dispatch({ type: 'UPDATE_STOCK', payload: 15 })}
-                    >
-                        <p>Threshold monitoring active.</p>
-                    </StatusCard>
-
-                    <div style={{ marginTop: '20px' }}>
-                        <MaintenanceForm />
-                    </div>
-
-                    <div style={{ marginTop: '20px', backgroundColor: 'white', padding: '15px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-                        <AlertsPanel />
+            <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr 340px', gap: '20px' }}>
+                <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+                        <InventoryPanel />
                     </div>
                 </aside>
 
-                <main style={{ backgroundColor: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                        <h2 style={{ margin: 0 }}>Asset Telemetry</h2>
-                        {isSyncing && <span style={{ fontSize: '0.8em', color: '#3498db', fontWeight: 'bold' }}>📡 SYNCING WITH BACKEND...</span>}
+                <main style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <div style={{ backgroundColor: 'white', padding: '25px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                            <h2 style={{ margin: 0 }}>Asset Telemetry</h2>
+                            {isSyncing && <span style={{ fontSize: '0.8em', color: '#3498db', fontWeight: 'bold' }}>📡 SYNCING...</span>}
+                        </div>
+                        <MachineList />
                     </div>
-                    <MachineList />
+                    <MaintenanceHistory />
                 </main>
 
+                <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <MaintenanceForm />
+                    <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+                        <AlertsPanel />
+                    </div>
+                </aside>
             </div>
         </div>
     );
 }
 
-// Simple internal component for layout
 function StatTile({ label, value, color }) {
     return (
         <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '8px', borderTop: `4px solid ${color}`, boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
@@ -108,9 +100,41 @@ function StatTile({ label, value, color }) {
 }
 
 function App() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+            setIsAuthenticated(true);
+        }
+    }, []);
+
+    const handleLogin = () => {
+        setIsAuthenticated(true);
+    };
+
+    const handleLogout = () => {
+        localStorage.clear();
+        setIsAuthenticated(false);
+    };
+
     return (
         <MaintenanceProvider>
-            <Dashboard />
+            {!isAuthenticated ? (
+                <LoginPage onLogin={handleLogin} />
+            ) : (
+                <div className="App">
+                    <div style={{ textAlign: 'right', padding: '10px', backgroundColor: '#2c3e50' }}>
+                        <button
+                            onClick={handleLogout}
+                            style={{ backgroundColor: '#e74c3c', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}
+                        >
+                            SİSTEMDEN ÇIKIŞ YAP 🔓
+                        </button>
+                    </div>
+                    <Dashboard />
+                </div>
+            )}
         </MaintenanceProvider>
     );
 }

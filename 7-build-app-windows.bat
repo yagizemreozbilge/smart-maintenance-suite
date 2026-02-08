@@ -163,7 +163,9 @@ taskkill /F /IM app.exe >nul 2>&1
 
 echo [BUILD] Compiling C source files...
 gcc main.c %DB_FILES% ^
+    -I. ^
     -I./database ^
+    -I./security ^
     -I"%PG_PATH%\include" ^
     "%PG_PATH%\lib\libpq.lib" ^
     -lws2_32 -lsecur32 -ladvapi32 -lshell32 -lpthread ^
@@ -196,9 +198,6 @@ if exist %FRONTEND_PATH% (
 )
 
 echo ....................
-echo Operation Completed! (Backend & Frontend are starting...)
+echo Operation Completed! (Backend and Frontend are starting...)
 echo ....................
 pause
-
-
-
