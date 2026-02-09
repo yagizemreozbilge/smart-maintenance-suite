@@ -109,12 +109,14 @@ function MachineCard({ machine }) {
                         >
                             {showSensors ? 'CLOSE TELEMETRY' : 'VIEW SENSORS'}
                         </button>
-                        <button
-                            onClick={() => dispatch({ type: 'REMOVE_MACHINE', payload: machine.id })}
-                            style={{ color: '#e74c3c', border: 'none', background: 'none', cursor: 'pointer', fontSize: '0.75rem' }}
-                        >
-                            Deactivate
-                        </button>
+                        {localStorage.getItem('user_role') === 'admin' && (
+                            <button
+                                onClick={() => dispatch({ type: 'REMOVE_MACHINE', payload: machine.id })}
+                                style={{ color: '#e74c3c', border: 'none', background: 'none', cursor: 'pointer', fontSize: '0.75rem' }}
+                            >
+                                Deactivate
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

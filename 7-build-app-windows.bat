@@ -155,7 +155,7 @@ echo  Build Backend API
 echo ....................
 set BACKEND_PATH=src\backend
 set PG_PATH=C:\Program Files\PostgreSQL\17
-set DB_FILES=database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c security/jwt.c
+set DB_FILES=database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c security/jwt.c security/rbac.c database/report_service.c
 
 pushd %BACKEND_PATH%
 echo [CLEAN] Closing any running instances of app.exe...

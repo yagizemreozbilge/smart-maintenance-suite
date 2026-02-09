@@ -54,6 +54,26 @@ function Dashboard() {
             <Header title="Smart Maintenance Control" />
             <WelcomeMessage />
 
+            {localStorage.getItem('user_role') === 'admin' && (
+                <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
+                    <button
+                        onClick={() => window.open('http://127.0.0.1:8080/api/reports/maintenance')}
+                        style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
+                    >
+                        📊 DOWNLOAD MAINTENANCE LOGS (.CSV)
+                    </button>
+                    <button
+                        onClick={() => window.open('http://127.0.0.1:8080/api/reports/inventory')}
+                        style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
+                    >
+                        📦 DOWNLOAD INVENTORY REPORT (.CSV)
+                    </button>
+                    <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', color: '#7f8c8d', fontSize: '0.8rem' }}>
+                        * Exporting directly from PostgreSQL backend
+                    </div>
+                </div>
+            )}
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', margin: '20px 0' }}>
                 <StatTile label="Total Assets" value={stats?.total || 0} color="#3498db" />
                 <StatTile label="Healthy" value={stats?.operational || 0} color="#2ecc71" />
@@ -80,7 +100,7 @@ function Dashboard() {
                 </main>
 
                 <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    <MaintenanceForm />
+                    {localStorage.getItem('user_role') !== 'operator' && <MaintenanceForm />}
                     <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
                         <AlertsPanel />
                     </div>

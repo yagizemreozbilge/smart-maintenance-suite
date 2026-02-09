@@ -146,7 +146,7 @@ echo "...................."
 BACKEND_PATH="src/backend"
 # Linux'ta PostgreSQL genellikle standart yollardadır (/usr/include/postgresql)
 # Bu yüzden ek yol belirtmemize gerek kalmayabilir ama standart bayrakları ekliyoruz.
-DB_FILES="database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c security/jwt.c"
+DB_FILES="database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c security/jwt.c security/rbac.c database/report_service.c"
 
 pushd $BACKEND_PATH > /dev/null
 echo "[BUILD] Compiling C source files for Linux..."

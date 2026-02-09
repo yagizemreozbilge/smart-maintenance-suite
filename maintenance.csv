@@ -1,0 +1,5 @@
+Log_ID,Machine_ID,Technician,Date,Description
+4,2,omer Faruk,2026-01-29,Helping the machine 1
+3,1,Yagiz Emre,2026-01-29,UPDATE: Actually, we checked the cooling pump again and it was perfect.
+2,1,Yagiz Emre,2026-01-29,Fixed high temperature issue by replacing the cooling pump.
+1,1,Alex Martinez,2026-01-20,Routine oil change and filter check.
