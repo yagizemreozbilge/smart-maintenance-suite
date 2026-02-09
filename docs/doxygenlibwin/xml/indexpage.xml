@@ -8,9 +8,21 @@
     <detaileddescription>
 <para><anchor id="index_1md__r_e_a_d_m_e"/> </para>
 <sect1 id="index_1autotoc_md1">
-<title>Overview</title><para>This project provides a suite of modules aimed to show how Cmake used with Ctest. Also combines doxygen documentation and test coverage reports</para>
+<title>Overview</title><para><bold>Smart Maintenance Suite</bold> is an industrial IoT-based predictive maintenance system with a C backend and React frontend. The system monitors machine health, manages inventory, tracks maintenance logs, and provides real-time alerts.</para>
+<sect2 id="index_1autotoc_md2">
+<title>Key Features</title><para><itemizedlist>
+<listitem><para>🏭 <bold>Machine Monitoring</bold>: Real-time sensor data processing and health tracking</para>
+</listitem><listitem><para>📊 <bold>Analytics Dashboard</bold>: Interactive charts and visualizations</para>
+</listitem><listitem><para>🔐 <bold>Role-Based Access Control</bold>: Admin, Technician, and Operator roles</para>
+</listitem><listitem><para>📦 <bold>Inventory Management</bold>: Stock tracking with low-stock alerts</para>
+</listitem><listitem><para>🔧 <bold>Maintenance Logging</bold>: Comprehensive maintenance history</para>
+</listitem><listitem><para>📄 <bold>Report Generation</bold>: XML/CSV/PDF export capabilities</para>
+</listitem><listitem><para>🧪 <bold>Comprehensive Testing</bold>: 100+ unit tests with &gt;80% coverage target</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
 </sect1>
-<sect1 id="index_1autotoc_md2">
+<sect1 id="index_1autotoc_md3">
 <title>Requirements</title><para><itemizedlist>
 <listitem><para>CMake &gt;= 3.12</para>
 </listitem><listitem><para>C++ Standard &gt;= 11</para>
@@ -20,37 +32,37 @@
 </listitem></itemizedlist>
 </para>
 </sect1>
-<sect1 id="index_1autotoc_md3">
-<title>Setup Development Environment</title><sect2 id="index_1autotoc_md4">
+<sect1 id="index_1autotoc_md4">
+<title>Setup Development Environment</title><sect2 id="index_1autotoc_md5">
 <title>Step-1 (Run on Windows, Can Effect on WSL)</title><para>Run 1-configure-pre-commit.bat file to copy 1-pre-commit script to .git/hooks that checkes. <ref refid="_r_e_a_d_m_e_8md" kindref="compound">README.md</ref>, gitignore and doxygenfiles. Also format code with astyle tool</para>
 </sect2>
-<sect2 id="index_1autotoc_md5">
+<sect2 id="index_1autotoc_md6">
 <title>Step-2 (Run on Windows, Can Effect on WSL)</title><para>If gitignore missing then you can create gitignore with 2-create-git-ignore.bat file run this file.</para>
 </sect2>
-<sect2 id="index_1autotoc_md6">
+<sect2 id="index_1autotoc_md7">
 <title>Step-3 (Only Windows)</title><para>Install package managers that we will use to install applications. Run 3-install-package-manager.bat to install choco and scoop package managers</para>
 </sect2>
-<sect2 id="index_1autotoc_md7">
+<sect2 id="index_1autotoc_md8">
 <title>Step-4 (Only Windows)</title><para>Run 4-install-windows-enviroment.bat to install required applications.</para>
 </sect2>
-<sect2 id="index_1autotoc_md8">
+<sect2 id="index_1autotoc_md9">
 <title>Step-5 (Only WSL)</title><para>Open powershell as admin and enter WSL then goto project folder and run 4-install-wsl-environment.sh to setup WSL environment</para>
 </sect2>
 </sect1>
-<sect1 id="index_1autotoc_md9">
+<sect1 id="index_1autotoc_md10">
 <title>Generate Development Environment</title><para>You can run 9-clean-configure-app-windows.bat to generate Visual Studio Communit Edition Project of this file. Or You can use Cmake project development with Visual Studio Community Edition</para>
 </sect1>
-<sect1 id="index_1autotoc_md10">
+<sect1 id="index_1autotoc_md11">
 <title>Build, Test and Package Application on Windows</title><para>Run 7-build-app-windows.bat to build, test and generate packed binaries for your application on windows.</para>
 <para>Also you can run 7-build-doc-windows.bat to only generate documentation and 8-build-test-windows.bat to only test application.</para>
 </sect1>
-<sect1 id="index_1autotoc_md11">
+<sect1 id="index_1autotoc_md12">
 <title>Build, Test and Package Application on WSL</title><para>Run 7-build-app-linux.sh to build, test and generate packed binaries for your application on WSL environment.</para>
 </sect1>
-<sect1 id="index_1autotoc_md12">
+<sect1 id="index_1autotoc_md13">
 <title>Clean Project</title><para>You can run 9-clean-project.bat to clean project outputs.</para>
 </sect1>
-<sect1 id="index_1autotoc_md13">
+<sect1 id="index_1autotoc_md14">
 <title>Supported Platforms</title><para><image type="html" name="badge-ubuntu.svg">Ubuntu badge</image>
  <image type="latex" name="badge-ubuntu.svg">Ubuntu badge</image>
  <image type="rtf" name="badge-ubuntu.svg">Ubuntu badge</image>
@@ -69,7 +81,7 @@
  <image type="docbook" name="badge-windows.svg">Windows badge</image>
  <image type="xml" name="badge-windows.svg">Windows badge</image>
 </para>
-<sect2 id="index_1autotoc_md14">
+<sect2 id="index_1autotoc_md15">
 <title>Test Coverage Ratios</title><para><blockquote><para><zwj/><bold>Note</bold> : There is a known bug on doxygen following badges are in different folder but has same name for this reason in doxygen html report use same image for all content <ulink url="https://github.com/doxygen/doxygen/issues/8362">Images with same name overwrite each other in output directory · Issue #8362 · doxygen/doxygen · GitHub</ulink>. <ref refid="_r_e_a_d_m_e_8md" kindref="compound">README.md</ref> and WebPage show correct badges. </para>
 </blockquote></para>
 <para><table rows="4" cols="3"><row>
@@ -125,7 +137,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md15">
+<sect2 id="index_1autotoc_md16">
 <title>Documentation Coverage Ratios</title><para><table rows="2" cols="3"><row>
 <entry thead="yes"><para></para>
 </entry><entry thead="yes"><para>Windows OS   </para>
@@ -148,18 +160,18 @@
 </entry></row>
 </table>
 </para>
-<sect3 id="index_1autotoc_md16">
+<sect3 id="index_1autotoc_md17">
 <title>Install Test Results to HTML Converter</title><para>We are using <ulink url="https://github.com/inorton/junit2html">GitHub - inorton/junit2html: Turn Junit XML reports into self contained HTML reports</ulink> to convert junit xml formatted test results to HTML page for reporting also we store logs during test. Use following commands to install this module with pip</para>
 <para><programlisting filename=".bash"><codeline><highlight class="normal">pip<sp/>install<sp/>junit2html</highlight></codeline>
 </programlisting></para>
 </sect3>
 </sect2>
-<sect2 id="index_1autotoc_md17">
+<sect2 id="index_1autotoc_md18">
 <title>Github Actions</title><para>This project also compiled and tested with Github Actions. If there is a missing setup or problem follow github action script for both Windows and WSL under</para>
 <para><computeroutput>.github/workflows/cpp.yml</computeroutput></para>
 <para>Github actions take too much time more than 1 hour take to complete build for Windows, MacOS and Linux. Also its paid operation for this reason we use offline batch scripts easy to use.</para>
 </sect2>
-<sect2 id="index_1autotoc_md18">
+<sect2 id="index_1autotoc_md19">
 <title>Build App on Windows</title><para>We have already configured script for build operations. <computeroutput>7-build-app-windows.bat</computeroutput> have complete all required tasks and copy outputs to release folder. <linebreak/>
 </para>
 <para><bold>Operation Completed in 11-15 minutes.</bold></para>
@@ -181,7 +193,7 @@
 </listitem></itemizedlist>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md19">
+<sect2 id="index_1autotoc_md20">
 <title>Build App on WSL/Linux</title><para>We are running WSL on Windows 10 and solve our virtual machine problem. We make cross-platform development. After development before commit we run and test app on Windows and WSL with this scripts. To run on WSL you need to install WSL first.</para>
 <para>you can use our public notes</para>
 <para><itemizedlist>
@@ -189,6 +201,91 @@
 </listitem><listitem><para><ulink url="https://github.com/ucoruh/ns3-wsl-win10-setup">GitHub - ucoruh/ns3-wsl-win10-setup: ns3 windows 10 WSL2 setup and usage</ulink></para>
 </listitem></itemizedlist>
 </para>
+</sect2>
+</sect1>
+<sect1 id="index_1autotoc_md21">
+<title>🧪 Testing</title><para>The project includes comprehensive unit tests for both backend and frontend with &gt;80% coverage target.</para>
+<sect2 id="index_1autotoc_md22">
+<title>Quick Start</title><para><programlisting filename=".bash"><codeline><highlight class="normal">#<sp/>Run<sp/>all<sp/>tests<sp/>(backend<sp/>+<sp/>frontend)</highlight></codeline>
+<codeline><highlight class="normal">run-all-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>backend<sp/>tests<sp/>only</highlight></codeline>
+<codeline><highlight class="normal">run-backend-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>frontend<sp/>tests<sp/>only</highlight></codeline>
+<codeline><highlight class="normal">run-frontend-tests.bat</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="index_1autotoc_md23">
+<title>Test Coverage</title><para><table rows="7" cols="3"><row>
+<entry thead="yes"><para>Module   </para>
+</entry><entry thead="yes"><para>Test Files   </para>
+</entry><entry thead="yes"><para>Coverage Target    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Data Structures   </para>
+</entry><entry thead="no"><para>5   </para>
+</entry><entry thead="no"><para>&gt;90%    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Security (RBAC, JWT)   </para>
+</entry><entry thead="no"><para>2   </para>
+</entry><entry thead="no"><para>&gt;85%    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Database Services   </para>
+</entry><entry thead="no"><para>3   </para>
+</entry><entry thead="no"><para>&gt;75%    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>API Handlers   </para>
+</entry><entry thead="no"><para>1   </para>
+</entry><entry thead="no"><para>&gt;80%    </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Frontend Components   </para>
+</entry><entry thead="no"><para>3   </para>
+</entry><entry thead="no"><para>&gt;80%    </para>
+</entry></row>
+<row>
+<entry thead="no"><para><bold>Total</bold>   </para>
+</entry><entry thead="no"><para><bold>14</bold>   </para>
+</entry><entry thead="no"><para>**&gt;80%**   </para>
+</entry></row>
+</table>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md24">
+<title>Documentation</title><para><itemizedlist>
+<listitem><para><bold>TEST_SUMMARY.md</bold> - Complete test suite overview</para>
+</listitem><listitem><para><bold>TESTING.md</bold> - Detailed testing guide</para>
+</listitem><listitem><para><bold>Coverage Reports</bold>:<itemizedlist>
+<listitem><para>Backend: <computeroutput>build_tests/*.gcda</computeroutput> (use ReportGenerator)</para>
+</listitem><listitem><para>Frontend: <computeroutput>src/tests/frontend/coverage/index.html</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+<sect2 id="index_1autotoc_md25">
+<title>Test Structure</title><para><programlisting><codeline><highlight class="normal">src/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>backend/tests/unit/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Backend<sp/>unit<sp/>tests<sp/>(C)</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_rbac.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_jwt.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_api_handlers.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_queue.c,<sp/>test_stack.c,<sp/>test_heap.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_bst.c,<sp/>test_graph.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>database/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──<sp/>test_machine_service.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──<sp/>test_inventory_service.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>└──<sp/>test_maintenance_service.c</highlight></codeline>
+<codeline><highlight class="normal">│</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>tests/frontend/unit/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Frontend<sp/>unit<sp/>tests<sp/>(Vitest)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>App.test.js</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>LoginPage.test.js</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>MaintenanceContext.test.js</highlight></codeline>
+</programlisting></para>
+<para>For more details, see TEST_SUMMARY.md.</para>
 <para>After WSL installation, right click and open WSL bash and run <computeroutput>7-build-app-linux.sh</computeroutput> this will provide similart task with windows and will generate report and libraries on release folder.</para>
 <para><hruler/>
 </para>

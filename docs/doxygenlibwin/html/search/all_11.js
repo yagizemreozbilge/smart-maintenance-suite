@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['ratios_0',['Ratios',['../index.html#autotoc_md15',1,'Documentation Coverage Ratios'],['../index.html#autotoc_md14',1,'Test Coverage Ratios']]],
-  ['readme_2emd_1',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['requirements_2',['Requirements',['../index.html#autotoc_md2',1,'']]],
-  ['results_20to_20html_20converter_3',['Install Test Results to HTML Converter',['../index.html#autotoc_md16',1,'']]],
-  ['run_20on_20windows_20can_20effect_20on_20wsl_4',['Run on Windows Can Effect on WSL',['../index.html#autotoc_md4',1,'Step-1 (Run on Windows, Can Effect on WSL)'],['../index.html#autotoc_md5',1,'Step-2 (Run on Windows, Can Effect on WSL)']]]
+  ['on_20windows_0',['on Windows',['../index.html#autotoc_md19',1,'Build App on Windows'],['../index.html#autotoc_md11',1,'Build, Test and Package Application on Windows']]],
+  ['on_20windows_20can_20effect_20on_20wsl_1',['on Windows Can Effect on WSL',['../index.html#autotoc_md5',1,'Step-1 (Run on Windows, Can Effect on WSL)'],['../index.html#autotoc_md6',1,'Step-2 (Run on Windows, Can Effect on WSL)']]],
+  ['on_20wsl_2',['on WSL',['../index.html#autotoc_md12',1,'Build, Test and Package Application on WSL'],['../index.html#autotoc_md5',1,'Step-1 (Run on Windows, Can Effect on WSL)'],['../index.html#autotoc_md6',1,'Step-2 (Run on Windows, Can Effect on WSL)']]],
+  ['on_20wsl_20linux_3',['Build App on WSL/Linux',['../index.html#autotoc_md20',1,'']]],
+  ['only_20windows_4',['Only Windows',['../index.html#autotoc_md7',1,'Step-3 (Only Windows)'],['../index.html#autotoc_md8',1,'Step-4 (Only Windows)']]],
+  ['only_20wsl_5',['Step-5 (Only WSL)',['../index.html#autotoc_md9',1,'']]],
+  ['overview_6',['Overview',['../index.html#autotoc_md1',1,'']]]
 ];

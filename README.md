@@ -2,7 +2,16 @@
 
 ## Overview
 
-This project provides a suite of modules aimed to show how Cmake used with Ctest. Also combines doxygen documentation and test coverage reports
+**Smart Maintenance Suite** is an industrial IoT-based predictive maintenance system with a C backend and React frontend. The system monitors machine health, manages inventory, tracks maintenance logs, and provides real-time alerts.
+
+### Key Features
+- 🏭 **Machine Monitoring**: Real-time sensor data processing and health tracking
+- 📊 **Analytics Dashboard**: Interactive charts and visualizations
+- 🔐 **Role-Based Access Control**: Admin, Technician, and Operator roles
+- 📦 **Inventory Management**: Stock tracking with low-stock alerts
+- 🔧 **Maintenance Logging**: Comprehensive maintenance history
+- 📄 **Report Generation**: XML/CSV/PDF export capabilities
+- 🧪 **Comprehensive Testing**: 100+ unit tests with >80% coverage target
 
 ## Requirements
 
@@ -147,6 +156,91 @@ you can use our public notes
 - https://github.com/coruhtech/vs-docker-wsl-cpp-development
 
 - [GitHub - ucoruh/ns3-wsl-win10-setup: ns3 windows 10 WSL2 setup and usage](https://github.com/ucoruh/ns3-wsl-win10-setup)
+
+## 🧪 Testing
+
+The project includes comprehensive unit tests for both backend and frontend with >80% coverage target.
+
+### Quick Start
+
+```bash
+# Run all tests (backend + frontend)
+run-all-tests.bat
+
+# Run backend tests only
+run-backend-tests.bat
+
+# Run frontend tests only
+run-frontend-tests.bat
+
+# Generate professional unified coverage report (like the image)
+10-professional-coverage-report.bat
+```
+
+### Professional Coverage Report
+
+Generate a **unified HTML coverage report** for all modules (Backend, Frontend, Data Structures, Security, Database, API) in one professional dashboard:
+
+```bash
+# Step 1: Compile and run tests
+run-backend-tests.bat
+
+# Step 2: Generate unified coverage report
+10-professional-coverage-report.bat
+```
+
+This creates a ReportGenerator HTML report with:
+- ✅ Combined coverage for all modules
+- ✅ Coverage history and trends
+- ✅ Interactive file-level details
+- ✅ Coverage badges
+- ✅ Summary dashboard (like the screenshot)
+
+**Report Location**: `coverage_professional/combined/index.html`
+
+For detailed instructions, see **[COVERAGE_REPORT_GUIDE.md](COVERAGE_REPORT_GUIDE.md)**.
+
+### Test Coverage
+
+| Module | Test Files | Coverage Target |
+|--------|-----------|-----------------|
+| Data Structures | 5 | >90% |
+| Security (RBAC, JWT) | 2 | >85% |
+| Database Services | 3 | >75% |
+| API Handlers | 1 | >80% |
+| Frontend Components | 3 | >80% |
+| **Total** | **14** | **>80%** |
+
+### Documentation
+
+- **[TEST_SUMMARY.md](TEST_SUMMARY.md)** - Complete test suite overview
+- **[TESTING.md](TESTING.md)** - Detailed testing guide
+- **Coverage Reports**:
+  - Backend: `build_tests/*.gcda` (use ReportGenerator)
+  - Frontend: `src/tests/frontend/coverage/index.html`
+
+### Test Structure
+
+```
+src/
+├── backend/tests/unit/          # Backend unit tests (C)
+│   ├── test_rbac.c
+│   ├── test_jwt.c
+│   ├── test_api_handlers.c
+│   ├── test_queue.c, test_stack.c, test_heap.c
+│   ├── test_bst.c, test_graph.c
+│   └── database/
+│       ├── test_machine_service.c
+│       ├── test_inventory_service.c
+│       └── test_maintenance_service.c
+│
+└── tests/frontend/unit/         # Frontend unit tests (Vitest)
+    ├── App.test.js
+    ├── LoginPage.test.js
+    └── MaintenanceContext.test.js
+```
+
+For more details, see [TEST_SUMMARY.md](TEST_SUMMARY.md).
 
 After WSL installation, right click and open WSL bash and run `7-build-app-linux.sh` this will provide similart task with windows and will generate report and libraries on release folder. 
 

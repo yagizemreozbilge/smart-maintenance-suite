@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['package_20application_20on_20windows_0',['Build, Test and Package Application on Windows',['../index.html#autotoc_md10',1,'']]],
-  ['package_20application_20on_20wsl_1',['Build, Test and Package Application on WSL',['../index.html#autotoc_md11',1,'']]],
-  ['platforms_2',['Supported Platforms',['../index.html#autotoc_md13',1,'']]],
-  ['project_3',['Clean Project',['../index.html#autotoc_md12',1,'']]],
-  ['project_20library_20generation_20and_20testing_20template_4',['Calculator Project Library Generation and Testing Template',['../index.html',1,'']]]
+  ['main_0',['main',['../smart__maintenance__suite__test_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'smart_maintenance_suite_test.cpp']]]
 ];

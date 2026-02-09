@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite --port 5173 --strictPort",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run --config ../tests/frontend/vitest.config.js",
+    "test:watch": "vitest --config ../tests/frontend/vitest.config.js",
+    "test:coverage": "vitest run --coverage --config ../tests/frontend/vitest.config.js"
   },
   "dependencies": {
     "lucide-react": "^0.284.0",
@@ -18,7 +21,13 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vitest": "^1.2.0",
+    "@vitest/coverage-v8": "^1.2.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/user-event": "^14.5.1",
+    "jsdom": "^23.2.0"
   },
   "optionalDependencies": {
     "@esbuild/linux-x64": "^0.27.3"

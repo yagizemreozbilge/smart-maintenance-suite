@@ -11,7 +11,16 @@
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Overview</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">This<sp/>project<sp/>provides<sp/>a<sp/>suite<sp/>of<sp/>modules<sp/>aimed<sp/>to<sp/>show<sp/>how<sp/>Cmake<sp/>used<sp/>with<sp/>Ctest.<sp/>Also<sp/>combines<sp/>doxygen<sp/>documentation<sp/>and<sp/>test<sp/>coverage<sp/>reports</highlight></codeline>
+<codeline><highlight class="normal">**Smart<sp/>Maintenance<sp/>Suite**<sp/>is<sp/>an<sp/>industrial<sp/>IoT-based<sp/>predictive<sp/>maintenance<sp/>system<sp/>with<sp/>a<sp/>C<sp/>backend<sp/>and<sp/>React<sp/>frontend.<sp/>The<sp/>system<sp/>monitors<sp/>machine<sp/>health,<sp/>manages<sp/>inventory,<sp/>tracks<sp/>maintenance<sp/>logs,<sp/>and<sp/>provides<sp/>real-time<sp/>alerts.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Key<sp/>Features</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>🏭<sp/>**Machine<sp/>Monitoring**:<sp/>Real-time<sp/>sensor<sp/>data<sp/>processing<sp/>and<sp/>health<sp/>tracking</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>📊<sp/>**Analytics<sp/>Dashboard**:<sp/>Interactive<sp/>charts<sp/>and<sp/>visualizations</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>🔐<sp/>**Role-Based<sp/>Access<sp/>Control**:<sp/>Admin,<sp/>Technician,<sp/>and<sp/>Operator<sp/>roles</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>📦<sp/>**Inventory<sp/>Management**:<sp/>Stock<sp/>tracking<sp/>with<sp/>low-stock<sp/>alerts</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>🔧<sp/>**Maintenance<sp/>Logging**:<sp/>Comprehensive<sp/>maintenance<sp/>history</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>📄<sp/>**Report<sp/>Generation**:<sp/>XML/CSV/PDF<sp/>export<sp/>capabilities</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>🧪<sp/>**Comprehensive<sp/>Testing**:<sp/>100+<sp/>unit<sp/>tests<sp/>with<sp/>&gt;80%<sp/>coverage<sp/>target</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">##<sp/>Requirements</highlight></codeline>
 <codeline></codeline>
@@ -156,6 +165,65 @@
 <codeline><highlight class="normal">-<sp/>https://github.com/coruhtech/vs-docker-wsl-cpp-development</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">-<sp/>[GitHub<sp/>-<sp/>ucoruh/ns3-wsl-win10-setup:<sp/>ns3<sp/>windows<sp/>10<sp/>WSL2<sp/>setup<sp/>and<sp/>usage](https://github.com/ucoruh/ns3-wsl-win10-setup)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>🧪<sp/>Testing</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>project<sp/>includes<sp/>comprehensive<sp/>unit<sp/>tests<sp/>for<sp/>both<sp/>backend<sp/>and<sp/>frontend<sp/>with<sp/>&gt;80%<sp/>coverage<sp/>target.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Quick<sp/>Start</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>all<sp/>tests<sp/>(backend<sp/>+<sp/>frontend)</highlight></codeline>
+<codeline><highlight class="normal">run-all-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>backend<sp/>tests<sp/>only</highlight></codeline>
+<codeline><highlight class="normal">run-backend-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>frontend<sp/>tests<sp/>only</highlight></codeline>
+<codeline><highlight class="normal">run-frontend-tests.bat</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Test<sp/>Coverage</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">|<sp/>Module<sp/>|<sp/>Test<sp/>Files<sp/>|<sp/>Coverage<sp/>Target<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|--------|-----------|-----------------|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Data<sp/>Structures<sp/>|<sp/>5<sp/>|<sp/>&gt;90%<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Security<sp/>(RBAC,<sp/>JWT)<sp/>|<sp/>2<sp/>|<sp/>&gt;85%<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Database<sp/>Services<sp/>|<sp/>3<sp/>|<sp/>&gt;75%<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>API<sp/>Handlers<sp/>|<sp/>1<sp/>|<sp/>&gt;80%<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>Frontend<sp/>Components<sp/>|<sp/>3<sp/>|<sp/>&gt;80%<sp/>|</highlight></codeline>
+<codeline><highlight class="normal">|<sp/>**Total**<sp/>|<sp/>**14**<sp/>|<sp/>**&gt;80%**<sp/>|</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Documentation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**[TEST_SUMMARY.md](TEST_SUMMARY.md)**<sp/>-<sp/>Complete<sp/>test<sp/>suite<sp/>overview</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**[TESTING.md](TESTING.md)**<sp/>-<sp/>Detailed<sp/>testing<sp/>guide</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**Coverage<sp/>Reports**:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>-<sp/>Backend:<sp/>`build_tests/*.gcda`<sp/>(use<sp/>ReportGenerator)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>-<sp/>Frontend:<sp/>`src/tests/frontend/coverage/index.html`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Test<sp/>Structure</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">src/</highlight></codeline>
+<codeline><highlight class="normal">├──<sp/>backend/tests/unit/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Backend<sp/>unit<sp/>tests<sp/>(C)</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_rbac.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_jwt.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_api_handlers.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_queue.c,<sp/>test_stack.c,<sp/>test_heap.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_bst.c,<sp/>test_graph.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/>└──<sp/>database/</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──<sp/>test_machine_service.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>├──<sp/>test_inventory_service.c</highlight></codeline>
+<codeline><highlight class="normal">│<sp/><sp/><sp/><sp/><sp/><sp/><sp/>└──<sp/>test_maintenance_service.c</highlight></codeline>
+<codeline><highlight class="normal">│</highlight></codeline>
+<codeline><highlight class="normal">└──<sp/>tests/frontend/unit/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Frontend<sp/>unit<sp/>tests<sp/>(Vitest)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>App.test.js</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>├──<sp/>LoginPage.test.js</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>└──<sp/>MaintenanceContext.test.js</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>more<sp/>details,<sp/>see<sp/>[TEST_SUMMARY.md](TEST_SUMMARY.md).</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">After<sp/>WSL<sp/>installation,<sp/>right<sp/>click<sp/>and<sp/>open<sp/>WSL<sp/>bash<sp/>and<sp/>run<sp/>`7-build-app-linux.sh`<sp/>this<sp/>will<sp/>provide<sp/>similart<sp/>task<sp/>with<sp/>windows<sp/>and<sp/>will<sp/>generate<sp/>report<sp/>and<sp/>libraries<sp/>on<sp/>release<sp/>folder.<sp/></highlight></codeline>
 <codeline></codeline>
