@@ -56,7 +56,25 @@ void *handle_request(void *client_ptr) {
     printf("[DEBUG] Request Received: %0.20s...\n", buffer);
 
     // 1. REPORTS (Daha spesifik oldukları için önce kontrol ediyoruz)
-    if (strstr(buffer, "GET /api/reports/maintenance")) {
+    if (strstr(buffer, "GET /api/reports/maintenance/xml")) {
+      char *xml = generate_maintenance_xml_report();
+
+      if (xml) {
+        send_response(client_socket, "application/xml", xml, 200);
+        free(xml);
+      } else {
+        send_response(client_socket, "text/plain", "XML Error", 500);
+      }
+    } else if (strstr(buffer, "GET /api/reports/inventory/xml")) {
+      char *xml = generate_inventory_xml_report();
+
+      if (xml) {
+        send_response(client_socket, "application/xml", xml, 200);
+        free(xml);
+      } else {
+        send_response(client_socket, "text/plain", "XML Error", 500);
+      }
+    } else if (strstr(buffer, "GET /api/reports/maintenance")) {
       char *csv = generate_maintenance_csv_report();
 
       if (csv) {

@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+char *generate_maintenance_csv_report();
+char *generate_inventory_csv_report();
+char *generate_maintenance_xml_report();
+char *generate_inventory_xml_report();
+
 char *generate_maintenance_csv_report() {
   MaintenanceLog logs[100];
   int count = get_all_maintenance_logs(logs, 100);

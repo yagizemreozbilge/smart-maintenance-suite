@@ -8,6 +8,7 @@ import { AlertsPanel } from './components/AlertsPanel.js';
 import LoginPage from './components/LoginPage.js';
 import { InventoryPanel } from './components/InventoryPanel.js';
 import { MaintenanceHistory } from './components/MaintenanceHistory.js';
+import { AnalyticsPanel } from './components/AnalyticsPanel.js';
 
 function Dashboard() {
     const { machines = [], alerts = [], maintenanceLogs = [] } = useMaintenance();
@@ -55,22 +56,37 @@ function Dashboard() {
             <WelcomeMessage />
 
             {localStorage.getItem('user_role') === 'admin' && (
-                <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
+                <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
                     <button
                         onClick={() => window.open('http://127.0.0.1:8080/api/reports/maintenance')}
-                        style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
+                        style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
                     >
-                        📊 DOWNLOAD MAINTENANCE LOGS (.CSV)
+                        📊 MAINTENANCE (CSV)
+                    </button>
+                    <button
+                        onClick={() => window.open('http://127.0.0.1:8080/api/reports/maintenance/xml')}
+                        style={{ backgroundColor: '#34495e', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
+                    >
+                        📂 MAINTENANCE (XML)
                     </button>
                     <button
                         onClick={() => window.open('http://127.0.0.1:8080/api/reports/inventory')}
-                        style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
+                        style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
                     >
-                        📦 DOWNLOAD INVENTORY REPORT (.CSV)
+                        📦 INVENTORY (CSV)
                     </button>
-                    <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', color: '#7f8c8d', fontSize: '0.8rem' }}>
-                        * Exporting directly from PostgreSQL backend
-                    </div>
+                    <button
+                        onClick={() => window.open('http://127.0.0.1:8080/api/reports/inventory/xml')}
+                        style={{ backgroundColor: '#34495e', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
+                    >
+                        📄 INVENTORY (XML)
+                    </button>
+                    <button
+                        onClick={() => window.print()}
+                        style={{ backgroundColor: '#e67e22', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem', marginLeft: 'auto' }}
+                    >
+                        🖨️ PRINT PDF REPORT
+                    </button>
                 </div>
             )}
 
@@ -81,7 +97,9 @@ function Dashboard() {
                 <StatTile label="Recent Logs" value={maintenanceLogs.length} color="#9b59b6" />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr 340px', gap: '20px' }}>
+            <AnalyticsPanel />
+
+            <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr 340px', gap: '20px', marginTop: '20px' }}>
                 <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
                         <InventoryPanel />
