@@ -1,1 +1,8 @@
-/* This file is a template for machine_handler.h. Content will be filled by yagiz on 2025-12-29. */
+#ifndef MACHINE_HANDLER_H
+#define MACHINE_HANDLER_H
+
+#include "../http_server.h"
+
+void handle_machine_request(HttpRequest *req, HttpResponse *res);
+
+#endif

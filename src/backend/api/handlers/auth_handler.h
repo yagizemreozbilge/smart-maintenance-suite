@@ -1,1 +1,8 @@
-/* This file is a template for auth_handler.h. Content will be filled by yagiz on 2025-12-29. */
+#ifndef AUTH_HANDLER_H
+#define AUTH_HANDLER_H
+
+#include "../http_server.h"
+
+void handle_auth_request(HttpRequest *req, HttpResponse *res);
+
+#endif

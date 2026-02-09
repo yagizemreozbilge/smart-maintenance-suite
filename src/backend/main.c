@@ -5,7 +5,7 @@
 #include "database/maintenance_service.h"
 #include "database/inventory_service.h"
 #include "database/api_handlers.h"
-#include "database/http_server.h"
+#include "api/http_server.h"
 #include "database/logger.h"
 #include <stdio.h>
 #include <stdlib.h>

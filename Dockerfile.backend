@@ -1,0 +1,31 @@
+# Dockerfile for C Backend
+FROM ubuntu:22.04
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    cmake \
+    libpq-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy source code
+COPY . .
+
+# Build the application (using manual gcc if cmake is not ready for backend)
+RUN gcc -o smart_maintenance_backend \
+    src/backend/main.c \
+    src/backend/api/http_server.c \
+    src/backend/api/router.c \
+    src/backend/api/handlers/*.c \
+    src/backend/database/*.c \
+    src/backend/security/*.c \
+    src/backend/core/data_structures/*.c \
+    -Isrc/backend -Isrc/backend/api -Isrc/backend/database -Isrc/backend/security -Isrc/backend/core/data_structures \
+    -lpq -lssl -lcrypto -lpthread -lm
+
+EXPOSE 8080
+
+CMD ["./smart_maintenance_backend"]
