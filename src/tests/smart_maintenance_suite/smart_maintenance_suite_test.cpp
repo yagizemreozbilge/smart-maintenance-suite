@@ -60,6 +60,18 @@ TEST_F(SensorAnalyticsTest, DetectAnomaly_InsufficientData) {
   EXPECT_FALSE(result); // Not enough data
 }
 
+TEST_F(SensorAnalyticsTest, DetectAnomaly_NullInput) {
+  bool result = SensorAnalytics::detectAnomaly(nullptr, 5, 2.0);
+  EXPECT_FALSE(result);
+}
+
+TEST_F(SensorAnalyticsTest, DetectAnomaly_ZeroStandardDeviation) {
+  // All values are the same, so stdDev is 0. Division by zero check should return false.
+  double constantReadings[] = {50.0, 50.0, 50.0, 50.0, 50.0};
+  bool result = SensorAnalytics::detectAnomaly(constantReadings, 5, 2.0);
+  EXPECT_FALSE(result);
+}
+
 TEST_F(SensorAnalyticsTest, CalculateStandardDeviation_ValidInput) {
   double data[] = {2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0};
   int dataSize = 8;
@@ -146,6 +158,16 @@ TEST_F(MaintenanceSchedulerTest, CalculateTotalCost_InvalidInterval) {
                std::invalid_argument);
   EXPECT_THROW(MaintenanceScheduler::calculateTotalCost(-1.0, 12.0, 500.0),
                std::invalid_argument);
+}
+
+TEST_F(MaintenanceSchedulerTest, CalculateTotalCost_ZeroPeriod) {
+  double result = MaintenanceScheduler::calculateTotalCost(3.0, 0.0, 500.0);
+  EXPECT_DOUBLE_EQ(result, 0.0);
+}
+
+TEST_F(MaintenanceSchedulerTest, CalculateTotalCost_ZeroCost) {
+  double result = MaintenanceScheduler::calculateTotalCost(3.0, 12.0, 0.0);
+  EXPECT_DOUBLE_EQ(result, 0.0);
 }
 
 TEST_F(MaintenanceSchedulerTest, AssessMaintenancePriority_Normal) {

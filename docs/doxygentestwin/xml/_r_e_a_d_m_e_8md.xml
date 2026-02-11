@@ -181,7 +181,33 @@
 <codeline></codeline>
 <codeline><highlight class="normal">#<sp/>Run<sp/>frontend<sp/>tests<sp/>only</highlight></codeline>
 <codeline><highlight class="normal">run-frontend-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Generate<sp/>professional<sp/>unified<sp/>coverage<sp/>report<sp/>(like<sp/>the<sp/>image)</highlight></codeline>
+<codeline><highlight class="normal">10-professional-coverage-report.bat</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Professional<sp/>Coverage<sp/>Report</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Generate<sp/>a<sp/>**unified<sp/>HTML<sp/>coverage<sp/>report**<sp/>for<sp/>all<sp/>modules<sp/>(Backend,<sp/>Frontend,<sp/>Data<sp/>Structures,<sp/>Security,<sp/>Database,<sp/>API)<sp/>in<sp/>one<sp/>professional<sp/>dashboard:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>Step<sp/>1:<sp/>Compile<sp/>and<sp/>run<sp/>tests</highlight></codeline>
+<codeline><highlight class="normal">run-backend-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Step<sp/>2:<sp/>Generate<sp/>unified<sp/>coverage<sp/>report</highlight></codeline>
+<codeline><highlight class="normal">10-professional-coverage-report.bat</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>creates<sp/>a<sp/>ReportGenerator<sp/>HTML<sp/>report<sp/>with:</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>✅<sp/>Combined<sp/>coverage<sp/>for<sp/>all<sp/>modules</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>✅<sp/>Coverage<sp/>history<sp/>and<sp/>trends</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>✅<sp/>Interactive<sp/>file-level<sp/>details</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>✅<sp/>Coverage<sp/>badges</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>✅<sp/>Summary<sp/>dashboard<sp/>(like<sp/>the<sp/>screenshot)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Report<sp/>Location**:<sp/>`coverage_professional/combined/index.html`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>detailed<sp/>instructions,<sp/>see<sp/>**[COVERAGE_REPORT_GUIDE.md](COVERAGE_REPORT_GUIDE.md)**.</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">###<sp/>Test<sp/>Coverage</highlight></codeline>
 <codeline></codeline>

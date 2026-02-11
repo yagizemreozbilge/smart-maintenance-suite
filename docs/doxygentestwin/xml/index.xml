@@ -1,21 +1,66 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.11.0" xml:lang="en-US">
-  <compound refid="class_calculator_test" kind="class"><name>CalculatorTest</name>
-    <member refid="class_calculator_test_1a16acabe39b00dc041fea47f1b99f9983" kind="function"><name>SetUp</name></member>
-    <member refid="class_calculator_test_1a49df00b9c0d435932adb5e1291ca06c4" kind="function"><name>TearDown</name></member>
+  <compound refid="class_inventory_optimizer_test" kind="class"><name>InventoryOptimizerTest</name>
+    <member refid="class_inventory_optimizer_test_1a1d013b17064f79fdf906d59539941825" kind="variable"><name>annualDemand</name></member>
+    <member refid="class_inventory_optimizer_test_1ab6027722459ee02a48f39af71acf1190" kind="variable"><name>orderingCost</name></member>
+    <member refid="class_inventory_optimizer_test_1a4c1072ee166ff549563f07ea8a57ff88" kind="variable"><name>holdingCost</name></member>
+    <member refid="class_inventory_optimizer_test_1a0d295de0c4923c7b741a99f6ba2917d4" kind="function"><name>SetUp</name></member>
   </compound>
-  <compound refid="namespace_coruh_1_1_calculator" kind="namespace"><name>Coruh::Calculator</name>
+  <compound refid="class_maintenance_scheduler_test" kind="class"><name>MaintenanceSchedulerTest</name>
+    <member refid="class_maintenance_scheduler_test_1ae77415f906351c603970f2354492691c" kind="variable"><name>failureRate</name></member>
+    <member refid="class_maintenance_scheduler_test_1a8db5fa89fa71056e94ef852598b46087" kind="variable"><name>maintenanceCost</name></member>
+    <member refid="class_maintenance_scheduler_test_1ac50eea3926b73e2b9d97f111e1d77b8e" kind="variable"><name>failureCost</name></member>
+    <member refid="class_maintenance_scheduler_test_1aad97631a9f2acb07e4504968beba82c7" kind="function"><name>SetUp</name></member>
+  </compound>
+  <compound refid="class_sensor_analytics_test" kind="class"><name>SensorAnalyticsTest</name>
+    <member refid="class_sensor_analytics_test_1acf4f9753c3dd24ab3c12a500548373f0" kind="variable"><name>normalReadings</name></member>
+    <member refid="class_sensor_analytics_test_1acf9163cdc86587d13ed14e1a83aa8e05" kind="variable"><name>anomalyReadings</name></member>
+    <member refid="class_sensor_analytics_test_1a3a15b7918f8606d305487c000611996a" kind="variable"><name>size</name></member>
+    <member refid="class_sensor_analytics_test_1a70598d30573fd9f8b21292840417a728" kind="function"><name>SetUp</name></member>
+  </compound>
+  <compound refid="namespace_smart_maintenance_1_1_analytics" kind="namespace"><name>SmartMaintenance::Analytics</name>
   </compound>
   <compound refid="namespacetesting" kind="namespace"><name>testing</name>
   </compound>
   <compound refid="_r_e_a_d_m_e_8md" kind="file"><name>README.md</name>
   </compound>
   <compound refid="smart__maintenance__suite__test_8cpp" kind="file"><name>smart_maintenance_suite_test.cpp</name>
-    <member refid="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" kind="function"><name>TEST_F</name></member>
-    <member refid="smart__maintenance__suite__test_8cpp_1a5b10cd9bfcd77263a48173a3d0b5ff7b" kind="function"><name>TEST_F</name></member>
-    <member refid="smart__maintenance__suite__test_8cpp_1acd37c4ea71846a04d2b04b3c6c3e135b" kind="function"><name>TEST_F</name></member>
-    <member refid="smart__maintenance__suite__test_8cpp_1a885dc4f6a00c3d0b54725164c875dd25" kind="function"><name>TEST_F</name></member>
-    <member refid="smart__maintenance__suite__test_8cpp_1aadb9113df327e8be871f5035e19beded" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a7d0320f9e334511978ada2d5819cf47d" kind="define"><name>ENABLE_SMART_MAINTENANCE_SUITE_TEST</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1ac1330a3c76b8c0d8f1ee7007bbaf9f14" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a37f00679f5555db8d09370562d7fac8e" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a7c7fe18e78bdd0f48998953ea3bcb223" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1aac29fe131cfd81f72649d7104b71bde8" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a7110c9f56d3cb2e73c481f05bfba9c07" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a214d0c433f56a8a69214ce53188097b1" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1ad294cabef0a7e7dfc623d8486ee43889" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a404bd3f640f32c1cf0954907f293326f" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a6fab91fd6a430357d9d307f8365ccdb1" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a9b627ed1799a0c77c547a5b6b4875a42" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1ab30c389f126ed997275cbbc6d957cca9" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1adca138724fda8f9d80a0403acb8e2727" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1ada30c9ee0062279512d0771dee6cccd4" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1ab639e638bd610461a8e184c7821d2599" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1adb7a49a41ad14952cc0a7f808f5d7e74" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a4a2db58fe642255c4cd59a2ec50054ae" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a5c0e280d4fa954c270fa51fa97c9c5b5" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a30cc9d126c87cb48702193b8731efbd6" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a6fbe4e556a2401b7d58f96954fe3802f" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a38f888bfa1191616d2ad7de8a711041f" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a89e8b9f2d10a6af53627cce6e4e70c03" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a5561cb9f60137e3c121bfdbb6ddf9f9f" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a2ce7a76e09045497af1222cdec63a0ff" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1aaa512be5278de007e36e9bc29f9678f0" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a47c7aa12114cdb33c78da3d0010ef809" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a5f2bc947c64766a240144936a8587e74" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a02a86d27fdc53a37c3fab50209e95168" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a86393f8a45c74454bfe4e025d26a9363" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a2317129e1b24afe221c1c4d207550a50" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a4beb3153740af4ebdfc5a65430b4aa98" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a7cb2f088bebeb97e04976f7fb901bb19" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a4f2219c02a17226509aa1e82f3186098" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a7af357b89ae8e3583f51de147d9f678f" kind="function"><name>TEST_F</name></member>
+    <member refid="smart__maintenance__suite__test_8cpp_1a6226f4973e4b8981fced8d4dadd6764a" kind="function"><name>TEST_F</name></member>
     <member refid="smart__maintenance__suite__test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
   </compound>
   <compound refid="dir_adf572a8ef5c93d9b07a8db94b41889d" kind="dir"><name>src/tests/smart_maintenance_suite</name>

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
+  <compounddef id="namespace_demo_app" kind="namespace" language="C++">
+    <compoundname>DemoApp</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateSensorAnalytics</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateSensorAnalytics</name>
+        <qualifiedname>DemoApp::demonstrateSensorAnalytics</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Demonstrates Sensor Analytics features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="25" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="25" bodyend="71" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="21" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateMaintenanceScheduling</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateMaintenanceScheduling</name>
+        <qualifiedname>DemoApp::demonstrateMaintenanceScheduling</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Demonstrates Maintenance Scheduling features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="73" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="73" bodyend="131" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="27" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateInventoryOptimization</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateInventoryOptimization</name>
+        <qualifiedname>DemoApp::demonstrateInventoryOptimization</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Demonstrates Inventory Optimization features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="133" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="133" bodyend="186" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="33" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DemoApp::printHeader</definition>
+        <argsstring>(const std::string &amp;title)</argsstring>
+        <name>printHeader</name>
+        <qualifiedname>DemoApp::printHeader</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Helper function to print headers. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Title to print </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="17" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="17" bodyend="23" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="39" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Contains demonstration functions for the Smart Maintenance Suite. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" line="12" column="1"/>
+  </compounddef>
+</doxygen>

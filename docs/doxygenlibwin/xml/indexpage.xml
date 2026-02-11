@@ -214,9 +214,31 @@
 <codeline></codeline>
 <codeline><highlight class="normal">#<sp/>Run<sp/>frontend<sp/>tests<sp/>only</highlight></codeline>
 <codeline><highlight class="normal">run-frontend-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Generate<sp/>professional<sp/>unified<sp/>coverage<sp/>report<sp/>(like<sp/>the<sp/>image)</highlight></codeline>
+<codeline><highlight class="normal">10-professional-coverage-report.bat</highlight></codeline>
 </programlisting></para>
 </sect2>
 <sect2 id="index_1autotoc_md23">
+<title>Professional Coverage Report</title><para>Generate a <bold>unified HTML coverage report</bold> for all modules (Backend, Frontend, Data Structures, Security, Database, API) in one professional dashboard:</para>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">#<sp/>Step<sp/>1:<sp/>Compile<sp/>and<sp/>run<sp/>tests</highlight></codeline>
+<codeline><highlight class="normal">run-backend-tests.bat</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Step<sp/>2:<sp/>Generate<sp/>unified<sp/>coverage<sp/>report</highlight></codeline>
+<codeline><highlight class="normal">10-professional-coverage-report.bat</highlight></codeline>
+</programlisting></para>
+<para>This creates a ReportGenerator HTML report with:<itemizedlist>
+<listitem><para>✅ Combined coverage for all modules</para>
+</listitem><listitem><para>✅ Coverage history and trends</para>
+</listitem><listitem><para>✅ Interactive file-level details</para>
+</listitem><listitem><para>✅ Coverage badges</para>
+</listitem><listitem><para>✅ Summary dashboard (like the screenshot)</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Report Location</bold>: <computeroutput>coverage_professional/combined/index.html</computeroutput></para>
+<para>For detailed instructions, see <bold>COVERAGE_REPORT_GUIDE.md</bold>.</para>
+</sect2>
+<sect2 id="index_1autotoc_md24">
 <title>Test Coverage</title><para><table rows="7" cols="3"><row>
 <entry thead="yes"><para>Module   </para>
 </entry><entry thead="yes"><para>Test Files   </para>
@@ -255,7 +277,7 @@
 </table>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md24">
+<sect2 id="index_1autotoc_md25">
 <title>Documentation</title><para><itemizedlist>
 <listitem><para><bold>TEST_SUMMARY.md</bold> - Complete test suite overview</para>
 </listitem><listitem><para><bold>TESTING.md</bold> - Detailed testing guide</para>
@@ -267,7 +289,7 @@
 </listitem></itemizedlist>
 </para>
 </sect2>
-<sect2 id="index_1autotoc_md25">
+<sect2 id="index_1autotoc_md26">
 <title>Test Structure</title><para><programlisting><codeline><highlight class="normal">src/</highlight></codeline>
 <codeline><highlight class="normal">├──<sp/>backend/tests/unit/<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>Backend<sp/>unit<sp/>tests<sp/>(C)</highlight></codeline>
 <codeline><highlight class="normal">│<sp/><sp/><sp/>├──<sp/>test_rbac.c</highlight></codeline>

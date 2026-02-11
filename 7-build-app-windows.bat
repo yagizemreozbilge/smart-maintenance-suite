@@ -160,6 +160,19 @@ set DB_FILES=database/db_connection.c database/machine_service.c database/sensor
 pushd %BACKEND_PATH%
 echo [CLEAN] Closing any running instances of app.exe...
 taskkill /F /IM app.exe >nul 2>&1
+powershell -Command "Get-Process -Name app -ErrorAction SilentlyContinue | Stop-Process -Force" >nul 2>&1
+timeout /t 2 /nobreak >nul
+
+if exist app.exe (
+    del /F /Q app.exe
+    if exist app.exe (
+        echo [ERROR] Could not delete existing app.exe. It might be in use or requires Admin privileges.
+        echo ACTION: Please manually close 'app.exe' via Task Manager or run this script as Administrator.
+        popd
+        pause
+        exit /b 1
+    )
+)
 
 echo [BUILD] Compiling C source files...
 gcc main.c %DB_FILES% ^

@@ -2,33 +2,117 @@
 \hypertarget{smart__maintenance__suite__test_8cpp}{}\label{smart__maintenance__suite__test_8cpp}\index{src/tests/smart\_maintenance\_suite/smart\_maintenance\_suite\_test.cpp@{src/tests/smart\_maintenance\_suite/smart\_maintenance\_suite\_test.cpp}}
 {\ttfamily \#include "{}gtest/gtest.\+h"{}}\newline
 {\ttfamily \#include "{}../../smart\+\_\+maintenance\+\_\+suite/header/smart\+\_\+maintenance\+\_\+suite.\+h"{}}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
 Include dependency graph for smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=332pt]{smart__maintenance__suite__test_8cpp__incl}
+\includegraphics[width=350pt]{smart__maintenance__suite__test_8cpp__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}
+class \mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}
+\item 
+class \mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}
+\item 
+class \mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a7d0320f9e334511978ada2d5819cf47d}{ENABLE\+\_\+\+SMART\+\_\+\+MAINTENANCE\+\_\+\+SUITE\+\_\+\+TEST}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a7d9bab343a282353423ab2d980c8ac52}{TEST\+\_\+F}} (\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}, Test\+Add)
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a900e571509f7fa6daec248c56bd9c81e}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Calculate\+Moving\+Average\+\_\+\+Valid\+Input)
 \item 
-\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a5b10cd9bfcd77263a48173a3d0b5ff7b}{TEST\+\_\+F}} (\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}, Test\+Subtract)
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_ac1330a3c76b8c0d8f1ee7007bbaf9f14}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Calculate\+Moving\+Average\+\_\+\+Full\+Window)
 \item 
-\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_acd37c4ea71846a04d2b04b3c6c3e135b}{TEST\+\_\+F}} (\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}, Test\+Multiply)
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a37f00679f5555db8d09370562d7fac8e}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Calculate\+Moving\+Average\+\_\+\+Empty\+Array)
 \item 
-\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a885dc4f6a00c3d0b54725164c875dd25}{TEST\+\_\+F}} (\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}, Test\+Divide)
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a7c7fe18e78bdd0f48998953ea3bcb223}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Calculate\+Moving\+Average\+\_\+\+Invalid\+Window\+Size)
 \item 
-\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_aadb9113df327e8be871f5035e19beded}{TEST\+\_\+F}} (\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}, Test\+Divide\+By\+Zero)
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_aac29fe131cfd81f72649d7104b71bde8}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Detect\+Anomaly\+\_\+\+No\+Anomaly)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a7110c9f56d3cb2e73c481f05bfba9c07}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Detect\+Anomaly\+\_\+\+With\+Anomaly)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a214d0c433f56a8a69214ce53188097b1}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Detect\+Anomaly\+\_\+\+Insufficient\+Data)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_ad294cabef0a7e7dfc623d8486ee43889}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Detect\+Anomaly\+\_\+\+Null\+Input)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a404bd3f640f32c1cf0954907f293326f}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Detect\+Anomaly\+\_\+\+Zero\+Standard\+Deviation)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a6fab91fd6a430357d9d307f8365ccdb1}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Calculate\+Standard\+Deviation\+\_\+\+Valid\+Input)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a9b627ed1799a0c77c547a5b6b4875a42}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Calculate\+Standard\+Deviation\+\_\+\+Single\+Value)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_ab30c389f126ed997275cbbc6d957cca9}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Calculate\+Standard\+Deviation\+\_\+\+Empty\+Array)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_adca138724fda8f9d80a0403acb8e2727}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Predict\+Remaining\+Life\+\_\+\+Valid\+Input)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_ada30c9ee0062279512d0771dee6cccd4}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Predict\+Remaining\+Life\+\_\+\+At\+Threshold)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_ab639e638bd610461a8e184c7821d2599}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Predict\+Remaining\+Life\+\_\+\+Beyond\+Threshold)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_adb7a49a41ad14952cc0a7f808f5d7e74}{TEST\+\_\+F}} (\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}, Predict\+Remaining\+Life\+\_\+\+Invalid\+Degradation\+Rate)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a4a2db58fe642255c4cd59a2ec50054ae}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Calculate\+Optimal\+Interval\+\_\+\+Valid\+Input)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a5c0e280d4fa954c270fa51fa97c9c5b5}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Calculate\+Optimal\+Interval\+\_\+\+Invalid\+Failure\+Rate)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a30cc9d126c87cb48702193b8731efbd6}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Calculate\+Optimal\+Interval\+\_\+\+Negative\+Costs)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a6fbe4e556a2401b7d58f96954fe3802f}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Calculate\+Total\+Cost\+\_\+\+Valid\+Input)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a38f888bfa1191616d2ad7de8a711041f}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Calculate\+Total\+Cost\+\_\+\+Invalid\+Interval)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a89e8b9f2d10a6af53627cce6e4e70c03}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Calculate\+Total\+Cost\+\_\+\+Zero\+Period)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a5561cb9f60137e3c121bfdbb6ddf9f9f}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Calculate\+Total\+Cost\+\_\+\+Zero\+Cost)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a2ce7a76e09045497af1222cdec63a0ff}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Assess\+Maintenance\+Priority\+\_\+\+Normal)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_aaa512be5278de007e36e9bc29f9678f0}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Assess\+Maintenance\+Priority\+\_\+\+Warning)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a47c7aa12114cdb33c78da3d0010ef809}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Assess\+Maintenance\+Priority\+\_\+\+Critical)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a5f2bc947c64766a240144936a8587e74}{TEST\+\_\+F}} (\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}, Assess\+Maintenance\+Priority\+\_\+\+At\+Thresholds)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a02a86d27fdc53a37c3fab50209e95168}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Calculate\+EOQ\+\_\+\+Valid\+Input)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a86393f8a45c74454bfe4e025d26a9363}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Calculate\+EOQ\+\_\+\+Invalid\+Parameters)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a2317129e1b24afe221c1c4d207550a50}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Calculate\+Reorder\+Point\+\_\+\+Valid\+Input)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a4beb3153740af4ebdfc5a65430b4aa98}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Calculate\+Reorder\+Point\+\_\+\+Zero\+Values)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a7cb2f088bebeb97e04976f7fb901bb19}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Calculate\+Reorder\+Point\+\_\+\+Negative\+Values)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a4f2219c02a17226509aa1e82f3186098}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Is\+Reorder\+Needed\+\_\+\+Below\+Minimum)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a7af357b89ae8e3583f51de147d9f678f}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Is\+Reorder\+Needed\+\_\+\+At\+Minimum)
+\item 
+\mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a6226f4973e4b8981fced8d4dadd6764a}{TEST\+\_\+F}} (\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}, Is\+Reorder\+Needed\+\_\+\+Above\+Minimum)
 \item 
 int \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
-\begin{DoxyCompactList}\small\item\em The main function of the test program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{smart__maintenance__suite__test_8cpp_a7d0320f9e334511978ada2d5819cf47d}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!ENABLE\_SMART\_MAINTENANCE\_SUITE\_TEST@{ENABLE\_SMART\_MAINTENANCE\_SUITE\_TEST}}
+\index{ENABLE\_SMART\_MAINTENANCE\_SUITE\_TEST@{ENABLE\_SMART\_MAINTENANCE\_SUITE\_TEST}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{ENABLE\_SMART\_MAINTENANCE\_SUITE\_TEST}{ENABLE\_SMART\_MAINTENANCE\_SUITE\_TEST}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a7d0320f9e334511978ada2d5819cf47d} 
+\#define ENABLE\+\_\+\+SMART\+\_\+\+MAINTENANCE\+\_\+\+SUITE\+\_\+\+TEST}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00001}{1}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
 
 
 \doxysubsection{Function Documentation}
@@ -40,69 +124,355 @@ int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstr
 
 
 
-The main function of the test program. 
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00260}{260}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
 
-
-\begin{DoxyParams}{Parameters}
-{\em argc} & The number of command-\/line arguments. \\
-\hline
-{\em argv} & An array of command-\/line argument strings. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-int The exit status of the program. 
-\end{DoxyReturn}
-
-
-Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00050}{50}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
-
-\Hypertarget{smart__maintenance__suite__test_8cpp_a7d9bab343a282353423ab2d980c8ac52}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\Hypertarget{smart__maintenance__suite__test_8cpp_a86393f8a45c74454bfe4e025d26a9363}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
 \index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
-\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
-{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a7d9bab343a282353423ab2d980c8ac52} 
-TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}}]{}{, }\item[{Test\+Add}]{}{}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [1/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a86393f8a45c74454bfe4e025d26a9363} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Calculate\+EOQ\+\_\+\+Invalid\+Parameters}]{}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00215}{215}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
 
-\Hypertarget{smart__maintenance__suite__test_8cpp_a885dc4f6a00c3d0b54725164c875dd25}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\Hypertarget{smart__maintenance__suite__test_8cpp_a02a86d27fdc53a37c3fab50209e95168}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
 \index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
-\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
-{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a885dc4f6a00c3d0b54725164c875dd25} 
-TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}}]{}{, }\item[{Test\+Divide}]{}{}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [2/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a02a86d27fdc53a37c3fab50209e95168} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Calculate\+EOQ\+\_\+\+Valid\+Input}]{}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00210}{210}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
 
-\Hypertarget{smart__maintenance__suite__test_8cpp_aadb9113df327e8be871f5035e19beded}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\Hypertarget{smart__maintenance__suite__test_8cpp_a7cb2f088bebeb97e04976f7fb901bb19}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
 \index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
-\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
-{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_aadb9113df327e8be871f5035e19beded} 
-TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}}]{}{, }\item[{Test\+Divide\+By\+Zero}]{}{}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [3/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a7cb2f088bebeb97e04976f7fb901bb19} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Calculate\+Reorder\+Point\+\_\+\+Negative\+Values}]{}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00232}{232}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
 
-\Hypertarget{smart__maintenance__suite__test_8cpp_acd37c4ea71846a04d2b04b3c6c3e135b}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\Hypertarget{smart__maintenance__suite__test_8cpp_a2317129e1b24afe221c1c4d207550a50}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
 \index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
-\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
-{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_acd37c4ea71846a04d2b04b3c6c3e135b} 
-TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}}]{}{, }\item[{Test\+Multiply}]{}{}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [4/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a2317129e1b24afe221c1c4d207550a50} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Calculate\+Reorder\+Point\+\_\+\+Valid\+Input}]{}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00029}{29}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00222}{222}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
 
-\Hypertarget{smart__maintenance__suite__test_8cpp_a5b10cd9bfcd77263a48173a3d0b5ff7b}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\Hypertarget{smart__maintenance__suite__test_8cpp_a4beb3153740af4ebdfc5a65430b4aa98}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
 \index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
-\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
-{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a5b10cd9bfcd77263a48173a3d0b5ff7b} 
-TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_calculator_test}{Calculator\+Test}}}]{}{, }\item[{Test\+Subtract}]{}{}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [5/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a4beb3153740af4ebdfc5a65430b4aa98} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Calculate\+Reorder\+Point\+\_\+\+Zero\+Values}]{}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00024}{24}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00227}{227}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a6226f4973e4b8981fced8d4dadd6764a}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [6/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a6226f4973e4b8981fced8d4dadd6764a} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Is\+Reorder\+Needed\+\_\+\+Above\+Minimum}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00251}{251}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a7af357b89ae8e3583f51de147d9f678f}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [7/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a7af357b89ae8e3583f51de147d9f678f} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Is\+Reorder\+Needed\+\_\+\+At\+Minimum}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00246}{246}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a4f2219c02a17226509aa1e82f3186098}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [8/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a4f2219c02a17226509aa1e82f3186098} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_inventory_optimizer_test}{Inventory\+Optimizer\+Test}}}]{}{, }\item[{Is\+Reorder\+Needed\+\_\+\+Below\+Minimum}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00241}{241}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a5f2bc947c64766a240144936a8587e74}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [9/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a5f2bc947c64766a240144936a8587e74} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Assess\+Maintenance\+Priority\+\_\+\+At\+Thresholds}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00188}{188}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a47c7aa12114cdb33c78da3d0010ef809}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [10/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a47c7aa12114cdb33c78da3d0010ef809} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Assess\+Maintenance\+Priority\+\_\+\+Critical}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00183}{183}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a2ce7a76e09045497af1222cdec63a0ff}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [11/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a2ce7a76e09045497af1222cdec63a0ff} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Assess\+Maintenance\+Priority\+\_\+\+Normal}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00173}{173}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_aaa512be5278de007e36e9bc29f9678f0}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [12/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_aaa512be5278de007e36e9bc29f9678f0} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Assess\+Maintenance\+Priority\+\_\+\+Warning}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00178}{178}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a5c0e280d4fa954c270fa51fa97c9c5b5}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [13/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a5c0e280d4fa954c270fa51fa97c9c5b5} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Calculate\+Optimal\+Interval\+\_\+\+Invalid\+Failure\+Rate}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00137}{137}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a30cc9d126c87cb48702193b8731efbd6}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [14/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a30cc9d126c87cb48702193b8731efbd6} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Calculate\+Optimal\+Interval\+\_\+\+Negative\+Costs}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00144}{144}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a4a2db58fe642255c4cd59a2ec50054ae}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [15/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a4a2db58fe642255c4cd59a2ec50054ae} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Calculate\+Optimal\+Interval\+\_\+\+Valid\+Input}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00129}{129}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a38f888bfa1191616d2ad7de8a711041f}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [16/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a38f888bfa1191616d2ad7de8a711041f} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Calculate\+Total\+Cost\+\_\+\+Invalid\+Interval}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00156}{156}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a6fbe4e556a2401b7d58f96954fe3802f}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [17/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a6fbe4e556a2401b7d58f96954fe3802f} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Calculate\+Total\+Cost\+\_\+\+Valid\+Input}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00151}{151}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a5561cb9f60137e3c121bfdbb6ddf9f9f}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [18/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a5561cb9f60137e3c121bfdbb6ddf9f9f} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Calculate\+Total\+Cost\+\_\+\+Zero\+Cost}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00168}{168}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a89e8b9f2d10a6af53627cce6e4e70c03}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [19/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a89e8b9f2d10a6af53627cce6e4e70c03} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maintenance_scheduler_test}{Maintenance\+Scheduler\+Test}}}]{}{, }\item[{Calculate\+Total\+Cost\+\_\+\+Zero\+Period}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00163}{163}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a37f00679f5555db8d09370562d7fac8e}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [20/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a37f00679f5555db8d09370562d7fac8e} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Calculate\+Moving\+Average\+\_\+\+Empty\+Array}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00036}{36}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_ac1330a3c76b8c0d8f1ee7007bbaf9f14}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [21/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_ac1330a3c76b8c0d8f1ee7007bbaf9f14} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Calculate\+Moving\+Average\+\_\+\+Full\+Window}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00031}{31}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a7c7fe18e78bdd0f48998953ea3bcb223}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [22/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a7c7fe18e78bdd0f48998953ea3bcb223} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Calculate\+Moving\+Average\+\_\+\+Invalid\+Window\+Size}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00042}{42}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a900e571509f7fa6daec248c56bd9c81e}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [23/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a900e571509f7fa6daec248c56bd9c81e} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Calculate\+Moving\+Average\+\_\+\+Valid\+Input}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_ab30c389f126ed997275cbbc6d957cca9}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [24/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_ab30c389f126ed997275cbbc6d957cca9} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Calculate\+Standard\+Deviation\+\_\+\+Empty\+Array}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00088}{88}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a9b627ed1799a0c77c547a5b6b4875a42}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [25/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a9b627ed1799a0c77c547a5b6b4875a42} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Calculate\+Standard\+Deviation\+\_\+\+Single\+Value}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00082}{82}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a6fab91fd6a430357d9d307f8365ccdb1}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [26/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a6fab91fd6a430357d9d307f8365ccdb1} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Calculate\+Standard\+Deviation\+\_\+\+Valid\+Input}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00075}{75}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a214d0c433f56a8a69214ce53188097b1}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [27/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a214d0c433f56a8a69214ce53188097b1} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Detect\+Anomaly\+\_\+\+Insufficient\+Data}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00057}{57}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_aac29fe131cfd81f72649d7104b71bde8}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [28/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_aac29fe131cfd81f72649d7104b71bde8} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Detect\+Anomaly\+\_\+\+No\+Anomaly}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00047}{47}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_ad294cabef0a7e7dfc623d8486ee43889}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [29/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_ad294cabef0a7e7dfc623d8486ee43889} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Detect\+Anomaly\+\_\+\+Null\+Input}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00063}{63}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a7110c9f56d3cb2e73c481f05bfba9c07}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [30/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a7110c9f56d3cb2e73c481f05bfba9c07} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Detect\+Anomaly\+\_\+\+With\+Anomaly}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00052}{52}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_a404bd3f640f32c1cf0954907f293326f}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [31/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_a404bd3f640f32c1cf0954907f293326f} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Detect\+Anomaly\+\_\+\+Zero\+Standard\+Deviation}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00068}{68}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_ada30c9ee0062279512d0771dee6cccd4}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [32/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_ada30c9ee0062279512d0771dee6cccd4} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Predict\+Remaining\+Life\+\_\+\+At\+Threshold}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00097}{97}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_ab639e638bd610461a8e184c7821d2599}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [33/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_ab639e638bd610461a8e184c7821d2599} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Predict\+Remaining\+Life\+\_\+\+Beyond\+Threshold}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00102}{102}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_adb7a49a41ad14952cc0a7f808f5d7e74}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [34/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_adb7a49a41ad14952cc0a7f808f5d7e74} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Predict\+Remaining\+Life\+\_\+\+Invalid\+Degradation\+Rate}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00107}{107}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
+
+\Hypertarget{smart__maintenance__suite__test_8cpp_adca138724fda8f9d80a0403acb8e2727}\index{smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}!TEST\_F@{TEST\_F}}
+\index{TEST\_F@{TEST\_F}!smart\_maintenance\_suite\_test.cpp@{smart\_maintenance\_suite\_test.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST\_F()}{TEST\_F()}\hspace{0.1cm}{\footnotesize\ttfamily [35/35]}}
+{\footnotesize\ttfamily \label{smart__maintenance__suite__test_8cpp_adca138724fda8f9d80a0403acb8e2727} 
+TEST\+\_\+F (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sensor_analytics_test}{Sensor\+Analytics\+Test}}}]{}{, }\item[{Predict\+Remaining\+Life\+\_\+\+Valid\+Input}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source_l00092}{92}} of file \mbox{\hyperlink{smart__maintenance__suite__test_8cpp_source}{smart\+\_\+maintenance\+\_\+suite\+\_\+test.\+cpp}}.
 

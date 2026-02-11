@@ -2,20 +2,28 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
   <compounddef id="smart__maintenance__suite__app_8cpp" kind="file" language="C++">
     <compoundname>smart_maintenance_suite_app.cpp</compoundname>
-    <includes local="no">iostream</includes>
-    <includes local="no">stack</includes>
-    <includes local="no">string</includes>
-    <includes local="no">sstream</includes>
-    <includes local="no">stdexcept</includes>
+    <includes refid="smart__maintenance__suite__app_8h" local="yes">../../smart_maintenance_suite_app/header/smart_maintenance_suite_app.h</includes>
     <includes refid="smart__maintenance__suite_8h" local="yes">../../smart_maintenance_suite/header/smart_maintenance_suite.h</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">iomanip</includes>
+    <includes local="no">stdexcept</includes>
+    <includes local="no">string</includes>
     <incdepgraph>
-      <node id="8">
+      <node id="5">
         <label>../../utility/header/commonTypes.h</label>
       </node>
-      <node id="7">
+      <node id="4">
         <label>../../smart_maintenance_suite/header/smart_maintenance_suite.h</label>
         <link refid="smart__maintenance__suite_8h"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>../../smart_maintenance_suite_app/header/smart_maintenance_suite_app.h</label>
+        <link refid="smart__maintenance__suite__app_8h"/>
+        <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -23,101 +31,110 @@
         <link refid="smart__maintenance__suite__app_8cpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
         <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
-      <node id="2">
-        <label>iostream</label>
-      </node>
-      <node id="5">
-        <label>sstream</label>
-      </node>
-      <node id="3">
-        <label>stack</label>
+      <node id="7">
+        <label>iomanip</label>
       </node>
       <node id="6">
+        <label>iostream</label>
+      </node>
+      <node id="8">
         <label>stdexcept</label>
       </node>
-      <node id="4">
+      <node id="3">
         <label>string</label>
       </node>
     </incdepgraph>
+    <innernamespace refid="namespace_demo_app">DemoApp</innernamespace>
     <sectiondef kind="func">
-      <memberdef kind="function" id="smart__maintenance__suite__app_8cpp_1ac792f08ed5f8708833ac64a61310dd03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DemoApp::printHeader</definition>
+        <argsstring>(const std::string &amp;title)</argsstring>
+        <name>printHeader</name>
+        <qualifiedname>DemoApp::printHeader</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Helper function to print headers. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Title to print </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="17" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="17" bodyend="23" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="39" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
-        <definition>bool isOperator</definition>
-        <argsstring>(char c)</argsstring>
-        <name>isOperator</name>
-        <param>
-          <type>char</type>
-          <declname>c</declname>
-        </param>
+        <definition>bool DemoApp::demonstrateSensorAnalytics</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateSensorAnalytics</name>
+        <qualifiedname>DemoApp::demonstrateSensorAnalytics</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para>Demonstrates Sensor Analytics features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="19" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="19" bodyend="21"/>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="25" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="25" bodyend="71" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="21" declcolumn="6"/>
       </memberdef>
-      <memberdef kind="function" id="smart__maintenance__suite__app_8cpp_1ae3f55e40ed8f0a2cde99d2b36e919cbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int precedence</definition>
-        <argsstring>(char c)</argsstring>
-        <name>precedence</name>
-        <param>
-          <type>char</type>
-          <declname>c</declname>
-        </param>
+      <memberdef kind="function" id="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateMaintenanceScheduling</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateMaintenanceScheduling</name>
+        <qualifiedname>DemoApp::demonstrateMaintenanceScheduling</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para>Demonstrates Maintenance Scheduling features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="23" column="5" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="23" bodyend="29"/>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="73" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="73" bodyend="131" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="27" declcolumn="6"/>
       </memberdef>
-      <memberdef kind="function" id="smart__maintenance__suite__app_8cpp_1a897077446c75caaf157031854034ac9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>std::string</type>
-        <definition>std::string infixToPostfix</definition>
-        <argsstring>(const std::string &amp;infix)</argsstring>
-        <name>infixToPostfix</name>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>infix</declname>
-        </param>
+      <memberdef kind="function" id="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateInventoryOptimization</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateInventoryOptimization</name>
+        <qualifiedname>DemoApp::demonstrateInventoryOptimization</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para>Demonstrates Inventory Optimization features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="31" column="13" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="31" bodyend="64"/>
-      </memberdef>
-      <memberdef kind="function" id="smart__maintenance__suite__app_8cpp_1af347a06ef4464029cd26e699842332cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>double</type>
-        <definition>double evaluatePostfix</definition>
-        <argsstring>(const std::string &amp;postfix)</argsstring>
-        <name>evaluatePostfix</name>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>postfix</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="66" column="8" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="66" bodyend="108"/>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="133" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="133" bodyend="186" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="33" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="smart__maintenance__suite__app_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -130,133 +147,235 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="110" column="5" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="110" bodyend="124"/>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="196" column="5" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="196" bodyend="222"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A simple program to demonstrate the usage of the smart maintenance suite model class. </para>
+<para>Smart Maintenance Suite - Demo Application Implementation. </para>
     </briefdescription>
     <detaileddescription>
-<para>This program process infix notations and calculate operations </para>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Standard<sp/>Libraries</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stack&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sstream&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="smart__maintenance__suite_8h" kindref="compound">../../smart_maintenance_suite/header/smart_maintenance_suite.h</ref>&quot;</highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Adjust<sp/>this<sp/>include<sp/>path<sp/>based<sp/>on<sp/>your<sp/>project<sp/>structure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="smart__maintenance__suite__app_8h" kindref="compound">../../smart_maintenance_suite_app/header/smart_maintenance_suite_app.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="smart__maintenance__suite_8h" kindref="compound">../../smart_maintenance_suite/header/smart_maintenance_suite.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iomanip&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_smart_maintenance_1_1_analytics" kindref="compound">SmartMaintenance::Analytics</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_demo_app" kindref="compound">DemoApp</ref><sp/>{</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_coruh_1_1_calculator" kindref="compound">Coruh::Calculator</ref>;</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="smart__maintenance__suite__app_8cpp_1ac792f08ed5f8708833ac64a61310dd03" kindref="member">isOperator</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c)<sp/>{</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;+&apos;</highlight><highlight class="normal"><sp/>||<sp/>c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;-&apos;</highlight><highlight class="normal"><sp/>||<sp/>c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;*&apos;</highlight><highlight class="normal"><sp/>||<sp/>c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="21"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="smart__maintenance__suite__app_8cpp_1ae3f55e40ed8f0a2cde99d2b36e919cbf" kindref="member">precedence</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c)<sp/>{</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;+&apos;</highlight><highlight class="normal"><sp/>||<sp/>c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;-&apos;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;*&apos;</highlight><highlight class="normal"><sp/>||<sp/>c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>2;</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
-<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal">std::string<sp/><ref refid="smart__maintenance__suite__app_8cpp_1a897077446c75caaf157031854034ac9f" kindref="member">infixToPostfix</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;infix)<sp/>{</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/>std::stack&lt;char&gt;<sp/>s;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/>std::ostringstream<sp/>postfix;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kindref="member">printHeader</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;title)<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\n╔════════════════════════════════════════════════════════════╗\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;║<sp/><sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::left<sp/>&lt;&lt;<sp/>std::setw(56)<sp/>&lt;&lt;<sp/>title<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>║\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;╚════════════════════════════════════════════════════════════╝\n\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" kindref="member">demonstrateSensorAnalytics</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kindref="member">printHeader</ref>(</highlight><highlight class="stringliteral">&quot;SENSOR<sp/>ANALYTICS<sp/>DEMO&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Simulated<sp/>temperature<sp/>sensor<sp/>readings<sp/>(°C)<sp/>-<sp/>using<sp/>basic<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>temperatureReadings[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>75.2,<sp/>76.1,<sp/>75.8,<sp/>76.5,<sp/>77.2,<sp/>78.1,<sp/>79.5,<sp/>81.2,<sp/>83.5,<sp/>92.1</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numReadings<sp/>=<sp/>10;<sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>elements<sp/>in<sp/>the<sp/>array</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Temperature<sp/>Readings<sp/>(°C):<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c<sp/>:<sp/>infix)<sp/>{</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(std::isdigit(c))<sp/>{</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>postfix<sp/>&lt;&lt;<sp/>c;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="smart__maintenance__suite__app_8cpp_1ac792f08ed5f8708833ac64a61310dd03" kindref="member">isOperator</ref>(c))<sp/>{</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(!s.empty()<sp/>&amp;&amp;<sp/><ref refid="smart__maintenance__suite__app_8cpp_1ae3f55e40ed8f0a2cde99d2b36e919cbf" kindref="member">precedence</ref>(s.top())<sp/>&gt;=<sp/><ref refid="smart__maintenance__suite__app_8cpp_1ae3f55e40ed8f0a2cde99d2b36e919cbf" kindref="member">precedence</ref>(c))<sp/>{</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>postfix<sp/>&lt;&lt;<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>s.top();</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s.pop();</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>postfix<sp/>&lt;&lt;<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>s.push(c);</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;(&apos;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>s.push(c);</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(c<sp/>==<sp/></highlight><highlight class="charliteral">&apos;)&apos;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(!s.empty()<sp/>&amp;&amp;<sp/>s.top()<sp/>!=<sp/></highlight><highlight class="charliteral">&apos;(&apos;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>postfix<sp/>&lt;&lt;<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>s.top();</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s.pop();</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>s.pop();</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(!s.empty())<sp/>{</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>postfix<sp/>&lt;&lt;<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>s.top();</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>s.pop();</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>postfix.str();</highlight></codeline>
-<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="smart__maintenance__suite__app_8cpp_1af347a06ef4464029cd26e699842332cb" kindref="member">evaluatePostfix</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;postfix)<sp/>{</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/>std::stack&lt;double&gt;<sp/>s;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/>std::istringstream<sp/>iss(postfix);</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/>std::string<sp/>token;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(iss<sp/>&gt;&gt;<sp/>token)<sp/>{</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="smart__maintenance__suite__app_8cpp_1ac792f08ed5f8708833ac64a61310dd03" kindref="member">isOperator</ref>(token[0]))<sp/>{</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b<sp/>=<sp/>s.top();</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>s.pop();</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>s.top();</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>s.pop();</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal">(token[0])<sp/>{</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/></highlight><highlight class="charliteral">&apos;+&apos;</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a54ca827c4b408c795576d48503eee6aa" kindref="member">Calculator::add</ref>(a,<sp/>b);</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/></highlight><highlight class="charliteral">&apos;-&apos;</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1ad8a28a8b990342d4bfde65ab85ec7596" kindref="member">Calculator::subtract</ref>(a,<sp/>b);</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/></highlight><highlight class="charliteral">&apos;*&apos;</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a319373a53b4e84f92c207e4f7bb9dfce" kindref="member">Calculator::multiply</ref>(a,<sp/>b);</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/></highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(b<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Division<sp/>by<sp/>zero<sp/>is<sp/>not<sp/>allowed.&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a7da73cdbcc434a4f28d614f7f036b74a" kindref="member">Calculator::divide</ref>(a,<sp/>b);</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>s.push(result);</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>s.push(std::stod(token));</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>s.top();</highlight></codeline>
-<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="smart__maintenance__suite__app_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kindref="member">main</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/>std::string<sp/>infix;</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Enter<sp/>an<sp/>infix<sp/>expression:<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/>std::getline(std::cin,<sp/>infix);</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>postfix<sp/>=<sp/><ref refid="smart__maintenance__suite__app_8cpp_1a897077446c75caaf157031854034ac9f" kindref="member">infixToPostfix</ref>(infix);</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/><ref refid="smart__maintenance__suite__app_8cpp_1af347a06ef4464029cd26e699842332cb" kindref="member">evaluatePostfix</ref>(postfix);</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Result:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>result<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::invalid_argument<sp/>&amp;e)<sp/>{</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Error:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
-<codeline lineno="124"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>numReadings;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>temperatureReadings[i]<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>moving<sp/>average</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Pass<sp/>array<sp/>and<sp/>size<sp/>instead<sp/>of<sp/>vector</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>movingAvg<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a3185f722f29f9cad83a6be51f4a4f466" kindref="member">SensorAnalytics::calculateMovingAverage</ref>(temperatureReadings,<sp/>numReadings,<sp/>5);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Moving<sp/>Average<sp/>(last<sp/>5<sp/>readings):<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::fixed<sp/>&lt;&lt;<sp/>std::setprecision(2)</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>movingAvg<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;°C\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::exception<sp/>&amp;e)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✗<sp/>Error:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Detect<sp/>anomaly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>anomalyDetected<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a46cbb1a9b09a4de26f029ea3ec6b812c" kindref="member">SensorAnalytics::detectAnomaly</ref>(temperatureReadings,<sp/>numReadings,<sp/>2.0);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Anomaly<sp/>Detection<sp/>(2σ<sp/>threshold):<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>(anomalyDetected<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;⚠️<sp/><sp/>ANOMALY<sp/>DETECTED!&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;✅<sp/>Normal&quot;</highlight><highlight class="normal">)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>standard<sp/>deviation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>stdDev<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a7cbe7e7e086b9d2973fcde4777cba436" kindref="member">SensorAnalytics::calculateStandardDeviation</ref>(temperatureReadings,<sp/>numReadings);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Standard<sp/>Deviation:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::fixed<sp/>&lt;&lt;<sp/>std::setprecision(2)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>stdDev<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;°C\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Predict<sp/>remaining<sp/>useful<sp/>life</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>currentTemp<sp/>=<sp/>83.5;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>criticalTemp<sp/>=<sp/>100.0;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>degradationRate<sp/>=<sp/>2.5;<sp/></highlight><highlight class="comment">//<sp/>°C<sp/>per<sp/>day</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rul<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1ad3581da7a6e5e323e55dc9af3ec909c5" kindref="member">SensorAnalytics::predictRemainingLife</ref>(currentTemp,<sp/>criticalTemp,<sp/>degradationRate);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Remaining<sp/>Useful<sp/>Life:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::fixed<sp/>&lt;&lt;<sp/>std::setprecision(1)</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>rul<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>days\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal">(...)<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" kindref="member">demonstrateMaintenanceScheduling</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kindref="member">printHeader</ref>(</highlight><highlight class="stringliteral">&quot;MAINTENANCE<sp/>SCHEDULING<sp/>DEMO&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>failureRate<sp/>=<sp/>0.05;<sp/></highlight><highlight class="comment">//<sp/>5%<sp/>failure<sp/>rate<sp/>per<sp/>month</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>preventiveCost<sp/>=<sp/>500.0;<sp/></highlight><highlight class="comment">//<sp/>$500<sp/>per<sp/>preventive<sp/>maintenance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>correctiveCost<sp/>=<sp/>2000.0;<sp/></highlight><highlight class="comment">//<sp/>$2000<sp/>per<sp/>corrective<sp/>maintenance<sp/>(failure)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Parameters:\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>-<sp/>Failure<sp/>Rate:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(failureRate<sp/>*<sp/>100)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;%<sp/>per<sp/>month\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>-<sp/>Preventive<sp/>Maintenance<sp/>Cost:<sp/>$&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>preventiveCost<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>-<sp/>Corrective<sp/>Maintenance<sp/>Cost:<sp/>$&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>correctiveCost<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>optimal<sp/>interval</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>optimalInterval<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a105d31e98b20bdbc553912a88a90b1de" kindref="member">MaintenanceScheduler::calculateOptimalInterval</ref>(</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>failureRate,<sp/>preventiveCost,<sp/>correctiveCost</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Optimal<sp/>Maintenance<sp/>Interval:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::fixed<sp/>&lt;&lt;<sp/>std::setprecision(1)</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>optimalInterval<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>months\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>total<sp/>cost<sp/>over<sp/>a<sp/>year</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>totalCost<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1ab2b7479cf31aeff21bb8109160a2b993" kindref="member">MaintenanceScheduler::calculateTotalCost</ref>(</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>optimalInterval,<sp/>12.0,<sp/>preventiveCost</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Total<sp/>Annual<sp/>Maintenance<sp/>Cost:<sp/>$&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::fixed<sp/>&lt;&lt;<sp/>std::setprecision(2)</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>totalCost<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Assess<sp/>maintenance<sp/>priority</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\nMaintenance<sp/>Priority<sp/>Assessment:\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Using<sp/>simple<sp/>struct<sp/>and<sp/>array<sp/>for<sp/>demo</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SensorData<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>name;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>value;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>SensorData<sp/>sensors[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Vibration<sp/>Sensor&quot;</highlight><highlight class="normal">,<sp/>45.0},</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Temperature<sp/>Sensor&quot;</highlight><highlight class="normal">,<sp/>78.0},</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Pressure<sp/>Sensor&quot;</highlight><highlight class="normal">,<sp/>95.0}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numSensors<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>warningThreshold<sp/>=<sp/>70.0;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>criticalThreshold<sp/>=<sp/>90.0;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>numSensors;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>priority<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a2f59efe7c6f6567e8cbd17ee7f1cb8a6" kindref="member">MaintenanceScheduler::assessMaintenancePriority</ref>(</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sensors[i].value,<sp/>warningThreshold,<sp/>criticalThreshold</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>status;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(priority<sp/>==<sp/>2)<sp/>status<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;🔴<sp/>CRITICAL&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(priority<sp/>==<sp/>1)<sp/>status<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;🟡<sp/>WARNING&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>status<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;🟢<sp/>NORMAL&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::left<sp/>&lt;&lt;<sp/>std::setw(20)<sp/>&lt;&lt;<sp/>sensors[i].name</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::setw(6)<sp/>&lt;&lt;<sp/>sensors[i].value</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>→<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>status<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal">(...)<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" kindref="member">demonstrateInventoryOptimization</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kindref="member">printHeader</ref>(</highlight><highlight class="stringliteral">&quot;INVENTORY<sp/>OPTIMIZATION<sp/>DEMO&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Bearing<sp/>inventory<sp/>example</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>annualDemand<sp/>=<sp/>1200.0;<sp/></highlight><highlight class="comment">//<sp/>1200<sp/>bearings<sp/>per<sp/>year</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>orderingCost<sp/>=<sp/>50.0;<sp/></highlight><highlight class="comment">//<sp/>$50<sp/>per<sp/>order</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>holdingCost<sp/>=<sp/>2.0;<sp/></highlight><highlight class="comment">//<sp/>$2<sp/>per<sp/>bearing<sp/>per<sp/>year</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Bearing<sp/>Inventory<sp/>Parameters:\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>-<sp/>Annual<sp/>Demand:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>annualDemand<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>units\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>-<sp/>Ordering<sp/>Cost:<sp/>$&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>orderingCost<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>per<sp/>order\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>-<sp/>Holding<sp/>Cost:<sp/>$&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>holdingCost<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>per<sp/>unit/year\n\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>EOQ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>eoq<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a18307c47e0fff667fa1fd18566a2bd07" kindref="member">InventoryOptimizer::calculateEOQ</ref>(annualDemand,<sp/>orderingCost,<sp/>holdingCost);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Economic<sp/>Order<sp/>Quantity<sp/>(EOQ):<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::fixed<sp/>&lt;&lt;<sp/>std::setprecision(0)</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>eoq<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>units\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>reorder<sp/>point</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dailyDemand<sp/>=<sp/>annualDemand<sp/>/<sp/>365.0;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>leadTime<sp/>=<sp/>7.0;<sp/></highlight><highlight class="comment">//<sp/>7<sp/>days</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>safetyStock<sp/>=<sp/>50.0;<sp/></highlight><highlight class="comment">//<sp/>50<sp/>units<sp/>safety<sp/>stock</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>reorderPoint<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a35bb0277fc1ca1a65e60d58316d5d75c" kindref="member">InventoryOptimizer::calculateReorderPoint</ref>(</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dailyDemand,<sp/>leadTime,<sp/>safetyStock</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;✓<sp/>Reorder<sp/>Point:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::fixed<sp/>&lt;&lt;<sp/>std::setprecision(0)</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>reorderPoint<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>units\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>if<sp/>reorder<sp/>needed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\nStock<sp/>Level<sp/>Check:\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">StockItem<sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>part;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>currentStock;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>minLevel;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>StockItem<sp/>inventory[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Bearing<sp/>608&quot;</highlight><highlight class="normal">,<sp/>45.0,<sp/>50.0},</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Oil<sp/>Filter&quot;</highlight><highlight class="normal">,<sp/>120.0,<sp/>100.0},</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Belt<sp/>V-Type&quot;</highlight><highlight class="normal">,<sp/>15.0,<sp/>20.0}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numItems<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>numItems;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>needsReorder<sp/>=<sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1ae53a277e9ee61eab4300deeffde8d5cf" kindref="member">InventoryOptimizer::isReorderNeeded</ref>(</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inventory[i].currentStock,<sp/>inventory[i].minLevel</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::left<sp/>&lt;&lt;<sp/>std::setw(15)<sp/>&lt;&lt;<sp/>inventory[i].part</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::setw(6)<sp/>&lt;&lt;<sp/>inventory[i].currentStock</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>/<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::setw(6)<sp/>&lt;&lt;<sp/>inventory[i].minLevel</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>→<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>(needsReorder<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;🔴<sp/>REORDER<sp/>NEEDED&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;✅<sp/>OK&quot;</highlight><highlight class="normal">)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal">(...)<sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>DemoApp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="comment">//<sp/>We<sp/>need<sp/>to<sp/>keep<sp/>a<sp/>main<sp/>function<sp/>for<sp/>the<sp/>standalone<sp/>application<sp/>build</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight><highlight class="comment">//<sp/>But<sp/>if<sp/>this<sp/>file<sp/>is<sp/>included<sp/>in<sp/>tests,<sp/>we<sp/>might<sp/>have<sp/>multiple<sp/>mains.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight><highlight class="comment">//<sp/>The<sp/>solution<sp/>is<sp/>to<sp/>use<sp/>preprocessor<sp/>directives<sp/>or<sp/>ensure<sp/>CMake<sp/>links<sp/>correctly.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="comment">//<sp/>For<sp/>now,<sp/>let&apos;s<sp/>keep<sp/>the<sp/>main<sp/>simple<sp/>and<sp/>just<sp/>call<sp/>our<sp/>functions.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ENABLE_DEMO_APP_TEST<sp/></highlight><highlight class="comment">//<sp/>If<sp/>NOT<sp/>building<sp/>tests<sp/>for<sp/>this<sp/>app</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="smart__maintenance__suite__app_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kindref="member">main</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;╔════════════════════════════════════════════════════════════╗\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;║<sp/><sp/><sp/><sp/><sp/>SMART<sp/>MAINTENANCE<sp/>SUITE<sp/>-<sp/>ANALYTICS<sp/>DEMO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>║\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;║<sp/><sp/><sp/><sp/><sp/>Industrial<sp/>IoT<sp/>Predictive<sp/>Maintenance<sp/>System<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>║\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;╚════════════════════════════════════════════════════════════╝\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Run<sp/>demonstrations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" kindref="member">DemoApp::demonstrateSensorAnalytics</ref>();</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" kindref="member">DemoApp::demonstrateMaintenanceScheduling</ref>();</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" kindref="member">DemoApp::demonstrateInventoryOptimization</ref>();</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;╔════════════════════════════════════════════════════════════╗\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;║<sp/><sp/>✅<sp/>All<sp/>demonstrations<sp/>completed<sp/>successfully!<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>║\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;╚════════════════════════════════════════════════════════════╝\n\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::exception<sp/>&amp;e)<sp/>{</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n❌<sp/>Error:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\n\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp"/>
   </compounddef>

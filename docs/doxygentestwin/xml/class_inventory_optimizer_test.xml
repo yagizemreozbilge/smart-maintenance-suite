@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
+  <compounddef id="class_inventory_optimizer_test" kind="class" language="C++" prot="public">
+    <compoundname>InventoryOptimizerTest</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">testing::Test</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_inventory_optimizer_test_1a1d013b17064f79fdf906d59539941825" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double InventoryOptimizerTest::annualDemand</definition>
+        <argsstring></argsstring>
+        <name>annualDemand</name>
+        <qualifiedname>InventoryOptimizerTest::annualDemand</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="199" column="10" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_inventory_optimizer_test_1ab6027722459ee02a48f39af71acf1190" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double InventoryOptimizerTest::orderingCost</definition>
+        <argsstring></argsstring>
+        <name>orderingCost</name>
+        <qualifiedname>InventoryOptimizerTest::orderingCost</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="200" column="10" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_inventory_optimizer_test_1a4c1072ee166ff549563f07ea8a57ff88" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double InventoryOptimizerTest::holdingCost</definition>
+        <argsstring></argsstring>
+        <name>holdingCost</name>
+        <qualifiedname>InventoryOptimizerTest::holdingCost</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="201" column="10" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_inventory_optimizer_test_1a0d295de0c4923c7b741a99f6ba2917d4" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void InventoryOptimizerTest::SetUp</definition>
+        <argsstring>() override</argsstring>
+        <name>SetUp</name>
+        <qualifiedname>InventoryOptimizerTest::SetUp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="203" column="8" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="203" bodyend="207"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>InventoryOptimizerTest</label>
+        <link refid="class_inventory_optimizer_test"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>testing::Test</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>InventoryOptimizerTest</label>
+        <link refid="class_inventory_optimizer_test"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>testing::Test</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="197" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="197" bodyend="208"/>
+    <listofallmembers>
+      <member refid="class_inventory_optimizer_test_1a1d013b17064f79fdf906d59539941825" prot="protected" virt="non-virtual"><scope>InventoryOptimizerTest</scope><name>annualDemand</name></member>
+      <member refid="class_inventory_optimizer_test_1a4c1072ee166ff549563f07ea8a57ff88" prot="protected" virt="non-virtual"><scope>InventoryOptimizerTest</scope><name>holdingCost</name></member>
+      <member refid="class_inventory_optimizer_test_1ab6027722459ee02a48f39af71acf1190" prot="protected" virt="non-virtual"><scope>InventoryOptimizerTest</scope><name>orderingCost</name></member>
+      <member refid="class_inventory_optimizer_test_1a0d295de0c4923c7b741a99f6ba2917d4" prot="protected" virt="non-virtual"><scope>InventoryOptimizerTest</scope><name>SetUp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

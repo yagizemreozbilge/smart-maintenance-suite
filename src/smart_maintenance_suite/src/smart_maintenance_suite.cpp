@@ -1,7 +1,13 @@
-#include "../../smart_maintenance_suite/header/smart_maintenance_suite.h" // Fix relative path
+/**
+ * @file smart_maintenance_suite.cpp
+ * @brief Smart Maintenance Suite - Demo Application Implementation
+ */
+#include "smart_maintenance_suite.h"
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
+
+
 
 using namespace SmartMaintenance::Analytics;
 

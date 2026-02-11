@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['precedence_0',['precedence',['../smart__maintenance__suite__app_8cpp.html#ae3f55e40ed8f0a2cde99d2b36e919cbf',1,'smart_maintenance_suite_app.cpp']]]
+  ['predictremaininglife_0',['predictRemainingLife',['../class_smart_maintenance_1_1_analytics_1_1_sensor_analytics.html#ad3581da7a6e5e323e55dc9af3ec909c5',1,'SmartMaintenance::Analytics::SensorAnalytics']]],
+  ['printheader_1',['printHeader',['../namespace_demo_app.html#a08b0cb703421f821091cc8b08d3a7c36',1,'DemoApp']]]
 ];

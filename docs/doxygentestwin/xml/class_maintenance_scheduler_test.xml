@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
+  <compounddef id="class_maintenance_scheduler_test" kind="class" language="C++" prot="public">
+    <compoundname>MaintenanceSchedulerTest</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">testing::Test</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="class_maintenance_scheduler_test_1ae77415f906351c603970f2354492691c" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double MaintenanceSchedulerTest::failureRate</definition>
+        <argsstring></argsstring>
+        <name>failureRate</name>
+        <qualifiedname>MaintenanceSchedulerTest::failureRate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="118" column="10" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_maintenance_scheduler_test_1a8db5fa89fa71056e94ef852598b46087" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double MaintenanceSchedulerTest::maintenanceCost</definition>
+        <argsstring></argsstring>
+        <name>maintenanceCost</name>
+        <qualifiedname>MaintenanceSchedulerTest::maintenanceCost</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="119" column="10" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_maintenance_scheduler_test_1ac50eea3926b73e2b9d97f111e1d77b8e" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double MaintenanceSchedulerTest::failureCost</definition>
+        <argsstring></argsstring>
+        <name>failureCost</name>
+        <qualifiedname>MaintenanceSchedulerTest::failureCost</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="120" column="10" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_maintenance_scheduler_test_1aad97631a9f2acb07e4504968beba82c7" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MaintenanceSchedulerTest::SetUp</definition>
+        <argsstring>() override</argsstring>
+        <name>SetUp</name>
+        <qualifiedname>MaintenanceSchedulerTest::SetUp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="122" column="8" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="122" bodyend="126"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>MaintenanceSchedulerTest</label>
+        <link refid="class_maintenance_scheduler_test"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>testing::Test</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>MaintenanceSchedulerTest</label>
+        <link refid="class_maintenance_scheduler_test"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>testing::Test</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="116" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="116" bodyend="127"/>
+    <listofallmembers>
+      <member refid="class_maintenance_scheduler_test_1ac50eea3926b73e2b9d97f111e1d77b8e" prot="protected" virt="non-virtual"><scope>MaintenanceSchedulerTest</scope><name>failureCost</name></member>
+      <member refid="class_maintenance_scheduler_test_1ae77415f906351c603970f2354492691c" prot="protected" virt="non-virtual"><scope>MaintenanceSchedulerTest</scope><name>failureRate</name></member>
+      <member refid="class_maintenance_scheduler_test_1a8db5fa89fa71056e94ef852598b46087" prot="protected" virt="non-virtual"><scope>MaintenanceSchedulerTest</scope><name>maintenanceCost</name></member>
+      <member refid="class_maintenance_scheduler_test_1aad97631a9f2acb07e4504968beba82c7" prot="protected" virt="non-virtual"><scope>MaintenanceSchedulerTest</scope><name>SetUp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

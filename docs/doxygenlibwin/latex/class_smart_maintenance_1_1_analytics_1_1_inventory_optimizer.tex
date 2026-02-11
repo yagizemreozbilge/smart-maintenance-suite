@@ -1,0 +1,93 @@
+\doxysection{Smart\+Maintenance\+::Analytics\+::Inventory\+Optimizer Class Reference}
+\hypertarget{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer}{}\label{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer}\index{SmartMaintenance::Analytics::InventoryOptimizer@{SmartMaintenance::Analytics::InventoryOptimizer}}
+
+
+Provides inventory management and optimization utilities.  
+
+
+
+
+{\ttfamily \#include $<$smart\+\_\+maintenance\+\_\+suite.\+h$>$}
+
+
+
+Collaboration diagram for Smart\+Maintenance\+::Analytics\+::Inventory\+Optimizer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a18307c47e0fff667fa1fd18566a2bd07}{calculate\+EOQ}} (double annual\+Demand, double ordering\+Cost, double holding\+Cost)
+\item 
+static double \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a35bb0277fc1ca1a65e60d58316d5d75c}{calculate\+Reorder\+Point}} (double daily\+Demand, double lead\+Time, double safety\+Stock)
+\item 
+static bool \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_ae53a277e9ee61eab4300deeffde8d5cf}{is\+Reorder\+Needed}} (double current\+Stock, double min\+Stock\+Level)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides inventory management and optimization utilities. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a18307c47e0fff667fa1fd18566a2bd07}\index{SmartMaintenance::Analytics::InventoryOptimizer@{SmartMaintenance::Analytics::InventoryOptimizer}!calculateEOQ@{calculateEOQ}}
+\index{calculateEOQ@{calculateEOQ}!SmartMaintenance::Analytics::InventoryOptimizer@{SmartMaintenance::Analytics::InventoryOptimizer}}
+\doxysubsubsection{\texorpdfstring{calculateEOQ()}{calculateEOQ()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a18307c47e0fff667fa1fd18566a2bd07} 
+double Inventory\+Optimizer\+::calculate\+EOQ (\begin{DoxyParamCaption}\item[{double}]{annual\+Demand}{, }\item[{double}]{ordering\+Cost}{, }\item[{double}]{holding\+Cost}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates Economic Order Quantity (EOQ) 
+\begin{DoxyParams}{Parameters}
+{\em annual\+Demand} & Annual demand for the part \\
+\hline
+{\em ordering\+Cost} & Cost per order \\
+\hline
+{\em holding\+Cost} & Annual holding cost per unit \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optimal order quantity 
+\end{DoxyReturn}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a35bb0277fc1ca1a65e60d58316d5d75c}\index{SmartMaintenance::Analytics::InventoryOptimizer@{SmartMaintenance::Analytics::InventoryOptimizer}!calculateReorderPoint@{calculateReorderPoint}}
+\index{calculateReorderPoint@{calculateReorderPoint}!SmartMaintenance::Analytics::InventoryOptimizer@{SmartMaintenance::Analytics::InventoryOptimizer}}
+\doxysubsubsection{\texorpdfstring{calculateReorderPoint()}{calculateReorderPoint()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a35bb0277fc1ca1a65e60d58316d5d75c} 
+double Inventory\+Optimizer\+::calculate\+Reorder\+Point (\begin{DoxyParamCaption}\item[{double}]{daily\+Demand}{, }\item[{double}]{lead\+Time}{, }\item[{double}]{safety\+Stock}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates reorder point for inventory 
+\begin{DoxyParams}{Parameters}
+{\em daily\+Demand} & Average daily demand \\
+\hline
+{\em lead\+Time} & Lead time in days \\
+\hline
+{\em safety\+Stock} & Safety stock quantity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reorder point quantity 
+\end{DoxyReturn}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_ae53a277e9ee61eab4300deeffde8d5cf}\index{SmartMaintenance::Analytics::InventoryOptimizer@{SmartMaintenance::Analytics::InventoryOptimizer}!isReorderNeeded@{isReorderNeeded}}
+\index{isReorderNeeded@{isReorderNeeded}!SmartMaintenance::Analytics::InventoryOptimizer@{SmartMaintenance::Analytics::InventoryOptimizer}}
+\doxysubsubsection{\texorpdfstring{isReorderNeeded()}{isReorderNeeded()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_ae53a277e9ee61eab4300deeffde8d5cf} 
+bool Inventory\+Optimizer\+::is\+Reorder\+Needed (\begin{DoxyParamCaption}\item[{double}]{current\+Stock}{, }\item[{double}]{min\+Stock\+Level}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Determines if stock is below minimum level 
+\begin{DoxyParams}{Parameters}
+{\em current\+Stock} & Current stock quantity \\
+\hline
+{\em min\+Stock\+Level} & Minimum stock level \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if reorder needed, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/smart\+\_\+maintenance\+\_\+suite/header/\mbox{\hyperlink{smart__maintenance__suite_8h}{smart\+\_\+maintenance\+\_\+suite.\+h}}\item 
+src/smart\+\_\+maintenance\+\_\+suite/src/\mbox{\hyperlink{smart__maintenance__suite_8cpp}{smart\+\_\+maintenance\+\_\+suite.\+cpp}}\end{DoxyCompactItemize}

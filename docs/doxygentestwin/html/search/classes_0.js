@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['calculatortest_0',['CalculatorTest',['../class_calculator_test.html',1,'']]]
+  ['inventoryoptimizertest_0',['InventoryOptimizerTest',['../class_inventory_optimizer_test.html',1,'']]]
 ];

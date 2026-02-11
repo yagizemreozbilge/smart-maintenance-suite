@@ -231,7 +231,27 @@ Quick Start</h2>
 <div class="line"> </div>
 <div class="line"># Run frontend tests only</div>
 <div class="line">run-frontend-tests.bat</div>
+<div class="line"> </div>
+<div class="line"># Generate professional unified coverage report (like the image)</div>
+<div class="line">10-professional-coverage-report.bat</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md23"></a>
+Professional Coverage Report</h2>
+<p>Generate a <b>unified HTML coverage report</b> for all modules (Backend, Frontend, Data Structures, Security, Database, API) in one professional dashboard:</p>
+<div class="fragment"><div class="line"># Step 1: Compile and run tests</div>
+<div class="line">run-backend-tests.bat</div>
+<div class="line"> </div>
+<div class="line"># Step 2: Generate unified coverage report</div>
+<div class="line">10-professional-coverage-report.bat</div>
+</div><!-- fragment --><p>This creates a ReportGenerator HTML report with:</p><ul>
+<li>✅ Combined coverage for all modules</li>
+<li>✅ Coverage history and trends</li>
+<li>✅ Interactive file-level details</li>
+<li>✅ Coverage badges</li>
+<li>✅ Summary dashboard (like the screenshot)</li>
+</ul>
+<p><b>Report Location</b>: <code>coverage_professional/combined/index.html</code></p>
+<p>For detailed instructions, see <b>COVERAGE_REPORT_GUIDE.md</b>.</p>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Test Coverage</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -249,7 +269,7 @@ Test Coverage</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Total</b>   </td><td class="markdownTableBodyNone"><b>14</b>   </td><td class="markdownTableBodyNone">**&gt;80%**   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
 Documentation</h2>
 <ul>
 <li><b>TEST_SUMMARY.md</b> - Complete test suite overview</li>
@@ -260,7 +280,7 @@ Documentation</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Test Structure</h2>
 <div class="fragment"><div class="line">src/</div>
 <div class="line">├── backend/tests/unit/          # Backend unit tests (C)</div>

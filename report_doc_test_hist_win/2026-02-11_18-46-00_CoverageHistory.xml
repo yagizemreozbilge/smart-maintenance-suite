@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2026-02-11_18-46-00" tag="">
+  <assembly name="Default">
+    <class name="C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\src\tests\smart_maintenance_suite\smart_maintenance_suite_test.cpp" coveredlines="0" coverablelines="49" totallines="245" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+  </assembly>
+</coverage>

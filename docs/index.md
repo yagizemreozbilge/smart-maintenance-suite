@@ -172,7 +172,33 @@ run-backend-tests.bat
 
 # Run frontend tests only
 run-frontend-tests.bat
+
+# Generate professional unified coverage report (like the image)
+10-professional-coverage-report.bat
 ```
+
+### Professional Coverage Report
+
+Generate a **unified HTML coverage report** for all modules (Backend, Frontend, Data Structures, Security, Database, API) in one professional dashboard:
+
+```bash
+# Step 1: Compile and run tests
+run-backend-tests.bat
+
+# Step 2: Generate unified coverage report
+10-professional-coverage-report.bat
+```
+
+This creates a ReportGenerator HTML report with:
+- ✅ Combined coverage for all modules
+- ✅ Coverage history and trends
+- ✅ Interactive file-level details
+- ✅ Coverage badges
+- ✅ Summary dashboard (like the screenshot)
+
+**Report Location**: `coverage_professional/combined/index.html`
+
+For detailed instructions, see **[COVERAGE_REPORT_GUIDE.md](COVERAGE_REPORT_GUIDE.md)**.
 
 ### Test Coverage
 

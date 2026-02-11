@@ -4,6 +4,8 @@
     <compoundname>smart_maintenance_suite_test.cpp</compoundname>
     <includes local="yes">gtest/gtest.h</includes>
     <includes local="yes">../../smart_maintenance_suite/header/smart_maintenance_suite.h</includes>
+    <includes local="no">stdexcept</includes>
+    <includes local="no">string</includes>
     <incdepgraph>
       <node id="3">
         <label>../../smart_maintenance_suite/header/smart_maintenance_suite.h</label>
@@ -15,24 +17,48 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>gtest/gtest.h</label>
       </node>
+      <node id="4">
+        <label>stdexcept</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
     </incdepgraph>
-    <innerclass refid="class_calculator_test" prot="public">CalculatorTest</innerclass>
-    <innernamespace refid="namespace_coruh_1_1_calculator">Coruh::Calculator</innernamespace>
+    <innerclass refid="class_sensor_analytics_test" prot="public">SensorAnalyticsTest</innerclass>
+    <innerclass refid="class_maintenance_scheduler_test" prot="public">MaintenanceSchedulerTest</innerclass>
+    <innerclass refid="class_inventory_optimizer_test" prot="public">InventoryOptimizerTest</innerclass>
+    <innernamespace refid="namespace_smart_maintenance_1_1_analytics">SmartMaintenance::Analytics</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="smart__maintenance__suite__test_8cpp_1a7d0320f9e334511978ada2d5819cf47d" prot="public" static="no">
+        <name>ENABLE_SMART_MAINTENANCE_SUITE_TEST</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="1" column="9" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="1" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>TEST_F</definition>
-        <argsstring>(CalculatorTest, TestAdd)</argsstring>
+        <argsstring>(SensorAnalyticsTest, CalculateMovingAverage_ValidInput)</argsstring>
         <name>TEST_F</name>
         <param>
-          <type><ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref></type>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
         </param>
         <param>
-          <type>TestAdd</type>
+          <type>CalculateMovingAverage_ValidInput</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -40,18 +66,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="19" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="19" bodyend="22"/>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="26" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="26" bodyend="29"/>
       </memberdef>
-      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a5b10cd9bfcd77263a48173a3d0b5ff7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1ac1330a3c76b8c0d8f1ee7007bbaf9f14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>TEST_F</definition>
-        <argsstring>(CalculatorTest, TestSubtract)</argsstring>
+        <argsstring>(SensorAnalyticsTest, CalculateMovingAverage_FullWindow)</argsstring>
         <name>TEST_F</name>
         <param>
-          <type><ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref></type>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
         </param>
         <param>
-          <type>TestSubtract</type>
+          <type>CalculateMovingAverage_FullWindow</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -59,18 +85,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="24" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="24" bodyend="27"/>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="31" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="31" bodyend="34"/>
       </memberdef>
-      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1acd37c4ea71846a04d2b04b3c6c3e135b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a37f00679f5555db8d09370562d7fac8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>TEST_F</definition>
-        <argsstring>(CalculatorTest, TestMultiply)</argsstring>
+        <argsstring>(SensorAnalyticsTest, CalculateMovingAverage_EmptyArray)</argsstring>
         <name>TEST_F</name>
         <param>
-          <type><ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref></type>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
         </param>
         <param>
-          <type>TestMultiply</type>
+          <type>CalculateMovingAverage_EmptyArray</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -78,18 +104,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="29" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="29" bodyend="32"/>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="36" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="36" bodyend="40"/>
       </memberdef>
-      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a885dc4f6a00c3d0b54725164c875dd25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a7c7fe18e78bdd0f48998953ea3bcb223" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>TEST_F</definition>
-        <argsstring>(CalculatorTest, TestDivide)</argsstring>
+        <argsstring>(SensorAnalyticsTest, CalculateMovingAverage_InvalidWindowSize)</argsstring>
         <name>TEST_F</name>
         <param>
-          <type><ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref></type>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
         </param>
         <param>
-          <type>TestDivide</type>
+          <type>CalculateMovingAverage_InvalidWindowSize</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -97,18 +123,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="34" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="34" bodyend="37"/>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="42" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="42" bodyend="45"/>
       </memberdef>
-      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1aadb9113df327e8be871f5035e19beded" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1aac29fe131cfd81f72649d7104b71bde8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>TEST_F</definition>
-        <argsstring>(CalculatorTest, TestDivideByZero)</argsstring>
+        <argsstring>(SensorAnalyticsTest, DetectAnomaly_NoAnomaly)</argsstring>
         <name>TEST_F</name>
         <param>
-          <type><ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref></type>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
         </param>
         <param>
-          <type>TestDivideByZero</type>
+          <type>DetectAnomaly_NoAnomaly</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -116,7 +142,577 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="39" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="39" bodyend="41"/>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="47" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="47" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a7110c9f56d3cb2e73c481f05bfba9c07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, DetectAnomaly_WithAnomaly)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>DetectAnomaly_WithAnomaly</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="52" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a214d0c433f56a8a69214ce53188097b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, DetectAnomaly_InsufficientData)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>DetectAnomaly_InsufficientData</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="57" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="57" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1ad294cabef0a7e7dfc623d8486ee43889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, DetectAnomaly_NullInput)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>DetectAnomaly_NullInput</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="63" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="63" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a404bd3f640f32c1cf0954907f293326f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, DetectAnomaly_ZeroStandardDeviation)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>DetectAnomaly_ZeroStandardDeviation</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="68" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="68" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a6fab91fd6a430357d9d307f8365ccdb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, CalculateStandardDeviation_ValidInput)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateStandardDeviation_ValidInput</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="75" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="75" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a9b627ed1799a0c77c547a5b6b4875a42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, CalculateStandardDeviation_SingleValue)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateStandardDeviation_SingleValue</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="82" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="82" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1ab30c389f126ed997275cbbc6d957cca9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, CalculateStandardDeviation_EmptyArray)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateStandardDeviation_EmptyArray</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="88" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="88" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1adca138724fda8f9d80a0403acb8e2727" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, PredictRemainingLife_ValidInput)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>PredictRemainingLife_ValidInput</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="92" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="92" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1ada30c9ee0062279512d0771dee6cccd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, PredictRemainingLife_AtThreshold)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>PredictRemainingLife_AtThreshold</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="97" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="97" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1ab639e638bd610461a8e184c7821d2599" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, PredictRemainingLife_BeyondThreshold)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>PredictRemainingLife_BeyondThreshold</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="102" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="102" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1adb7a49a41ad14952cc0a7f808f5d7e74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(SensorAnalyticsTest, PredictRemainingLife_InvalidDegradationRate)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref></type>
+        </param>
+        <param>
+          <type>PredictRemainingLife_InvalidDegradationRate</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="107" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="107" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a4a2db58fe642255c4cd59a2ec50054ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, CalculateOptimalInterval_ValidInput)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateOptimalInterval_ValidInput</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="129" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="129" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a5c0e280d4fa954c270fa51fa97c9c5b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, CalculateOptimalInterval_InvalidFailureRate)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateOptimalInterval_InvalidFailureRate</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="137" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="137" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a30cc9d126c87cb48702193b8731efbd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, CalculateOptimalInterval_NegativeCosts)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateOptimalInterval_NegativeCosts</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="144" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="144" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a6fbe4e556a2401b7d58f96954fe3802f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, CalculateTotalCost_ValidInput)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateTotalCost_ValidInput</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="151" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="151" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a38f888bfa1191616d2ad7de8a711041f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, CalculateTotalCost_InvalidInterval)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateTotalCost_InvalidInterval</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="156" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="156" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a89e8b9f2d10a6af53627cce6e4e70c03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, CalculateTotalCost_ZeroPeriod)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateTotalCost_ZeroPeriod</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="163" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a5561cb9f60137e3c121bfdbb6ddf9f9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, CalculateTotalCost_ZeroCost)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateTotalCost_ZeroCost</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="168" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="168" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a2ce7a76e09045497af1222cdec63a0ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, AssessMaintenancePriority_Normal)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>AssessMaintenancePriority_Normal</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="173" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="173" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1aaa512be5278de007e36e9bc29f9678f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, AssessMaintenancePriority_Warning)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>AssessMaintenancePriority_Warning</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="178" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="178" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a47c7aa12114cdb33c78da3d0010ef809" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, AssessMaintenancePriority_Critical)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>AssessMaintenancePriority_Critical</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="183" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="183" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a5f2bc947c64766a240144936a8587e74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(MaintenanceSchedulerTest, AssessMaintenancePriority_AtThresholds)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref></type>
+        </param>
+        <param>
+          <type>AssessMaintenancePriority_AtThresholds</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="188" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="188" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a02a86d27fdc53a37c3fab50209e95168" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, CalculateEOQ_ValidInput)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateEOQ_ValidInput</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="210" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="210" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a86393f8a45c74454bfe4e025d26a9363" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, CalculateEOQ_InvalidParameters)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateEOQ_InvalidParameters</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="215" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="215" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a2317129e1b24afe221c1c4d207550a50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, CalculateReorderPoint_ValidInput)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateReorderPoint_ValidInput</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="222" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="222" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a4beb3153740af4ebdfc5a65430b4aa98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, CalculateReorderPoint_ZeroValues)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateReorderPoint_ZeroValues</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="227" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="227" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a7cb2f088bebeb97e04976f7fb901bb19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, CalculateReorderPoint_NegativeValues)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>CalculateReorderPoint_NegativeValues</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="232" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="232" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a4f2219c02a17226509aa1e82f3186098" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, IsReorderNeeded_BelowMinimum)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>IsReorderNeeded_BelowMinimum</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="241" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="241" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a7af357b89ae8e3583f51de147d9f678f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, IsReorderNeeded_AtMinimum)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>IsReorderNeeded_AtMinimum</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="246" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="246" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a6226f4973e4b8981fced8d4dadd6764a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_F</definition>
+        <argsstring>(InventoryOptimizerTest, IsReorderNeeded_AboveMinimum)</argsstring>
+        <name>TEST_F</name>
+        <param>
+          <type><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref></type>
+        </param>
+        <param>
+          <type>IsReorderNeeded_AboveMinimum</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="251" column="1" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="251" bodyend="254"/>
       </memberdef>
       <memberdef kind="function" id="smart__maintenance__suite__test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -132,33 +728,12 @@
           <declname>argv</declname>
         </param>
         <briefdescription>
-<para>The main function of the test program. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>argc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The number of command-line arguments. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>argv</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>An array of command-line argument strings. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>int The exit status of the program. </para>
-</simplesect>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="50" column="5" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="50" bodyend="57"/>
+        <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" line="260" column="5" bodyfile="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp" bodystart="260" bodyend="267"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -166,56 +741,273 @@
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="comment">//#define<sp/>ENABLE_SMART_MAINTENANCE_SUITE_TEST<sp/><sp/>//<sp/>Uncomment<sp/>this<sp/>line<sp/>to<sp/>enable<sp/>the<sp/>Smart<sp/>Maintenance<sp/>Suite<sp/>tests</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1" refid="smart__maintenance__suite__test_8cpp_1a7d0320f9e334511978ada2d5819cf47d" refkind="member"><highlight class="preprocessor">#define<sp/>ENABLE_SMART_MAINTENANCE_SUITE_TEST<sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>Smart<sp/>Maintenance<sp/>Suite<sp/>tests</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;gtest/gtest.h&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../smart_maintenance_suite/header/smart_maintenance_suite.h&quot;</highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Adjust<sp/>this<sp/>include<sp/>path<sp/>based<sp/>on<sp/>your<sp/>project<sp/>structure</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">Coruh::Calculator;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../smart_maintenance_suite/header/smart_maintenance_suite.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8" refid="class_calculator_test" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>::testing::Test<sp/>{</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="10" refid="class_calculator_test_1a16acabe39b00dc041fea47f1b99f9983" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_calculator_test_1a16acabe39b00dc041fea47f1b99f9983" kindref="member">SetUp</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Setup<sp/>test<sp/>data</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">SmartMaintenance::Analytics;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SensorAnalytics<sp/>Tests</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14" refid="class_calculator_test_1a49df00b9c0d435932adb5e1291ca06c4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_calculator_test_1a49df00b9c0d435932adb5e1291ca06c4" kindref="member">TearDown</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Clean<sp/>up<sp/>test<sp/>data</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="17"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19" refid="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" kindref="member">TEST_F</ref>(<ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref>,<sp/>TestAdd)<sp/>{</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>Calculator::add(5.0,<sp/>3.0);</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>8.0);</highlight></codeline>
-<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24" refid="smart__maintenance__suite__test_8cpp_1a5b10cd9bfcd77263a48173a3d0b5ff7b" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" kindref="member">TEST_F</ref>(<ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref>,<sp/>TestSubtract)<sp/>{</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>Calculator::subtract(5.0,<sp/>3.0);</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>2.0);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="smart__maintenance__suite__test_8cpp_1acd37c4ea71846a04d2b04b3c6c3e135b" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" kindref="member">TEST_F</ref>(<ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref>,<sp/>TestMultiply)<sp/>{</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>Calculator::multiply(5.0,<sp/>3.0);</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>15.0);</highlight></codeline>
-<codeline lineno="32"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34" refid="smart__maintenance__suite__test_8cpp_1a885dc4f6a00c3d0b54725164c875dd25" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" kindref="member">TEST_F</ref>(<ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref>,<sp/>TestDivide)<sp/>{</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>Calculator::divide(6.0,<sp/>3.0);</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>2.0);</highlight></codeline>
-<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39" refid="smart__maintenance__suite__test_8cpp_1aadb9113df327e8be871f5035e19beded" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a7d9bab343a282353423ab2d980c8ac52" kindref="member">TEST_F</ref>(<ref refid="class_calculator_test" kindref="compound">CalculatorTest</ref>,<sp/>TestDivideByZero)<sp/>{</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/>EXPECT_THROW(Calculator::divide(5.0,<sp/>0.0),<sp/>std::invalid_argument);</highlight></codeline>
-<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50" refid="smart__maintenance__suite__test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="smart__maintenance__suite__test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**argv)<sp/>{</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ENABLE_SMART_MAINTENANCE_SUITE_TEST</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/>::testing::InitGoogleTest(&amp;argc,<sp/>argv);</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RUN_ALL_TESTS();</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14" refid="class_sensor_analytics_test" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>::testing::Test<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Using<sp/>fixed<sp/>size<sp/>arrays<sp/>for<sp/>testing</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="class_sensor_analytics_test_1acf4f9753c3dd24ab3c12a500548373f0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_sensor_analytics_test_1acf4f9753c3dd24ab3c12a500548373f0" kindref="member">normalReadings</ref>[5]<sp/>=<sp/>{75.0,<sp/>76.0,<sp/>75.5,<sp/>76.2,<sp/>75.8};</highlight></codeline>
+<codeline lineno="18" refid="class_sensor_analytics_test_1acf9163cdc86587d13ed14e1a83aa8e05" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_sensor_analytics_test_1acf9163cdc86587d13ed14e1a83aa8e05" kindref="member">anomalyReadings</ref>[5]<sp/>=<sp/>{75.0,<sp/>76.0,<sp/>75.5,<sp/>76.2,<sp/>95.0};</highlight></codeline>
+<codeline lineno="19" refid="class_sensor_analytics_test_1a3a15b7918f8606d305487c000611996a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_sensor_analytics_test_1a3a15b7918f8606d305487c000611996a" kindref="member">size</ref><sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="class_sensor_analytics_test_1a70598d30573fd9f8b21292840417a728" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_sensor_analytics_test_1a70598d30573fd9f8b21292840417a728" kindref="member">SetUp</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Arrays<sp/>already<sp/>initialized</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>CalculateMovingAverage_ValidInput)<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::calculateMovingAverage(normalReadings,<sp/>size,<sp/>3);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>EXPECT_NEAR(result,<sp/>75.833,<sp/>0.01);<sp/></highlight><highlight class="comment">//<sp/>Average<sp/>of<sp/>last<sp/>3:<sp/>(75.5<sp/>+<sp/>76.2<sp/>+<sp/>75.8)<sp/>/<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="smart__maintenance__suite__test_8cpp_1ac1330a3c76b8c0d8f1ee7007bbaf9f14" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>CalculateMovingAverage_FullWindow)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::calculateMovingAverage(normalReadings,<sp/>size,<sp/>5);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>EXPECT_NEAR(result,<sp/>75.7,<sp/>0.01);<sp/></highlight><highlight class="comment">//<sp/>Average<sp/>of<sp/>all<sp/>5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="smart__maintenance__suite__test_8cpp_1a37f00679f5555db8d09370562d7fac8e" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>CalculateMovingAverage_EmptyArray)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Pass<sp/>nullptr<sp/>or<sp/>size<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>EXPECT_THROW(SensorAnalytics::calculateMovingAverage(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>0,<sp/>3),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>EXPECT_THROW(SensorAnalytics::calculateMovingAverage(normalReadings,<sp/>0,<sp/>3),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="smart__maintenance__suite__test_8cpp_1a7c7fe18e78bdd0f48998953ea3bcb223" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>CalculateMovingAverage_InvalidWindowSize)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>EXPECT_THROW(SensorAnalytics::calculateMovingAverage(normalReadings,<sp/>size,<sp/>0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>EXPECT_THROW(SensorAnalytics::calculateMovingAverage(normalReadings,<sp/>size,<sp/>10),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="smart__maintenance__suite__test_8cpp_1aac29fe131cfd81f72649d7104b71bde8" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>DetectAnomaly_NoAnomaly)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::detectAnomaly(normalReadings,<sp/>size,<sp/>2.0);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>EXPECT_FALSE(result);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="smart__maintenance__suite__test_8cpp_1a7110c9f56d3cb2e73c481f05bfba9c07" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>DetectAnomaly_WithAnomaly)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::detectAnomaly(anomalyReadings,<sp/>size,<sp/>2.0);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>EXPECT_TRUE(result);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="smart__maintenance__suite__test_8cpp_1a214d0c433f56a8a69214ce53188097b1" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>DetectAnomaly_InsufficientData)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>single[]<sp/>=<sp/>{75.0};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::detectAnomaly(single,<sp/>1,<sp/>2.0);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>EXPECT_FALSE(result);<sp/></highlight><highlight class="comment">//<sp/>Not<sp/>enough<sp/>data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="smart__maintenance__suite__test_8cpp_1ad294cabef0a7e7dfc623d8486ee43889" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>DetectAnomaly_NullInput)<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::detectAnomaly(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>5,<sp/>2.0);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>EXPECT_FALSE(result);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="smart__maintenance__suite__test_8cpp_1a404bd3f640f32c1cf0954907f293326f" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>DetectAnomaly_ZeroStandardDeviation)<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>All<sp/>values<sp/>are<sp/>the<sp/>same,<sp/>so<sp/>stdDev<sp/>is<sp/>0.<sp/>Division<sp/>by<sp/>zero<sp/>check<sp/>should<sp/>return<sp/>false.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>constantReadings[]<sp/>=<sp/>{50.0,<sp/>50.0,<sp/>50.0,<sp/>50.0,<sp/>50.0};</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::detectAnomaly(constantReadings,<sp/>5,<sp/>2.0);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>EXPECT_FALSE(result);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="smart__maintenance__suite__test_8cpp_1a6fab91fd6a430357d9d307f8365ccdb1" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>CalculateStandardDeviation_ValidInput)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>data[]<sp/>=<sp/>{2.0,<sp/>4.0,<sp/>4.0,<sp/>4.0,<sp/>5.0,<sp/>5.0,<sp/>7.0,<sp/>9.0};</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dataSize<sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::calculateStandardDeviation(data,<sp/>dataSize);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>EXPECT_NEAR(result,<sp/>2.0,<sp/>0.01);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="smart__maintenance__suite__test_8cpp_1a9b627ed1799a0c77c547a5b6b4875a42" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>CalculateStandardDeviation_SingleValue)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>single[]<sp/>=<sp/>{5.0};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::calculateStandardDeviation(single,<sp/>1);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="smart__maintenance__suite__test_8cpp_1ab30c389f126ed997275cbbc6d957cca9" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>CalculateStandardDeviation_EmptyArray)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>EXPECT_THROW(SensorAnalytics::calculateStandardDeviation(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="smart__maintenance__suite__test_8cpp_1adca138724fda8f9d80a0403acb8e2727" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>PredictRemainingLife_ValidInput)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::predictRemainingLife(80.0,<sp/>100.0,<sp/>2.0);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>10.0);<sp/></highlight><highlight class="comment">//<sp/>(100<sp/>-<sp/>80)<sp/>/<sp/>2<sp/>=<sp/>10</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="smart__maintenance__suite__test_8cpp_1ada30c9ee0062279512d0771dee6cccd4" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>PredictRemainingLife_AtThreshold)<sp/>{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::predictRemainingLife(100.0,<sp/>100.0,<sp/>2.0);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="smart__maintenance__suite__test_8cpp_1ab639e638bd610461a8e184c7821d2599" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>PredictRemainingLife_BeyondThreshold)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>SensorAnalytics::predictRemainingLife(105.0,<sp/>100.0,<sp/>2.0);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="smart__maintenance__suite__test_8cpp_1adb7a49a41ad14952cc0a7f808f5d7e74" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_sensor_analytics_test" kindref="compound">SensorAnalyticsTest</ref>,<sp/>PredictRemainingLife_InvalidDegradationRate)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>EXPECT_THROW(SensorAnalytics::predictRemainingLife(80.0,<sp/>100.0,<sp/>0.0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>EXPECT_THROW(SensorAnalytics::predictRemainingLife(80.0,<sp/>100.0,<sp/>-1.0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">//<sp/>MaintenanceScheduler<sp/>Tests</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="class_maintenance_scheduler_test" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>::testing::Test<sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="118" refid="class_maintenance_scheduler_test_1ae77415f906351c603970f2354492691c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_maintenance_scheduler_test_1ae77415f906351c603970f2354492691c" kindref="member">failureRate</ref>;</highlight></codeline>
+<codeline lineno="119" refid="class_maintenance_scheduler_test_1a8db5fa89fa71056e94ef852598b46087" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_maintenance_scheduler_test_1a8db5fa89fa71056e94ef852598b46087" kindref="member">maintenanceCost</ref>;</highlight></codeline>
+<codeline lineno="120" refid="class_maintenance_scheduler_test_1ac50eea3926b73e2b9d97f111e1d77b8e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_maintenance_scheduler_test_1ac50eea3926b73e2b9d97f111e1d77b8e" kindref="member">failureCost</ref>;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="class_maintenance_scheduler_test_1aad97631a9f2acb07e4504968beba82c7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_maintenance_scheduler_test_1aad97631a9f2acb07e4504968beba82c7" kindref="member">SetUp</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_maintenance_scheduler_test_1ae77415f906351c603970f2354492691c" kindref="member">failureRate</ref><sp/>=<sp/>0.05;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_maintenance_scheduler_test_1a8db5fa89fa71056e94ef852598b46087" kindref="member">maintenanceCost</ref><sp/>=<sp/>500.0;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_maintenance_scheduler_test_1ac50eea3926b73e2b9d97f111e1d77b8e" kindref="member">failureCost</ref><sp/>=<sp/>2000.0;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129" refid="smart__maintenance__suite__test_8cpp_1a4a2db58fe642255c4cd59a2ec50054ae" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateOptimalInterval_ValidInput)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateOptimalInterval(</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>failureRate,<sp/>maintenanceCost,<sp/>failureCost</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>EXPECT_GT(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>EXPECT_NEAR(result,<sp/>4.47,<sp/>0.1);<sp/></highlight><highlight class="comment">//<sp/>sqrt((2<sp/>*<sp/>500)<sp/>/<sp/>(0.05<sp/>*<sp/>2000))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="smart__maintenance__suite__test_8cpp_1a5c0e280d4fa954c270fa51fa97c9c5b5" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateOptimalInterval_InvalidFailureRate)<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>EXPECT_THROW(MaintenanceScheduler::calculateOptimalInterval(0.0,<sp/>500.0,<sp/>2000.0),</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>EXPECT_THROW(MaintenanceScheduler::calculateOptimalInterval(-0.1,<sp/>500.0,<sp/>2000.0),</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="smart__maintenance__suite__test_8cpp_1a30cc9d126c87cb48702193b8731efbd6" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateOptimalInterval_NegativeCosts)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>EXPECT_THROW(MaintenanceScheduler::calculateOptimalInterval(0.05,<sp/>-500.0,<sp/>2000.0),</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>EXPECT_THROW(MaintenanceScheduler::calculateOptimalInterval(0.05,<sp/>500.0,<sp/>-2000.0),</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151" refid="smart__maintenance__suite__test_8cpp_1a6fbe4e556a2401b7d58f96954fe3802f" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateTotalCost_ValidInput)<sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateTotalCost(3.0,<sp/>12.0,<sp/>500.0);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>2000.0);<sp/></highlight><highlight class="comment">//<sp/>(12<sp/>/<sp/>3)<sp/>*<sp/>500<sp/>=<sp/>2000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156" refid="smart__maintenance__suite__test_8cpp_1a38f888bfa1191616d2ad7de8a711041f" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateTotalCost_InvalidInterval)<sp/>{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>EXPECT_THROW(MaintenanceScheduler::calculateTotalCost(0.0,<sp/>12.0,<sp/>500.0),</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>EXPECT_THROW(MaintenanceScheduler::calculateTotalCost(-1.0,<sp/>12.0,<sp/>500.0),</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163" refid="smart__maintenance__suite__test_8cpp_1a89e8b9f2d10a6af53627cce6e4e70c03" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateTotalCost_ZeroPeriod)<sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateTotalCost(3.0,<sp/>0.0,<sp/>500.0);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168" refid="smart__maintenance__suite__test_8cpp_1a5561cb9f60137e3c121bfdbb6ddf9f9f" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateTotalCost_ZeroCost)<sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateTotalCost(3.0,<sp/>12.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173" refid="smart__maintenance__suite__test_8cpp_1a2ce7a76e09045497af1222cdec63a0ff" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>AssessMaintenancePriority_Normal)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::assessMaintenancePriority(50.0,<sp/>70.0,<sp/>90.0);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>EXPECT_EQ(result,<sp/>0);<sp/></highlight><highlight class="comment">//<sp/>Normal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178" refid="smart__maintenance__suite__test_8cpp_1aaa512be5278de007e36e9bc29f9678f0" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>AssessMaintenancePriority_Warning)<sp/>{</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::assessMaintenancePriority(75.0,<sp/>70.0,<sp/>90.0);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>EXPECT_EQ(result,<sp/>1);<sp/></highlight><highlight class="comment">//<sp/>Warning</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="smart__maintenance__suite__test_8cpp_1a47c7aa12114cdb33c78da3d0010ef809" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>AssessMaintenancePriority_Critical)<sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::assessMaintenancePriority(95.0,<sp/>70.0,<sp/>90.0);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>EXPECT_EQ(result,<sp/>2);<sp/></highlight><highlight class="comment">//<sp/>Critical</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188" refid="smart__maintenance__suite__test_8cpp_1a5f2bc947c64766a240144936a8587e74" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>AssessMaintenancePriority_AtThresholds)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>EXPECT_EQ(MaintenanceScheduler::assessMaintenancePriority(70.0,<sp/>70.0,<sp/>90.0),<sp/>1);<sp/></highlight><highlight class="comment">//<sp/>At<sp/>warning</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>EXPECT_EQ(MaintenanceScheduler::assessMaintenancePriority(90.0,<sp/>70.0,<sp/>90.0),<sp/>2);<sp/></highlight><highlight class="comment">//<sp/>At<sp/>critical</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="comment">//<sp/>InventoryOptimizer<sp/>Tests</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197" refid="class_inventory_optimizer_test" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>::testing::Test<sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="199" refid="class_inventory_optimizer_test_1a1d013b17064f79fdf906d59539941825" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_inventory_optimizer_test_1a1d013b17064f79fdf906d59539941825" kindref="member">annualDemand</ref>;</highlight></codeline>
+<codeline lineno="200" refid="class_inventory_optimizer_test_1ab6027722459ee02a48f39af71acf1190" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_inventory_optimizer_test_1ab6027722459ee02a48f39af71acf1190" kindref="member">orderingCost</ref>;</highlight></codeline>
+<codeline lineno="201" refid="class_inventory_optimizer_test_1a4c1072ee166ff549563f07ea8a57ff88" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_inventory_optimizer_test_1a4c1072ee166ff549563f07ea8a57ff88" kindref="member">holdingCost</ref>;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203" refid="class_inventory_optimizer_test_1a0d295de0c4923c7b741a99f6ba2917d4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_inventory_optimizer_test_1a0d295de0c4923c7b741a99f6ba2917d4" kindref="member">SetUp</ref>()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_inventory_optimizer_test_1a1d013b17064f79fdf906d59539941825" kindref="member">annualDemand</ref><sp/>=<sp/>1200.0;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_inventory_optimizer_test_1ab6027722459ee02a48f39af71acf1190" kindref="member">orderingCost</ref><sp/>=<sp/>50.0;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_inventory_optimizer_test_1a4c1072ee166ff549563f07ea8a57ff88" kindref="member">holdingCost</ref><sp/>=<sp/>2.0;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="208"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210" refid="smart__maintenance__suite__test_8cpp_1a02a86d27fdc53a37c3fab50209e95168" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>CalculateEOQ_ValidInput)<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>InventoryOptimizer::calculateEOQ(annualDemand,<sp/>orderingCost,<sp/>holdingCost);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>EXPECT_NEAR(result,<sp/>244.95,<sp/>0.1);<sp/></highlight><highlight class="comment">//<sp/>sqrt((2<sp/>*<sp/>1200<sp/>*<sp/>50)<sp/>/<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215" refid="smart__maintenance__suite__test_8cpp_1a86393f8a45c74454bfe4e025d26a9363" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>CalculateEOQ_InvalidParameters)<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>EXPECT_THROW(InventoryOptimizer::calculateEOQ(0.0,<sp/>50.0,<sp/>2.0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>EXPECT_THROW(InventoryOptimizer::calculateEOQ(1200.0,<sp/>0.0,<sp/>2.0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>EXPECT_THROW(InventoryOptimizer::calculateEOQ(1200.0,<sp/>50.0,<sp/>0.0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>EXPECT_THROW(InventoryOptimizer::calculateEOQ(-100.0,<sp/>50.0,<sp/>2.0),<sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222" refid="smart__maintenance__suite__test_8cpp_1a2317129e1b24afe221c1c4d207550a50" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>CalculateReorderPoint_ValidInput)<sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>InventoryOptimizer::calculateReorderPoint(10.0,<sp/>7.0,<sp/>50.0);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>120.0);<sp/></highlight><highlight class="comment">//<sp/>(10<sp/>*<sp/>7)<sp/>+<sp/>50<sp/>=<sp/>120</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227" refid="smart__maintenance__suite__test_8cpp_1a4beb3153740af4ebdfc5a65430b4aa98" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>CalculateReorderPoint_ZeroValues)<sp/>{</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>InventoryOptimizer::calculateReorderPoint(0.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="230"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232" refid="smart__maintenance__suite__test_8cpp_1a7cb2f088bebeb97e04976f7fb901bb19" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>CalculateReorderPoint_NegativeValues)<sp/>{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/>EXPECT_THROW(InventoryOptimizer::calculateReorderPoint(-10.0,<sp/>7.0,<sp/>50.0),</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>EXPECT_THROW(InventoryOptimizer::calculateReorderPoint(10.0,<sp/>-7.0,<sp/>50.0),</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>EXPECT_THROW(InventoryOptimizer::calculateReorderPoint(10.0,<sp/>7.0,<sp/>-50.0),</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::invalid_argument);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241" refid="smart__maintenance__suite__test_8cpp_1a4f2219c02a17226509aa1e82f3186098" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>IsReorderNeeded_BelowMinimum)<sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>InventoryOptimizer::isReorderNeeded(45.0,<sp/>50.0);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/>EXPECT_TRUE(result);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246" refid="smart__maintenance__suite__test_8cpp_1a7af357b89ae8e3583f51de147d9f678f" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>IsReorderNeeded_AtMinimum)<sp/>{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>InventoryOptimizer::isReorderNeeded(50.0,<sp/>50.0);</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/>EXPECT_TRUE(result);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251" refid="smart__maintenance__suite__test_8cpp_1a6226f4973e4b8981fced8d4dadd6764a" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_inventory_optimizer_test" kindref="compound">InventoryOptimizerTest</ref>,<sp/>IsReorderNeeded_AboveMinimum)<sp/>{</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>InventoryOptimizer::isReorderNeeded(55.0,<sp/>50.0);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>EXPECT_FALSE(result);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Main<sp/>Function</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260" refid="smart__maintenance__suite__test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="smart__maintenance__suite__test_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**argv)<sp/>{</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>ENABLE_SMART_MAINTENANCE_SUITE_TEST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/>::testing::InitGoogleTest(&amp;argc,<sp/>argv);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>RUN_ALL_TESTS();</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="src/tests/smart_maintenance_suite/smart_maintenance_suite_test.cpp"/>
   </compounddef>

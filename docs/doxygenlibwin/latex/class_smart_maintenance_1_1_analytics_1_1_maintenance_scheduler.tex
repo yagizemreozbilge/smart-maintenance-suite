@@ -1,0 +1,95 @@
+\doxysection{Smart\+Maintenance\+::Analytics\+::Maintenance\+Scheduler Class Reference}
+\hypertarget{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler}{}\label{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler}\index{SmartMaintenance::Analytics::MaintenanceScheduler@{SmartMaintenance::Analytics::MaintenanceScheduler}}
+
+
+Provides maintenance scheduling and cost optimization utilities.  
+
+
+
+
+{\ttfamily \#include $<$smart\+\_\+maintenance\+\_\+suite.\+h$>$}
+
+
+
+Collaboration diagram for Smart\+Maintenance\+::Analytics\+::Maintenance\+Scheduler\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a105d31e98b20bdbc553912a88a90b1de}{calculate\+Optimal\+Interval}} (double failure\+Rate, double maintenance\+Cost, double failure\+Cost)
+\item 
+static double \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_ab2b7479cf31aeff21bb8109160a2b993}{calculate\+Total\+Cost}} (double interval, double period, double cost\+Per\+Maintenance)
+\item 
+static int \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a2f59efe7c6f6567e8cbd17ee7f1cb8a6}{assess\+Maintenance\+Priority}} (double sensor\+Value, double warning\+Threshold, double critical\+Threshold)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides maintenance scheduling and cost optimization utilities. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a2f59efe7c6f6567e8cbd17ee7f1cb8a6}\index{SmartMaintenance::Analytics::MaintenanceScheduler@{SmartMaintenance::Analytics::MaintenanceScheduler}!assessMaintenancePriority@{assessMaintenancePriority}}
+\index{assessMaintenancePriority@{assessMaintenancePriority}!SmartMaintenance::Analytics::MaintenanceScheduler@{SmartMaintenance::Analytics::MaintenanceScheduler}}
+\doxysubsubsection{\texorpdfstring{assessMaintenancePriority()}{assessMaintenancePriority()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a2f59efe7c6f6567e8cbd17ee7f1cb8a6} 
+int Maintenance\+Scheduler\+::assess\+Maintenance\+Priority (\begin{DoxyParamCaption}\item[{double}]{sensor\+Value}{, }\item[{double}]{warning\+Threshold}{, }\item[{double}]{critical\+Threshold}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Determines if immediate maintenance is required 
+\begin{DoxyParams}{Parameters}
+{\em sensor\+Value} & Current sensor value \\
+\hline
+{\em warning\+Threshold} & Warning threshold \\
+\hline
+{\em critical\+Threshold} & Critical threshold \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 (normal), 1 (warning), 2 (critical) 
+\end{DoxyReturn}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a105d31e98b20bdbc553912a88a90b1de}\index{SmartMaintenance::Analytics::MaintenanceScheduler@{SmartMaintenance::Analytics::MaintenanceScheduler}!calculateOptimalInterval@{calculateOptimalInterval}}
+\index{calculateOptimalInterval@{calculateOptimalInterval}!SmartMaintenance::Analytics::MaintenanceScheduler@{SmartMaintenance::Analytics::MaintenanceScheduler}}
+\doxysubsubsection{\texorpdfstring{calculateOptimalInterval()}{calculateOptimalInterval()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a105d31e98b20bdbc553912a88a90b1de} 
+double Maintenance\+Scheduler\+::calculate\+Optimal\+Interval (\begin{DoxyParamCaption}\item[{double}]{failure\+Rate}{, }\item[{double}]{maintenance\+Cost}{, }\item[{double}]{failure\+Cost}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates optimal maintenance interval based on failure rate 
+\begin{DoxyParams}{Parameters}
+{\em failure\+Rate} & Failure rate (failures per time unit) \\
+\hline
+{\em maintenance\+Cost} & Cost of preventive maintenance \\
+\hline
+{\em failure\+Cost} & Cost of corrective maintenance (failure) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optimal maintenance interval in time units 
+\end{DoxyReturn}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_ab2b7479cf31aeff21bb8109160a2b993}\index{SmartMaintenance::Analytics::MaintenanceScheduler@{SmartMaintenance::Analytics::MaintenanceScheduler}!calculateTotalCost@{calculateTotalCost}}
+\index{calculateTotalCost@{calculateTotalCost}!SmartMaintenance::Analytics::MaintenanceScheduler@{SmartMaintenance::Analytics::MaintenanceScheduler}}
+\doxysubsubsection{\texorpdfstring{calculateTotalCost()}{calculateTotalCost()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_ab2b7479cf31aeff21bb8109160a2b993} 
+double Maintenance\+Scheduler\+::calculate\+Total\+Cost (\begin{DoxyParamCaption}\item[{double}]{interval}{, }\item[{double}]{period}{, }\item[{double}]{cost\+Per\+Maintenance}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates total maintenance cost over a period 
+\begin{DoxyParams}{Parameters}
+{\em interval} & Maintenance interval \\
+\hline
+{\em period} & Total period to calculate cost for \\
+\hline
+{\em cost\+Per\+Maintenance} & Cost per maintenance event \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Total maintenance cost 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/smart\+\_\+maintenance\+\_\+suite/header/\mbox{\hyperlink{smart__maintenance__suite_8h}{smart\+\_\+maintenance\+\_\+suite.\+h}}\item 
+src/smart\+\_\+maintenance\+\_\+suite/src/\mbox{\hyperlink{smart__maintenance__suite_8cpp}{smart\+\_\+maintenance\+\_\+suite.\+cpp}}\end{DoxyCompactItemize}

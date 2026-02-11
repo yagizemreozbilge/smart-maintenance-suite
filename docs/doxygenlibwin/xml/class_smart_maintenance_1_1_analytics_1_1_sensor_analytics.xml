@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
+  <compounddef id="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics" kind="class" language="C++" prot="public">
+    <compoundname>SmartMaintenance::Analytics::SensorAnalytics</compoundname>
+    <includes refid="smart__maintenance__suite_8h" local="no">smart_maintenance_suite.h</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a3185f722f29f9cad83a6be51f4a4f466" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double SensorAnalytics::calculateMovingAverage</definition>
+        <argsstring>(const double *readings, int size, int windowSize)</argsstring>
+        <name>calculateMovingAverage</name>
+        <qualifiedname>SmartMaintenance::Analytics::SensorAnalytics::calculateMovingAverage</qualifiedname>
+        <param>
+          <type>const double *</type>
+          <declname>readings</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>windowSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates the moving average of sensor readings <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>readings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of sensor readings </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the readings array </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>windowSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the moving average window </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Moving average value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="31" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="18" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a46cbb1a9b09a4de26f029ea3ec6b812c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool SensorAnalytics::detectAnomaly</definition>
+        <argsstring>(const double *readings, int size, double threshold=2.0)</argsstring>
+        <name>detectAnomaly</name>
+        <qualifiedname>SmartMaintenance::Analytics::SensorAnalytics::detectAnomaly</qualifiedname>
+        <param>
+          <type>const double *</type>
+          <declname>readings</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>threshold</declname>
+          <defval>2.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Detects anomalies in sensor data using standard deviation <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>readings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of sensor readings </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the readings array </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>threshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of standard deviations for anomaly detection (default: 2.0) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if anomaly detected, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="40" column="15" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="39" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a7cbe7e7e086b9d2973fcde4777cba436" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double SensorAnalytics::calculateStandardDeviation</definition>
+        <argsstring>(const double *readings, int size)</argsstring>
+        <name>calculateStandardDeviation</name>
+        <qualifiedname>SmartMaintenance::Analytics::SensorAnalytics::calculateStandardDeviation</qualifiedname>
+        <param>
+          <type>const double *</type>
+          <declname>readings</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates the standard deviation of sensor readings <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>readings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of sensor readings </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size of the readings array </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Standard deviation value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="48" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="71" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1ad3581da7a6e5e323e55dc9af3ec909c5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double SensorAnalytics::predictRemainingLife</definition>
+        <argsstring>(double currentValue, double thresholdValue, double degradationRate)</argsstring>
+        <name>predictRemainingLife</name>
+        <qualifiedname>SmartMaintenance::Analytics::SensorAnalytics::predictRemainingLife</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>currentValue</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>thresholdValue</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>degradationRate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Predicts remaining useful life (RUL) based on degradation rate <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>currentValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current sensor value </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>thresholdValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Critical threshold value </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>degradationRate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Rate of degradation per time unit </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Estimated remaining useful life in time units </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="57" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="99" bodyend="110"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Provides sensor data analysis and predictive maintenance calculations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SmartMaintenance::Analytics::SensorAnalytics</label>
+        <link refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="22" column="1" bodyfile="src/smart_maintenance_suite/header/smart_maintenance_suite.h" bodystart="22" bodyend="58"/>
+    <listofallmembers>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a3185f722f29f9cad83a6be51f4a4f466" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::SensorAnalytics</scope><name>calculateMovingAverage</name></member>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a7cbe7e7e086b9d2973fcde4777cba436" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::SensorAnalytics</scope><name>calculateStandardDeviation</name></member>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a46cbb1a9b09a4de26f029ea3ec6b812c" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::SensorAnalytics</scope><name>detectAnomaly</name></member>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1ad3581da7a6e5e323e55dc9af3ec909c5" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::SensorAnalytics</scope><name>predictRemainingLife</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

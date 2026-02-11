@@ -3,6 +3,7 @@
   <compounddef id="smart__maintenance__suite_8h" kind="file" language="C++">
     <compoundname>smart_maintenance_suite.h</compoundname>
     <includes local="yes">../../utility/header/commonTypes.h</includes>
+    <includes local="no">string</includes>
     <includedby refid="smart__maintenance__suite_8cpp" local="yes">src/smart_maintenance_suite/src/smart_maintenance_suite.cpp</includedby>
     <includedby refid="smart__maintenance__suite__app_8cpp" local="yes">src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp</includedby>
     <incdepgraph>
@@ -14,6 +15,11 @@
         <link refid="smart__maintenance__suite_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -34,39 +40,61 @@
         <link refid="smart__maintenance__suite__app_8cpp"/>
       </node>
     </invincdepgraph>
-    <innerclass refid="class_coruh_1_1_calculator_1_1_calculator" prot="public">Coruh::Calculator::Calculator</innerclass>
-    <innernamespace refid="namespace_coruh">Coruh</innernamespace>
-    <innernamespace refid="namespace_coruh_1_1_calculator">Coruh::Calculator</innernamespace>
+    <innerclass refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics" prot="public">SmartMaintenance::Analytics::SensorAnalytics</innerclass>
+    <innerclass refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler" prot="public">SmartMaintenance::Analytics::MaintenanceScheduler</innerclass>
+    <innerclass refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer" prot="public">SmartMaintenance::Analytics::InventoryOptimizer</innerclass>
+    <innernamespace refid="namespace_smart_maintenance">SmartMaintenance</innernamespace>
+    <innernamespace refid="namespace_smart_maintenance_1_1_analytics">SmartMaintenance::Analytics</innernamespace>
     <briefdescription>
-<para>Provides functions for math. utilities. </para>
+<para>Smart Maintenance Suite - Core Utility Library. </para>
     </briefdescription>
     <detaileddescription>
+<para>Provides sensor data processing, alert threshold calculations, and predictive maintenance utilities for industrial IoT systems. </para>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SMART_MAINTENANCE_SUITE_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SMART_MAINTENANCE_SUITE_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../utility/header/commonTypes.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SMART_MAINTENANCE_SUITE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SMART_MAINTENANCE_SUITE_H</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12" refid="namespace_coruh" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_coruh" kindref="compound">Coruh</ref><sp/>{</highlight></codeline>
-<codeline lineno="13" refid="namespace_coruh_1_1_calculator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="class_coruh_1_1_calculator_1_1_calculator" kindref="compound">Calculator</ref><sp/>{</highlight></codeline>
-<codeline lineno="18" refid="class_coruh_1_1_calculator_1_1_calculator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_coruh_1_1_calculator_1_1_calculator" kindref="compound">Calculator</ref><sp/>{</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a54ca827c4b408c795576d48503eee6aa" kindref="member">add</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1ad8a28a8b990342d4bfde65ab85ec7596" kindref="member">subtract</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b);</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a319373a53b4e84f92c207e4f7bb9dfce" kindref="member">multiply</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b);</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a7da73cdbcc434a4f28d614f7f036b74a" kindref="member">divide</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b);</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>SMART_MAINTENANCE_SUITE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../../utility/header/commonTypes.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="namespace_smart_maintenance" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_smart_maintenance" kindref="compound">SmartMaintenance</ref><sp/>{</highlight></codeline>
+<codeline lineno="16" refid="namespace_smart_maintenance_1_1_analytics" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">Analytics<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics" kindref="compound">SensorAnalytics</ref><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a3185f722f29f9cad83a6be51f4a4f466" kindref="member">calculateMovingAverage</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*readings,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>windowSize);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a46cbb1a9b09a4de26f029ea3ec6b812c" kindref="member">detectAnomaly</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*readings,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>threshold<sp/>=<sp/>2.0);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a7cbe7e7e086b9d2973fcde4777cba436" kindref="member">calculateStandardDeviation</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*readings,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1ad3581da7a6e5e323e55dc9af3ec909c5" kindref="member">predictRemainingLife</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>currentValue,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>thresholdValue,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>degradationRate);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler" kindref="compound">MaintenanceScheduler</ref><sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a105d31e98b20bdbc553912a88a90b1de" kindref="member">calculateOptimalInterval</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>failureRate,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>maintenanceCost,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>failureCost);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1ab2b7479cf31aeff21bb8109160a2b993" kindref="member">calculateTotalCost</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>interval,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>period,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>costPerMaintenance);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a2f59efe7c6f6567e8cbd17ee7f1cb8a6" kindref="member">assessMaintenancePriority</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sensorValue,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>warningThreshold,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>criticalThreshold);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer" kindref="compound">InventoryOptimizer</ref><sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a18307c47e0fff667fa1fd18566a2bd07" kindref="member">calculateEOQ</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>annualDemand,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>orderingCost,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>holdingCost);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a35bb0277fc1ca1a65e60d58316d5d75c" kindref="member">calculateReorderPoint</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dailyDemand,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>leadTime,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>safetyStock);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1ae53a277e9ee61eab4300deeffde8d5cf" kindref="member">isReorderNeeded</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>currentStock,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>minStockLevel);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>Analytics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>SmartMaintenance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>SMART_MAINTENANCE_SUITE_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h"/>
   </compounddef>

@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
+  <compounddef id="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer" kind="class" language="C++" prot="public">
+    <compoundname>SmartMaintenance::Analytics::InventoryOptimizer</compoundname>
+    <includes refid="smart__maintenance__suite_8h" local="no">smart_maintenance_suite.h</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a18307c47e0fff667fa1fd18566a2bd07" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double InventoryOptimizer::calculateEOQ</definition>
+        <argsstring>(double annualDemand, double orderingCost, double holdingCost)</argsstring>
+        <name>calculateEOQ</name>
+        <qualifiedname>SmartMaintenance::Analytics::InventoryOptimizer::calculateEOQ</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>annualDemand</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>orderingCost</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>holdingCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates Economic Order Quantity (EOQ) <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>annualDemand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Annual demand for the part </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>orderingCost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cost per order </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>holdingCost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Annual holding cost per unit </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Optimal order quantity </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="107" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="159" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a35bb0277fc1ca1a65e60d58316d5d75c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double InventoryOptimizer::calculateReorderPoint</definition>
+        <argsstring>(double dailyDemand, double leadTime, double safetyStock)</argsstring>
+        <name>calculateReorderPoint</name>
+        <qualifiedname>SmartMaintenance::Analytics::InventoryOptimizer::calculateReorderPoint</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>dailyDemand</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>leadTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>safetyStock</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates reorder point for inventory <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dailyDemand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Average daily demand </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>leadTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lead time in days </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>safetyStock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Safety stock quantity </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Reorder point quantity </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="116" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="168" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1ae53a277e9ee61eab4300deeffde8d5cf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool InventoryOptimizer::isReorderNeeded</definition>
+        <argsstring>(double currentStock, double minStockLevel)</argsstring>
+        <name>isReorderNeeded</name>
+        <qualifiedname>SmartMaintenance::Analytics::InventoryOptimizer::isReorderNeeded</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>currentStock</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>minStockLevel</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Determines if stock is below minimum level <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>currentStock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current stock quantity </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>minStockLevel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum stock level </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if reorder needed, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="124" column="15" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="177" bodyend="179"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Provides inventory management and optimization utilities. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SmartMaintenance::Analytics::InventoryOptimizer</label>
+        <link refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="98" column="1" bodyfile="src/smart_maintenance_suite/header/smart_maintenance_suite.h" bodystart="98" bodyend="125"/>
+    <listofallmembers>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a18307c47e0fff667fa1fd18566a2bd07" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::InventoryOptimizer</scope><name>calculateEOQ</name></member>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a35bb0277fc1ca1a65e60d58316d5d75c" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::InventoryOptimizer</scope><name>calculateReorderPoint</name></member>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1ae53a277e9ee61eab4300deeffde8d5cf" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::InventoryOptimizer</scope><name>isReorderNeeded</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

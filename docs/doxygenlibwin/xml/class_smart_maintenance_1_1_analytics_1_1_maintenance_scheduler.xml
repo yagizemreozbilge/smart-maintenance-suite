@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
+  <compounddef id="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler" kind="class" language="C++" prot="public">
+    <compoundname>SmartMaintenance::Analytics::MaintenanceScheduler</compoundname>
+    <includes refid="smart__maintenance__suite_8h" local="no">smart_maintenance_suite.h</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a105d31e98b20bdbc553912a88a90b1de" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double MaintenanceScheduler::calculateOptimalInterval</definition>
+        <argsstring>(double failureRate, double maintenanceCost, double failureCost)</argsstring>
+        <name>calculateOptimalInterval</name>
+        <qualifiedname>SmartMaintenance::Analytics::MaintenanceScheduler::calculateOptimalInterval</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>failureRate</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>maintenanceCost</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>failureCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates optimal maintenance interval based on failure rate <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>failureRate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Failure rate (failures per time unit) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>maintenanceCost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cost of preventive maintenance </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>failureCost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cost of corrective maintenance (failure) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Optimal maintenance interval in time units </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="73" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="116" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1ab2b7479cf31aeff21bb8109160a2b993" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double MaintenanceScheduler::calculateTotalCost</definition>
+        <argsstring>(double interval, double period, double costPerMaintenance)</argsstring>
+        <name>calculateTotalCost</name>
+        <qualifiedname>SmartMaintenance::Analytics::MaintenanceScheduler::calculateTotalCost</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>interval</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>period</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>costPerMaintenance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculates total maintenance cost over a period <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maintenance interval </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Total period to calculate cost for </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>costPerMaintenance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cost per maintenance event </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Total maintenance cost </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="82" column="17" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="131" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a2f59efe7c6f6567e8cbd17ee7f1cb8a6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int MaintenanceScheduler::assessMaintenancePriority</definition>
+        <argsstring>(double sensorValue, double warningThreshold, double criticalThreshold)</argsstring>
+        <name>assessMaintenancePriority</name>
+        <qualifiedname>SmartMaintenance::Analytics::MaintenanceScheduler::assessMaintenancePriority</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>sensorValue</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>warningThreshold</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>criticalThreshold</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Determines if immediate maintenance is required <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensorValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current sensor value </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>warningThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Warning threshold </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>criticalThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Critical threshold </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 (normal), 1 (warning), 2 (critical) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="91" column="14" bodyfile="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp" bodystart="145" bodyend="153"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Provides maintenance scheduling and cost optimization utilities. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>SmartMaintenance::Analytics::MaintenanceScheduler</label>
+        <link refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/smart_maintenance_suite/header/smart_maintenance_suite.h" line="64" column="1" bodyfile="src/smart_maintenance_suite/header/smart_maintenance_suite.h" bodystart="64" bodyend="92"/>
+    <listofallmembers>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a2f59efe7c6f6567e8cbd17ee7f1cb8a6" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::MaintenanceScheduler</scope><name>assessMaintenancePriority</name></member>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a105d31e98b20bdbc553912a88a90b1de" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::MaintenanceScheduler</scope><name>calculateOptimalInterval</name></member>
+      <member refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1ab2b7479cf31aeff21bb8109160a2b993" prot="public" virt="non-virtual"><scope>SmartMaintenance::Analytics::MaintenanceScheduler</scope><name>calculateTotalCost</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -3,28 +3,47 @@
 \mbox{\hyperlink{smart__maintenance__suite_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ SMART\_MAINTENANCE\_SUITE\_H}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SMART\_MAINTENANCE\_SUITE\_H}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../../utility/header/commonTypes.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ SMART\_MAINTENANCE\_SUITE\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ SMART\_MAINTENANCE\_SUITE\_H}}
 \DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_coruh}{Coruh}}\ \{}
-\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{class_coruh_1_1_calculator_1_1_calculator}{Calculator}}\ \{}
-\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_coruh_1_1_calculator_1_1_calculator}{Calculator}}\ \{}
-\DoxyCodeLine{00019\ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_coruh_1_1_calculator_1_1_calculator_a54ca827c4b408c795576d48503eee6aa}{add}}(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b);}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_coruh_1_1_calculator_1_1_calculator_ad8a28a8b990342d4bfde65ab85ec7596}{subtract}}(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b);}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_coruh_1_1_calculator_1_1_calculator_a319373a53b4e84f92c207e4f7bb9dfce}{multiply}}(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b);}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_coruh_1_1_calculator_1_1_calculator_a7da73cdbcc434a4f28d614f7f036b74a}{divide}}(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b);}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \};}
-\DoxyCodeLine{00056\ \}}
-\DoxyCodeLine{00057\ \}}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SMART\_MAINTENANCE\_SUITE\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../../utility/header/commonTypes.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_smart_maintenance}{SmartMaintenance}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }Analytics\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics}{SensorAnalytics}}\ \{}
+\DoxyCodeLine{00023\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a3185f722f29f9cad83a6be51f4a4f466}{calculateMovingAverage}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *readings,\ \textcolor{keywordtype}{int}\ size,\ \textcolor{keywordtype}{int}\ windowSize);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a46cbb1a9b09a4de26f029ea3ec6b812c}{detectAnomaly}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *readings,\ \textcolor{keywordtype}{int}\ size,\ \textcolor{keywordtype}{double}\ threshold\ =\ 2.0);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a7cbe7e7e086b9d2973fcde4777cba436}{calculateStandardDeviation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ *readings,\ \textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_ad3581da7a6e5e323e55dc9af3ec909c5}{predictRemainingLife}}(\textcolor{keywordtype}{double}\ currentValue,\ \textcolor{keywordtype}{double}\ thresholdValue,\ \textcolor{keywordtype}{double}\ degradationRate);}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler}{MaintenanceScheduler}}\ \{}
+\DoxyCodeLine{00065\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a105d31e98b20bdbc553912a88a90b1de}{calculateOptimalInterval}}(\textcolor{keywordtype}{double}\ failureRate,\ \textcolor{keywordtype}{double}\ maintenanceCost,\ \textcolor{keywordtype}{double}\ failureCost);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_ab2b7479cf31aeff21bb8109160a2b993}{calculateTotalCost}}(\textcolor{keywordtype}{double}\ interval,\ \textcolor{keywordtype}{double}\ period,\ \textcolor{keywordtype}{double}\ costPerMaintenance);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_a2f59efe7c6f6567e8cbd17ee7f1cb8a6}{assessMaintenancePriority}}(\textcolor{keywordtype}{double}\ sensorValue,\ \textcolor{keywordtype}{double}\ warningThreshold,\ \textcolor{keywordtype}{double}\ criticalThreshold);}
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer}{InventoryOptimizer}}\ \{}
+\DoxyCodeLine{00099\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a18307c47e0fff667fa1fd18566a2bd07}{calculateEOQ}}(\textcolor{keywordtype}{double}\ annualDemand,\ \textcolor{keywordtype}{double}\ orderingCost,\ \textcolor{keywordtype}{double}\ holdingCost);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_a35bb0277fc1ca1a65e60d58316d5d75c}{calculateReorderPoint}}(\textcolor{keywordtype}{double}\ dailyDemand,\ \textcolor{keywordtype}{double}\ leadTime,\ \textcolor{keywordtype}{double}\ safetyStock);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00124\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_ae53a277e9ee61eab4300deeffde8d5cf}{isReorderNeeded}}(\textcolor{keywordtype}{double}\ currentStock,\ \textcolor{keywordtype}{double}\ minStockLevel);}
+\DoxyCodeLine{00125\ \};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \}\ \textcolor{comment}{//\ namespace\ Analytics}}
+\DoxyCodeLine{00128\ \}\ \textcolor{comment}{//\ namespace\ SmartMaintenance}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SMART\_MAINTENANCE\_SUITE\_H}}
 
 \end{DoxyCode}

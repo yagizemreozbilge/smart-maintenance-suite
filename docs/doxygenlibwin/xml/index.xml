@@ -1,14 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.11.0" xml:lang="en-US">
-  <compound refid="class_coruh_1_1_calculator_1_1_calculator" kind="class"><name>Coruh::Calculator::Calculator</name>
-    <member refid="class_coruh_1_1_calculator_1_1_calculator_1a54ca827c4b408c795576d48503eee6aa" kind="function"><name>add</name></member>
-    <member refid="class_coruh_1_1_calculator_1_1_calculator_1ad8a28a8b990342d4bfde65ab85ec7596" kind="function"><name>subtract</name></member>
-    <member refid="class_coruh_1_1_calculator_1_1_calculator_1a319373a53b4e84f92c207e4f7bb9dfce" kind="function"><name>multiply</name></member>
-    <member refid="class_coruh_1_1_calculator_1_1_calculator_1a7da73cdbcc434a4f28d614f7f036b74a" kind="function"><name>divide</name></member>
+  <compound refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer" kind="class"><name>SmartMaintenance::Analytics::InventoryOptimizer</name>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a18307c47e0fff667fa1fd18566a2bd07" kind="function"><name>calculateEOQ</name></member>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a35bb0277fc1ca1a65e60d58316d5d75c" kind="function"><name>calculateReorderPoint</name></member>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1ae53a277e9ee61eab4300deeffde8d5cf" kind="function"><name>isReorderNeeded</name></member>
   </compound>
-  <compound refid="namespace_coruh" kind="namespace"><name>Coruh</name>
+  <compound refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler" kind="class"><name>SmartMaintenance::Analytics::MaintenanceScheduler</name>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a105d31e98b20bdbc553912a88a90b1de" kind="function"><name>calculateOptimalInterval</name></member>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1ab2b7479cf31aeff21bb8109160a2b993" kind="function"><name>calculateTotalCost</name></member>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a2f59efe7c6f6567e8cbd17ee7f1cb8a6" kind="function"><name>assessMaintenancePriority</name></member>
   </compound>
-  <compound refid="namespace_coruh_1_1_calculator" kind="namespace"><name>Coruh::Calculator</name>
+  <compound refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics" kind="class"><name>SmartMaintenance::Analytics::SensorAnalytics</name>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a3185f722f29f9cad83a6be51f4a4f466" kind="function"><name>calculateMovingAverage</name></member>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a46cbb1a9b09a4de26f029ea3ec6b812c" kind="function"><name>detectAnomaly</name></member>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a7cbe7e7e086b9d2973fcde4777cba436" kind="function"><name>calculateStandardDeviation</name></member>
+    <member refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1ad3581da7a6e5e323e55dc9af3ec909c5" kind="function"><name>predictRemainingLife</name></member>
+  </compound>
+  <compound refid="namespace_demo_app" kind="namespace"><name>DemoApp</name>
+    <member refid="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" kind="function"><name>demonstrateSensorAnalytics</name></member>
+    <member refid="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" kind="function"><name>demonstrateMaintenanceScheduling</name></member>
+    <member refid="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" kind="function"><name>demonstrateInventoryOptimization</name></member>
+    <member refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kind="function"><name>printHeader</name></member>
+  </compound>
+  <compound refid="namespace_smart_maintenance" kind="namespace"><name>SmartMaintenance</name>
+  </compound>
+  <compound refid="namespace_smart_maintenance_1_1_analytics" kind="namespace"><name>SmartMaintenance::Analytics</name>
   </compound>
   <compound refid="_r_e_a_d_m_e_8md" kind="file"><name>README.md</name>
   </compound>
@@ -17,12 +33,16 @@
   <compound refid="smart__maintenance__suite_8cpp" kind="file"><name>smart_maintenance_suite.cpp</name>
   </compound>
   <compound refid="smart__maintenance__suite__app_8h" kind="file"><name>smart_maintenance_suite_app.h</name>
+    <member refid="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" kind="function"><name>demonstrateSensorAnalytics</name></member>
+    <member refid="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" kind="function"><name>demonstrateMaintenanceScheduling</name></member>
+    <member refid="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" kind="function"><name>demonstrateInventoryOptimization</name></member>
+    <member refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kind="function"><name>printHeader</name></member>
   </compound>
   <compound refid="smart__maintenance__suite__app_8cpp" kind="file"><name>smart_maintenance_suite_app.cpp</name>
-    <member refid="smart__maintenance__suite__app_8cpp_1ac792f08ed5f8708833ac64a61310dd03" kind="function"><name>isOperator</name></member>
-    <member refid="smart__maintenance__suite__app_8cpp_1ae3f55e40ed8f0a2cde99d2b36e919cbf" kind="function"><name>precedence</name></member>
-    <member refid="smart__maintenance__suite__app_8cpp_1a897077446c75caaf157031854034ac9f" kind="function"><name>infixToPostfix</name></member>
-    <member refid="smart__maintenance__suite__app_8cpp_1af347a06ef4464029cd26e699842332cb" kind="function"><name>evaluatePostfix</name></member>
+    <member refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kind="function"><name>printHeader</name></member>
+    <member refid="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" kind="function"><name>demonstrateSensorAnalytics</name></member>
+    <member refid="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" kind="function"><name>demonstrateMaintenanceScheduling</name></member>
+    <member refid="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" kind="function"><name>demonstrateInventoryOptimization</name></member>
     <member refid="smart__maintenance__suite__app_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" kind="function"><name>main</name></member>
   </compound>
   <compound refid="dir_900ce474183f1558f88cd51ef5f4efb7" kind="dir"><name>src/smart_maintenance_suite/header</name>

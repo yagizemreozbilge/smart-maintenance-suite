@@ -2,18 +2,138 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
   <compounddef id="smart__maintenance__suite__app_8h" kind="file" language="C++">
     <compoundname>smart_maintenance_suite_app.h</compoundname>
+    <includes local="no">string</includes>
+    <includedby refid="smart__maintenance__suite__app_8cpp" local="yes">src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h</label>
+        <link refid="smart__maintenance__suite__app_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h</label>
+        <link refid="smart__maintenance__suite__app_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp</label>
+        <link refid="smart__maintenance__suite__app_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_demo_app">DemoApp</innernamespace>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateSensorAnalytics</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateSensorAnalytics</name>
+        <qualifiedname>DemoApp::demonstrateSensorAnalytics</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Demonstrates Sensor Analytics features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="25" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="25" bodyend="71" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="21" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateMaintenanceScheduling</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateMaintenanceScheduling</name>
+        <qualifiedname>DemoApp::demonstrateMaintenanceScheduling</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Demonstrates Maintenance Scheduling features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="73" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="73" bodyend="131" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="27" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool DemoApp::demonstrateInventoryOptimization</definition>
+        <argsstring>()</argsstring>
+        <name>demonstrateInventoryOptimization</name>
+        <qualifiedname>DemoApp::demonstrateInventoryOptimization</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Demonstrates Inventory Optimization features. <simplesect kind="return"><para>true if demonstration runs successfully without exception. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="133" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="133" bodyend="186" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="33" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void DemoApp::printHeader</definition>
+        <argsstring>(const std::string &amp;title)</argsstring>
+        <name>printHeader</name>
+        <qualifiedname>DemoApp::printHeader</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Helper function to print headers. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Title to print </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" line="17" column="6" bodyfile="src/smart_maintenance_suite_app/src/smart_maintenance_suite_app.cpp" bodystart="17" bodyend="23" declfile="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h" declline="39" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
-<para>Smart Maintenance Suite Application header file. </para>
+<para>Header file for Smart Maintenance Suite Demo Application. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
 <codeline lineno="1"></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SMART_MAINTENANCE_SUITE_APP_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SMART_MAINTENANCE_SUITE_APP_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>SMART_MAINTENANCE_SUITE_APP_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SMART_MAINTENANCE_SUITE_APP_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>SMART_MAINTENANCE_SUITE_APP_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_demo_app" kindref="compound">DemoApp</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1a9c79914af5fc7a1b6673c6802891b6ec" kindref="member">demonstrateSensorAnalytics</ref>();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1a3de475c746868fc9d92e393eae31c5d7" kindref="member">demonstrateMaintenanceScheduling</ref>();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1aa2d31f58129e70a718e854da2c6ded79" kindref="member">demonstrateInventoryOptimization</ref>();</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespace_demo_app_1a08b0cb703421f821091cc8b08d3a7c36" kindref="member">printHeader</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;title);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>DemoApp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>SMART_MAINTENANCE_SUITE_APP_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="src/smart_maintenance_suite_app/header/smart_maintenance_suite_app.h"/>
   </compounddef>

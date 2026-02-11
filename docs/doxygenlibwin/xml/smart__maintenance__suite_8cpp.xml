@@ -2,16 +2,20 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.11.0" xml:lang="en-US">
   <compounddef id="smart__maintenance__suite_8cpp" kind="file" language="C++">
     <compoundname>smart_maintenance_suite.cpp</compoundname>
-    <includes refid="smart__maintenance__suite_8h" local="yes">../header/smart_maintenance_suite.h</includes>
+    <includes refid="smart__maintenance__suite_8h" local="yes">smart_maintenance_suite.h</includes>
+    <includes local="no">cmath</includes>
     <includes local="no">stdexcept</includes>
+    <includes local="no">iostream</includes>
     <incdepgraph>
       <node id="3">
         <label>../../utility/header/commonTypes.h</label>
       </node>
       <node id="2">
-        <label>../header/smart_maintenance_suite.h</label>
+        <label>smart_maintenance_suite.h</label>
         <link refid="smart__maintenance__suite_8h"/>
         <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -19,42 +23,208 @@
         <link refid="smart__maintenance__suite_8cpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="5">
+        <label>cmath</label>
+      </node>
+      <node id="7">
+        <label>iostream</label>
+      </node>
+      <node id="6">
         <label>stdexcept</label>
+      </node>
+      <node id="4">
+        <label>string</label>
       </node>
     </incdepgraph>
     <briefdescription>
+<para>Smart Maintenance Suite - Demo Application Implementation. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="smart__maintenance__suite_8h" kindref="compound">../header/smart_maintenance_suite.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="3"><highlight class="normal"></highlight></codeline>
-<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_coruh_1_1_calculator" kindref="compound">Coruh::Calculator</ref>;</highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a54ca827c4b408c795576d48503eee6aa" kindref="member">Calculator::add</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
-<codeline lineno="7"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>a<sp/>+<sp/>b;</highlight></codeline>
-<codeline lineno="8"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="1"></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="smart__maintenance__suite_8h" kindref="compound">smart_maintenance_suite.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1ad8a28a8b990342d4bfde65ab85ec7596" kindref="member">Calculator::subtract</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>a<sp/>-<sp/>b;</highlight></codeline>
-<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_smart_maintenance_1_1_analytics" kindref="compound">SmartMaintenance::Analytics</ref>;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a319373a53b4e84f92c207e4f7bb9dfce" kindref="member">Calculator::multiply</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>a<sp/>*b;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SensorAnalytics<sp/>Implementation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_coruh_1_1_calculator_1_1_calculator_1a7da73cdbcc434a4f28d614f7f036b74a" kindref="member">Calculator::divide</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(b<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Division<sp/>by<sp/>zero<sp/>is<sp/>not<sp/>allowed.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a3185f722f29f9cad83a6be51f4a4f466" kindref="member">SensorAnalytics::calculateMovingAverage</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*readings,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>windowSize)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(readings<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>||<sp/>size<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Readings<sp/>array<sp/>cannot<sp/>be<sp/>empty&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>a<sp/>/<sp/>b;</highlight></codeline>
-<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(windowSize<sp/>&lt;=<sp/>0<sp/>||<sp/>windowSize<sp/>&gt;<sp/>size)<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Invalid<sp/>window<sp/>size&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>average<sp/>of<sp/>last<sp/>&apos;windowSize&apos;<sp/>readings</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sum<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Starting<sp/>index:<sp/>size<sp/>-<sp/>windowSize</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Example:<sp/>size=10,<sp/>window=3<sp/>-&gt;<sp/>start<sp/>index<sp/>7<sp/>(readings[7],<sp/>[8],<sp/>[9])</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>size<sp/>-<sp/>windowSize;<sp/>i<sp/>&lt;<sp/>size;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>sum<sp/>+=<sp/>readings[i];</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>sum<sp/>/<sp/>windowSize;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a46cbb1a9b09a4de26f029ea3ec6b812c" kindref="member">SensorAnalytics::detectAnomaly</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*readings,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>threshold)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(readings<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>||<sp/>size<sp/>&lt;<sp/>2)<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>Not<sp/>enough<sp/>data<sp/>to<sp/>detect<sp/>anomaly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>mean</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sum<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>size;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>sum<sp/>+=<sp/>readings[i];</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mean<sp/>=<sp/>sum<sp/>/<sp/>size;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>standard<sp/>deviation<sp/>manually</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>varianceSum<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>size;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>varianceSum<sp/>+=<sp/>(readings[i]<sp/>-<sp/>mean)<sp/>*<sp/>(readings[i]<sp/>-<sp/>mean);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>variance<sp/>=<sp/>varianceSum<sp/>/<sp/>size;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>stdDev<sp/>=<sp/>std::sqrt(variance);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>if<sp/>stdDev<sp/>is<sp/>non-zero<sp/>to<sp/>avoid<sp/>division<sp/>by<sp/>zero</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stdDev<sp/>==<sp/>0.0)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>if<sp/>the<sp/>last<sp/>reading<sp/>is<sp/>an<sp/>anomaly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>lastReading<sp/>=<sp/>readings[size<sp/>-<sp/>1];</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>zScore<sp/>=<sp/>std::abs((lastReading<sp/>-<sp/>mean)<sp/>/<sp/>stdDev);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>zScore<sp/>&gt;<sp/>threshold;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1a7cbe7e7e086b9d2973fcde4777cba436" kindref="member">SensorAnalytics::calculateStandardDeviation</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*readings,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(readings<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>||<sp/>size<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Readings<sp/>array<sp/>cannot<sp/>be<sp/>empty&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(size<sp/>==<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.0;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>mean</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sum<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>size;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>sum<sp/>+=<sp/>readings[i];</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mean<sp/>=<sp/>sum<sp/>/<sp/>size;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>variance</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>varianceSum<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>size;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>varianceSum<sp/>+=<sp/>(readings[i]<sp/>-<sp/>mean)<sp/>*<sp/>(readings[i]<sp/>-<sp/>mean);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>variance<sp/>=<sp/>varianceSum<sp/>/<sp/>size;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::sqrt(variance);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_1ad3581da7a6e5e323e55dc9af3ec909c5" kindref="member">SensorAnalytics::predictRemainingLife</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>currentValue,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>thresholdValue,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>degradationRate)<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(degradationRate<sp/>&lt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Degradation<sp/>rate<sp/>must<sp/>be<sp/>positive&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(currentValue<sp/>&gt;=<sp/>thresholdValue)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.0;<sp/></highlight><highlight class="comment">//<sp/>Already<sp/>at<sp/>or<sp/>beyond<sp/>threshold</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>RUL<sp/>=<sp/>(threshold<sp/>-<sp/>current)<sp/>/<sp/>degradation_rate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(thresholdValue<sp/>-<sp/>currentValue)<sp/>/<sp/>degradationRate;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">//<sp/>MaintenanceScheduler<sp/>Implementation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a105d31e98b20bdbc553912a88a90b1de" kindref="member">MaintenanceScheduler::calculateOptimalInterval</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>failureRate,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>maintenanceCost,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>failureCost)<sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(failureRate<sp/>&lt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Failure<sp/>rate<sp/>must<sp/>be<sp/>positive&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(maintenanceCost<sp/>&lt;<sp/>0<sp/>||<sp/>failureCost<sp/>&lt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Costs<sp/>cannot<sp/>be<sp/>negative&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Optimal<sp/>interval<sp/>using<sp/>reliability<sp/>theory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>T_opt<sp/>=<sp/>sqrt(2<sp/>*<sp/>C_pm<sp/>/<sp/>(lambda<sp/>*<sp/>C_cm))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>costRatio<sp/>=<sp/>(2.0<sp/>*<sp/>maintenanceCost)<sp/>/<sp/>(failureRate<sp/>*failureCost);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::sqrt(costRatio);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1ab2b7479cf31aeff21bb8109160a2b993" kindref="member">MaintenanceScheduler::calculateTotalCost</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>interval,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>period,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>costPerMaintenance)<sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(interval<sp/>&lt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Interval<sp/>must<sp/>be<sp/>positive&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(period<sp/>&lt;<sp/>0<sp/>||<sp/>costPerMaintenance<sp/>&lt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Period<sp/>and<sp/>cost<sp/>cannot<sp/>be<sp/>negative&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>maintenance<sp/>events<sp/>=<sp/>period<sp/>/<sp/>interval</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>numMaintenances<sp/>=<sp/>period<sp/>/<sp/>interval;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>numMaintenances<sp/>*costPerMaintenance;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_maintenance_scheduler_1a2f59efe7c6f6567e8cbd17ee7f1cb8a6" kindref="member">MaintenanceScheduler::assessMaintenancePriority</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sensorValue,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>warningThreshold,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>criticalThreshold)<sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sensorValue<sp/>&gt;=<sp/>criticalThreshold)<sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>2;<sp/></highlight><highlight class="comment">//<sp/>Critical<sp/>-<sp/>immediate<sp/>maintenance<sp/>required</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sensorValue<sp/>&gt;=<sp/>warningThreshold)<sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Warning<sp/>-<sp/>schedule<sp/>maintenance<sp/>soon</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;<sp/></highlight><highlight class="comment">//<sp/>Normal<sp/>-<sp/>no<sp/>immediate<sp/>action<sp/>needed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="comment">//<sp/>InventoryOptimizer<sp/>Implementation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="comment">//<sp/>============================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a18307c47e0fff667fa1fd18566a2bd07" kindref="member">InventoryOptimizer::calculateEOQ</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>annualDemand,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>orderingCost,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>holdingCost)<sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(annualDemand<sp/>&lt;=<sp/>0<sp/>||<sp/>orderingCost<sp/>&lt;=<sp/>0<sp/>||<sp/>holdingCost<sp/>&lt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;All<sp/>parameters<sp/>must<sp/>be<sp/>positive&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>EOQ<sp/>=<sp/>sqrt((2<sp/>*<sp/>D<sp/>*<sp/>S)<sp/>/<sp/>H)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::sqrt((2.0<sp/>*<sp/>annualDemand<sp/>*orderingCost)<sp/>/<sp/>holdingCost);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1a35bb0277fc1ca1a65e60d58316d5d75c" kindref="member">InventoryOptimizer::calculateReorderPoint</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dailyDemand,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>leadTime,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>safetyStock)<sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dailyDemand<sp/>&lt;<sp/>0<sp/>||<sp/>leadTime<sp/>&lt;<sp/>0<sp/>||<sp/>safetyStock<sp/>&lt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;All<sp/>parameters<sp/>must<sp/>be<sp/>non-negative&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>ROP<sp/>=<sp/>(daily<sp/>demand<sp/>*<sp/>lead<sp/>time)<sp/>+<sp/>safety<sp/>stock</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(dailyDemand<sp/>*leadTime)<sp/>+<sp/>safetyStock;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_smart_maintenance_1_1_analytics_1_1_inventory_optimizer_1ae53a277e9ee61eab4300deeffde8d5cf" kindref="member">InventoryOptimizer::isReorderNeeded</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>currentStock,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>minStockLevel)<sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>currentStock<sp/>&lt;=<sp/>minStockLevel;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="src/smart_maintenance_suite/src/smart_maintenance_suite.cpp"/>
   </compounddef>

@@ -1,0 +1,113 @@
+\doxysection{Smart\+Maintenance\+::Analytics\+::Sensor\+Analytics Class Reference}
+\hypertarget{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics}{}\label{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics}\index{SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}}
+
+
+Provides sensor data analysis and predictive maintenance calculations.  
+
+
+
+
+{\ttfamily \#include $<$smart\+\_\+maintenance\+\_\+suite.\+h$>$}
+
+
+
+Collaboration diagram for Smart\+Maintenance\+::Analytics\+::Sensor\+Analytics\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a3185f722f29f9cad83a6be51f4a4f466}{calculate\+Moving\+Average}} (const double \texorpdfstring{$\ast$}{*}readings, int size, int window\+Size)
+\item 
+static bool \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a46cbb1a9b09a4de26f029ea3ec6b812c}{detect\+Anomaly}} (const double \texorpdfstring{$\ast$}{*}readings, int size, double threshold=2.\+0)
+\item 
+static double \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a7cbe7e7e086b9d2973fcde4777cba436}{calculate\+Standard\+Deviation}} (const double \texorpdfstring{$\ast$}{*}readings, int size)
+\item 
+static double \mbox{\hyperlink{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_ad3581da7a6e5e323e55dc9af3ec909c5}{predict\+Remaining\+Life}} (double current\+Value, double threshold\+Value, double degradation\+Rate)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides sensor data analysis and predictive maintenance calculations. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a3185f722f29f9cad83a6be51f4a4f466}\index{SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}!calculateMovingAverage@{calculateMovingAverage}}
+\index{calculateMovingAverage@{calculateMovingAverage}!SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}}
+\doxysubsubsection{\texorpdfstring{calculateMovingAverage()}{calculateMovingAverage()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a3185f722f29f9cad83a6be51f4a4f466} 
+double Sensor\+Analytics\+::calculate\+Moving\+Average (\begin{DoxyParamCaption}\item[{const double \texorpdfstring{$\ast$}{*}}]{readings}{, }\item[{int}]{size}{, }\item[{int}]{window\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates the moving average of sensor readings 
+\begin{DoxyParams}{Parameters}
+{\em readings} & Array of sensor readings \\
+\hline
+{\em size} & Size of the readings array \\
+\hline
+{\em window\+Size} & Size of the moving average window \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Moving average value 
+\end{DoxyReturn}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a7cbe7e7e086b9d2973fcde4777cba436}\index{SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}!calculateStandardDeviation@{calculateStandardDeviation}}
+\index{calculateStandardDeviation@{calculateStandardDeviation}!SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}}
+\doxysubsubsection{\texorpdfstring{calculateStandardDeviation()}{calculateStandardDeviation()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a7cbe7e7e086b9d2973fcde4777cba436} 
+double Sensor\+Analytics\+::calculate\+Standard\+Deviation (\begin{DoxyParamCaption}\item[{const double \texorpdfstring{$\ast$}{*}}]{readings}{, }\item[{int}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Calculates the standard deviation of sensor readings 
+\begin{DoxyParams}{Parameters}
+{\em readings} & Array of sensor readings \\
+\hline
+{\em size} & Size of the readings array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Standard deviation value 
+\end{DoxyReturn}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a46cbb1a9b09a4de26f029ea3ec6b812c}\index{SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}!detectAnomaly@{detectAnomaly}}
+\index{detectAnomaly@{detectAnomaly}!SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}}
+\doxysubsubsection{\texorpdfstring{detectAnomaly()}{detectAnomaly()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_a46cbb1a9b09a4de26f029ea3ec6b812c} 
+bool Sensor\+Analytics\+::detect\+Anomaly (\begin{DoxyParamCaption}\item[{const double \texorpdfstring{$\ast$}{*}}]{readings}{, }\item[{int}]{size}{, }\item[{double}]{threshold}{ = {\ttfamily 2.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Detects anomalies in sensor data using standard deviation 
+\begin{DoxyParams}{Parameters}
+{\em readings} & Array of sensor readings \\
+\hline
+{\em size} & Size of the readings array \\
+\hline
+{\em threshold} & Number of standard deviations for anomaly detection (default\+: 2.\+0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if anomaly detected, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_ad3581da7a6e5e323e55dc9af3ec909c5}\index{SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}!predictRemainingLife@{predictRemainingLife}}
+\index{predictRemainingLife@{predictRemainingLife}!SmartMaintenance::Analytics::SensorAnalytics@{SmartMaintenance::Analytics::SensorAnalytics}}
+\doxysubsubsection{\texorpdfstring{predictRemainingLife()}{predictRemainingLife()}}
+{\footnotesize\ttfamily \label{class_smart_maintenance_1_1_analytics_1_1_sensor_analytics_ad3581da7a6e5e323e55dc9af3ec909c5} 
+double Sensor\+Analytics\+::predict\+Remaining\+Life (\begin{DoxyParamCaption}\item[{double}]{current\+Value}{, }\item[{double}]{threshold\+Value}{, }\item[{double}]{degradation\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Predicts remaining useful life (RUL) based on degradation rate 
+\begin{DoxyParams}{Parameters}
+{\em current\+Value} & Current sensor value \\
+\hline
+{\em threshold\+Value} & Critical threshold value \\
+\hline
+{\em degradation\+Rate} & Rate of degradation per time unit \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Estimated remaining useful life in time units 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/smart\+\_\+maintenance\+\_\+suite/header/\mbox{\hyperlink{smart__maintenance__suite_8h}{smart\+\_\+maintenance\+\_\+suite.\+h}}\item 
+src/smart\+\_\+maintenance\+\_\+suite/src/\mbox{\hyperlink{smart__maintenance__suite_8cpp}{smart\+\_\+maintenance\+\_\+suite.\+cpp}}\end{DoxyCompactItemize}
