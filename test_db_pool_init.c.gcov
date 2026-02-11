@@ -1,0 +1,61 @@
+        -:    0:Source:src/backend/tests/unit/database/test_db_pool_init.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_db_pool_init-test_db_pool_init.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_db_pool_init-test_db_pool_init.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <assert.h>
+        -:    3:#include <string.h>
+        -:    4:#include "db_connection.h"
+        -:    5:
+function test_pool_init_values called 1 returned 100% blocks executed 76%
+        1:    6:void test_pool_init_values() {
+        -:    7:  DatabaseConfig cfg;
+        1:    8:  memset(&cfg, 0, sizeof(DatabaseConfig));
+        1:    9:  strcpy(cfg.host, "localhost");
+        1:   10:  cfg.port = 5432;
+        1:   11:  strcpy(cfg.dbname, "testdb");
+        1:   12:  cfg.pool_min = 3;
+        1:   13:  cfg.pool_max = 7;
+        1:   14:  ConnectionPool *pool = db_pool_init(&cfg, FAIL_FAST, 0);
+call    0 returned 1
+       1*:   15:  assert(pool != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   16:  PoolMetrics m = db_pool_get_metrics();
+call    0 returned 1
+       1*:   17:  assert(m.used_cnt == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   18:  assert(m.acquire_cnt == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   19:  assert(m.release_cnt == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   20:  db_pool_destroy();
+call    0 returned 1
+        1:   21:  printf("Pool Init Values Test Passed\n");
+call    0 returned 1
+        1:   22:}
+        -:   23:
+function run_db_pool_init_tests called 1 returned 100% blocks executed 100%
+        1:   24:void run_db_pool_init_tests() {
+        1:   25:  printf("Running DB Pool Init Tests...\n");
+call    0 returned 1
+        1:   26:  test_pool_init_values();
+call    0 returned 1
+        1:   27:  printf("DB Pool Init Tests Passed!\n");
+call    0 returned 1
+        1:   28:}
+        -:   29:
+function main called 1 returned 100% blocks executed 100%
+        1:   30:int main() {
+        1:   31:    run_db_pool_init_tests();
+call    0 returned 1
+        1:   32:    return 0;
+        -:   33:}
+        -:   34:

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include "../../database/db_connection.h"
+#include "db_connection.h"
 
 void test_pool_exhaustion_fail_fast() {
   DatabaseConfig cfg;
@@ -24,4 +24,9 @@ void run_db_pool_basic_tests() {
   printf("Running DB Pool Basic Tests...\n");
   test_pool_exhaustion_fail_fast();
   printf("DB Pool Basic Tests Passed!\n");
+}
+
+int main() {
+  run_db_pool_basic_tests();
+  return 0;
 }

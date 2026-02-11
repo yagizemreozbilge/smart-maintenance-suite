@@ -32,3 +32,8 @@ void run_graph_tests() {
   test_graph_ops();
   printf("All Graph Tests Passed!\n");
 }
+
+int main() {
+  run_graph_tests();
+  return 0;
+}

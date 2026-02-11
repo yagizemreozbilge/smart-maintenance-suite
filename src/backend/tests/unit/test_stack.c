@@ -36,3 +36,8 @@ void run_stack_tests() {
   test_stack_push_pop();
   printf("All Stack Tests Passed!\n");
 }
+
+int main() {
+  run_stack_tests();
+  return 0;
+}

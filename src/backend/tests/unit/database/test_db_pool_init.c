@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include "../../database/db_connection.h"
+#include "db_connection.h"
 
 void test_pool_init_values() {
   DatabaseConfig cfg;
@@ -25,4 +25,9 @@ void run_db_pool_init_tests() {
   printf("Running DB Pool Init Tests...\n");
   test_pool_init_values();
   printf("DB Pool Init Tests Passed!\n");
+}
+
+int main() {
+  run_db_pool_init_tests();
+  return 0;
 }

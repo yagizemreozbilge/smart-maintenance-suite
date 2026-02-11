@@ -1,0 +1,69 @@
+        -:    0:Source:src/backend/api/handlers/auth_handler.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-auth_handler.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:#include "auth_handler.h"
+        -:    2:#include "../../database/db_connection.h"
+        -:    3:#include "../../security/jwt.h"
+        -:    4:#include <string.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <stdlib.h>
+        -:    7:
+function handle_auth_request called 0 returned 0% blocks executed 0%
+    #####:    8:void handle_auth_request(HttpRequest *req, HttpResponse *res) {
+    #####:    9:  char username[50] = {0}, password[50] = {0}, role[20] = {0};
+        -:   10:  // Support both query params and simple body formats
+    #####:   11:  char *target = (strlen(req->query_params) > 0) ? req->query_params : req->body;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   12:  char *u_ptr = strstr(target, "u=");
+    #####:   13:  char *p_ptr = strstr(target, "p=");
+        -:   14:
+    #####:   15:  if (u_ptr && p_ptr) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   16:    sscanf(u_ptr, "u=%[^& \n\r]", username);
+call    0 never executed
+    #####:   17:    sscanf(p_ptr, "p=%[^& \n\r]", password);
+call    0 never executed
+        -:   18:    // Mock verify user (using logic from legacy)
+        -:   19:    // In real app, we'd call the user_service
+    #####:   20:    int uid = -1;
+        -:   21:
+    #####:   22:    if (strcmp(username, "admin") == 0 && strcmp(password, "admin123") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   23:      uid = 1;
+    #####:   24:      strcpy(role, "admin");
+    #####:   25:    } else if (strcmp(username, "teknik1") == 0 && strcmp(password, "tech123") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   26:      uid = 2;
+    #####:   27:      strcpy(role, "teknisyen");
+        -:   28:    }
+        -:   29:
+    #####:   30:    if (uid != -1) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   31:      char *token = generate_auth_token(uid, username, role);
+call    0 never executed
+    #####:   32:      res->status_code = 200;
+    #####:   33:      sprintf(res->body, "{\"success\": true, \"token\": \"%s\", \"role\": \"%s\", \"username\": \"%s\"}",
+call    0 never executed
+        -:   34:              token, role, username);
+    #####:   35:      free(token);
+        -:   36:    } else {
+    #####:   37:      res->status_code = 401;
+    #####:   38:      strcpy(res->body, "{\"success\": false, \"message\": \"Invalid credentials\"}");
+        -:   39:    }
+        -:   40:  } else {
+    #####:   41:    res->status_code = 400;
+    #####:   42:    strcpy(res->body, "{\"error\": \"Missing credentials\"}");
+        -:   43:  }
+    #####:   44:}

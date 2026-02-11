@@ -1,0 +1,495 @@
+        -:    0:Source:src/backend/tests/unit/database/test_db_pool_fifo.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_db_pool_fifo.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_db_pool_fifo.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <string.h>
+        -:    4:#include <pthread.h>
+        -:    5:#include <unistd.h>
+        -:    6:#include <assert.h>
+        -:    7:#include "db_connection.h"
+        -:    8:
+        -:    9:// ------------------------------------------------------------
+        -:   10:// MOCK IMPLEMENTASYONLAR - db_connection.c'deki static fonksiyonlar
+        -:   11:// ------------------------------------------------------------
+        -:   12:
+        -:   13:// Stack operasyonları için mock
+        -:   14:#define MAX_POOL_SIZE 100
+        -:   15:
+        -:   16:static int mock_free_stack[MAX_POOL_SIZE];
+        -:   17:static int mock_free_top = -1;
+        -:   18:static int mock_used_stack[MAX_POOL_SIZE];
+        -:   19:static int mock_used_top = -1;
+        -:   20:
+        -:   21:// Mock stack_push - gerçek implementasyonun aynısı
+function mock_stack_push called 22 returned 100% blocks executed 75%
+       22:   22:int mock_stack_push(int stack[], int *top, int value) {
+      22*:   23:    if (*top >= MAX_POOL_SIZE - 1) return -1;
+branch  0 taken 0 (fallthrough)
+branch  1 taken 22
+       22:   24:    stack[++(*top)] = value;
+       22:   25:    return 0;
+        -:   26:}
+        -:   27:
+        -:   28:// Mock stack_pop
+function mock_stack_pop called 8 returned 100% blocks executed 100%
+        8:   29:int mock_stack_pop(int stack[], int *top) {
+        8:   30:    if (*top < 0) return -1;
+branch  0 taken 1 (fallthrough)
+branch  1 taken 7
+        7:   31:    return stack[(*top)--];
+        -:   32:}
+        -:   33:
+        -:   34:// ------------------------------------------------------------
+        -:   35:// MOCK POOL STRUCT
+        -:   36:// ------------------------------------------------------------
+        -:   37:typedef struct db_conn_s {
+        -:   38:    PGconn *pg_conn;
+        -:   39:    bool in_use;
+        -:   40:    int index;
+        -:   41:} db_conn_t;
+        -:   42:
+        -:   43:typedef struct ConnectionPool {
+        -:   44:    db_conn_t *connections;
+        -:   45:    int free_stack[MAX_POOL_SIZE];
+        -:   46:    int free_top;
+        -:   47:    int used_stack[MAX_POOL_SIZE];
+        -:   48:    int used_top;
+        -:   49:    int size;
+        -:   50:    int used_cnt;
+        -:   51:    pthread_mutex_t lock;
+        -:   52:    pthread_cond_t cond;
+        -:   53:    int timeout_ms;
+        -:   54:    PoolExhaustionPolicy policy;
+        -:   55:} db_pool_t;
+        -:   56:
+        -:   57:// Mock global pool
+        -:   58:static db_pool_t mock_pool;
+        -:   59:
+        -:   60:// ------------------------------------------------------------
+        -:   61:// MOCK DB CONNECTION FUNCTIONS
+        -:   62:// ------------------------------------------------------------
+        -:   63:
+        -:   64:// db_pool_acquire'in mock versiyonu
+function mock_db_pool_acquire called 8 returned 100% blocks executed 90%
+        8:   65:DBConnection *mock_db_pool_acquire(void) {
+        8:   66:    if (mock_pool.free_top < 0) {
+branch  0 taken 3 (fallthrough)
+branch  1 taken 5
+        -:   67:        // Pool boş, policy'e göre davran
+        3:   68:        if (mock_pool.policy == FAIL_FAST) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 2
+        1:   69:            return NULL;
+        -:   70:        }
+        -:   71:        // QUEUE_REQUESTS için basit mock
+        2:   72:        return NULL;
+        -:   73:    }
+        -:   74:    
+        5:   75:    int idx = mock_stack_pop(mock_pool.free_stack, &mock_pool.free_top);
+call    0 returned 5
+       5*:   76:    if (idx < 0) return NULL;
+branch  0 taken 0 (fallthrough)
+branch  1 taken 5
+        -:   77:    
+        5:   78:    mock_pool.connections[idx].in_use = true;
+        5:   79:    mock_stack_push(mock_pool.used_stack, &mock_pool.used_top, idx);
+call    0 returned 5
+        5:   80:    mock_pool.used_cnt++;
+        -:   81:    
+        5:   82:    return (DBConnection *)&mock_pool.connections[idx];
+        -:   83:}
+        -:   84:
+        -:   85:// db_pool_release'in mock versiyonu
+function mock_db_pool_release called 5 returned 100% blocks executed 90%
+        5:   86:void mock_db_pool_release(DBConnection *conn) {
+        5:   87:    db_conn_t *db_conn = (db_conn_t *)conn;
+        5:   88:    int idx = db_conn->index;
+        -:   89:    
+        5:   90:    db_conn->in_use = false;
+        5:   91:    mock_pool.used_cnt--;
+        -:   92:    
+        -:   93:    // Used stack'ten çıkar
+        -:   94:    int i;
+       5*:   95:    for (i = 0; i <= mock_pool.used_top; i++) {
+branch  0 taken 5
+branch  1 taken 0 (fallthrough)
+        5:   96:        if (mock_pool.used_stack[i] == idx) {
+branch  0 taken 5 (fallthrough)
+branch  1 taken 0
+        7:   97:            for (int j = i; j < mock_pool.used_top; j++) {
+branch  0 taken 2
+branch  1 taken 5 (fallthrough)
+        2:   98:                mock_pool.used_stack[j] = mock_pool.used_stack[j + 1];
+        -:   99:            }
+        5:  100:            mock_pool.used_top--;
+        5:  101:            break;
+        -:  102:        }
+        -:  103:    }
+        -:  104:    
+        -:  105:    // Free stack'e ekle
+        5:  106:    mock_stack_push(mock_pool.free_stack, &mock_pool.free_top, idx);
+call    0 returned 5
+        5:  107:}
+        -:  108:
+        -:  109:// db_pool_init'in mock versiyonu
+function mock_db_pool_init called 4 returned 100% blocks executed 100%
+        4:  110:void mock_db_pool_init(int pool_size, PoolExhaustionPolicy policy) {
+        4:  111:    memset(&mock_pool, 0, sizeof(mock_pool));
+        -:  112:    
+        4:  113:    mock_pool.size = pool_size;
+        4:  114:    mock_pool.policy = policy;
+        4:  115:    mock_pool.free_top = -1;
+        4:  116:    mock_pool.used_top = -1;
+        4:  117:    mock_pool.used_cnt = 0;
+        -:  118:    
+        4:  119:    mock_pool.connections = calloc(pool_size, sizeof(db_conn_t));
+        -:  120:    
+       13:  121:    for (int i = 0; i < pool_size; i++) {
+branch  0 taken 9
+branch  1 taken 4 (fallthrough)
+        9:  122:        mock_pool.connections[i].index = i;
+        9:  123:        mock_pool.connections[i].in_use = false;
+        9:  124:        mock_pool.connections[i].pg_conn = NULL;
+        9:  125:        mock_stack_push(mock_pool.free_stack, &mock_pool.free_top, i);
+call    0 returned 9
+        -:  126:    }
+        4:  127:}
+        -:  128:
+        -:  129:// db_pool_destroy'in mock versiyonu
+function mock_db_pool_destroy called 4 returned 100% blocks executed 100%
+        4:  130:void mock_db_pool_destroy(void) {
+        4:  131:    if (mock_pool.connections) {
+branch  0 taken 4 (fallthrough)
+branch  1 taken 0
+        4:  132:        free(mock_pool.connections);
+        4:  133:        mock_pool.connections = NULL;
+        -:  134:    }
+        4:  135:    mock_pool.free_top = -1;
+        4:  136:    mock_pool.used_top = -1;
+        4:  137:    mock_pool.used_cnt = 0;
+        4:  138:}
+        -:  139:
+        -:  140:// ------------------------------------------------------------
+        -:  141:// TEST FONKSIYONLARI
+        -:  142:// ------------------------------------------------------------
+        -:  143:
+function waiting_worker called 2 returned 100% blocks executed 100%
+        2:  144:void *waiting_worker(void *arg) {
+        2:  145:    DBConnection *c = mock_db_pool_acquire();
+call    0 returned 2
+        2:  146:    *(DBConnection **)arg = c;
+        2:  147:    return NULL;
+        -:  148:}
+        -:  149:
+function test_fifo_logic called 1 returned 100% blocks executed 90%
+        1:  150:void test_fifo_logic() {
+        1:  151:    printf("Testing FIFO logic...\n");
+call    0 returned 1
+        -:  152:    
+        -:  153:    // Pool'u başlat
+        1:  154:    mock_db_pool_init(1, QUEUE_REQUESTS);
+call    0 returned 1
+        -:  155:    
+        -:  156:    // Mock connection
+        1:  157:    mock_pool.connections[0].pg_conn = (PGconn *)0xDEADBEEF;
+        1:  158:    mock_pool.connections[0].in_use = false;
+        -:  159:    
+        -:  160:    // Free stack'i temizle ve baştan ekle
+        1:  161:    mock_pool.free_top = -1;
+        1:  162:    mock_stack_push(mock_pool.free_stack, &mock_pool.free_top, 0);
+call    0 returned 1
+        -:  163:    
+        -:  164:    // Thread A acquires the only connection
+        1:  165:    DBConnection *c1 = mock_db_pool_acquire();
+call    0 returned 1
+       1*:  166:    assert(c1 != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  167:    assert(mock_pool.used_cnt == 1);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  168:    
+        -:  169:    // Thread B tries to acquire and should block (mock'ta blocking yok, NULL döner)
+        -:  170:    pthread_t t1, t2;
+        1:  171:    DBConnection *res1 = NULL, *res2 = NULL;
+        -:  172:    
+        1:  173:    pthread_create(&t1, NULL, waiting_worker, &res1);
+call    0 returned 1
+        1:  174:    usleep(100000);
+call    0 returned 1
+        -:  175:    
+        -:  176:    // Thread C tries to acquire and should block behind B
+        1:  177:    pthread_create(&t2, NULL, waiting_worker, &res2);
+call    0 returned 1
+        1:  178:    usleep(100000);
+call    0 returned 1
+        -:  179:    
+        -:  180:    // Release connection
+        1:  181:    mock_db_pool_release(c1);
+call    0 returned 1
+        -:  182:    
+        1:  183:    pthread_join(t1, NULL);
+call    0 returned 1
+        1:  184:    pthread_join(t2, NULL);
+call    0 returned 1
+        -:  185:    
+        1:  186:    mock_db_pool_destroy();
+call    0 returned 1
+        1:  187:    printf("FIFO Logic Test Passed\n");
+call    0 returned 1
+        1:  188:}
+        -:  189:
+function test_stack_operations called 1 returned 100% blocks executed 73%
+        1:  190:void test_stack_operations() {
+        1:  191:    printf("Testing stack operations...\n");
+call    0 returned 1
+        -:  192:    
+        -:  193:    int stack[10];
+        1:  194:    int top = -1;
+        -:  195:    
+        -:  196:    // Push test
+        1:  197:    int r1 = mock_stack_push(stack, &top, 5);
+call    0 returned 1
+       1*:  198:    assert(r1 == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  199:    assert(top == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  200:    assert(stack[0] == 5);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  201:    
+        1:  202:    r1 = mock_stack_push(stack, &top, 10);
+call    0 returned 1
+       1*:  203:    assert(r1 == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  204:    assert(top == 1);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  205:    assert(stack[1] == 10);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  206:    
+        -:  207:    // Pop test
+        1:  208:    int val = mock_stack_pop(stack, &top);
+call    0 returned 1
+       1*:  209:    assert(val == 10);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  210:    assert(top == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  211:    
+        1:  212:    val = mock_stack_pop(stack, &top);
+call    0 returned 1
+       1*:  213:    assert(val == 5);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  214:    assert(top == -1);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  215:    
+        -:  216:    // Empty pop test
+        1:  217:    val = mock_stack_pop(stack, &top);
+call    0 returned 1
+       1*:  218:    assert(val == -1);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  219:    
+        1:  220:    printf("Stack Operations Test Passed\n");
+call    0 returned 1
+        1:  221:}
+        -:  222:
+function test_pool_initialization called 1 returned 100% blocks executed 78%
+        1:  223:void test_pool_initialization() {
+        1:  224:    printf("Testing pool initialization...\n");
+call    0 returned 1
+        -:  225:    
+        1:  226:    mock_db_pool_init(5, FAIL_FAST);
+call    0 returned 1
+        -:  227:    
+       1*:  228:    assert(mock_pool.size == 5);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  229:    assert(mock_pool.free_top == 4);  // 0-4 arası 5 eleman
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  230:    assert(mock_pool.used_top == -1);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  231:    assert(mock_pool.used_cnt == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  232:    
+        -:  233:    // Free stack kontrolü
+        6:  234:    for (int i = 0; i <= mock_pool.free_top; i++) {
+branch  0 taken 5
+branch  1 taken 1 (fallthrough)
+       5*:  235:        assert(mock_pool.free_stack[i] == i);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 5
+call    2 never executed
+        -:  236:    }
+        -:  237:    
+        1:  238:    mock_db_pool_destroy();
+call    0 returned 1
+        1:  239:    printf("Pool Initialization Test Passed\n");
+call    0 returned 1
+        1:  240:}
+        -:  241:
+function test_acquire_release called 1 returned 100% blocks executed 76%
+        1:  242:void test_acquire_release() {
+        1:  243:    printf("Testing acquire/release cycle...\n");
+call    0 returned 1
+        -:  244:    
+        1:  245:    mock_db_pool_init(2, FAIL_FAST);
+call    0 returned 1
+        -:  246:    
+        -:  247:    // İki connection al
+        1:  248:    DBConnection *c1 = mock_db_pool_acquire();
+call    0 returned 1
+        1:  249:    DBConnection *c2 = mock_db_pool_acquire();
+call    0 returned 1
+        -:  250:    
+       1*:  251:    assert(c1 != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  252:    assert(c2 != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  253:    assert(mock_pool.used_cnt == 2);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  254:    assert(mock_pool.free_top == -1);  // Tüm connection'lar kullanımda
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  255:    
+        -:  256:    // Birini release et
+        1:  257:    mock_db_pool_release(c1);
+call    0 returned 1
+       1*:  258:    assert(mock_pool.used_cnt == 1);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  259:    assert(mock_pool.free_top == 0);  // 1 connection free
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  260:    
+        -:  261:    // Tekrar acquire et
+        1:  262:    DBConnection *c3 = mock_db_pool_acquire();
+call    0 returned 1
+       1*:  263:    assert(c3 != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  264:    assert(mock_pool.used_cnt == 2);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:  265:    assert(mock_pool.free_top == -1);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  266:    
+        1:  267:    mock_db_pool_release(c2);
+call    0 returned 1
+        1:  268:    mock_db_pool_release(c3);
+call    0 returned 1
+        1:  269:    mock_db_pool_destroy();
+call    0 returned 1
+        -:  270:    
+        1:  271:    printf("Acquire/Release Test Passed\n");
+call    0 returned 1
+        1:  272:}
+        -:  273:
+function test_fail_fast called 1 returned 100% blocks executed 86%
+        1:  274:void test_fail_fast() {
+        1:  275:    printf("Testing FAIL_FAST policy...\n");
+call    0 returned 1
+        -:  276:    
+        1:  277:    mock_db_pool_init(1, FAIL_FAST);
+call    0 returned 1
+        -:  278:    
+        1:  279:    DBConnection *c1 = mock_db_pool_acquire();
+call    0 returned 1
+       1*:  280:    assert(c1 != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  281:    
+        -:  282:    // İkinci acquire hemen NULL dönmeli
+        1:  283:    DBConnection *c2 = mock_db_pool_acquire();
+call    0 returned 1
+       1*:  284:    assert(c2 == NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:  285:    
+        1:  286:    mock_db_pool_release(c1);
+call    0 returned 1
+        1:  287:    mock_db_pool_destroy();
+call    0 returned 1
+        -:  288:    
+        1:  289:    printf("FAIL_FAST Test Passed\n");
+call    0 returned 1
+        1:  290:}
+        -:  291:
+        -:  292:// ------------------------------------------------------------
+        -:  293:// MAIN
+        -:  294:// ------------------------------------------------------------
+        -:  295:
+function main called 1 returned 100% blocks executed 100%
+        1:  296:int main() {
+        1:  297:    printf("\n========================================\n");
+call    0 returned 1
+        1:  298:    printf("   DB POOL FIFO TESTS - MOCK VERSION\n");
+call    0 returned 1
+        1:  299:    printf("========================================\n\n");
+call    0 returned 1
+        -:  300:    
+        1:  301:    test_stack_operations();
+call    0 returned 1
+        1:  302:    test_pool_initialization();
+call    0 returned 1
+        1:  303:    test_acquire_release();
+call    0 returned 1
+        1:  304:    test_fail_fast();
+call    0 returned 1
+        1:  305:    test_fifo_logic();
+call    0 returned 1
+        -:  306:    
+        1:  307:    printf("\n========================================\n");
+call    0 returned 1
+        1:  308:    printf("   ALL TESTS PASSED!\n");
+call    0 returned 1
+        1:  309:    printf("========================================\n\n");
+call    0 returned 1
+        -:  310:    
+        1:  311:    return 0;
+        -:  312:}

@@ -10,6 +10,11 @@ typedef enum {
 } AlertSeverity;
 
 /**
+ * Converts severity enum to string representation.
+ */
+const char *severity_to_str(AlertSeverity severity);
+
+/**
  * Creates a new alert in the database.
  */
 bool create_alert(int sensor_id, AlertSeverity severity, const char *message);
@@ -32,4 +37,10 @@ typedef struct {
  */
 int get_recent_alerts(AlertInfo *out_alerts, int max_alerts);
 
-#endif
+/**
+ * Serializes alerts to JSON format for API responses.
+ * Returns a JSON string that must be freed by the caller.
+ */
+char *serialize_alerts_to_json(void);
+
+#endif /* ALERT_SERVICE_H */

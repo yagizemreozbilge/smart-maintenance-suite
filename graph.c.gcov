@@ -1,0 +1,163 @@
+        -:    0:Source:src/backend/core/data_structures/graph.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_graph-graph.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_graph-graph.gcda
+        -:    0:Runs:1
+        -:    1:/* This file is a template for graph.c. Content will be filled by yagiz on 2025-12-29. */
+        -:    2:#include <stdio.h>
+        -:    3:#include "graph.h"
+        -:    4:
+function initGraph called 2 returned 100% blocks executed 100%
+        2:    5:void initGraph(Graph *g) {
+        2:    6:  g->count = 0;
+        -:    7:
+        -:    8:  // Initialize Matrix with 0s
+      202:    9:  for(int i = 0; i < MAX_MACHINES; i++) {
+branch  0 taken 200
+branch  1 taken 2 (fallthrough)
+      200:   10:    g->machineIds[i] = 0;
+        -:   11:
+    20200:   12:    for(int j = 0; j < MAX_MACHINES; j++) {
+branch  0 taken 20000
+branch  1 taken 200 (fallthrough)
+    20000:   13:      g->adjMatrix[i][j] = 0;
+        -:   14:    }
+        -:   15:  }
+        2:   16:}
+        -:   17:
+        -:   18:// Helper to find internal index from Machine ID
+function getIndex called 13 returned 100% blocks executed 100%
+       13:   19:static int getIndex(Graph *g, int machine_id) {
+       21:   20:  for(int i = 0; i < g->count; i++) {
+branch  0 taken 18
+branch  1 taken 3 (fallthrough)
+       18:   21:    if(g->machineIds[i] == machine_id) {
+branch  0 taken 10 (fallthrough)
+branch  1 taken 8
+       10:   22:      return i;
+        -:   23:    }
+        -:   24:  }
+        -:   25:
+        3:   26:  return -1;
+        -:   27:}
+        -:   28:
+function addMachineNode called 3 returned 100% blocks executed 62%
+        3:   29:bool addMachineNode(Graph *g, int machine_id) {
+        3:   30:  if(g->count >= MAX_MACHINES) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+    #####:   31:    printf("ERROR: Graph is full! Cannot add Machine %d\n", machine_id);
+call    0 never executed
+    #####:   32:    return false;
+        -:   33:  }
+        -:   34:
+        -:   35:  // Check duplicate
+        3:   36:  if(getIndex(g, machine_id) != -1) {
+call    0 returned 3
+branch  1 taken 0 (fallthrough)
+branch  2 taken 3
+        -:   37:    // Already exists
+    #####:   38:    return false;
+        -:   39:  }
+        -:   40:
+        3:   41:  g->machineIds[g->count] = machine_id;
+        3:   42:  g->count++;
+        3:   43:  return true;
+        -:   44:}
+        -:   45:
+function addDependency called 1 returned 100% blocks executed 78%
+        1:   46:bool addDependency(Graph *g, int from_id, int to_id) {
+        1:   47:  int u = getIndex(g, from_id);
+call    0 returned 1
+        1:   48:  int v = getIndex(g, to_id);
+call    0 returned 1
+        -:   49:
+        1:   50:  if(u == -1 || v == -1) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    #####:   51:    printf("ERROR: Machine IDs not found in graph.\n");
+call    0 never executed
+    #####:   52:    return false;
+        -:   53:  }
+        -:   54:
+        -:   55:  // Directed Edge: u depends on v
+        1:   56:  g->adjMatrix[u][v] = 1;
+        -:   57:  // If user wants bidirectional (mutual), they call this function twice reversed.
+        -:   58:  // Or we could enable this logic here if explicitly requested.
+        1:   59:  printf("Dependency Added: Machine %d -> Depends on -> Machine %d\n", from_id, to_id);
+call    0 returned 1
+        1:   60:  return true;
+        -:   61:}
+        -:   62:
+function removeDependency called 1 returned 100% blocks executed 86%
+        1:   63:bool removeDependency(Graph *g, int from_id, int to_id) {
+        1:   64:  int u = getIndex(g, from_id);
+call    0 returned 1
+        1:   65:  int v = getIndex(g, to_id);
+call    0 returned 1
+        -:   66:
+        1:   67:  if(u == -1 || v == -1) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    #####:   68:    return false;
+        -:   69:  }
+        -:   70:
+        1:   71:  g->adjMatrix[u][v] = 0;
+        1:   72:  return true;
+        -:   73:}
+        -:   74:
+function hasDependency called 3 returned 100% blocks executed 86%
+        3:   75:bool hasDependency(Graph *g, int from_id, int to_id) {
+        3:   76:  int u = getIndex(g, from_id);
+call    0 returned 3
+        3:   77:  int v = getIndex(g, to_id);
+call    0 returned 3
+        -:   78:
+       3*:   79:  if(u == -1 || v == -1) return false;
+branch  0 taken 3 (fallthrough)
+branch  1 taken 0
+branch  2 taken 0 (fallthrough)
+branch  3 taken 3
+        -:   80:
+        3:   81:  return (g->adjMatrix[u][v] == 1);
+        -:   82:}
+        -:   83:
+function printDependencies called 0 returned 0% blocks executed 0%
+    #####:   84:void printDependencies(Graph *g, int machine_id) {
+    #####:   85:  int u = getIndex(g, machine_id);
+call    0 never executed
+        -:   86:
+    #####:   87:  if(u == -1) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   88:    printf("Machine %d not found.\n", machine_id);
+call    0 never executed
+    #####:   89:    return;
+        -:   90:  }
+        -:   91:
+    #####:   92:  printf("Machine %d depends on:\n", machine_id);
+call    0 never executed
+    #####:   93:  bool found = false;
+        -:   94:
+    #####:   95:  for(int v = 0; v < g->count; v++) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:   96:    if(g->adjMatrix[u][v] == 1) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   97:      printf(" - Machine %d\n", g->machineIds[v]);
+call    0 never executed
+    #####:   98:      found = true;
+        -:   99:    }
+        -:  100:  }
+        -:  101:
+    #####:  102:  if(!found) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  103:    printf(" - (No Dependencies, Independent Machine)\n");
+call    0 never executed
+        -:  104:  }
+        -:  105:}

@@ -23,6 +23,14 @@
 #include "logger.h"
 #include "db_connection.h"
 
+#ifdef TEST_MODE
+  // Test modunda PostgreSQL bağlantısını mock'la
+  #define PQconnectdb(x) ((PGconn*)0xDEADBEEF)
+  #define PQstatus(x) CONNECTION_OK
+  #define PQerrorMessage(x) "Mock connection"
+  #define PQfinish(x)
+#endif
+
 
 /* ------------------------------------------------------------ */
 /* 5.  The pool structure (private – defined here for simplicity) */

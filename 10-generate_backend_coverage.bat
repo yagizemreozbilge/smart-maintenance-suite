@@ -1,0 +1,258 @@
+@echo off
+setlocal EnableExtensions EnableDelayedExpansion
+cd /d "%~dp0"
+
+REM ------------------------------------------------------------
+REM Ensure MSYS2 MinGW64 tools are in PATH
+REM ------------------------------------------------------------
+set "PATH=C:\msys64\mingw64\bin;%PATH%"
+
+set "ROOT=%cd%"
+set "BUILD_DIR=build_backend_tests"
+set "COV_DIR=coverage_backend"
+set "REPORT_DIR=docs\coverage_backend_report"
+set "HISTORY_DIR=docs\coverage_history"
+
+echo ============================================================
+echo   BACKEND GCC COVERAGE - FULL TEST SUITE (15 TESTS)
+echo ============================================================
+echo.
+
+REM ============================================================
+REM CLEAN
+REM ============================================================
+
+echo [1/5] Cleaning old build and coverage data...
+
+if exist "%BUILD_DIR%" rd /S /Q "%BUILD_DIR%"
+if exist "%COV_DIR%" rd /S /Q "%COV_DIR%"
+if exist "%REPORT_DIR%" rd /S /Q "%REPORT_DIR%"
+
+mkdir "%BUILD_DIR%"
+mkdir "%COV_DIR%"
+mkdir "%REPORT_DIR%"
+if not exist "%HISTORY_DIR%" mkdir "%HISTORY_DIR%"
+
+for /R %%f in (*.gcda *.gcno *.gcov) do del /Q "%%f" >nul 2>&1
+
+echo [OK] Clean complete
+echo.
+
+REM ============================================================
+REM TOOL CHECK
+REM ============================================================
+
+echo [2/5] Checking required tools...
+
+where gcc >nul 2>&1 || (echo [ERROR] GCC not found & pause & exit /b 1)
+where reportgenerator >nul 2>&1 || (echo [ERROR] ReportGenerator not found & pause & exit /b 1)
+
+echo [OK] All tools found
+echo.
+
+REM ============================================================
+REM Check for missing header files
+REM ============================================================
+
+echo [INFO] Checking for required headers...
+
+if not exist "src\backend\database\alert_service.h" (
+    echo [WARNING] alert_service.h not found, creating empty header...
+    echo // Empty header file for compilation > src\backend\database\alert_service.h
+)
+
+if not exist "src\backend\database\db_connection.h" (
+    echo [ERROR] db_connection.h not found!
+    echo Please ensure src\backend\database\db_connection.h exists
+    pause
+    exit /b 1
+)
+
+echo [OK] Header check complete
+echo.
+
+REM ============================================================
+REM COMMON FLAGS (Branch coverage enabled)
+REM ============================================================
+
+REM Include paths - added database directory
+set "CFLAGS=-Isrc\backend -Isrc\backend\database -Isrc\tests -Isrc\tests\mock_includes -IC:\msys64\mingw64\include -g -O0 --coverage"
+
+REM Linker flags - mconsole for console app, subsystem:console
+set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq"
+
+set TEST_COUNT=0
+set TEST_FAILED=0
+
+echo [3/5] Compiling and Running All Tests...
+echo.
+
+goto RUN_TESTS
+
+:run_test
+set TEST_NAME=%1
+
+echo ------------------------------------------------------------
+echo Running: %TEST_NAME%
+echo ------------------------------------------------------------
+
+REM Compile as console application
+gcc %CFLAGS% %2 %3 %4 %5 %6 %7 %8 %9 -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
+
+if errorlevel 1 (
+    echo   [FAIL] Compilation failed
+    set /a TEST_FAILED+=1
+    goto :eof
+)
+
+REM Run the test
+"%BUILD_DIR%\%TEST_NAME%.exe"
+if errorlevel 1 (
+    echo   [FAIL] Test execution failed
+    set /a TEST_FAILED+=1
+    goto :eof
+)
+
+echo   [OK] Passed
+set /a TEST_COUNT+=1
+goto :eof
+
+:RUN_TESTS
+
+REM --- Data Structure Tests (Console Apps) ---
+call :run_test test_queue ^
+src\backend\tests\unit\test_queue.c ^
+src\backend\core\data_structures\queue.c
+
+call :run_test test_stack ^
+src\backend\tests\unit\test_stack.c ^
+src\backend\core\data_structures\stack.c
+
+call :run_test test_bst ^
+src\backend\tests\unit\test_bst.c ^
+src\backend\core\data_structures\bst.c
+
+call :run_test test_heap ^
+src\backend\tests\unit\test_heap.c ^
+src\backend\core\data_structures\heap.c
+
+call :run_test test_graph ^
+src\backend\tests\unit\test_graph.c ^
+src\backend\core\data_structures\graph.c
+
+REM --- API Tests ---
+call :run_test test_api ^
+src\backend\tests\unit\test_api_handlers.c ^
+src\backend\api\router.c ^
+src\backend\api\handlers\machine_handler.c ^
+src\backend\api\handlers\inventory_handler.c ^
+src\backend\api\handlers\auth_handler.c ^
+src\backend\api\handlers\maintenance_handler.c ^
+src\backend\api\handlers\report_handler.c ^
+src\backend\api\handlers\fault_handler.c ^
+src\backend\database\alert_service.c ^
+src\backend\database\api_handlers.c ^
+src\backend\database\cJSON.c ^
+src\backend\api\http_server.c ^
+src\backend\database\db_connection.c ^
+src\backend\database\machine_service.c ^
+src\backend\database\inventory_service.c ^
+src\backend\database\maintenance_service.c
+
+
+REM --- Database Tests ---
+call :run_test test_db_pool_basic ^
+src\backend\tests\unit\database\test_db_pool_basic.c ^
+src\backend\database\db_connection.c
+
+call :run_test test_db_pool_init ^
+src\backend\tests\unit\database\test_db_pool_init.c ^
+src\backend\database\db_connection.c
+
+call :run_test test_db_pool_fifo ^
+src\backend\tests\unit\database\test_db_pool_fifo.c
+
+REM --- Service Tests ---
+call :run_test test_inventory_service ^
+src\backend\tests\unit\database\test_inventory_service.c ^
+src\backend\database\inventory_service.c ^
+src\backend\database\db_connection.c
+
+call :run_test test_machine_service ^
+src\backend\tests\unit\database\test_machine_service.c ^
+src\backend\database\machine_service.c ^
+src\backend\database\db_connection.c
+
+call :run_test test_maintenance_service ^
+src\backend\tests\unit\database\test_maintenance_service.c ^
+src\backend\database\maintenance_service.c ^
+src\backend\database\db_connection.c
+
+REM --- Security Tests ---
+call :run_test test_rbac ^
+src\backend\tests\unit\test_rbac.c ^
+src\backend\security\rbac.c
+
+call :run_test test_jwt ^
+src\backend\tests\unit\test_jwt_standalone.c
+
+REM --- Integration Tests ---
+call :run_test test_machine_module_int ^
+src\backend\tests\integration\test_machine_module.c ^
+src\backend\modules\machine\machine_service.c ^
+src\backend\database\db_connection.c
+
+echo.
+echo Tests Passed: %TEST_COUNT%
+echo Tests Failed: %TEST_FAILED%
+echo.
+
+REM ============================================================
+REM COVERAGE (Branch enabled)
+REM ============================================================
+
+echo [4/5] Generating gcov files...
+
+REM Generate gcov files from coverage data
+for /R %%f in (*.gcno) do gcov -b -c "%%f" >nul 2>&1
+
+if errorlevel 1 (
+    echo [ERROR] gcov generation failed!
+    pause
+    exit /b 1
+)
+
+echo [OK] gcov files generated
+echo.
+
+REM ============================================================
+REM REPORT (Classic Dashboard + History)
+REM ============================================================
+
+echo [5/5] Generating HTML report...
+
+reportgenerator ^
+    -reports:"**\*.gcov" ^
+    -targetdir:"%REPORT_DIR%" ^
+    -historydir:"%HISTORY_DIR%" ^
+    -reporttypes:Html ^
+    -title:"Backend C Tests - Coverage Report" ^
+    -verbosity:Warning
+
+if errorlevel 1 (
+    echo [ERROR] Report generation failed!
+    pause
+    exit /b 1
+)
+
+echo.
+echo ============================================================
+echo   COVERAGE REPORT GENERATED SUCCESSFULLY
+echo ============================================================
+echo.
+echo %ROOT%\%REPORT_DIR%\index.html
+echo.
+
+start "" "%ROOT%\%REPORT_DIR%\index.html"
+
+pause

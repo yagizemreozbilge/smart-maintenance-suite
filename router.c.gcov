@@ -1,0 +1,57 @@
+        -:    0:Source:src/backend/api/router.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-router.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    1:#include "router.h"
+        -:    2:#include "handlers/machine_handler.h"
+        -:    3:#include "handlers/inventory_handler.h"
+        -:    4:#include "handlers/auth_handler.h"
+        -:    5:#include "handlers/maintenance_handler.h"
+        -:    6:#include "handlers/report_handler.h"
+        -:    7:#include "alert_service.h"
+        -:    8:#include <string.h>
+        -:    9:#include <stdio.h>
+        -:   10:
+function handle_route called 0 returned 0% blocks executed 0%
+    #####:   11:void handle_route(HttpRequest *req, HttpResponse *res) {
+        -:   12:  // Default 404
+    #####:   13:  res->status_code = 404;
+    #####:   14:  strcpy(res->content_type, "application/json");
+    #####:   15:  strcpy(res->body, "{\"error\": \"Route not found\"}");
+        -:   16:
+    #####:   17:  if (strstr(req->path, "/api/machines")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   18:    handle_machine_request(req, res);
+call    0 never executed
+    #####:   19:  } else if (strstr(req->path, "/api/inventory")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   20:    handle_inventory_request(req, res);
+call    0 never executed
+    #####:   21:  } else if (strstr(req->path, "/api/login")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   22:    handle_auth_request(req, res);
+call    0 never executed
+    #####:   23:  } else if (strstr(req->path, "/api/maintenance")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   24:    handle_maintenance_request(req, res);
+call    0 never executed
+    #####:   25:  } else if (strstr(req->path, "/api/reports")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   26:    handle_report_request(req, res);
+call    0 never executed
+    #####:   27:  } else if (strstr(req->path, "/api/alerts")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   28:    // Simple inline for now since it's just a fetcher in legacy
+    #####:   29:    res->status_code = 200;
+    #####:   30:    char *json = serialize_alerts_to_json();
+call    0 never executed
+    #####:   31:    strncpy(res->body, json, 8191);
+    #####:   32:    free(json);
+        -:   33:  }
+    #####:   34:}

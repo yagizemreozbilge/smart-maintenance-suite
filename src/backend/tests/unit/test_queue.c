@@ -37,3 +37,8 @@ void run_queue_tests() {
   test_queue_enqueue_dequeue();
   printf("All Queue Tests Passed!\n");
 }
+
+int main() {
+  run_queue_tests();
+  return 0;
+}

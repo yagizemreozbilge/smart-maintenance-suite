@@ -1,0 +1,201 @@
+        -:    0:Source:src/backend/tests/unit/test_rbac.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_rbac-test_rbac.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_rbac-test_rbac.gcda
+        -:    0:Runs:1
+        -:    1:#include "../../security/rbac.h"
+        -:    2:#include <stdio.h>
+        -:    3:#include <assert.h>
+        -:    4:#include <string.h>
+        -:    5:
+function test_string_to_role_admin called 1 returned 100% blocks executed 83%
+        1:    6:void test_string_to_role_admin() {
+        1:    7:  UserRole role = string_to_role("admin");
+call    0 returned 1
+       1*:    8:  assert(role == ROLE_ADMIN);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:    9:  printf("[PASS] string_to_role: admin\n");
+call    0 returned 1
+        1:   10:}
+        -:   11:
+function test_string_to_role_teknisyen called 1 returned 100% blocks executed 83%
+        1:   12:void test_string_to_role_teknisyen() {
+        1:   13:  UserRole role = string_to_role("teknisyen");
+call    0 returned 1
+       1*:   14:  assert(role == ROLE_TEKNISYEN);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   15:  printf("[PASS] string_to_role: teknisyen\n");
+call    0 returned 1
+        1:   16:}
+        -:   17:
+function test_string_to_role_operator called 1 returned 100% blocks executed 83%
+        1:   18:void test_string_to_role_operator() {
+        1:   19:  UserRole role = string_to_role("operator");
+call    0 returned 1
+       1*:   20:  assert(role == ROLE_OPERATOR);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   21:  printf("[PASS] string_to_role: operator\n");
+call    0 returned 1
+        1:   22:}
+        -:   23:
+function test_string_to_role_unknown called 1 returned 100% blocks executed 83%
+        1:   24:void test_string_to_role_unknown() {
+        1:   25:  UserRole role = string_to_role("invalid_role");
+call    0 returned 1
+       1*:   26:  assert(role == ROLE_UNKNOWN);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   27:  printf("[PASS] string_to_role: unknown role\n");
+call    0 returned 1
+        1:   28:}
+        -:   29:
+function test_string_to_role_null called 1 returned 100% blocks executed 83%
+        1:   30:void test_string_to_role_null() {
+        1:   31:  UserRole role = string_to_role(NULL);
+call    0 returned 1
+       1*:   32:  assert(role == ROLE_UNKNOWN);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   33:  printf("[PASS] string_to_role: NULL input\n");
+call    0 returned 1
+        1:   34:}
+        -:   35:
+function test_can_delete_assets_admin called 1 returned 100% blocks executed 83%
+        1:   36:void test_can_delete_assets_admin() {
+       1*:   37:  assert(can_delete_assets(ROLE_ADMIN) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   38:  printf("[PASS] can_delete_assets: admin allowed\n");
+call    0 returned 1
+        1:   39:}
+        -:   40:
+function test_can_delete_assets_teknisyen called 1 returned 100% blocks executed 83%
+        1:   41:void test_can_delete_assets_teknisyen() {
+       1*:   42:  assert(can_delete_assets(ROLE_TEKNISYEN) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   43:  printf("[PASS] can_delete_assets: teknisyen denied\n");
+call    0 returned 1
+        1:   44:}
+        -:   45:
+function test_can_delete_assets_operator called 1 returned 100% blocks executed 83%
+        1:   46:void test_can_delete_assets_operator() {
+       1*:   47:  assert(can_delete_assets(ROLE_OPERATOR) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   48:  printf("[PASS] can_delete_assets: operator denied\n");
+call    0 returned 1
+        1:   49:}
+        -:   50:
+function test_can_onboard_assets_admin called 1 returned 100% blocks executed 83%
+        1:   51:void test_can_onboard_assets_admin() {
+       1*:   52:  assert(can_onboard_assets(ROLE_ADMIN) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   53:  printf("[PASS] can_onboard_assets: admin allowed\n");
+call    0 returned 1
+        1:   54:}
+        -:   55:
+function test_can_onboard_assets_teknisyen called 1 returned 100% blocks executed 83%
+        1:   56:void test_can_onboard_assets_teknisyen() {
+       1*:   57:  assert(can_onboard_assets(ROLE_TEKNISYEN) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   58:  printf("[PASS] can_onboard_assets: teknisyen allowed\n");
+call    0 returned 1
+        1:   59:}
+        -:   60:
+function test_can_onboard_assets_operator called 1 returned 100% blocks executed 83%
+        1:   61:void test_can_onboard_assets_operator() {
+       1*:   62:  assert(can_onboard_assets(ROLE_OPERATOR) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   63:  printf("[PASS] can_onboard_assets: operator denied\n");
+call    0 returned 1
+        1:   64:}
+        -:   65:
+function test_can_view_system_all_roles called 1 returned 100% blocks executed 79%
+        1:   66:void test_can_view_system_all_roles() {
+       1*:   67:  assert(can_view_system(ROLE_ADMIN) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+       1*:   68:  assert(can_view_system(ROLE_TEKNISYEN) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+       1*:   69:  assert(can_view_system(ROLE_OPERATOR) == 1);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   70:  printf("[PASS] can_view_system: all roles allowed\n");
+call    0 returned 1
+        1:   71:}
+        -:   72:
+function test_can_view_system_unknown called 1 returned 100% blocks executed 83%
+        1:   73:void test_can_view_system_unknown() {
+       1*:   74:  assert(can_view_system(ROLE_UNKNOWN) == 0);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   75:  printf("[PASS] can_view_system: unknown role denied\n");
+call    0 returned 1
+        1:   76:}
+        -:   77:
+function main called 1 returned 100% blocks executed 100%
+        1:   78:int main() {
+        1:   79:  printf("=== RBAC Unit Tests ===\n");
+call    0 returned 1
+        1:   80:  test_string_to_role_admin();
+call    0 returned 1
+        1:   81:  test_string_to_role_teknisyen();
+call    0 returned 1
+        1:   82:  test_string_to_role_operator();
+call    0 returned 1
+        1:   83:  test_string_to_role_unknown();
+call    0 returned 1
+        1:   84:  test_string_to_role_null();
+call    0 returned 1
+        1:   85:  test_can_delete_assets_admin();
+call    0 returned 1
+        1:   86:  test_can_delete_assets_teknisyen();
+call    0 returned 1
+        1:   87:  test_can_delete_assets_operator();
+call    0 returned 1
+        1:   88:  test_can_onboard_assets_admin();
+call    0 returned 1
+        1:   89:  test_can_onboard_assets_teknisyen();
+call    0 returned 1
+        1:   90:  test_can_onboard_assets_operator();
+call    0 returned 1
+        1:   91:  test_can_view_system_all_roles();
+call    0 returned 1
+        1:   92:  test_can_view_system_unknown();
+call    0 returned 1
+        1:   93:  printf("\n✅ All RBAC tests passed!\n");
+call    0 returned 1
+        1:   94:  return 0;
+        -:   95:}

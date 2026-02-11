@@ -1,0 +1,62 @@
+        -:    0:Source:src/backend/core/data_structures/stack.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_stack-stack.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_stack-stack.gcda
+        -:    0:Runs:1
+        -:    1:/* This file is a template for stack.c. Content will be filled by yagiz on 2025-12-29. */
+        -:    2:#include <stdio.h>
+        -:    3:#include "stack.h"
+        -:    4:
+function initStack called 2 returned 100% blocks executed 100%
+        2:    5:void initStack(Stack *s) {
+        2:    6:  s->top = 0;   // Start index
+        2:    7:  s->count = 0; // No operations to undo yet
+        2:    8:}
+        -:    9:
+        -:   10:// ADD NEW OPERATION (Circular Overwrite Logic)
+function push called 2 returned 100% blocks executed 100%
+        2:   11:void push(Stack *s, Operation op) {
+        -:   12:  // 1. Write new element to "top"
+        2:   13:  s->history[s->top] = op;
+        2:   14:  printf("Operation Added (ID: %d) -> Stack Index: %d\n", op.operation_id, s->top);
+call    0 returned 2
+        -:   15:  // 2. Advance top (Circular: 0, 1, 2, 3, 4 -> 0)
+        2:   16:  s->top = (s->top + 1) % MAX_UNDO_LEVEL;
+        -:   17:
+        -:   18:  // 3. Increment count if not full.
+        -:   19:  // If full (count == 5), do not increment.
+        -:   20:  // Because we overwrote the oldest data, total count remains 5.
+        2:   21:  if (s->count < MAX_UNDO_LEVEL) {
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:   22:    s->count++;
+        -:   23:  }
+        2:   24:}
+        -:   25:
+        -:   26:// UNDO OPERATION
+function pop called 3 returned 100% blocks executed 100%
+        3:   27:bool pop(Stack *s, Operation *outOp) {
+        3:   28:  if (s->count == 0) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 2
+        1:   29:    printf("ERROR: No operation to undo! (Stack Empty)\n");
+call    0 returned 1
+        1:   30:    return false;
+        -:   31:  }
+        -:   32:
+        -:   33:  // 1. Move Top BACK
+        -:   34:  // WARNING: Negative modulo is tricky in C.
+        -:   35:  // Formula: (top - 1 + MAX) % MAX
+        2:   36:  s->top = (s->top - 1 + MAX_UNDO_LEVEL) % MAX_UNDO_LEVEL;
+        -:   37:  // 2. Retrieve data
+        2:   38:  *outOp = s->history[s->top];
+        -:   39:  // 3. Decrement count
+        2:   40:  s->count--;
+        2:   41:  printf("Operation Undone: ID %d\n", outOp->operation_id);
+call    0 returned 2
+        2:   42:  return true;
+        -:   43:}
+        -:   44:
+function getUndoCount called 4 returned 100% blocks executed 100%
+        4:   45:int getUndoCount(Stack *s) {
+        4:   46:  return s->count;
+        -:   47:}

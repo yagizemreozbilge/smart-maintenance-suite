@@ -4,6 +4,7 @@
 #include "handlers/auth_handler.h"
 #include "handlers/maintenance_handler.h"
 #include "handlers/report_handler.h"
+#include "alert_service.h"
 #include <string.h>
 #include <stdio.h>
 

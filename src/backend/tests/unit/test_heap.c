@@ -39,3 +39,8 @@ void run_heap_tests() {
   test_heap_insert_extract();
   printf("All Heap Tests Passed!\n");
 }
+
+int main() {
+  run_heap_tests();
+  return 0;
+}

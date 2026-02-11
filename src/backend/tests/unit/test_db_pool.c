@@ -3,8 +3,8 @@
 #include <string.h>
 #include <pthread.h>
 #include <unistd.h>
-#include "../../database/db_connection.c"
-#include "../../database/logger.h"
+#include "database/db_connection.c"
+#include "database/logger.h"
 
 /* ------------------------------------------------------------ */
 /* PART 1: Initialization & Config Tests                        */
@@ -102,4 +102,9 @@ void run_db_pool_tests() {
   test_db_pool_metrics_logic();
   test_db_pool_fifo_logic();
   printf("--- DB Connection Pool Tests Passed! ---\n\n");
+}
+
+int main() {
+  run_db_pool_tests();
+  return 0;
 }

@@ -1,0 +1,82 @@
+        -:    0:Source:src/backend/database/machine_service.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_machine_service-machine_service.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_machine_service-machine_service.gcda
+        -:    0:Runs:1
+        -:    1:#include "machine_service.h"
+        -:    2:#include "db_connection.h"
+        -:    3:#include "logger.h"
+        -:    4:#include <string.h>
+        -:    5:#include <stdlib.h>
+        -:    6:
+function get_all_machines called 0 returned 0% blocks executed 0%
+    #####:    7:int get_all_machines(Machine *machines, int max_count) {
+        -:    8:  // 1. Havuzdan bir bağlantı ödünç al
+    #####:    9:  DBConnection *conn_wrapper = db_pool_acquire();
+call    0 never executed
+        -:   10:
+    #####:   11:  if (!conn_wrapper) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   12:    LOG_ERROR("Could not acquire connection to fetch machines.");
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   13:    return 0;
+        -:   14:  }
+        -:   15:
+        -:   16:  // 2. SQL Sorgusunu çalıştır
+    #####:   17:  PGresult *res = PQexec(conn_wrapper->pg_conn, "SELECT id, name, model, location, status FROM machines");
+call    0 never executed
+        -:   18:
+    #####:   19:  if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:   20:    LOG_ERROR("SELECT machines failed: %s", PQerrorMessage(conn_wrapper->pg_conn));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+    #####:   21:    PQclear(res);
+call    0 never executed
+    #####:   22:    db_pool_release(conn_wrapper);
+call    0 never executed
+    #####:   23:    return 0;
+        -:   24:  }
+        -:   25:
+        -:   26:  // 3. Gelen verileri C Struct'larına kopyala
+    #####:   27:  int rows = PQntuples(res);
+call    0 never executed
+    #####:   28:  int count = (rows < max_count) ? rows : max_count;
+        -:   29:
+    #####:   30:  for (int i = 0; i < count; i++) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:   31:    machines[i].id = atoi(PQgetvalue(res, i, 0));
+call    0 never executed
+call    1 never executed
+    #####:   32:    strncpy(machines[i].name, PQgetvalue(res, i, 1), 99);
+call    0 never executed
+    #####:   33:    machines[i].name[99] = '\0';
+    #####:   34:    strncpy(machines[i].model, PQgetvalue(res, i, 2), 49);
+call    0 never executed
+    #####:   35:    machines[i].model[49] = '\0';
+    #####:   36:    strncpy(machines[i].location, PQgetvalue(res, i, 3), 99);
+call    0 never executed
+    #####:   37:    machines[i].location[99] = '\0';
+    #####:   38:    strncpy(machines[i].status, PQgetvalue(res, i, 4), 19);
+call    0 never executed
+    #####:   39:    machines[i].status[19] = '\0';
+        -:   40:  }
+        -:   41:
+        -:   42:  // 4. Temizlik: Sonucu temizle ve bağlantıyı havuza geri ver
+    #####:   43:  PQclear(res);
+call    0 never executed
+    #####:   44:  db_pool_release(conn_wrapper);
+call    0 never executed
+    #####:   45:  LOG_INFO("Successfully fetched %d machines from DB.", count);
+call    0 never executed
+    #####:   46:  return count;
+        -:   47:}

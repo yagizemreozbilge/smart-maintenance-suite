@@ -41,3 +41,8 @@ void run_bst_tests() {
   test_bst_insert_search();
   printf("All BST Tests Passed!\n");
 }
+
+int main() {
+  run_bst_tests();
+  return 0;
+}

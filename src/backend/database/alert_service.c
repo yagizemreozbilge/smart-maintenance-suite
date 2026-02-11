@@ -5,6 +5,10 @@
 #include <string.h>
 #include <stdlib.h>
 
+/* ------------------------------------------------------------------
+ * PRIVATE HELPERS
+ * ------------------------------------------------------------------ */
+
 const char *severity_to_str(AlertSeverity severity) {
   switch (severity) {
     case SEVERITY_INFO:
@@ -20,6 +24,10 @@ const char *severity_to_str(AlertSeverity severity) {
       return "UNKNOWN";
   }
 }
+
+/* ------------------------------------------------------------------
+ * PUBLIC API
+ * ------------------------------------------------------------------ */
 
 bool create_alert(int sensor_id, AlertSeverity severity, const char *message) {
   DBConnection *conn_wrapper = db_pool_acquire();
@@ -48,6 +56,8 @@ bool create_alert(int sensor_id, AlertSeverity severity, const char *message) {
   return true;
 }
 
+/* ------------------------------------------------------------------ */
+
 void check_and_trigger_alerts(int sensor_id, const char *sensor_type, double value) {
   if (strcmp(sensor_type, "Temperature") == 0) {
     if (value > 90.0) {
@@ -73,6 +83,8 @@ void check_and_trigger_alerts(int sensor_id, const char *sensor_type, double val
     }
   }
 }
+
+/* ------------------------------------------------------------------ */
 
 int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
   DBConnection *conn_wrapper = db_pool_acquire();
@@ -111,3 +123,68 @@ int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
   db_pool_release(conn_wrapper);
   return count;
 }
+
+/* ------------------------------------------------------------------
+ * JSON SERIALIZATION (API ENDPOINTS)
+ * ------------------------------------------------------------------ */
+
+/**
+ * Serializes alerts to JSON format for API responses.
+ * Fetches recent alerts and converts them to JSON string.
+ * Caller is responsible for freeing the returned string.
+ */
+char *serialize_alerts_to_json(void) {
+  AlertInfo alerts[50];
+  int count = get_recent_alerts(alerts, 50);
+  // JSON string için memory allocation
+  char *json = (char *)malloc(4096);
+
+  if (!json) return NULL;
+
+  char *ptr = json;
+  ptr += sprintf(ptr, "{\"alerts\":[");
+
+  for (int i = 0; i < count; i++) {
+    if (i > 0) {
+      ptr += sprintf(ptr, ",");
+    }
+
+    ptr += sprintf(ptr,
+                   "{"
+                   "\"id\":%d,"
+                   "\"sensor_id\":%d,"
+                   "\"severity\":\"%s\","
+                   "\"message\":\"%s\","
+                   "\"created_at\":\"%s\""
+                   "}",
+                   alerts[i].id,
+                   alerts[i].sensor_id,
+                   alerts[i].severity,
+                   alerts[i].message,
+                   alerts[i].created_at
+                  );
+  }
+
+  ptr += sprintf(ptr, "]}");
+  return json;
+}
+
+/* ------------------------------------------------------------------
+ * TEST/MOCK VERSION (compile with -DTEST_MODE)
+ * ------------------------------------------------------------------ */
+
+#ifdef TEST_MODE
+/**
+ * Test version that doesn't require database connection.
+ */
+char *serialize_alerts_to_json(void) {
+  char *json = (char *)malloc(256);
+
+  if (json) {
+    strcpy(json, "{\"alerts\":[]}");
+  }
+
+  return json;
+}
+
+#endif /* TEST_MODE */

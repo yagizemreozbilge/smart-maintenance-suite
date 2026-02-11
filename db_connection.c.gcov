@@ -1,0 +1,563 @@
+        -:    0:Source:src/backend/database/db_connection.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_maintenance_service-db_connection.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_maintenance_service-db_connection.gcda
+        -:    0:Runs:1
+        -:    1:/*
+        -:    2: * db_connection.c
+        -:    3: * ----------------
+        -:    4: * A learning‑focused implementation of a PostgreSQL connection pool.
+        -:    5: * The code is heavily commented so that a newcomer can follow each
+        -:    6: * design decision and understand how the pool works in a real‑world
+        -:    7: * factory setting (50+ machines sending sensor data).
+        -:    8: *
+        -:    9: * NOTE: This file pairs with `db_connection.h` which declares the public
+        -:   10: * API and data structures.
+        -:   11: */
+        -:   12:
+        -:   13:/* ------------------------------------------------------------ */
+        -:   14:/* 1.  Standard library includes                                 */
+        -:   15:/* ------------------------------------------------------------ */
+        -:   16:#include <stdio.h>
+        -:   17:#include <stdlib.h>
+        -:   18:#include <stdbool.h>
+        -:   19:#include <string.h>
+        -:   20:#include <pthread.h>
+        -:   21:#include <libpq-fe.h>          /* libpq – PostgreSQL C client library */
+        -:   22:#include <errno.h>
+        -:   23:#include "logger.h"
+        -:   24:#include "db_connection.h"
+        -:   25:
+        -:   26:#ifdef TEST_MODE
+        -:   27:    // Test modunda PostgreSQL bağlantısını mock'la
+        -:   28:    #define PQconnectdb(x) ((PGconn*)0xDEADBEEF)
+        -:   29:    #define PQstatus(x) CONNECTION_OK
+        -:   30:    #define PQerrorMessage(x) "Mock connection"
+        -:   31:    #define PQfinish(x)
+        -:   32:#endif
+        -:   33:
+        -:   34:
+        -:   35:/* ------------------------------------------------------------ */
+        -:   36:/* 5.  The pool structure (private – defined here for simplicity) */
+        -:   37:/* ------------------------------------------------------------ */
+        -:   38:struct ConnectionPool {
+        -:   39:  DBConnection *connections;          /* array of size max_size */
+        -:   40:  int           max_size;            /* e.g. 25 */
+        -:   41:  int           min_size;            /* e.g. 5  */
+        -:   42:  int           used_cnt;            /* how many are currently in_use */
+        -:   43:  int          *free_stack;          /* stack of free indices */
+        -:   44:  int           free_top;            /* index of the top element */
+        -:   45:  size_t acquire_cnt;
+        -:   46:  size_t release_cnt;
+        -:   47:  double total_wait_ms;
+        -:   48:  pthread_mutex_t lock;              /* protects all mutable fields */
+        -:   49:  pthread_cond_t  free_cond;         /* signalled when a slot becomes free */
+        -:   50:  PoolExhaustionPolicy policy;       /* chosen by the integrator */
+        -:   51:  int           timeout_ms;          /* used when policy == BLOCK_WITH_TIMEOUT */
+        -:   52:  DatabaseConfig cfg;                /* stored so we can lazily create connections */
+        -:   53:};
+        -:   54:
+        -:   55:/* --- FIFO Queue Structure for Waiting Threads --- */
+        -:   56:typedef struct WaitNode {
+        -:   57:  pthread_cond_t cond;
+        -:   58:  struct WaitNode *next;
+        -:   59:} WaitNode;
+        -:   60:
+        -:   61:static WaitNode *wait_head = NULL;
+        -:   62:static WaitNode *wait_tail = NULL;
+        -:   63:
+        -:   64:/* ------------------------------------------------------------ */
+        -:   65:/* 6.  Global pool instance – one pool per process                */
+        -:   66:/* ------------------------------------------------------------ */
+        -:   67:static ConnectionPool g_pool = {0};
+        -:   68:
+        -:   69:/* ------------------------------------------------------------ */
+        -:   70:/* 7.  Helper: build a libpq connection string from DatabaseConfig */
+        -:   71:/* ------------------------------------------------------------ */
+function build_conn_str called 0 returned 0% blocks executed 0%
+    #####:   72:static char *build_conn_str(const DatabaseConfig *cfg) {
+        -:   73:  /* The string is allocated on the heap; the caller must free it. */
+    #####:   74:  size_t needed = 256 + strlen(cfg->host) + strlen(cfg->dbname) +
+    #####:   75:                  strlen(cfg->user) + strlen(cfg->password) + strlen(cfg->sslmode);
+    #####:   76:  char *buf = (char *)malloc(needed);
+        -:   77:
+    #####:   78:  if (!buf) return NULL;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   79:
+    #####:   80:  snprintf(buf, needed,
+        -:   81:           "host=%s port=%d dbname=%s user=%s password=%s sslmode=%s connect_timeout=%d",
+    #####:   82:           cfg->host, cfg->port, cfg->dbname, cfg->user, cfg->password,
+    #####:   83:           cfg->sslmode, cfg->connect_timeout);
+call    0 never executed
+    #####:   84:  return buf;
+        -:   85:}
+        -:   86:
+        -:   87:/* ------------------------------------------------------------ */
+        -:   88:/* 8.  Stack utilities – very small, lock‑free because the pool lock
+        -:   89: *    already protects them.
+        -:   90: * ------------------------------------------------------------ */
+function stack_push called 0 returned 0% blocks executed 0%
+    #####:   91:static inline void stack_push(int *stack, int *top, int value) {
+    #####:   92:  stack[(*top)++] = value;   /* store then increment */
+    #####:   93:}
+        -:   94:
+function stack_pop called 0 returned 0% blocks executed 0%
+    #####:   95:static inline int stack_pop(int *stack, int *top) {
+    #####:   96:  return stack[--(*top)];    /* decrement then retrieve */
+        -:   97:}
+        -:   98:
+function stack_is_empty called 0 returned 0% blocks executed 0%
+    #####:   99:static inline bool stack_is_empty(int top) {
+    #####:  100:  return top == 0;
+        -:  101:}
+        -:  102:
+        -:  103:/* --- Internal: Reconnect a dead connection --- */
+function reconnect_connection called 0 returned 0% blocks executed 0%
+    #####:  104:static bool reconnect_connection(DBConnection *c, const DatabaseConfig *cfg) {
+    #####:  105:  if (c->pg_conn) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  106:    PQfinish(c->pg_conn);
+call    0 never executed
+    #####:  107:    c->pg_conn = NULL;
+        -:  108:  }
+        -:  109:
+    #####:  110:  char *cs = build_conn_str(cfg);
+call    0 never executed
+        -:  111:
+    #####:  112:  if (!cs) return false;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  113:
+    #####:  114:  LOG_INFO("[db_pool] Reconnecting dead connection at slot %d...", c->index);
+call    0 never executed
+    #####:  115:  c->pg_conn = PQconnectdb(cs);
+call    0 never executed
+    #####:  116:  free(cs);
+        -:  117:
+    #####:  118:  if (PQstatus(c->pg_conn) != CONNECTION_OK) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:  119:    LOG_ERROR("[db_pool] Reconnect failed: %s", PQerrorMessage(c->pg_conn));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+    #####:  120:    return false;
+        -:  121:  }
+        -:  122:
+    #####:  123:  return true;
+        -:  124:}
+        -:  125:
+        -:  126:/* ------------------------------------------------------------ */
+        -:  127:/* 9.  Public API – initialise the pool                         */
+        -:  128:/* ------------------------------------------------------------ */
+function db_pool_init called 0 returned 0% blocks executed 0%
+    #####:  129:ConnectionPool *db_pool_init(const DatabaseConfig *cfg,
+        -:  130:                             PoolExhaustionPolicy policy,
+        -:  131:                             int timeout_ms) {
+        -:  132:  /* 1️ Allocate the connection array */
+    #####:  133:  g_pool.acquire_cnt = 0;
+    #####:  134:  g_pool.release_cnt = 0;
+    #####:  135:  g_pool.total_wait_ms = 0;
+        -:  136:  // Konfigürasyondan boyutları oku, belirtilmemişse varsayılanları kullan
+    #####:  137:  g_pool.max_size = (cfg->pool_max > 0) ? cfg->pool_max : 25;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  138:  g_pool.min_size = (cfg->pool_min > 0) ? cfg->pool_min : 5;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  139:  g_pool.used_cnt = 0;
+    #####:  140:  g_pool.policy    = policy;
+    #####:  141:  g_pool.timeout_ms = timeout_ms;
+    #####:  142:  g_pool.cfg = *cfg;             /* copy – we own the data */
+    #####:  143:  g_pool.connections = calloc(g_pool.max_size, sizeof(DBConnection));
+        -:  144:
+    #####:  145:  if (!g_pool.connections) return NULL;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  146:
+        -:  147:  /* 2️ Allocate the free‑slot stack (size = max_size) */
+    #####:  148:  g_pool.free_stack = malloc(g_pool.max_size *sizeof(int));
+        -:  149:
+    #####:  150:  if (!g_pool.free_stack) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  151:    free(g_pool.connections);
+    #####:  152:    return NULL;
+        -:  153:  }
+        -:  154:
+    #####:  155:  g_pool.free_top = 0;
+        -:  156:  /* 3️ Initialise mutex / condition variable */
+    #####:  157:  pthread_mutex_init(&g_pool.lock, NULL);
+call    0 never executed
+    #####:  158:  pthread_cond_init(&g_pool.free_cond, NULL);
+call    0 never executed
+        -:  159:  /* 4 Eagerly create the *minimum* number of connections */
+    #####:  160:  char *conn_str = build_conn_str(&g_pool.cfg);
+call    0 never executed
+        -:  161:
+    #####:  162:  if (!conn_str) return NULL;   /* out‑of‑memory */
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  163:
+    #####:  164:  for (int i = 0; i < g_pool.min_size; ++i) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  165:    PGconn *c = PQconnectdb(conn_str);
+call    0 never executed
+        -:  166:
+    #####:  167:    if (PQstatus(c) != CONNECTION_OK) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:  168:      LOG_ERROR("[db_pool_init] failed to connect: %s", PQerrorMessage(c));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+    #####:  169:      PQfinish(c);
+call    0 never executed
+    #####:  170:      continue;   /* we keep the slot NULL – lazy creation later */
+        -:  171:    }
+        -:  172:
+    #####:  173:    g_pool.connections[i].pg_conn = c;
+    #####:  174:    g_pool.connections[i].in_use = false;
+    #####:  175:    g_pool.connections[i].index   = i;
+    #####:  176:    stack_push(g_pool.free_stack, &g_pool.free_top, i);
+call    0 never executed
+        -:  177:  }
+        -:  178:
+    #####:  179:  free(conn_str);
+        -:  180:
+        -:  181:  /* 5️ Remaining slots stay NULL (lazy) */
+    #####:  182:  for (int i = g_pool.min_size; i < g_pool.max_size; ++i) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  183:    g_pool.connections[i].pg_conn = NULL;
+    #####:  184:    g_pool.connections[i].in_use = false;
+    #####:  185:    g_pool.connections[i].index   = i;
+        -:  186:  }
+        -:  187:
+    #####:  188:  return &g_pool;
+        -:  189:}
+        -:  190:
+        -:  191:/* ------------------------------------------------------------ */
+        -:  192:/* 10. Acquire a connection – respects the exhaustion policy      */
+        -:  193:/* ------------------------------------------------------------ */
+function db_pool_acquire called 0 returned 0% blocks executed 0%
+    #####:  194:DBConnection *db_pool_acquire(void) {
+    #####:  195:  pthread_mutex_lock(&g_pool.lock);
+call    0 never executed
+        -:  196:
+        -:  197:  /* Fast path – a free slot is already on the stack */
+    #####:  198:  if (!stack_is_empty(g_pool.free_top)) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:  199:    int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
+call    0 never executed
+    #####:  200:    DBConnection *c = &g_pool.connections[idx];
+        -:  201:
+        -:  202:    /* --- RECONNECTION LOGIC START --- */
+        -:  203:    /* Check if the connection is still alive */
+    #####:  204:    if (PQstatus(c->pg_conn) != CONNECTION_OK) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:  205:      if (!reconnect_connection(c, &g_pool.cfg)) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+        -:  206:        /* If reconnect fails, we effectively lost a slot.
+        -:  207:           In a real system, we might retry or return NULL. */
+    #####:  208:        pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  209:        return NULL;
+        -:  210:      }
+        -:  211:    }
+        -:  212:
+        -:  213:    /* --- RECONNECTION LOGIC END --- */
+    #####:  214:    c->in_use = true;
+    #####:  215:    g_pool.used_cnt++;
+    #####:  216:    pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  217:    return c;
+        -:  218:  }
+        -:  219:
+        -:  220:  /* No free slot – try lazy creation if we still have capacity */
+    #####:  221:  for (int i = g_pool.min_size; i < g_pool.max_size; ++i) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  222:    if (g_pool.connections[i].pg_conn == NULL) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  223:      char *cs = build_conn_str(&g_pool.cfg);
+call    0 never executed
+        -:  224:
+    #####:  225:      if (!cs) break;   /* out‑of‑memory */
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  226:
+    #####:  227:      PGconn *c = PQconnectdb(cs);
+call    0 never executed
+    #####:  228:      free(cs);
+        -:  229:
+    #####:  230:      if (PQstatus(c) != CONNECTION_OK) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:  231:        LOG_ERROR("[db_pool_acquire] lazy connect failed: %s", PQerrorMessage(c));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+    #####:  232:        PQfinish(c);
+call    0 never executed
+    #####:  233:        continue;   /* treat as exhausted for now */
+        -:  234:      }
+        -:  235:
+    #####:  236:      g_pool.connections[i].pg_conn = c;
+    #####:  237:      g_pool.connections[i].in_use = true;
+    #####:  238:      g_pool.connections[i].index   = i;
+    #####:  239:      g_pool.used_cnt++;
+    #####:  240:      pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  241:      return &g_pool.connections[i];
+        -:  242:    }
+        -:  243:  }
+        -:  244:
+        -:  245:  /* -------------------------------------------------------- */
+        -:  246:  /* 3 Pool exhausted – apply the selected policy            */
+        -:  247:  /* -------------------------------------------------------- */
+    #####:  248:  switch (g_pool.policy) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  249:    case BLOCK_WITH_TIMEOUT: {
+        -:  250:      /* Dynamically adjust timeout based on current load.
+        -:  251:       * The more connections in use, the longer we are willing to wait.
+        -:  252:       * Simple heuristic: base_timeout * (1 + used_cnt / max_size). */
+    #####:  253:      double load_factor = (double)g_pool.used_cnt / (double)g_pool.max_size;
+    #####:  254:      int effective_timeout_ms = (int)(g_pool.timeout_ms * (1.0 + load_factor));
+        -:  255:      struct timespec ts;
+    #####:  256:      clock_gettime(CLOCK_REALTIME, &ts);
+call    0 never executed
+    #####:  257:      ts.tv_sec  += effective_timeout_ms / 1000;
+    #####:  258:      ts.tv_nsec += (effective_timeout_ms % 1000) * 1000000;
+        -:  259:
+    #####:  260:      if (ts.tv_nsec >= 1000000000) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  261:        ts.tv_sec++;
+    #####:  262:        ts.tv_nsec -= 1000000000;
+        -:  263:      }
+        -:  264:
+        -:  265:      /* Measure how long we actually waited. */
+        -:  266:      struct timespec wait_start, wait_end;
+    #####:  267:      clock_gettime(CLOCK_REALTIME, &wait_start);
+call    0 never executed
+    #####:  268:      int rc = 0;
+        -:  269:
+    #####:  270:      while (rc != ETIMEDOUT && stack_is_empty(g_pool.free_top)) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed (fallthrough)
+    #####:  271:        rc = pthread_cond_timedwait(&g_pool.free_cond, &g_pool.lock, &ts);
+call    0 never executed
+        -:  272:      }
+        -:  273:
+    #####:  274:      clock_gettime(CLOCK_REALTIME, &wait_end);
+call    0 never executed
+    #####:  275:      double waited_ms = (wait_end.tv_sec - wait_start.tv_sec) * 1000.0 +
+    #####:  276:                         (wait_end.tv_nsec - wait_start.tv_nsec) / 1000000.0;
+    #####:  277:      g_pool.total_wait_ms += waited_ms;
+        -:  278:
+    #####:  279:      if (!stack_is_empty(g_pool.free_top)) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:  280:        int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
+call    0 never executed
+    #####:  281:        DBConnection *c = &g_pool.connections[idx];
+    #####:  282:        c->in_use = true;
+    #####:  283:        g_pool.used_cnt++;
+    #####:  284:        g_pool.acquire_cnt++;
+    #####:  285:        pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  286:        return c;
+        -:  287:      }
+        -:  288:
+        -:  289:      /* timeout – fall through to failure */
+    #####:  290:      break;
+        -:  291:    }
+        -:  292:
+    #####:  293:    case QUEUE_REQUESTS: {
+        -:  294:      /* FIFO Bekleme Kuyruğu Uygulaması:
+        -:  295:       * Her thread kendi condition variable'ı ile kuyruğa eklenir. */
+    #####:  296:      WaitNode *my_node = malloc(sizeof(WaitNode));
+    #####:  297:      pthread_cond_init(&my_node->cond, NULL);
+call    0 never executed
+    #####:  298:      my_node->next = NULL;
+        -:  299:
+    #####:  300:      if (wait_tail == NULL) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  301:        wait_head = my_node;
+        -:  302:      } else {
+    #####:  303:        wait_tail->next = my_node;
+        -:  304:      }
+        -:  305:
+    #####:  306:      wait_tail = my_node;
+        -:  307:
+    #####:  308:      while (stack_is_empty(g_pool.free_top) || wait_head != my_node) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+branch  4 never executed (fallthrough)
+    #####:  309:        pthread_cond_wait(&my_node->cond, &g_pool.lock);
+call    0 never executed
+        -:  310:      }
+        -:  311:
+    #####:  312:      int idx = stack_pop(g_pool.free_stack, &g_pool.free_top);
+call    0 never executed
+    #####:  313:      DBConnection *c = &g_pool.connections[idx];
+    #####:  314:      c->in_use = true;
+    #####:  315:      g_pool.used_cnt++;
+    #####:  316:      g_pool.acquire_cnt++;
+        -:  317:      /* Kendini kuyruktan çıkar */
+    #####:  318:      wait_head = my_node->next;
+        -:  319:
+    #####:  320:      if (wait_head == NULL) wait_tail = NULL;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  321:
+    #####:  322:      pthread_cond_destroy(&my_node->cond);
+call    0 never executed
+    #####:  323:      free(my_node);
+    #####:  324:      pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  325:      return c;
+        -:  326:    }
+        -:  327:
+    #####:  328:    case FAIL_FAST:
+        -:  329:    default:
+        -:  330:      /* Immediate failure – caller must decide what to do */
+    #####:  331:      break;
+        -:  332:  }
+        -:  333:
+    #####:  334:  pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  335:  return NULL;   /* pool exhausted and policy dictated failure */
+        -:  336:}
+        -:  337:
+        -:  338:/* ------------------------------------------------------------ */
+        -:  339:/* 11. Release a connection back to the pool                     */
+        -:  340:/* ------------------------------------------------------------ */
+function db_pool_release called 0 returned 0% blocks executed 0%
+    #####:  341:void db_pool_release(DBConnection *conn) {
+    #####:  342:  if (!conn) return;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  343:
+    #####:  344:  pthread_mutex_lock(&g_pool.lock);
+call    0 never executed
+    #####:  345:  int idx = conn->index;
+    #####:  346:  conn->in_use = false;
+    #####:  347:  stack_push(g_pool.free_stack, &g_pool.free_top, idx);
+call    0 never executed
+    #####:  348:  g_pool.used_cnt--;
+    #####:  349:  g_pool.release_cnt++;
+        -:  350:
+        -:  351:  /* Kuyruktaki ilk kişiyi uyandır (FIFO) */
+    #####:  352:  if (wait_head != NULL) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  353:    pthread_cond_signal(&wait_head->cond);
+call    0 never executed
+        -:  354:  } else {
+        -:  355:    /* Kimse kuyrukta değilse BLOCK_WITH_TIMEOUT bekleyenleri uyar */
+    #####:  356:    pthread_cond_signal(&g_pool.free_cond);
+call    0 never executed
+        -:  357:  }
+        -:  358:
+    #####:  359:  pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+        -:  360:}
+        -:  361:
+        -:  362:/* ------------------------------------------------------------ */
+        -:  363:/* 12. Destroy the pool – close all libpq connections          */
+        -:  364:/* ------------------------------------------------------------ */
+function db_pool_destroy called 0 returned 0% blocks executed 0%
+    #####:  365:void db_pool_destroy(void) {
+        -:  366:  /* Student‑style cleanup: close all libpq connections and free memory. */
+    #####:  367:  pthread_mutex_lock(&g_pool.lock);
+call    0 never executed
+        -:  368:
+    #####:  369:  for (int i = 0; i < g_pool.max_size; ++i) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  370:    if (g_pool.connections[i].pg_conn) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  371:      PQfinish(g_pool.connections[i].pg_conn);
+call    0 never executed
+    #####:  372:      g_pool.connections[i].pg_conn = NULL;
+        -:  373:    }
+        -:  374:  }
+        -:  375:
+    #####:  376:  free(g_pool.connections);
+    #####:  377:  free(g_pool.free_stack);
+    #####:  378:  pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  379:  pthread_mutex_destroy(&g_pool.lock);
+call    0 never executed
+    #####:  380:  pthread_cond_destroy(&g_pool.free_cond);
+call    0 never executed
+    #####:  381:  memset(&g_pool, 0, sizeof(g_pool));
+    #####:  382:}
+        -:  383:
+        -:  384:/* ------------------------------------------------------------ */
+        -:  385:/* 12.5 Get current metrics                                     */
+        -:  386:/* ------------------------------------------------------------ */
+function db_pool_get_metrics called 0 returned 0% blocks executed 0%
+    #####:  387:PoolMetrics db_pool_get_metrics(void) {
+        -:  388:  PoolMetrics m;
+    #####:  389:  pthread_mutex_lock(&g_pool.lock);
+call    0 never executed
+    #####:  390:  m.acquire_cnt = g_pool.acquire_cnt;
+    #####:  391:  m.release_cnt = g_pool.release_cnt;
+    #####:  392:  m.used_cnt    = g_pool.used_cnt;
+    #####:  393:  m.total_wait_ms = g_pool.total_wait_ms;
+    #####:  394:  pthread_mutex_unlock(&g_pool.lock);
+call    0 never executed
+    #####:  395:  return m;
+        -:  396:}
+        -:  397:
+        -:  398:/* ------------------------------------------------------------ */
+        -:  399:/* 13. Example usage (commented out – keep it for learning)   */
+        -:  400:/* ------------------------------------------------------------ */
+        -:  401:/*
+        -:  402:int main(void)
+        -:  403:{
+        -:  404:    DatabaseConfig cfg = {"localhost", 5432, "factorydb", "admin", "secret", "require", 5, 5, 25};
+        -:  405:    ConnectionPool *p = db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 200);
+        -:  406:    if (!p) { LOG_ERROR("Failed to init pool"); return 1; }
+        -:  407:
+        -:  408:    DBConnection *c = db_pool_acquire();
+        -:  409:    if (!c) { LOG_ERROR("Could not acquire connection"); return 1; }
+        -:  410:
+        -:  411:    // Use the connection, e.g. PQexec(c->pg_conn, "SELECT 1");
+        -:  412:
+        -:  413:    db_pool_release(c);
+        -:  414:    db_pool_destroy();
+        -:  415:    return 0;
+        -:  416:}
+        -:  417:*/
