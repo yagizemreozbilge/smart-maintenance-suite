@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/yagiz/Desktop/Project/smart-maintenance-suite/build_win/src/tests/smart_maintenance_suite_app/smart_maintenance_suite_app_tests[1]_tests.cmake")
+  include("C:/Users/yagiz/Desktop/Project/smart-maintenance-suite/build_win/src/tests/smart_maintenance_suite_app/smart_maintenance_suite_app_tests[1]_tests.cmake")
+else()
+  add_test(smart_maintenance_suite_app_tests_NOT_BUILT smart_maintenance_suite_app_tests_NOT_BUILT)
+endif()

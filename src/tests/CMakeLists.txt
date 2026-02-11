@@ -42,3 +42,8 @@ if(ENABLE_SMART_MAINTENANCE_SUITE)
 	add_subdirectory(smart_maintenance_suite)
 endif()
 
+# Smart Maintenance App tests
+if(ENABLE_SMART_MAINTENANCE_SUITE_APP)
+    add_subdirectory(smart_maintenance_suite_app)
+endif()
+
