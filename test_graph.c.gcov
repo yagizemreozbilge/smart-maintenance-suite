@@ -1,0 +1,91 @@
+        -:    0:Source:src/backend/tests/unit/test_graph.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_graph-test_graph.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_graph-test_graph.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <assert.h>
+        -:    3:#include "../../core/data_structures/graph.h"
+        -:    4:
+function test_graph_init called 1 returned 100% blocks executed 83%
+        1:    5:void test_graph_init() {
+        -:    6:  Graph g;
+        1:    7:  initGraph(&g);
+call    0 returned 1
+       1*:    8:  assert(g.count == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:    9:  printf("Graph Init Test Passed\n");
+call    0 returned 1
+        1:   10:}
+        -:   11:
+function test_graph_ops called 1 returned 100% blocks executed 77%
+        1:   12:void test_graph_ops() {
+        -:   13:  Graph g;
+        1:   14:  initGraph(&g);
+call    0 returned 1
+        -:   15:  // Add machines (Nodes)
+       1*:   16:  assert(addMachineNode(&g, 100) == true);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+       1*:   17:  assert(addMachineNode(&g, 200) == true);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+       1*:   18:  assert(addMachineNode(&g, 300) == true);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        -:   19:  // Dependencies: 100 -> 200 (100 depends on 200)
+       1*:   20:  assert(addDependency(&g, 100, 200) == true);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+       1*:   21:  assert(hasDependency(&g, 100, 200) == true);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+       1*:   22:  assert(hasDependency(&g, 200, 100) == false);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        -:   23:  // Remove dependency
+       1*:   24:  assert(removeDependency(&g, 100, 200) == true);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+       1*:   25:  assert(hasDependency(&g, 100, 200) == false);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   26:  printf("Graph Ops Test Passed\n");
+call    0 returned 1
+        1:   27:}
+        -:   28:
+function run_graph_tests called 1 returned 100% blocks executed 100%
+        1:   29:void run_graph_tests() {
+        1:   30:  printf("Running Graph Tests...\n");
+call    0 returned 1
+        1:   31:  test_graph_init();
+call    0 returned 1
+        1:   32:  test_graph_ops();
+call    0 returned 1
+        1:   33:  printf("All Graph Tests Passed!\n");
+call    0 returned 1
+        1:   34:}
+        -:   35:
+function main called 1 returned 100% blocks executed 100%
+        1:   36:int main() {
+        1:   37:  run_graph_tests();
+call    0 returned 1
+        1:   38:  return 0;
+        -:   39:}

@@ -1,0 +1,168 @@
+        -:    0:Source:src/backend/api/handlers/fault_handler.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-fault_handler.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-fault_handler.gcda
+        -:    0:Runs:1
+        -:    1:/* This file is a template for fault_handler.c. Content will be filled by yagiz on 2025-12-29. */
+        -:    2:#include "fault_handler.h"
+        -:    3:#include "../../database/cJSON.h"
+        -:    4:#include <string.h>
+        -:    5:#include <stdlib.h>
+        -:    6:#include <stdio.h>
+        -:    7:
+        -:    8:// Fault/Arıza verileri için JSON serialize fonksiyonu
+function serialize_faults_to_json called 0 returned 0% blocks executed 0%
+    #####:    9:char *serialize_faults_to_json(void) {
+    #####:   10:  cJSON *root = cJSON_CreateObject();
+call    0 never executed
+    #####:   11:  cJSON *faults_array = cJSON_CreateArray();
+call    0 never executed
+        -:   12:  // Mock fault/arıza verileri
+    #####:   13:  cJSON *fault1 = cJSON_CreateObject();
+call    0 never executed
+    #####:   14:  cJSON_AddNumberToObject(fault1, "id", 1);
+call    0 never executed
+    #####:   15:  cJSON_AddNumberToObject(fault1, "machine_id", 1);
+call    0 never executed
+    #####:   16:  cJSON_AddStringToObject(fault1, "machine_name", "CNC Machine");
+call    0 never executed
+    #####:   17:  cJSON_AddStringToObject(fault1, "description", "Overheating detected");
+call    0 never executed
+    #####:   18:  cJSON_AddStringToObject(fault1, "severity", "CRITICAL");
+call    0 never executed
+    #####:   19:  cJSON_AddStringToObject(fault1, "status", "active");
+call    0 never executed
+    #####:   20:  cJSON_AddStringToObject(fault1, "detected_at", "2026-02-11 10:30:00");
+call    0 never executed
+    #####:   21:  cJSON_AddItemToArray(faults_array, fault1);
+call    0 never executed
+    #####:   22:  cJSON *fault2 = cJSON_CreateObject();
+call    0 never executed
+    #####:   23:  cJSON_AddNumberToObject(fault2, "id", 2);
+call    0 never executed
+    #####:   24:  cJSON_AddNumberToObject(fault2, "machine_id", 2);
+call    0 never executed
+    #####:   25:  cJSON_AddStringToObject(fault2, "machine_name", "Conveyor Belt");
+call    0 never executed
+    #####:   26:  cJSON_AddStringToObject(fault2, "description", "Belt misalignment");
+call    0 never executed
+    #####:   27:  cJSON_AddStringToObject(fault2, "severity", "WARNING");
+call    0 never executed
+    #####:   28:  cJSON_AddStringToObject(fault2, "status", "acknowledged");
+call    0 never executed
+    #####:   29:  cJSON_AddStringToObject(fault2, "detected_at", "2026-02-11 09:15:00");
+call    0 never executed
+    #####:   30:  cJSON_AddItemToArray(faults_array, fault2);
+call    0 never executed
+    #####:   31:  cJSON_AddItemToObject(root, "faults", faults_array);
+call    0 never executed
+    #####:   32:  char *json = cJSON_Print(root);
+call    0 never executed
+    #####:   33:  cJSON_Delete(root);
+call    0 never executed
+    #####:   34:  return json;
+        -:   35:}
+        -:   36:
+        -:   37:// Tek bir fault detayı için JSON serialize
+function serialize_fault_detail_to_json called 0 returned 0% blocks executed 0%
+    #####:   38:char *serialize_fault_detail_to_json(int fault_id) {
+    #####:   39:  cJSON *root = cJSON_CreateObject();
+call    0 never executed
+    #####:   40:  cJSON_AddNumberToObject(root, "id", fault_id);
+call    0 never executed
+    #####:   41:  cJSON_AddNumberToObject(root, "machine_id", 1);
+call    0 never executed
+    #####:   42:  cJSON_AddStringToObject(root, "machine_name", "CNC Machine");
+call    0 never executed
+    #####:   43:  cJSON_AddStringToObject(root, "description", "Overheating detected - Temperature exceeded 90°C");
+call    0 never executed
+    #####:   44:  cJSON_AddStringToObject(root, "severity", "CRITICAL");
+call    0 never executed
+    #####:   45:  cJSON_AddStringToObject(root, "status", "active");
+call    0 never executed
+    #####:   46:  cJSON_AddStringToObject(root, "detected_at", "2026-02-11 10:30:00");
+call    0 never executed
+    #####:   47:  cJSON_AddStringToObject(root, "resolved_at", "");
+call    0 never executed
+    #####:   48:  cJSON_AddStringToObject(root, "root_cause", "Coolant pump failure");
+call    0 never executed
+    #####:   49:  cJSON_AddStringToObject(root, "recommended_action", "Check and replace coolant pump");
+call    0 never executed
+    #####:   50:  char *json = cJSON_Print(root);
+call    0 never executed
+    #####:   51:  cJSON_Delete(root);
+call    0 never executed
+    #####:   52:  return json;
+        -:   53:}
+        -:   54:
+function handle_fault_request called 0 returned 0% blocks executed 0%
+    #####:   55:void handle_fault_request(HttpRequest *req, HttpResponse *res) {
+        -:   56:  // GET /api/faults - Tüm arızaları listele
+        -:   57:  // GET /api/faults/1 - Tek bir arıza detayı
+        -:   58:  // POST /api/faults - Yeni arıza bildir
+        -:   59:  // PUT /api/faults/1/acknowledge - Arızayı onayla
+        -:   60:  // PUT /api/faults/1/resolve - Arızayı çöz
+    #####:   61:  if (strcmp(req->method, "GET") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   62:    // Check if it's a single fault request
+    #####:   63:    char *fault_id_str = strstr(req->path, "/api/faults/");
+        -:   64:
+    #####:   65:    if (fault_id_str && strlen(fault_id_str) > 12) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+        -:   66:      // GET /api/faults/{id}
+    #####:   67:      int fault_id = atoi(fault_id_str + 12);
+call    0 never executed
+    #####:   68:      char *json = serialize_fault_detail_to_json(fault_id);
+call    0 never executed
+    #####:   69:      res->status_code = 200;
+    #####:   70:      strcpy(res->content_type, "application/json");
+    #####:   71:      strncpy(res->body, json, 8191);
+    #####:   72:      res->body[8191] = '\0';
+    #####:   73:      free(json);
+        -:   74:    } else {
+        -:   75:      // GET /api/faults
+    #####:   76:      char *json = serialize_faults_to_json();
+call    0 never executed
+    #####:   77:      res->status_code = 200;
+    #####:   78:      strcpy(res->content_type, "application/json");
+    #####:   79:      strncpy(res->body, json, 8191);
+    #####:   80:      res->body[8191] = '\0';
+    #####:   81:      free(json);
+        -:   82:    }
+    #####:   83:  } else if (strcmp(req->method, "POST") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   84:    // POST /api/faults - Yeni arıza bildir
+    #####:   85:    res->status_code = 201;
+    #####:   86:    strcpy(res->content_type, "application/json");
+    #####:   87:    strcpy(res->body, "{\"success\": true, \"message\": \"Fault reported successfully\", \"fault_id\": 3}");
+    #####:   88:  } else if (strcmp(req->method, "PUT") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   89:    // PUT /api/faults/1/acknowledge veya /api/faults/1/resolve
+    #####:   90:    if (strstr(req->path, "/acknowledge")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   91:      res->status_code = 200;
+    #####:   92:      strcpy(res->content_type, "application/json");
+    #####:   93:      strcpy(res->body, "{\"success\": true, \"message\": \"Fault acknowledged\"}");
+    #####:   94:    } else if (strstr(req->path, "/resolve")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   95:      res->status_code = 200;
+    #####:   96:      strcpy(res->content_type, "application/json");
+    #####:   97:      strcpy(res->body, "{\"success\": true, \"message\": \"Fault resolved\"}");
+        -:   98:    } else {
+    #####:   99:      res->status_code = 400;
+    #####:  100:      strcpy(res->content_type, "application/json");
+    #####:  101:      strcpy(res->body, "{\"error\": \"Invalid fault operation\"}");
+        -:  102:    }
+        -:  103:  } else {
+    #####:  104:    res->status_code = 405;
+    #####:  105:    strcpy(res->content_type, "application/json");
+    #####:  106:    strcpy(res->body, "{\"error\": \"Method not supported for faults\"}");
+        -:  107:  }
+    #####:  108:}

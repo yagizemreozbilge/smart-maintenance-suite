@@ -1,0 +1,287 @@
+        -:    0:Source:src/backend/database/alert_service.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-alert_service.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-alert_service.gcda
+        -:    0:Runs:1
+        -:    1:#include "alert_service.h"
+        -:    2:#include "db_connection.h"
+        -:    3:#include "logger.h"
+        -:    4:#include <stdio.h>
+        -:    5:#include <string.h>
+        -:    6:#include <stdlib.h>
+        -:    7:
+        -:    8:/* ------------------------------------------------------------------
+        -:    9: * PRIVATE HELPERS
+        -:   10: * ------------------------------------------------------------------ */
+        -:   11:
+function severity_to_str called 0 returned 0% blocks executed 0%
+    #####:   12:const char *severity_to_str(AlertSeverity severity) {
+    #####:   13:  switch (severity) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   14:    case SEVERITY_INFO:
+    #####:   15:      return "INFO";
+        -:   16:
+    #####:   17:    case SEVERITY_WARNING:
+    #####:   18:      return "WARNING";
+        -:   19:
+    #####:   20:    case SEVERITY_CRITICAL:
+    #####:   21:      return "CRITICAL";
+        -:   22:
+    #####:   23:    default:
+    #####:   24:      return "UNKNOWN";
+        -:   25:  }
+        -:   26:}
+        -:   27:
+        -:   28:/* ------------------------------------------------------------------
+        -:   29: * PUBLIC API
+        -:   30: * ------------------------------------------------------------------ */
+        -:   31:
+function create_alert called 0 returned 0% blocks executed 0%
+    #####:   32:bool create_alert(int sensor_id, AlertSeverity severity, const char *message) {
+    #####:   33:  DBConnection *conn_wrapper = db_pool_acquire();
+call    0 never executed
+        -:   34:
+    #####:   35:  if (!conn_wrapper) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   36:    LOG_ERROR("Could not acquire connection to create alert.");
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    #####:   37:    return false;
+        -:   38:  }
+        -:   39:
+        -:   40:  char query[1024];
+    #####:   41:  snprintf(query, sizeof(query),
+call    0 never executed
+call    1 never executed
+        -:   42:           "INSERT INTO alerts (sensor_id, severity, message) VALUES (%d, '%s', '%s');",
+        -:   43:           sensor_id, severity_to_str(severity), message);
+    #####:   44:  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+call    0 never executed
+        -:   45:
+    #####:   46:  if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:   47:    LOG_ERROR("Failed to insert alert: %s", PQerrorMessage(conn_wrapper->pg_conn));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+    #####:   48:    PQclear(res);
+call    0 never executed
+    #####:   49:    db_pool_release(conn_wrapper);
+call    0 never executed
+    #####:   50:    return false;
+        -:   51:  }
+        -:   52:
+    #####:   53:  PQclear(res);
+call    0 never executed
+    #####:   54:  db_pool_release(conn_wrapper);
+call    0 never executed
+    #####:   55:  LOG_INFO("[ALERT CREATED] Sensor %d: %s (%s)", sensor_id, message, severity_to_str(severity));
+call    0 never executed
+call    1 never executed
+    #####:   56:  return true;
+        -:   57:}
+        -:   58:
+        -:   59:/* ------------------------------------------------------------------ */
+        -:   60:
+function check_and_trigger_alerts called 0 returned 0% blocks executed 0%
+    #####:   61:void check_and_trigger_alerts(int sensor_id, const char *sensor_type, double value) {
+    #####:   62:  if (strcmp(sensor_type, "Temperature") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   63:    if (value > 90.0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   64:      char msg[128];
+    #####:   65:      snprintf(msg, sizeof(msg), "Critical Temperature detected: %.2f C", value);
+call    0 never executed
+    #####:   66:      create_alert(sensor_id, SEVERITY_CRITICAL, msg);
+call    0 never executed
+    #####:   67:    } else if (value > 75.0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   68:      char msg[128];
+    #####:   69:      snprintf(msg, sizeof(msg), "High Temperature warning: %.2f C", value);
+call    0 never executed
+    #####:   70:      create_alert(sensor_id, SEVERITY_WARNING, msg);
+call    0 never executed
+        -:   71:    }
+    #####:   72:  } else if (strcmp(sensor_type, "Vibration") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   73:    if (value > 5.0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   74:      char msg[128];
+    #####:   75:      snprintf(msg, sizeof(msg), "Excessive Vibration detected: %.2f Hz", value);
+call    0 never executed
+    #####:   76:      create_alert(sensor_id, SEVERITY_CRITICAL, msg);
+call    0 never executed
+        -:   77:    }
+    #####:   78:  } else if (strcmp(sensor_type, "Pressure") == 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   79:    if (value > 12.0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   80:      char msg[128];
+    #####:   81:      snprintf(msg, sizeof(msg), "High Pressure detected: %.2f Bar", value);
+call    0 never executed
+    #####:   82:      create_alert(sensor_id, SEVERITY_WARNING, msg);
+call    0 never executed
+        -:   83:    }
+        -:   84:  }
+    #####:   85:}
+        -:   86:
+        -:   87:/* ------------------------------------------------------------------ */
+        -:   88:
+function get_recent_alerts called 0 returned 0% blocks executed 0%
+    #####:   89:int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
+    #####:   90:  DBConnection *conn_wrapper = db_pool_acquire();
+call    0 never executed
+        -:   91:
+    #####:   92:  if (!conn_wrapper) return 0;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   93:
+        -:   94:  char query[256];
+    #####:   95:  snprintf(query, sizeof(query),
+call    0 never executed
+        -:   96:           "SELECT id, sensor_id, severity, message, to_char(alert_time, 'YYYY-MM-DD HH24:MI:SS') "
+        -:   97:           "FROM alerts ORDER BY alert_time DESC LIMIT %d;",
+        -:   98:           max_alerts);
+    #####:   99:  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+call    0 never executed
+        -:  100:
+    #####:  101:  if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+call    0 never executed
+branch  1 never executed (fallthrough)
+branch  2 never executed
+    #####:  102:    LOG_ERROR("Failed to fetch alerts: %s", PQerrorMessage(conn_wrapper->pg_conn));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+    #####:  103:    PQclear(res);
+call    0 never executed
+    #####:  104:    db_pool_release(conn_wrapper);
+call    0 never executed
+    #####:  105:    return 0;
+        -:  106:  }
+        -:  107:
+    #####:  108:  int rows = PQntuples(res);
+call    0 never executed
+    #####:  109:  int count = (rows < max_alerts) ? rows : max_alerts;
+        -:  110:
+    #####:  111:  for (int i = 0; i < count; i++) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  112:    out_alerts[i].id = atoi(PQgetvalue(res, i, 0));
+call    0 never executed
+call    1 never executed
+    #####:  113:    out_alerts[i].sensor_id = atoi(PQgetvalue(res, i, 1));
+call    0 never executed
+call    1 never executed
+    #####:  114:    strncpy(out_alerts[i].severity, PQgetvalue(res, i, 2), 15);
+call    0 never executed
+    #####:  115:    out_alerts[i].severity[15] = '\0';
+    #####:  116:    strncpy(out_alerts[i].message, PQgetvalue(res, i, 3), 255);
+call    0 never executed
+    #####:  117:    out_alerts[i].message[255] = '\0';
+    #####:  118:    strncpy(out_alerts[i].created_at, PQgetvalue(res, i, 4), 31);
+call    0 never executed
+    #####:  119:    out_alerts[i].created_at[31] = '\0';
+        -:  120:  }
+        -:  121:
+    #####:  122:  PQclear(res);
+call    0 never executed
+    #####:  123:  db_pool_release(conn_wrapper);
+call    0 never executed
+    #####:  124:  return count;
+        -:  125:}
+        -:  126:
+        -:  127:/* ------------------------------------------------------------------
+        -:  128: * JSON SERIALIZATION (API ENDPOINTS)
+        -:  129: * ------------------------------------------------------------------ */
+        -:  130:
+        -:  131:/**
+        -:  132: * Serializes alerts to JSON format for API responses.
+        -:  133: * Fetches recent alerts and converts them to JSON string.
+        -:  134: * Caller is responsible for freeing the returned string.
+        -:  135: */
+function alert_service_serialize_alerts called 0 returned 0% blocks executed 0%
+    #####:  136:char *alert_service_serialize_alerts(void) {
+        -:  137:  AlertInfo alerts[50];
+    #####:  138:  int count = get_recent_alerts(alerts, 50);
+call    0 never executed
+        -:  139:  // JSON string için memory allocation
+    #####:  140:  char *json = (char *)malloc(4096);
+        -:  141:
+    #####:  142:  if (!json) return NULL;
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:  143:
+    #####:  144:  char *ptr = json;
+    #####:  145:  ptr += sprintf(ptr, "{\"alerts\":[");
+call    0 never executed
+        -:  146:
+    #####:  147:  for (int i = 0; i < count; i++) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  148:    if (i > 0) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  149:      ptr += sprintf(ptr, ",");
+call    0 never executed
+        -:  150:    }
+        -:  151:
+    #####:  152:    ptr += sprintf(ptr,
+        -:  153:                   "{"
+        -:  154:                   "\"id\":%d,"
+        -:  155:                   "\"sensor_id\":%d,"
+        -:  156:                   "\"severity\":\"%s\","
+        -:  157:                   "\"message\":\"%s\","
+        -:  158:                   "\"created_at\":\"%s\""
+        -:  159:                   "}",
+        -:  160:                   alerts[i].id,
+        -:  161:                   alerts[i].sensor_id,
+    #####:  162:                   alerts[i].severity,
+    #####:  163:                   alerts[i].message,
+    #####:  164:                   alerts[i].created_at
+call    0 never executed
+        -:  165:                  );
+        -:  166:  }
+        -:  167:
+    #####:  168:  ptr += sprintf(ptr, "]}");
+call    0 never executed
+    #####:  169:  return json;
+        -:  170:}
+        -:  171:
+        -:  172:/* ------------------------------------------------------------------
+        -:  173: * TEST/MOCK VERSION (compile with -DTEST_MODE)
+        -:  174: * ------------------------------------------------------------------ */
+        -:  175:
+        -:  176:#ifdef TEST_MODE
+        -:  177:/**
+        -:  178: * Test version that doesn't require database connection.
+        -:  179: */
+        -:  180:char *alert_service_serialize_alerts(void) {
+        -:  181:  char *json = (char *)malloc(256);
+        -:  182:
+        -:  183:  if (json) {
+        -:  184:    strcpy(json, "{\"alerts\":[]}");
+        -:  185:  }
+        -:  186:
+        -:  187:  return json;
+        -:  188:}
+        -:  189:
+        -:  190:#endif /* TEST_MODE */

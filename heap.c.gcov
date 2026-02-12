@@ -1,0 +1,202 @@
+        -:    0:Source:src/backend/core/data_structures/heap.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_heap-heap.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_heap-heap.gcda
+        -:    0:Runs:1
+        -:    1:/* This file is a template for heap.c. Content will be filled by yagiz on 2025-12-29. */
+        -:    2:#include <stdio.h>
+        -:    3:#include "heap.h"
+        -:    4:
+        -:    5:// Helper: Bubble Up (Moves a node UP to its correct position)
+function bubbleUp called 3 returned 100% blocks executed 80%
+        3:    6:static void bubbleUp(Heap *h, int index) {
+        4:    7:  while (index > 0) {
+branch  0 taken 2
+branch  1 taken 2 (fallthrough)
+        2:    8:    int parentIndex = (index - 1) / 2;
+        -:    9:    // Max-Heap Logic: Parent should be greater.
+        -:   10:    // Tie-Breaker: If Priorities are EQUAL, Older Timestamp (smaller value) wins.
+        2:   11:    bool parentIsSmaller = h->data[parentIndex].priority < h->data[index].priority;
+       2*:   12:    bool equalButNewer = (h->data[parentIndex].priority == h->data[index].priority) &&
+branch  0 taken 0 (fallthrough)
+branch  1 taken 2
+    #####:   13:                         (h->data[parentIndex].timestamp > h->data[index].timestamp);
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   14:
+        2:   15:    if (parentIsSmaller || equalButNewer) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+        -:   16:      // SWAP
+        1:   17:      Task temp = h->data[parentIndex];
+        1:   18:      h->data[parentIndex] = h->data[index];
+        1:   19:      h->data[index] = temp;
+        -:   20:      // Move up
+        1:   21:      index = parentIndex;
+        -:   22:    } else {
+        -:   23:      break; // Order is correct
+        -:   24:    }
+        -:   25:  }
+        3:   26:}
+        -:   27:
+        -:   28:// Helper: Heapify / Bubble Down (Moves a node DOWN to its correct position)
+function heapify called 3 returned 100% blocks executed 40%
+        3:   29:static void heapify(Heap *h, int index) {
+        3:   30:  int largest = index;
+        3:   31:  int left = 2 * index + 1;
+        3:   32:  int right = 2 * index + 2;
+        -:   33:
+        -:   34:  // Check Left Child
+        3:   35:  if (left < h->count) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 2
+        1:   36:    bool leftIsBigger = h->data[left].priority > h->data[largest].priority;
+       1*:   37:    bool leftEqualButOlder = (h->data[left].priority == h->data[largest].priority) &&
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   38:                             (h->data[left].timestamp < h->data[largest].timestamp); // Smaller timestamp = Older
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   39:
+        1:   40:    if (leftIsBigger || leftEqualButOlder) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    #####:   41:      largest = left;
+        -:   42:    }
+        -:   43:  }
+        -:   44:
+        -:   45:  // Check Right Child
+        3:   46:  if (right < h->count) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+    #####:   47:    bool rightIsBigger = h->data[right].priority > h->data[largest].priority;
+    #####:   48:    bool rightEqualButOlder = (h->data[right].priority == h->data[largest].priority) &&
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   49:                              (h->data[right].timestamp < h->data[largest].timestamp);
+branch  0 never executed (fallthrough)
+branch  1 never executed
+        -:   50:
+    #####:   51:    if (rightIsBigger || rightEqualButOlder) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+branch  2 never executed (fallthrough)
+branch  3 never executed
+    #####:   52:      largest = right;
+        -:   53:    }
+        -:   54:  }
+        -:   55:
+        -:   56:  // Swap and Recursive Call
+        3:   57:  if (largest != index) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+    #####:   58:    Task temp = h->data[index];
+    #####:   59:    h->data[index] = h->data[largest];
+    #####:   60:    h->data[largest] = temp;
+    #####:   61:    heapify(h, largest);
+call    0 never executed
+        -:   62:  }
+        3:   63:}
+        -:   64:
+function initHeap called 2 returned 100% blocks executed 100%
+        2:   65:void initHeap(Heap *h) {
+        2:   66:  h->count = 0;
+        2:   67:}
+        -:   68:
+        -:   69:// INSERT
+function insertHeap called 3 returned 100% blocks executed 71%
+        3:   70:bool insertHeap(Heap *h, Task task) {
+        3:   71:  if (h->count >= MAX_HEAP_SIZE) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 3
+    #####:   72:    printf("ERROR: Heap is full! Cannot add Task-%d\n", task.id);
+call    0 never executed
+    #####:   73:    return false;
+        -:   74:  }
+        -:   75:
+        -:   76:  // 1. Add to end
+        3:   77:  h->data[h->count] = task;
+        -:   78:  // 2. Bubble Up
+        3:   79:  bubbleUp(h, h->count);
+call    0 returned 3
+        -:   80:  // 3. Increment Count
+        3:   81:  h->count++;
+        3:   82:  printf("Task Added: ID-%d [P:%d]\n", task.id, task.priority);
+call    0 returned 3
+        3:   83:  return true;
+        -:   84:}
+        -:   85:
+        -:   86:// EXTRACT MAX
+function extractMax called 4 returned 100% blocks executed 100%
+        4:   87:bool extractMax(Heap *h, Task *outTask) {
+        4:   88:  if (h->count == 0) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 3
+        1:   89:    printf("ERROR: Heap is empty!\n");
+call    0 returned 1
+        1:   90:    return false;
+        -:   91:  }
+        -:   92:
+        -:   93:  // 1. Get Root (Max Priority)
+        3:   94:  *outTask = h->data[0];
+        -:   95:  // 2. Move last element to root
+        3:   96:  h->data[0] = h->data[h->count - 1];
+        3:   97:  h->count--;
+        -:   98:  // 3. Heaterify (Bubble Down)
+        3:   99:  heapify(h, 0);
+call    0 returned 3
+        -:  100:  // printf("Task Extracted: ID-%d [P:%d]\n", outTask->id, outTask->priority);
+        3:  101:  return true;
+        -:  102:}
+        -:  103:
+        -:  104:// UPDATE PRIORITY (Dynamic Update)
+function updatePriority called 0 returned 0% blocks executed 0%
+    #####:  105:bool updatePriority(Heap *h, int task_id, int new_priority) {
+    #####:  106:  int index = -1;
+        -:  107:
+        -:  108:  // 1. Find the task
+    #####:  109:  for(int i = 0; i < h->count; i++) {
+branch  0 never executed
+branch  1 never executed (fallthrough)
+    #####:  110:    if(h->data[i].id == task_id) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  111:      index = i;
+    #####:  112:      break;
+        -:  113:    }
+        -:  114:  }
+        -:  115:
+    #####:  116:  if(index == -1) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  117:    printf("ERROR: Task-%d not found!\n", task_id);
+call    0 never executed
+    #####:  118:    return false;
+        -:  119:  }
+        -:  120:
+    #####:  121:  int old_priority = h->data[index].priority;
+    #####:  122:  h->data[index].priority = new_priority;
+    #####:  123:  printf("Task-%d Priority Updated: %d -> %d\n", task_id, old_priority, new_priority);
+call    0 never executed
+        -:  124:
+        -:  125:  // 2. Re-balance
+    #####:  126:  if (new_priority > old_priority) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:  127:    bubbleUp(h, index);
+call    0 never executed
+        -:  128:  } else {
+    #####:  129:    heapify(h, index);
+call    0 never executed
+        -:  130:  }
+        -:  131:
+    #####:  132:  return true;
+        -:  133:}
+        -:  134:
+function getHeapSize called 1 returned 100% blocks executed 100%
+        1:  135:int getHeapSize(Heap *h) {
+        1:  136:  return h->count;
+        -:  137:}

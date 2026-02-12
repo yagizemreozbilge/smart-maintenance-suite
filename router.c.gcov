@@ -1,0 +1,67 @@
+        -:    0:Source:src/backend/api/router.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-router.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-router.gcda
+        -:    0:Runs:1
+        -:    1:#include "router.h"
+        -:    2:#include "handlers/machine_handler.h"
+        -:    3:#include "handlers/inventory_handler.h"
+        -:    4:#include "handlers/auth_handler.h"
+        -:    5:#include "handlers/maintenance_handler.h"
+        -:    6:#include "handlers/report_handler.h"
+        -:    7:#include "handlers/fault_handler.h"
+        -:    8:#include "../database/alert_service.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <stdlib.h>
+        -:   12:
+        -:   13:
+        -:   14:
+function handle_route called 0 returned 0% blocks executed 0%
+    #####:   15:void handle_route(HttpRequest *req, HttpResponse *res) {
+        -:   16:  // Default 404
+    #####:   17:  res->status_code = 404;
+    #####:   18:  strcpy(res->content_type, "application/json");
+    #####:   19:  strcpy(res->body, "{\"error\": \"Route not found\"}");
+        -:   20:
+    #####:   21:  if (strstr(req->path, "/api/machines")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   22:    handle_machine_request(req, res);
+call    0 never executed
+    #####:   23:  } else if (strstr(req->path, "/api/inventory")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   24:    handle_inventory_request(req, res);
+call    0 never executed
+    #####:   25:  } else if (strstr(req->path, "/api/login")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   26:    handle_auth_request(req, res);
+call    0 never executed
+    #####:   27:  } else if (strstr(req->path, "/api/maintenance")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   28:    handle_maintenance_request(req, res);
+call    0 never executed
+    #####:   29:  } else if (strstr(req->path, "/api/reports")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   30:    handle_report_request(req, res);
+call    0 never executed
+    #####:   31:  } else if (strstr(req->path, "/api/faults")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   32:    handle_fault_request(req, res);
+call    0 never executed
+    #####:   33:  } else if (strstr(req->path, "/api/alerts")) {
+branch  0 never executed (fallthrough)
+branch  1 never executed
+    #####:   34:    res->status_code = 200;
+    #####:   35:    strcpy(res->content_type, "application/json");
+    #####:   36:    char *json = alert_service_serialize_alerts();
+call    0 never executed
+    #####:   37:    strncpy(res->body, json, 8191);
+    #####:   38:    res->body[8191] = '\0';
+    #####:   39:    free(json);
+        -:   40:  }
+    #####:   41:}

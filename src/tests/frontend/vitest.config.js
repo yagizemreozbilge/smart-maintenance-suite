@@ -7,6 +7,9 @@ export default defineConfig({
     test: {
         globals: true,
         environment: 'jsdom',
+        include: [
+      '../tests/frontend/unit/**/*.{test,spec}.{js,jsx}'
+    ],
         setupFiles: './setup.js',
         coverage: {
             provider: 'v8',

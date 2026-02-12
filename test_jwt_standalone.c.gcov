@@ -1,0 +1,178 @@
+        -:    0:Source:src/backend/tests/unit/test_jwt_standalone.c
+        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_jwt-test_jwt_standalone.gcno
+        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_jwt-test_jwt_standalone.gcda
+        -:    0:Runs:1
+        -:    1:#include "../../security/jwt.h"
+        -:    2:#include <stdio.h>
+        -:    3:#include <assert.h>
+        -:    4:#include <string.h>
+        -:    5:#include <stdlib.h>
+        -:    6:#include <time.h>
+        -:    7:
+        -:    8:// Standalone JWT functions (no database dependency)
+function generate_auth_token_standalone called 5 returned 100% blocks executed 100%
+        5:    9:char *generate_auth_token_standalone(int user_id, const char *username, const char *role) {
+        5:   10:  char *token = (char *)malloc(128);
+        5:   11:  time_t now = time(NULL);
+call    0 returned 5
+        5:   12:  long expires = (long)now + (3600 * 24);
+        5:   13:  snprintf(token, 128, "token_%d_%ld_%s", user_id, expires, role);
+call    0 returned 5
+        5:   14:  return token;
+        -:   15:}
+        -:   16:
+function validate_auth_token_standalone called 5 returned 100% blocks executed 100%
+        5:   17:bool validate_auth_token_standalone(const char *token) {
+        5:   18:  if (!token || strlen(token) < 10) return false;
+branch  0 taken 4 (fallthrough)
+branch  1 taken 1
+branch  2 taken 2 (fallthrough)
+branch  3 taken 2
+        -:   19:
+        2:   20:  if (strstr(token, "token_") != token) return false;
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        -:   21:
+        1:   22:  return true;
+        -:   23:}
+        -:   24:
+function test_generate_auth_token called 1 returned 100% blocks executed 75%
+        1:   25:void test_generate_auth_token() {
+        1:   26:  char *token = generate_auth_token_standalone(1, "admin", "admin");
+call    0 returned 1
+       1*:   27:  assert(token != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   28:  assert(strlen(token) > 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   29:  assert(strstr(token, "token_") != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   30:  printf("[PASS] generate_auth_token: token created\n");
+call    0 returned 1
+        1:   31:  free(token);
+        1:   32:}
+        -:   33:
+function test_generate_auth_token_different_users called 1 returned 100% blocks executed 86%
+        1:   34:void test_generate_auth_token_different_users() {
+        1:   35:  char *token1 = generate_auth_token_standalone(1, "admin", "admin");
+call    0 returned 1
+        1:   36:  char *token2 = generate_auth_token_standalone(2, "teknisyen", "teknisyen");
+call    0 returned 1
+       1*:   37:  assert(strcmp(token1, token2) != 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   38:  printf("[PASS] generate_auth_token: different tokens for different users\n");
+call    0 returned 1
+        1:   39:  free(token1);
+        1:   40:  free(token2);
+        1:   41:}
+        -:   42:
+function test_validate_auth_token_valid called 1 returned 100% blocks executed 86%
+        1:   43:void test_validate_auth_token_valid() {
+        1:   44:  char *token = generate_auth_token_standalone(1, "admin", "admin");
+call    0 returned 1
+       1*:   45:  assert(validate_auth_token_standalone(token) == true);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   46:  printf("[PASS] validate_auth_token: valid token accepted\n");
+call    0 returned 1
+        1:   47:  free(token);
+        1:   48:}
+        -:   49:
+function test_validate_auth_token_invalid called 1 returned 100% blocks executed 83%
+        1:   50:void test_validate_auth_token_invalid() {
+       1*:   51:  assert(validate_auth_token_standalone("invalid_token") == false);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   52:  printf("[PASS] validate_auth_token: invalid token rejected\n");
+call    0 returned 1
+        1:   53:}
+        -:   54:
+function test_validate_auth_token_null called 1 returned 100% blocks executed 83%
+        1:   55:void test_validate_auth_token_null() {
+       1*:   56:  assert(validate_auth_token_standalone(NULL) == false);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   57:  printf("[PASS] validate_auth_token: NULL token rejected\n");
+call    0 returned 1
+        1:   58:}
+        -:   59:
+function test_validate_auth_token_empty called 1 returned 100% blocks executed 83%
+        1:   60:void test_validate_auth_token_empty() {
+       1*:   61:  assert(validate_auth_token_standalone("") == false);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   62:  printf("[PASS] validate_auth_token: empty token rejected\n");
+call    0 returned 1
+        1:   63:}
+        -:   64:
+function test_validate_auth_token_short called 1 returned 100% blocks executed 83%
+        1:   65:void test_validate_auth_token_short() {
+       1*:   66:  assert(validate_auth_token_standalone("tok") == false);
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+call    3 never executed
+        1:   67:  printf("[PASS] validate_auth_token: short token rejected\n");
+call    0 returned 1
+        1:   68:}
+        -:   69:
+function test_token_format called 1 returned 100% blocks executed 78%
+        1:   70:void test_token_format() {
+        1:   71:  char *token = generate_auth_token_standalone(42, "testuser", "operator");
+call    0 returned 1
+       1*:   72:  assert(strstr(token, "token_42_") != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   73:  assert(strstr(token, "_operator") != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        1:   74:  printf("[PASS] generate_auth_token: correct format\n");
+call    0 returned 1
+        1:   75:  free(token);
+        1:   76:}
+        -:   77:
+function main called 1 returned 100% blocks executed 100%
+        1:   78:int main() {
+        1:   79:  printf("=== JWT Unit Tests (Standalone) ===\n");
+call    0 returned 1
+        1:   80:  printf("Note: These tests don't require database connection.\n");
+call    0 returned 1
+        1:   81:  printf("Database integration tests should be run separately.\n\n");
+call    0 returned 1
+        1:   82:  test_generate_auth_token();
+call    0 returned 1
+        1:   83:  test_generate_auth_token_different_users();
+call    0 returned 1
+        1:   84:  test_validate_auth_token_valid();
+call    0 returned 1
+        1:   85:  test_validate_auth_token_invalid();
+call    0 returned 1
+        1:   86:  test_validate_auth_token_null();
+call    0 returned 1
+        1:   87:  test_validate_auth_token_empty();
+call    0 returned 1
+        1:   88:  test_validate_auth_token_short();
+call    0 returned 1
+        1:   89:  test_token_format();
+call    0 returned 1
+        1:   90:  printf("\n✅ All JWT standalone tests passed!\n");
+call    0 returned 1
+        1:   91:  return 0;
+        -:   92:}
