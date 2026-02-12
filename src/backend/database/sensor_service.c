@@ -6,7 +6,7 @@
 #include <string.h>
 #include "alert_service.h"
 
-int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors) {
+int get_machine_sensor_stats(int machine_id, SensorStatus *out_stats, int max_sensors) {
   // 1. Acquire a connection from the pool
   DBConnection *conn_wrapper = db_pool_acquire();
 

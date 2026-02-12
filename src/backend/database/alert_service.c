@@ -133,7 +133,7 @@ int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
  * Fetches recent alerts and converts them to JSON string.
  * Caller is responsible for freeing the returned string.
  */
-char *serialize_alerts_to_json(void) {
+char *alert_service_serialize_alerts(void) {
   AlertInfo alerts[50];
   int count = get_recent_alerts(alerts, 50);
   // JSON string için memory allocation
@@ -177,7 +177,7 @@ char *serialize_alerts_to_json(void) {
 /**
  * Test version that doesn't require database connection.
  */
-char *serialize_alerts_to_json(void) {
+char *alert_service_serialize_alerts(void) {
   char *json = (char *)malloc(256);
 
   if (json) {

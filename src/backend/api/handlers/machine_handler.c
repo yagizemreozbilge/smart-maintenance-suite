@@ -1,9 +1,26 @@
 #include "machine_handler.h"
 #include "../../database/api_handlers.h"
 #include "../../database/machine_service.h"
+#include "../../database/cJSON.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+
+
+char *serialize_machines_to_json(void) {
+  cJSON *root = cJSON_CreateObject();
+  cJSON *items = cJSON_CreateArray();
+  cJSON *item1 = cJSON_CreateObject();
+  cJSON_AddNumberToObject(item1, "id", 1);
+  cJSON_AddStringToObject(item1, "name", "CNC Machine");
+  cJSON_AddStringToObject(item1, "status", "running");
+  cJSON_AddItemToArray(items, item1);
+  cJSON_AddItemToObject(root, "machines", items);
+  char *json = cJSON_Print(root);
+  cJSON_Delete(root);
+  return json;
+}
 
 void handle_machine_request(HttpRequest *req, HttpResponse *res) {
   if (strcmp(req->method, "GET") == 0) {

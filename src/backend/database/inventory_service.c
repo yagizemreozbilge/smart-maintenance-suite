@@ -93,3 +93,29 @@ int get_low_stock_items(InventoryItem *out_items, int max_items) {
   db_pool_release(conn_wrapper);
   return count;
 }
+
+// ====================================================================
+// MOCK IMPLEMENTATIONS FOR TESTING
+// ====================================================================
+
+#ifdef TEST_MODE
+
+int get_all_inventory(InventoryItem *items, int max_count) {
+  if (!items || max_count <= 0) return 0;
+
+  items[0].id = 1;
+  strcpy(items[0].name, "Motor Oil");
+  items[0].quantity = 25;
+  items[0].min_quantity = 10;
+  items[1].id = 2;
+  strcpy(items[1].name, "Bearings");
+  items[1].quantity = 50;
+  items[1].min_quantity = 20;
+  items[2].id = 3;
+  strcpy(items[2].name, "Filters");
+  items[2].quantity = 15;
+  items[2].min_quantity = 5;
+  return 3;
+}
+
+#endif /* TEST_MODE */

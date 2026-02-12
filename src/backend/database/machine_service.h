@@ -10,6 +10,7 @@ typedef struct {
   char model[50];
   char location[100];
   char status[20];
+  double health_score;  // ← EKLE! get_machine_health için
 } Machine;
 
 /**
@@ -19,5 +20,15 @@ typedef struct {
  * @return Number of machines successfully fetched.
  */
 int get_all_machines(Machine *machines, int max_count);
+
+/**
+ * Get machine by ID
+ */
+int get_machine_by_id(int id, Machine *machine);
+
+/**
+ * Get machine health score
+ */
+double get_machine_health_score(int machine_id);
 
 #endif

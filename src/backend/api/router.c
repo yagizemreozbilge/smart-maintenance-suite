@@ -4,9 +4,13 @@
 #include "handlers/auth_handler.h"
 #include "handlers/maintenance_handler.h"
 #include "handlers/report_handler.h"
-#include "alert_service.h"
+#include "handlers/fault_handler.h"
+#include "../database/alert_service.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+
 
 void handle_route(HttpRequest *req, HttpResponse *res) {
   // Default 404
@@ -24,11 +28,14 @@ void handle_route(HttpRequest *req, HttpResponse *res) {
     handle_maintenance_request(req, res);
   } else if (strstr(req->path, "/api/reports")) {
     handle_report_request(req, res);
+  } else if (strstr(req->path, "/api/faults")) {
+    handle_fault_request(req, res);
   } else if (strstr(req->path, "/api/alerts")) {
-    // Simple inline for now since it's just a fetcher in legacy
     res->status_code = 200;
-    char *json = serialize_alerts_to_json();
+    strcpy(res->content_type, "application/json");
+    char *json = alert_service_serialize_alerts();
     strncpy(res->body, json, 8191);
+    res->body[8191] = '\0';
     free(json);
   }
 }

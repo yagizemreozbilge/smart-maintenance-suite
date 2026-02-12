@@ -41,6 +41,6 @@ int get_recent_alerts(AlertInfo *out_alerts, int max_alerts);
  * Serializes alerts to JSON format for API responses.
  * Returns a JSON string that must be freed by the caller.
  */
-char *serialize_alerts_to_json(void);
+char *alert_service_serialize_alerts(void);
 
 #endif /* ALERT_SERVICE_H */

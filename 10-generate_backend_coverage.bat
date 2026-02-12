@@ -14,7 +14,7 @@ set "REPORT_DIR=docs\coverage_backend_report"
 set "HISTORY_DIR=docs\coverage_history"
 
 echo ============================================================
-echo   BACKEND GCC COVERAGE - FULL TEST SUITE (15 TESTS)
+echo   BACKEND GCC COVERAGE - FULL TEST SUITE (16 TESTS)
 echo ============================================================
 echo.
 
@@ -68,6 +68,29 @@ if not exist "src\backend\database\db_connection.h" (
     exit /b 1
 )
 
+REM ============================================================
+REM Check for cJSON library
+REM ============================================================
+
+echo [INFO] Checking for cJSON library...
+
+if not exist "C:\msys64\mingw64\lib\libcjson.a" (
+    echo [WARNING] cJSON library not found in MSYS64, trying to find elsewhere...
+    if not exist "src\backend\database\cJSON.c" (
+        echo [ERROR] Neither cJSON library nor cJSON.c source file found!
+        echo Please install cJSON: pacman -S mingw-w64-x86_64-cjson
+        echo or ensure src\backend\database\cJSON.c exists
+        pause
+        exit /b 1
+    ) else (
+        echo [OK] Using cJSON.c from source
+        set "USE_CJSON_SOURCE=1"
+    )
+) else (
+    echo [OK] cJSON library found
+    set "USE_CJSON_SOURCE=0"
+)
+
 echo [OK] Header check complete
 echo.
 
@@ -75,11 +98,17 @@ REM ============================================================
 REM COMMON FLAGS (Branch coverage enabled)
 REM ============================================================
 
-REM Include paths - added database directory
+REM Include paths
 set "CFLAGS=-Isrc\backend -Isrc\backend\database -Isrc\tests -Isrc\tests\mock_includes -IC:\msys64\mingw64\include -g -O0 --coverage"
 
-REM Linker flags - mconsole for console app, subsystem:console
-set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq"
+REM Linker flags - cJSON kütüphanesini EKLEDİM!
+set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq -lcjson"
+
+REM Eğer cJSON kaynak dosyasını kullanacaksak, ayrıca bağlamaya gerek yok
+if "%USE_CJSON_SOURCE%"=="1" (
+    echo [INFO] Using cJSON.c from source instead of -lcjson
+    set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq"
+)
 
 set TEST_COUNT=0
 set TEST_FAILED=0
@@ -91,13 +120,27 @@ goto RUN_TESTS
 
 :run_test
 set TEST_NAME=%1
+shift
 
+set "SOURCE_FILES="
+:collect_files
+if "%1"=="" goto compile_test
+set "SOURCE_FILES=%SOURCE_FILES% %1"
+shift
+goto collect_files
+
+:compile_test
 echo ------------------------------------------------------------
 echo Running: %TEST_NAME%
 echo ------------------------------------------------------------
 
-REM Compile as console application
-gcc %CFLAGS% %2 %3 %4 %5 %6 %7 %8 %9 -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
+REM cJSON kaynak dosyasını gerektiğinde EKLE
+if "%USE_CJSON_SOURCE%"=="1" (
+    echo [INFO] Adding cJSON.c to compilation
+    gcc %CFLAGS% %SOURCE_FILES% src\backend\database\cJSON.c -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
+) else (
+    gcc %CFLAGS% %SOURCE_FILES% -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
+)
 
 if errorlevel 1 (
     echo   [FAIL] Compilation failed
@@ -144,6 +187,7 @@ REM --- API Tests ---
 call :run_test test_api ^
 src\backend\tests\unit\test_api_handlers.c ^
 src\backend\api\router.c ^
+src\backend\api\http_server.c ^
 src\backend\api\handlers\machine_handler.c ^
 src\backend\api\handlers\inventory_handler.c ^
 src\backend\api\handlers\auth_handler.c ^
@@ -151,14 +195,16 @@ src\backend\api\handlers\maintenance_handler.c ^
 src\backend\api\handlers\report_handler.c ^
 src\backend\api\handlers\fault_handler.c ^
 src\backend\database\alert_service.c ^
-src\backend\database\api_handlers.c ^
-src\backend\database\cJSON.c ^
-src\backend\api\http_server.c ^
-src\backend\database\db_connection.c ^
 src\backend\database\machine_service.c ^
+src\backend\database\db_connection.c ^
 src\backend\database\inventory_service.c ^
-src\backend\database\maintenance_service.c
-
+src\backend\database\maintenance_service.c ^
+src\backend\security\jwt.c ^
+src\backend\security\rbac.c ^
+src\backend\security\encryption.c ^
+src\backend\core\utils\logger.c ^
+src\backend\core\utils\memory.c ^
+src\backend\core\utils\time_utils.c
 
 REM --- Database Tests ---
 call :run_test test_db_pool_basic ^
@@ -195,6 +241,8 @@ src\backend\security\rbac.c
 
 call :run_test test_jwt ^
 src\backend\tests\unit\test_jwt_standalone.c
+
+
 
 REM --- Integration Tests ---
 call :run_test test_machine_module_int ^
@@ -237,7 +285,10 @@ reportgenerator ^
     -historydir:"%HISTORY_DIR%" ^
     -reporttypes:Html ^
     -title:"Backend C Tests - Coverage Report" ^
-    -verbosity:Warning
+    -verbosity:Warning ^
+    -filefilters:"-C:/msys64/mingw64/include/*" ^
+    -filefilters:"-*/mingw64/*" ^
+    -filefilters:"-*stdio.h*"
 
 if errorlevel 1 (
     echo [ERROR] Report generation failed!

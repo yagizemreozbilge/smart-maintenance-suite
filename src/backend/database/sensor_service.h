@@ -15,7 +15,7 @@ typedef struct {
 /**
  * Fetches the latest health metrics for all sensors on a specific machine.
  */
-int get_machine_health(int machine_id, SensorStatus *out_stats, int max_sensors);
+int get_machine_sensor_stats(int machine_id, SensorStatus *out_stats, int max_sensors);
 
 /**
  * Adds a new sensor reading and triggers the alert engine.

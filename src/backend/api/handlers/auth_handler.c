@@ -1,44 +1,28 @@
 #include "auth_handler.h"
-#include "../../database/db_connection.h"
+#include "../../database/cJSON.h"
 #include "../../security/jwt.h"
 #include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 void handle_auth_request(HttpRequest *req, HttpResponse *res) {
-  char username[50] = {0}, password[50] = {0}, role[20] = {0};
-  // Support both query params and simple body formats
-  char *target = (strlen(req->query_params) > 0) ? req->query_params : req->body;
-  char *u_ptr = strstr(target, "u=");
-  char *p_ptr = strstr(target, "p=");
-
-  if (u_ptr && p_ptr) {
-    sscanf(u_ptr, "u=%[^& \n\r]", username);
-    sscanf(p_ptr, "p=%[^& \n\r]", password);
-    // Mock verify user (using logic from legacy)
-    // In real app, we'd call the user_service
-    int uid = -1;
-
-    if (strcmp(username, "admin") == 0 && strcmp(password, "admin123") == 0) {
-      uid = 1;
-      strcpy(role, "admin");
-    } else if (strcmp(username, "teknik1") == 0 && strcmp(password, "tech123") == 0) {
-      uid = 2;
-      strcpy(role, "teknisyen");
-    }
-
-    if (uid != -1) {
-      char *token = generate_auth_token(uid, username, role);
-      res->status_code = 200;
-      sprintf(res->body, "{\"success\": true, \"token\": \"%s\", \"role\": \"%s\", \"username\": \"%s\"}",
-              token, role, username);
-      free(token);
-    } else {
-      res->status_code = 401;
-      strcpy(res->body, "{\"success\": false, \"message\": \"Invalid credentials\"}");
-    }
-  } else {
-    res->status_code = 400;
-    strcpy(res->body, "{\"error\": \"Missing credentials\"}");
-  }
+  // Mock kullanıcı bilgileri
+  int user_id = 1;
+  const char *username = "admin";
+  const char *role = "admin";
+  // jwt.h'daki orijinal generate_auth_token fonksiyonunu çağır
+  char *token = generate_auth_token(user_id, username, role);
+  cJSON *root = cJSON_CreateObject();
+  cJSON_AddStringToObject(root, "status", "authenticated");
+  cJSON_AddStringToObject(root, "token", token);
+  cJSON_AddStringToObject(root, "role", role);
+  cJSON_AddStringToObject(root, "username", username);
+  char *json = cJSON_Print(root);
+  cJSON_Delete(root);
+  free(token);
+  res->status_code = 200;
+  strcpy(res->content_type, "application/json");
+  strncpy(res->body, json, 8191);
+  res->body[8191] = '\0';
+  free(json);
 }

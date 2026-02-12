@@ -154,3 +154,32 @@ bool delete_maintenance_log(int log_id) {
   db_pool_release(conn_wrapper);
   return success;
 }
+
+// ====================================================================
+// MOCK IMPLEMENTATIONS FOR TESTING
+// ====================================================================
+
+#ifdef TEST_MODE
+
+int get_all_maintenance_logs(MaintenanceLog *logs, int max_count) {
+  if (!logs || max_count <= 0) return 0;
+
+  logs[0].id = 1;
+  logs[0].machine_id = 1;
+  strcpy(logs[0].description, "Routine oil change");
+  strcpy(logs[0].status, "completed");
+  logs[0].cost = 150.50;
+  logs[1].id = 2;
+  logs[1].machine_id = 2;
+  strcpy(logs[1].description, "Belt replacement");
+  strcpy(logs[1].status, "scheduled");
+  logs[1].cost = 275.00;
+  logs[2].id = 3;
+  logs[2].machine_id = 3;
+  strcpy(logs[2].description, "Firmware update");
+  strcpy(logs[2].status, "in_progress");
+  logs[2].cost = 0.00;
+  return 3;
+}
+
+#endif /* TEST_MODE */

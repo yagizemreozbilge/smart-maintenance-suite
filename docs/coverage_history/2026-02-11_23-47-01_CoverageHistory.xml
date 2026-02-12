@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2026-02-11_23-47-01" tag="">
+  <assembly name="Default">
+    <class name="C:\msys64\mingw64\include\stdio.h" coveredlines="5" coverablelines="5" totallines="1595" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="src\backend\core\data_structures\bst.c" coveredlines="0" coverablelines="0" totallines="113" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\core\data_structures\graph.c" coveredlines="0" coverablelines="0" totallines="105" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\core\data_structures\heap.c" coveredlines="0" coverablelines="0" totallines="137" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\core\data_structures\queue.c" coveredlines="0" coverablelines="0" totallines="108" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\core\data_structures\stack.c" coveredlines="0" coverablelines="0" totallines="47" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\security\rbac.c" coveredlines="0" coverablelines="0" totallines="26" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\tests\unit\test_bst.c" coveredlines="0" coverablelines="0" totallines="48" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\tests\unit\test_graph.c" coveredlines="0" coverablelines="0" totallines="39" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\tests\unit\test_heap.c" coveredlines="0" coverablelines="0" totallines="46" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\tests\unit\test_jwt_standalone.c" coveredlines="0" coverablelines="0" totallines="92" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\tests\unit\test_queue.c" coveredlines="0" coverablelines="0" totallines="44" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\tests\unit\test_rbac.c" coveredlines="0" coverablelines="0" totallines="95" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="src\backend\tests\unit\test_stack.c" coveredlines="0" coverablelines="0" totallines="43" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+  </assembly>
+</coverage>
