@@ -102,12 +102,12 @@ REM Include paths
 set "CFLAGS=-Isrc\backend -Isrc\backend\database -Isrc\tests -Isrc\tests\mock_includes -IC:\msys64\mingw64\include -g -O0 --coverage"
 
 REM Linker flags - cJSON kütüphanesini EKLEDİM!
-set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq -lcjson"
+set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq -lcjson -lcmocka"
 
 REM Eğer cJSON kaynak dosyasını kullanacaksak, ayrıca bağlamaya gerek yok
 if "%USE_CJSON_SOURCE%"=="1" (
     echo [INFO] Using cJSON.c from source instead of -lcjson
-    set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq"
+    set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq -lcjson -lcmocka"
 )
 
 set TEST_COUNT=0
@@ -206,6 +206,37 @@ src\backend\core\utils\logger.c ^
 src\backend\core\utils\memory.c ^
 src\backend\core\utils\time_utils.c
 
+REM --- Individual Handler Unit Tests ---
+
+call :run_test test_auth_handler ^
+src\backend\tests\unit\test_auth_handler.c ^
+src\backend\api\handlers\auth_handler.c ^
+src\backend\security\jwt.c ^
+src\backend\database\db_connection.c
+
+
+call :run_test test_inventory_handler ^
+src\backend\tests\unit\test_inventory_handler.c ^
+src\backend\api\handlers\inventory_handler.c ^
+
+
+call :run_test test_fault_handler ^
+src\backend\tests\unit\test_fault_handler.c ^
+src\backend\api\handlers\fault_handler.c ^
+
+call :run_test test_machine_handler ^
+src\backend\tests\unit\test_machine_handler.c ^
+src\backend\api\handlers\machine_handler.c
+
+call :run_test test_report_handler ^
+src\backend\tests\unit\test_report_handler.c ^
+src\backend\api\handlers\report_handler.c
+
+call :run_test test_maintenance_handler ^
+src\backend\tests\unit\test_maintenance_handler.c ^
+src\backend\api\handlers\maintenance_handler.c
+
+
 REM --- Database Tests ---
 call :run_test test_db_pool_basic ^
 src\backend\tests\unit\database\test_db_pool_basic.c ^
@@ -218,21 +249,59 @@ src\backend\database\db_connection.c
 call :run_test test_db_pool_fifo ^
 src\backend\tests\unit\database\test_db_pool_fifo.c
 
-REM --- Service Tests ---
+REM --- Service Tests (TEST_MODE) ---
+
 call :run_test test_inventory_service ^
 src\backend\tests\unit\database\test_inventory_service.c ^
 src\backend\database\inventory_service.c ^
-src\backend\database\db_connection.c
+-DTEST_MODE
 
 call :run_test test_machine_service ^
 src\backend\tests\unit\database\test_machine_service.c ^
 src\backend\database\machine_service.c ^
-src\backend\database\db_connection.c
+-DTEST_MODE
 
 call :run_test test_maintenance_service ^
 src\backend\tests\unit\database\test_maintenance_service.c ^
 src\backend\database\maintenance_service.c ^
+-DTEST_MODE
+
+
+REM --- REAL Service Tests (TEST_MODE OLMADAN) ---
+call :run_test test_alert_service_real ^
+src\backend\tests\unit\database\test_alert_service_real.c ^
+src\backend\database\alert_service.c
+
+call :run_test test_inventory_service_real ^
+src\backend\tests\unit\database\test_inventory_service_real.c ^
+src\backend\database\inventory_service.c
+
+call :run_test test_machine_service_real ^
+src\backend\tests\unit\database\test_machine_service_real.c ^
+src\backend\database\machine_service.c
+
+call :run_test test_maintenance_service_real ^
+src\backend\tests\unit\database\test_maintenance_service_real.c ^
+src\backend\database\maintenance_service.c
+
+call :run_test test_db_connection_real ^
+src\backend\tests\unit\database\test_db_connection_real.c ^
 src\backend\database\db_connection.c
+
+REM --- HTTP Server Tests (ŞİMDİLİK DEVRE DIŞI - winsock çakışması nedeniyle) ---
+REM call :run_test test_http_server ^
+REM src\backend\tests\unit\test_http_server.c ^
+REM src\backend\api\http_server.c
+
+REM --- DB Connection Tests ---
+call :run_test test_db_connection ^
+src\backend\tests\unit\database\test_db_connection.c ^
+src\backend\database\db_connection.c
+
+REM --- Router Tests ---
+call :run_test test_router ^
+src\backend\tests\unit\test_router.c ^
+src\backend\api\router.c
 
 REM --- Security Tests ---
 call :run_test test_rbac ^
@@ -262,7 +331,9 @@ REM ============================================================
 echo [4/5] Generating gcov files...
 
 REM Generate gcov files from coverage data
-for /R %%f in (*.gcno) do gcov -b -c "%%f" >nul 2>&1
+for /R "%BUILD_DIR%" %%f in (*.gcno) do (
+    gcov -b -c -o "%BUILD_DIR%" "%%f" >nul 2>&1
+)
 
 if errorlevel 1 (
     echo [ERROR] gcov generation failed!

@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef TEST_MODE
+
 bool add_maintenance_log(int machine_id, const char *technician, const char *description, double cost) {
   DBConnection *conn_wrapper = db_pool_acquire();
 
@@ -155,31 +157,24 @@ bool delete_maintenance_log(int log_id) {
   return success;
 }
 
-// ====================================================================
-// MOCK IMPLEMENTATIONS FOR TESTING
-// ====================================================================
+#endif  // TEST_MODE
 
 #ifdef TEST_MODE
+
+// =====================================
+// MOCK IMPLEMENTATION
+// =====================================
 
 int get_all_maintenance_logs(MaintenanceLog *logs, int max_count) {
   if (!logs || max_count <= 0) return 0;
 
   logs[0].id = 1;
   logs[0].machine_id = 1;
+  strcpy(logs[0].technician_name, "Ali");
+  strcpy(logs[0].log_date, "2025-01-01");
   strcpy(logs[0].description, "Routine oil change");
-  strcpy(logs[0].status, "completed");
-  logs[0].cost = 150.50;
-  logs[1].id = 2;
-  logs[1].machine_id = 2;
-  strcpy(logs[1].description, "Belt replacement");
-  strcpy(logs[1].status, "scheduled");
-  logs[1].cost = 275.00;
-  logs[2].id = 3;
-  logs[2].machine_id = 3;
-  strcpy(logs[2].description, "Firmware update");
-  strcpy(logs[2].status, "in_progress");
-  logs[2].cost = 0.00;
-  return 3;
+  logs[0].cost = 150.5;
+  return 1;
 }
 
-#endif /* TEST_MODE */
+#endif  // TEST_MODE

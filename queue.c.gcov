@@ -1,6 +1,6 @@
         -:    0:Source:src/backend/core/data_structures/queue.c
-        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_queue-queue.gcno
-        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_queue-queue.gcda
+        -:    0:Graph:build_backend_tests/test_queue-queue.gcno
+        -:    0:Data:build_backend_tests/test_queue-queue.gcda
         -:    0:Runs:1
         -:    1:/* This file is a template for queue.c. Content will be filled by yagiz on 2025-12-29. */
         -:    2:#include <stdio.h>

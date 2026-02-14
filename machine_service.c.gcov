@@ -1,6 +1,6 @@
         -:    0:Source:src/backend/database/machine_service.c
-        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_machine_service-machine_service.gcno
-        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_machine_service-machine_service.gcda
+        -:    0:Graph:build_backend_tests/test_machine_service_real-machine_service.gcno
+        -:    0:Data:build_backend_tests/test_machine_service_real-machine_service.gcda
         -:    0:Runs:1
         -:    1:#include "machine_service.h"
         -:    2:#include "db_connection.h"
@@ -9,162 +9,205 @@
         -:    5:#include <stdlib.h>
         -:    6:#include <stdio.h>
         -:    7:
-        -:    8:// ====================================================================
-        -:    9:// GERÇEK IMPLEMENTASYON (PostgreSQL)
+        -:    8:#ifndef TEST_MODE
+        -:    9:
         -:   10:// ====================================================================
-        -:   11:
-function get_all_machines called 0 returned 0% blocks executed 0%
-    #####:   12:int get_all_machines(Machine *machines, int max_count) {
-        -:   13:  // 1. Havuzdan bir bağlantı ödünç al
-    #####:   14:  DBConnection *conn_wrapper = db_pool_acquire();
-call    0 never executed
-        -:   15:
-    #####:   16:  if (!conn_wrapper) {
-branch  0 never executed (fallthrough)
-branch  1 never executed
-    #####:   17:    LOG_ERROR("Could not acquire connection to fetch machines.");
+        -:   11:// GERÇEK IMPLEMENTASYON (PostgreSQL)
+        -:   12:// ====================================================================
+        -:   13:
+function get_all_machines called 1 returned 100% blocks executed 43%
+        1:   14:int get_all_machines(Machine *machines, int max_count)
+        -:   15:{
+        1:   16:    if (!machines || max_count <= 0)
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    #####:   17:        return 0;
+        -:   18:
+        1:   19:    DBConnection *conn_wrapper = db_pool_acquire();
+call    0 returned 1
+        1:   20:    if (!conn_wrapper) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   21:        LOG_ERROR("Could not acquire connection to fetch machines.");
 call    0 never executed
 call    1 never executed
 call    2 never executed
 call    3 never executed
-    #####:   18:    return 0;
-        -:   19:  }
-        -:   20:
-        -:   21:  // 2. SQL Sorgusunu çalıştır
-    #####:   22:  PGresult *res = PQexec(conn_wrapper->pg_conn,
-call    0 never executed
-        -:   23:                         "SELECT id, name, model, location, status FROM machines");
+    #####:   22:        return 0;
+        -:   23:    }
         -:   24:
-    #####:   25:  if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        1:   25:    PGresult *res = PQexec(
+call    0 returned 1
+        -:   26:        conn_wrapper->pg_conn,
+        -:   27:        "SELECT id, name, model, location, status FROM machines");
+        -:   28:
+        1:   29:    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:   30:        LOG_ERROR("SELECT machines failed: %s",
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+        -:   31:                  PQerrorMessage(conn_wrapper->pg_conn));
+        1:   32:        PQclear(res);
+call    0 returned 1
+        1:   33:        db_pool_release(conn_wrapper);
+call    0 returned 1
+        1:   34:        return 0;
+        -:   35:    }
+        -:   36:
+    #####:   37:    int rows = PQntuples(res);
 call    0 never executed
-branch  1 never executed (fallthrough)
-branch  2 never executed
-    #####:   26:    LOG_ERROR("SELECT machines failed: %s", PQerrorMessage(conn_wrapper->pg_conn));
-call    0 never executed
-call    1 never executed
-call    2 never executed
-call    3 never executed
-call    4 never executed
-    #####:   27:    PQclear(res);
-call    0 never executed
-    #####:   28:    db_pool_release(conn_wrapper);
-call    0 never executed
-    #####:   29:    return 0;
-        -:   30:  }
-        -:   31:
-        -:   32:  // 3. Gelen verileri C Struct'larına kopyala
-    #####:   33:  int rows = PQntuples(res);
-call    0 never executed
-    #####:   34:  int count = (rows < max_count) ? rows : max_count;
-        -:   35:
-    #####:   36:  for (int i = 0; i < count; i++) {
+    #####:   38:    int count = (rows < max_count) ? rows : max_count;
+        -:   39:
+    #####:   40:    for (int i = 0; i < count; i++) {
 branch  0 never executed
 branch  1 never executed (fallthrough)
-    #####:   37:    machines[i].id = atoi(PQgetvalue(res, i, 0));
+    #####:   41:        machines[i].id = atoi(PQgetvalue(res, i, 0));
 call    0 never executed
 call    1 never executed
-    #####:   38:    strncpy(machines[i].name, PQgetvalue(res, i, 1), 99);
+        -:   42:
+    #####:   43:        strncpy(machines[i].name, PQgetvalue(res, i, 1), 99);
 call    0 never executed
-    #####:   39:    machines[i].name[99] = '\0';
-    #####:   40:    strncpy(machines[i].model, PQgetvalue(res, i, 2), 49);
+    #####:   44:        machines[i].name[99] = '\0';
+        -:   45:
+    #####:   46:        strncpy(machines[i].model, PQgetvalue(res, i, 2), 49);
 call    0 never executed
-    #####:   41:    machines[i].model[49] = '\0';
-    #####:   42:    strncpy(machines[i].location, PQgetvalue(res, i, 3), 99);
-call    0 never executed
-    #####:   43:    machines[i].location[99] = '\0';
-    #####:   44:    strncpy(machines[i].status, PQgetvalue(res, i, 4), 19);
-call    0 never executed
-    #####:   45:    machines[i].status[19] = '\0';
-    #####:   46:    machines[i].health_score = get_machine_health_score(machines[i].id);
-call    0 never executed
-        -:   47:  }
+    #####:   47:        machines[i].model[49] = '\0';
         -:   48:
-        -:   49:  // 4. Temizlik
-    #####:   50:  PQclear(res);
+    #####:   49:        strncpy(machines[i].location, PQgetvalue(res, i, 3), 99);
 call    0 never executed
-    #####:   51:  db_pool_release(conn_wrapper);
+    #####:   50:        machines[i].location[99] = '\0';
+        -:   51:
+    #####:   52:        strncpy(machines[i].status, PQgetvalue(res, i, 4), 19);
 call    0 never executed
-    #####:   52:  LOG_INFO("Successfully fetched %d machines from DB.", count);
+    #####:   53:        machines[i].status[19] = '\0';
+        -:   54:
+    #####:   55:        machines[i].health_score =
+    #####:   56:            get_machine_health_score(machines[i].id);
 call    0 never executed
-    #####:   53:  return count;
-        -:   54:}
-        -:   55:
-function get_machine_by_id called 0 returned 0% blocks executed 0%
-    #####:   56:int get_machine_by_id(int id, Machine *machine) {
-        -:   57:  // Gerçek implementasyon - veritabanından sorgula
-        -:   58:  // Şimdilik mock veri döndür
-    #####:   59:  if (!machine) return -1;
-branch  0 never executed (fallthrough)
-branch  1 never executed
-        -:   60:
-    #####:   61:  machine->id = id;
-    #####:   62:  sprintf(machine->name, "Machine %d", id);
+        -:   57:    }
+        -:   58:
+    #####:   59:    PQclear(res);
 call    0 never executed
-    #####:   63:  strcpy(machine->model, "Standard Model");
-    #####:   64:  strcpy(machine->location, "Production Line");
-    #####:   65:  strcpy(machine->status, "running");
-    #####:   66:  machine->health_score = 90.0;
-    #####:   67:  return 0;
-        -:   68:}
-        -:   69:
-function get_machine_health_score called 0 returned 0% blocks executed 0%
-    #####:   70:double get_machine_health_score(int machine_id) {
-        -:   71:  (void)machine_id;
-        -:   72:  // Gerçek implementasyon - sensör verilerinden hesapla
-    #####:   73:  return 94.7;
-        -:   74:}
+    #####:   60:    db_pool_release(conn_wrapper);
+call    0 never executed
+        -:   61:
+    #####:   62:    LOG_INFO("Successfully fetched %d machines from DB.", count);
+call    0 never executed
+    #####:   63:    return count;
+        -:   64:}
+        -:   65:
+function get_machine_by_id called 1 returned 100% blocks executed 80%
+        1:   66:int get_machine_by_id(int id, Machine *machine)
+        -:   67:{
+        1:   68:    if (!machine)
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   69:        return -1;
+        -:   70:
+        1:   71:    machine->id = id;
+        -:   72:
+        1:   73:    snprintf(machine->name, sizeof(machine->name),
+call    0 returned 1
+        -:   74:             "Machine %d", id);
         -:   75:
-        -:   76:// ====================================================================
-        -:   77:// MOCK IMPLEMENTATIONS FOR TESTING
-        -:   78:// ====================================================================
-        -:   79:
-        -:   80:#ifdef TEST_MODE
-        -:   81:
-        -:   82:// TEST MODE'DA gerçek fonksiyonları geçersiz kıl
-        -:   83:#undef get_all_machines
-        -:   84:#undef get_machine_by_id
-        -:   85:#undef get_machine_health_score
+        1:   76:    strncpy(machine->model, "Standard Model", sizeof(machine->model) - 1);
+        1:   77:    machine->model[sizeof(machine->model) - 1] = '\0';
+        -:   78:
+        1:   79:    strncpy(machine->location, "Production Line",
+        -:   80:            sizeof(machine->location) - 1);
+        1:   81:    machine->location[sizeof(machine->location) - 1] = '\0';
+        -:   82:
+        1:   83:    strncpy(machine->status, "running",
+        -:   84:            sizeof(machine->status) - 1);
+        1:   85:    machine->status[sizeof(machine->status) - 1] = '\0';
         -:   86:
-        -:   87:int get_all_machines(Machine *machines, int max_count) {
-        -:   88:  if (!machines || max_count <= 0) return 0;
-        -:   89:
-        -:   90:  // Mock machine data for testing
-        -:   91:  machines[0].id = 1;
-        -:   92:  strcpy(machines[0].name, "CNC Machine");
-        -:   93:  strcpy(machines[0].model, "HAAS VF-2");
-        -:   94:  strcpy(machines[0].location, "Shop Floor A");
-        -:   95:  strcpy(machines[0].status, "running");
-        -:   96:  machines[0].health_score = 95.5;
-        -:   97:  machines[1].id = 2;
-        -:   98:  strcpy(machines[1].name, "Conveyor Belt");
-        -:   99:  strcpy(machines[1].model, "Dorner 2200");
-        -:  100:  strcpy(machines[1].location, "Assembly Line");
-        -:  101:  strcpy(machines[1].status, "idle");
-        -:  102:  machines[1].health_score = 87.3;
-        -:  103:  machines[2].id = 3;
-        -:  104:  strcpy(machines[2].name, "Robot Arm");
-        -:  105:  strcpy(machines[2].model, "Fanuc M-10iA");
-        -:  106:  strcpy(machines[2].location, "Welding Station");
-        -:  107:  strcpy(machines[2].status, "running");
-        -:  108:  machines[2].health_score = 99.1;
-        -:  109:  return 3;
-        -:  110:}
-        -:  111:
-        -:  112:int get_machine_by_id(int id, Machine *machine) {
-        -:  113:  if (!machine) return -1;
+        1:   87:    machine->health_score = 90.0;
+        -:   88:
+        1:   89:    return 0;
+        -:   90:}
+        -:   91:
+function get_machine_health_score called 0 returned 0% blocks executed 0%
+    #####:   92:double get_machine_health_score(int machine_id)
+        -:   93:{
+        -:   94:    (void)machine_id;
+    #####:   95:    return 94.7;
+        -:   96:}
+        -:   97:
+        -:   98:#endif  // TEST_MODE
+        -:   99:
+        -:  100:
+        -:  101:
+        -:  102:#ifdef TEST_MODE
+        -:  103:
+        -:  104:// ====================================================================
+        -:  105:// MOCK IMPLEMENTATIONS FOR TESTING
+        -:  106:// ====================================================================
+        -:  107:
+        -:  108:int get_all_machines(Machine *machines, int max_count)
+        -:  109:{
+        -:  110:    if (!machines || max_count <= 0)
+        -:  111:        return 0;
+        -:  112:
+        -:  113:    machines[0].id = 1;
         -:  114:
-        -:  115:  machine->id = id;
-        -:  116:  sprintf(machine->name, "Machine %d", id);
-        -:  117:  strcpy(machine->model, "Test Model");
-        -:  118:  strcpy(machine->location, "Test Location");
-        -:  119:  strcpy(machine->status, "running");
-        -:  120:  machine->health_score = 90.0;
-        -:  121:  return 0;
-        -:  122:}
-        -:  123:
-        -:  124:double get_machine_health_score(int machine_id) {
-        -:  125:  (void)machine_id;
-        -:  126:  return 94.7;
-        -:  127:}
+        -:  115:    strncpy(machines[0].name, "CNC-01", sizeof(machines[0].name) - 1);
+        -:  116:    machines[0].name[sizeof(machines[0].name) - 1] = '\0';
+        -:  117:
+        -:  118:    strncpy(machines[0].model, "X100", sizeof(machines[0].model) - 1);
+        -:  119:    machines[0].model[sizeof(machines[0].model) - 1] = '\0';
+        -:  120:
+        -:  121:    strncpy(machines[0].location, "Line A",
+        -:  122:            sizeof(machines[0].location) - 1);
+        -:  123:    machines[0].location[sizeof(machines[0].location) - 1] = '\0';
+        -:  124:
+        -:  125:    strncpy(machines[0].status, "active",
+        -:  126:            sizeof(machines[0].status) - 1);
+        -:  127:    machines[0].status[sizeof(machines[0].status) - 1] = '\0';
         -:  128:
-        -:  129:#endif /* TEST_MODE */
+        -:  129:    machines[0].health_score = 88.5;
+        -:  130:
+        -:  131:    return 1;
+        -:  132:}
+        -:  133:
+        -:  134:int get_machine_by_id(int id, Machine *machine)
+        -:  135:{
+        -:  136:    if (!machine)
+        -:  137:        return 0;
+        -:  138:
+        -:  139:    machine->id = id;
+        -:  140:
+        -:  141:    strncpy(machine->name, "Mock Machine",
+        -:  142:            sizeof(machine->name) - 1);
+        -:  143:    machine->name[sizeof(machine->name) - 1] = '\0';
+        -:  144:
+        -:  145:    strncpy(machine->model, "Mock Model",
+        -:  146:            sizeof(machine->model) - 1);
+        -:  147:    machine->model[sizeof(machine->model) - 1] = '\0';
+        -:  148:
+        -:  149:    strncpy(machine->location, "Test Lab",
+        -:  150:            sizeof(machine->location) - 1);
+        -:  151:    machine->location[sizeof(machine->location) - 1] = '\0';
+        -:  152:
+        -:  153:    strncpy(machine->status, "active",
+        -:  154:            sizeof(machine->status) - 1);
+        -:  155:    machine->status[sizeof(machine->status) - 1] = '\0';
+        -:  156:
+        -:  157:    machine->health_score = 90.0;
+        -:  158:
+        -:  159:    return 1;
+        -:  160:}
+        -:  161:
+        -:  162:double get_machine_health_score(int machine_id)
+        -:  163:{
+        -:  164:    (void)machine_id;
+        -:  165:    return 88.5;
+        -:  166:}
+        -:  167:
+        -:  168:#endif

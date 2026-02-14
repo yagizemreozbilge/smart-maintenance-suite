@@ -5,12 +5,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#ifndef TEST_MODE
+
 // ====================================================================
 // GERÇEK IMPLEMENTASYON (PostgreSQL)
 // ====================================================================
 
 int get_all_machines(Machine *machines, int max_count) {
-  // 1. Havuzdan bir bağlantı ödünç al
+  if (!machines || max_count <= 0)
+    return 0;
+
   DBConnection *conn_wrapper = db_pool_acquire();
 
   if (!conn_wrapper) {
@@ -18,18 +22,18 @@ int get_all_machines(Machine *machines, int max_count) {
     return 0;
   }
 
-  // 2. SQL Sorgusunu çalıştır
-  PGresult *res = PQexec(conn_wrapper->pg_conn,
-                         "SELECT id, name, model, location, status FROM machines");
+  PGresult *res = PQexec(
+                    conn_wrapper->pg_conn,
+                    "SELECT id, name, model, location, status FROM machines");
 
   if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-    LOG_ERROR("SELECT machines failed: %s", PQerrorMessage(conn_wrapper->pg_conn));
+    LOG_ERROR("SELECT machines failed: %s",
+              PQerrorMessage(conn_wrapper->pg_conn));
     PQclear(res);
     db_pool_release(conn_wrapper);
     return 0;
   }
 
-  // 3. Gelen verileri C Struct'larına kopyala
   int rows = PQntuples(res);
   int count = (rows < max_count) ? rows : max_count;
 
@@ -43,10 +47,10 @@ int get_all_machines(Machine *machines, int max_count) {
     machines[i].location[99] = '\0';
     strncpy(machines[i].status, PQgetvalue(res, i, 4), 19);
     machines[i].status[19] = '\0';
-    machines[i].health_score = get_machine_health_score(machines[i].id);
+    machines[i].health_score =
+      get_machine_health_score(machines[i].id);
   }
 
-  // 4. Temizlik
   PQclear(res);
   db_pool_release(conn_wrapper);
   LOG_INFO("Successfully fetched %d machines from DB.", count);
@@ -54,76 +58,82 @@ int get_all_machines(Machine *machines, int max_count) {
 }
 
 int get_machine_by_id(int id, Machine *machine) {
-  // Gerçek implementasyon - veritabanından sorgula
-  // Şimdilik mock veri döndür
-  if (!machine) return -1;
+  if (!machine)
+    return -1;
 
   machine->id = id;
-  sprintf(machine->name, "Machine %d", id);
-  strcpy(machine->model, "Standard Model");
-  strcpy(machine->location, "Production Line");
-  strcpy(machine->status, "running");
+  snprintf(machine->name, sizeof(machine->name),
+           "Machine %d", id);
+  strncpy(machine->model, "Standard Model", sizeof(machine->model) - 1);
+  machine->model[sizeof(machine->model) - 1] = '\0';
+  strncpy(machine->location, "Production Line",
+          sizeof(machine->location) - 1);
+  machine->location[sizeof(machine->location) - 1] = '\0';
+  strncpy(machine->status, "running",
+          sizeof(machine->status) - 1);
+  machine->status[sizeof(machine->status) - 1] = '\0';
   machine->health_score = 90.0;
   return 0;
 }
 
 double get_machine_health_score(int machine_id) {
   (void)machine_id;
-  // Gerçek implementasyon - sensör verilerinden hesapla
   return 94.7;
 }
+
+#endif  // TEST_MODE
+
+
+
+#ifdef TEST_MODE
 
 // ====================================================================
 // MOCK IMPLEMENTATIONS FOR TESTING
 // ====================================================================
 
-#ifdef TEST_MODE
-
-// TEST MODE'DA gerçek fonksiyonları geçersiz kıl
-#undef get_all_machines
-#undef get_machine_by_id
-#undef get_machine_health_score
-
 int get_all_machines(Machine *machines, int max_count) {
-  if (!machines || max_count <= 0) return 0;
+  if (!machines || max_count <= 0)
+    return 0;
 
-  // Mock machine data for testing
   machines[0].id = 1;
-  strcpy(machines[0].name, "CNC Machine");
-  strcpy(machines[0].model, "HAAS VF-2");
-  strcpy(machines[0].location, "Shop Floor A");
-  strcpy(machines[0].status, "running");
-  machines[0].health_score = 95.5;
-  machines[1].id = 2;
-  strcpy(machines[1].name, "Conveyor Belt");
-  strcpy(machines[1].model, "Dorner 2200");
-  strcpy(machines[1].location, "Assembly Line");
-  strcpy(machines[1].status, "idle");
-  machines[1].health_score = 87.3;
-  machines[2].id = 3;
-  strcpy(machines[2].name, "Robot Arm");
-  strcpy(machines[2].model, "Fanuc M-10iA");
-  strcpy(machines[2].location, "Welding Station");
-  strcpy(machines[2].status, "running");
-  machines[2].health_score = 99.1;
-  return 3;
+  strncpy(machines[0].name, "CNC-01", sizeof(machines[0].name) - 1);
+  machines[0].name[sizeof(machines[0].name) - 1] = '\0';
+  strncpy(machines[0].model, "X100", sizeof(machines[0].model) - 1);
+  machines[0].model[sizeof(machines[0].model) - 1] = '\0';
+  strncpy(machines[0].location, "Line A",
+          sizeof(machines[0].location) - 1);
+  machines[0].location[sizeof(machines[0].location) - 1] = '\0';
+  strncpy(machines[0].status, "active",
+          sizeof(machines[0].status) - 1);
+  machines[0].status[sizeof(machines[0].status) - 1] = '\0';
+  machines[0].health_score = 88.5;
+  return 1;
 }
 
 int get_machine_by_id(int id, Machine *machine) {
-  if (!machine) return -1;
+  if (!machine)
+    return 0;
 
   machine->id = id;
-  sprintf(machine->name, "Machine %d", id);
-  strcpy(machine->model, "Test Model");
-  strcpy(machine->location, "Test Location");
-  strcpy(machine->status, "running");
+  strncpy(machine->name, "Mock Machine",
+          sizeof(machine->name) - 1);
+  machine->name[sizeof(machine->name) - 1] = '\0';
+  strncpy(machine->model, "Mock Model",
+          sizeof(machine->model) - 1);
+  machine->model[sizeof(machine->model) - 1] = '\0';
+  strncpy(machine->location, "Test Lab",
+          sizeof(machine->location) - 1);
+  machine->location[sizeof(machine->location) - 1] = '\0';
+  strncpy(machine->status, "active",
+          sizeof(machine->status) - 1);
+  machine->status[sizeof(machine->status) - 1] = '\0';
   machine->health_score = 90.0;
-  return 0;
+  return 1;
 }
 
 double get_machine_health_score(int machine_id) {
   (void)machine_id;
-  return 94.7;
+  return 88.5;
 }
 
-#endif /* TEST_MODE */
+#endif

@@ -1,6 +1,6 @@
         -:    0:Source:src/backend/api/handlers/auth_handler.c
-        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-auth_handler.gcno
-        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-auth_handler.gcda
+        -:    0:Graph:build_backend_tests/test_auth_handler-auth_handler.gcno
+        -:    0:Data:build_backend_tests/test_auth_handler-auth_handler.gcda
         -:    0:Runs:1
         -:    1:#include "auth_handler.h"
         -:    2:#include "../../database/cJSON.h"
@@ -9,33 +9,33 @@
         -:    5:#include <stdlib.h>
         -:    6:#include <stdio.h>
         -:    7:
-function handle_auth_request called 0 returned 0% blocks executed 0%
-    #####:    8:void handle_auth_request(HttpRequest *req, HttpResponse *res) {
+function handle_auth_request called 1 returned 100% blocks executed 100%
+        1:    8:void handle_auth_request(HttpRequest *req, HttpResponse *res) {
         -:    9:  // Mock kullanıcı bilgileri
-    #####:   10:  int user_id = 1;
-    #####:   11:  const char *username = "admin";
-    #####:   12:  const char *role = "admin";
+        1:   10:  int user_id = 1;
+        1:   11:  const char *username = "admin";
+        1:   12:  const char *role = "admin";
         -:   13:  // jwt.h'daki orijinal generate_auth_token fonksiyonunu çağır
-    #####:   14:  char *token = generate_auth_token(user_id, username, role);
-call    0 never executed
-    #####:   15:  cJSON *root = cJSON_CreateObject();
-call    0 never executed
-    #####:   16:  cJSON_AddStringToObject(root, "status", "authenticated");
-call    0 never executed
-    #####:   17:  cJSON_AddStringToObject(root, "token", token);
-call    0 never executed
-    #####:   18:  cJSON_AddStringToObject(root, "role", role);
-call    0 never executed
-    #####:   19:  cJSON_AddStringToObject(root, "username", username);
-call    0 never executed
-    #####:   20:  char *json = cJSON_Print(root);
-call    0 never executed
-    #####:   21:  cJSON_Delete(root);
-call    0 never executed
-    #####:   22:  free(token);
-    #####:   23:  res->status_code = 200;
-    #####:   24:  strcpy(res->content_type, "application/json");
-    #####:   25:  strncpy(res->body, json, 8191);
-    #####:   26:  res->body[8191] = '\0';
-    #####:   27:  free(json);
-    #####:   28:}
+        1:   14:  char *token = generate_auth_token(user_id, username, role);
+call    0 returned 1
+        1:   15:  cJSON *root = cJSON_CreateObject();
+call    0 returned 1
+        1:   16:  cJSON_AddStringToObject(root, "status", "authenticated");
+call    0 returned 1
+        1:   17:  cJSON_AddStringToObject(root, "token", token);
+call    0 returned 1
+        1:   18:  cJSON_AddStringToObject(root, "role", role);
+call    0 returned 1
+        1:   19:  cJSON_AddStringToObject(root, "username", username);
+call    0 returned 1
+        1:   20:  char *json = cJSON_Print(root);
+call    0 returned 1
+        1:   21:  cJSON_Delete(root);
+call    0 returned 1
+        1:   22:  free(token);
+        1:   23:  res->status_code = 200;
+        1:   24:  strcpy(res->content_type, "application/json");
+        1:   25:  strncpy(res->body, json, 8191);
+        1:   26:  res->body[8191] = '\0';
+        1:   27:  free(json);
+        1:   28:}

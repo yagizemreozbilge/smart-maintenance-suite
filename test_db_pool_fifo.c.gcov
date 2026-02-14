@@ -1,6 +1,6 @@
         -:    0:Source:src/backend/tests/unit/database/test_db_pool_fifo.c
-        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_db_pool_fifo.gcno
-        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_db_pool_fifo.gcda
+        -:    0:Graph:build_backend_tests/test_db_pool_fifo.gcno
+        -:    0:Data:build_backend_tests/test_db_pool_fifo.gcda
         -:    0:Runs:1
         -:    1:#include <stdio.h>
         -:    2:#include <stdlib.h>

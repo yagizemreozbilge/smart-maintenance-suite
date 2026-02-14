@@ -1,6 +1,6 @@
         -:    0:Source:src/backend/tests/unit/test_api_handlers.c
-        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-test_api_handlers.gcno
-        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_api-test_api_handlers.gcda
+        -:    0:Graph:build_backend_tests/test_api-test_api_handlers.gcno
+        -:    0:Data:build_backend_tests/test_api-test_api_handlers.gcda
         -:    0:Runs:1
         -:    1:#include "../../api/http_server.h"
         -:    2:#include "../../api/router.h"

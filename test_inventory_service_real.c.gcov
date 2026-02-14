@@ -1,0 +1,282 @@
+        -:    0:Source:src/backend/tests/unit/database/test_inventory_service_real.c
+        -:    0:Graph:build_backend_tests/test_inventory_service_real-test_inventory_service_real.gcno
+        -:    0:Data:build_backend_tests/test_inventory_service_real-test_inventory_service_real.gcda
+        -:    0:Runs:1
+        -:    1:#include <stdarg.h>
+        -:    2:#include <stddef.h>
+        -:    3:#include <setjmp.h>
+        -:    4:#include <cmocka.h>
+        -:    5:#include <string.h>
+        -:    6:#include <stdio.h>
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:// ÖNEMLİ: libpq-fe.h'i include ETME!
+        -:   10:#define PGconn void
+        -:   11:#define PGresult void
+        -:   12:
+        -:   13:#define LIBPQ_FE_H
+        -:   14:#define PQconninfoOption void
+        -:   15:#define ConnStatusType int
+        -:   16:#define ExecStatusType int
+        -:   17:#define CONNECTION_OK 0
+        -:   18:#define CONNECTION_BAD 1
+        -:   19:#define PGRES_COMMAND_OK 1
+        -:   20:#define PGRES_TUPLES_OK 2
+        -:   21:#define PGRES_FATAL_ERROR 3
+        -:   22:
+        -:   23:#include "inventory_service.h"
+        -:   24:#include "db_connection.h"
+        -:   25:
+        -:   26:// Logger mock'larını manuel tanımla
+        -:   27:#undef LOG_ERROR
+        -:   28:#undef LOG_INFO
+        -:   29:#define LOG_ERROR(msg, ...) 
+        -:   30:#define LOG_INFO(msg, ...) 
+        -:   31:
+        -:   32:/* ====================================================================
+        -:   33: * MOCK FONKSİYONLAR
+        -:   34: * ==================================================================== */
+        -:   35:
+        -:   36:static DBConnection mock_conn;
+        -:   37:static void* mock_result;
+        -:   38:static int mock_acquire_success = 1;
+        -:   39:static int mock_result_status = 2; // PGRES_TUPLES_OK
+        -:   40:static char mock_error_message[256] = "";
+        -:   41:static char mock_query[1024] = "";
+        -:   42:
+        -:   43:static int mock_acquire_called = 0;
+        -:   44:static int mock_release_called = 0;
+        -:   45:static int mock_pqexec_called = 0;
+        -:   46:static int mock_pqclear_called = 0;
+        -:   47:static int mock_pqntuples_called = 0;
+        -:   48:
+        -:   49:typedef struct {
+        -:   50:    char id[10];
+        -:   51:    char part_name[100];
+        -:   52:    char sku[50];
+        -:   53:    char quantity[10];
+        -:   54:    char min_stock[10];
+        -:   55:    char unit_cost[20];
+        -:   56:    char last_restocked[32];
+        -:   57:} MockRow;
+        -:   58:
+        -:   59:static MockRow mock_rows[10];
+        -:   60:static int mock_row_count = 0;
+        -:   61:
+function db_pool_acquire called 4 returned 100% blocks executed 100%
+        4:   62:DBConnection* db_pool_acquire(void) {
+        4:   63:    mock_acquire_called++;
+        4:   64:    if (mock_acquire_success) {
+branch  0 taken 3 (fallthrough)
+branch  1 taken 1
+        3:   65:        mock_conn.pg_conn = (void*)0x1234;
+        3:   66:        return &mock_conn;
+        -:   67:    }
+        1:   68:    return NULL;
+        -:   69:}
+        -:   70:
+function db_pool_release called 3 returned 100% blocks executed 100%
+        3:   71:void db_pool_release(DBConnection *conn) {
+        3:   72:    mock_release_called++;
+        3:   73:}
+        -:   74:
+function PQexec called 3 returned 100% blocks executed 100%
+        3:   75:void* PQexec(void* conn, const char *query) {
+        3:   76:    mock_pqexec_called++;
+        3:   77:    strncpy(mock_query, query, sizeof(mock_query) - 1);
+        3:   78:    return mock_result;
+        -:   79:}
+        -:   80:
+function PQresultStatus called 3 returned 100% blocks executed 100%
+        3:   81:int PQresultStatus(const void *res) {
+        3:   82:    return mock_result_status;
+        -:   83:}
+        -:   84:
+function PQerrorMessage called 0 returned 0% blocks executed 0%
+    #####:   85:char* PQerrorMessage(const void *conn) {
+    #####:   86:    return mock_error_message;
+        -:   87:}
+        -:   88:
+function PQclear called 3 returned 100% blocks executed 100%
+        3:   89:void PQclear(void *res) {
+        3:   90:    mock_pqclear_called++;
+        3:   91:}
+        -:   92:
+function PQntuples called 2 returned 100% blocks executed 100%
+        2:   93:int PQntuples(const void *res) {
+        2:   94:    mock_pqntuples_called++;
+        2:   95:    return mock_row_count;
+        -:   96:}
+        -:   97:
+function PQgetvalue called 28 returned 100% blocks executed 91%
+       28:   98:char* PQgetvalue(const void *res, int row, int field) {
+       28:   99:    if (row < mock_row_count) {
+branch  0 taken 28 (fallthrough)
+branch  1 taken 0
+       28:  100:        switch (field) {
+branch  0 taken 4
+branch  1 taken 4
+branch  2 taken 4
+branch  3 taken 4
+branch  4 taken 4
+branch  5 taken 4
+branch  6 taken 4
+branch  7 taken 0
+        4:  101:            case 0: return mock_rows[row].id;
+        4:  102:            case 1: return mock_rows[row].part_name;
+        4:  103:            case 2: return mock_rows[row].sku;
+        4:  104:            case 3: return mock_rows[row].quantity;
+        4:  105:            case 4: return mock_rows[row].min_stock;
+        4:  106:            case 5: return mock_rows[row].unit_cost;
+        4:  107:            case 6: return mock_rows[row].last_restocked;
+        -:  108:        }
+        -:  109:    }
+    #####:  110:    return "";
+        -:  111:}
+        -:  112:
+        -:  113:/* ====================================================================
+        -:  114: * TEST SETUP
+        -:  115: * ==================================================================== */
+        -:  116:
+function reset_mocks called 5 returned 100% blocks executed 100%
+        5:  117:static void reset_mocks(void) {
+        5:  118:    mock_acquire_success = 1;
+        5:  119:    mock_result_status = 2; // PGRES_TUPLES_OK
+        5:  120:    mock_error_message[0] = '\0';
+        5:  121:    mock_query[0] = '\0';
+        -:  122:    
+        5:  123:    mock_acquire_called = 0;
+        5:  124:    mock_release_called = 0;
+        5:  125:    mock_pqexec_called = 0;
+        5:  126:    mock_pqclear_called = 0;
+        5:  127:    mock_pqntuples_called = 0;
+        -:  128:    
+        5:  129:    mock_row_count = 0;
+        5:  130:    memset(mock_rows, 0, sizeof(mock_rows));
+        5:  131:}
+        -:  132:
+function setup_test_data called 2 returned 100% blocks executed 100%
+        2:  133:static void setup_test_data(void) {
+        2:  134:    mock_row_count = 2;
+        -:  135:    
+        2:  136:    strcpy(mock_rows[0].id, "1");
+        2:  137:    strcpy(mock_rows[0].part_name, "Motor Oil");
+        2:  138:    strcpy(mock_rows[0].sku, "MO-001");
+        2:  139:    strcpy(mock_rows[0].quantity, "50");
+        2:  140:    strcpy(mock_rows[0].min_stock, "10");
+        2:  141:    strcpy(mock_rows[0].unit_cost, "25.50");
+        2:  142:    strcpy(mock_rows[0].last_restocked, "2025-01-01");
+        -:  143:    
+        2:  144:    strcpy(mock_rows[1].id, "2");
+        2:  145:    strcpy(mock_rows[1].part_name, "Air Filter");
+        2:  146:    strcpy(mock_rows[1].sku, "AF-002");
+        2:  147:    strcpy(mock_rows[1].quantity, "5");
+        2:  148:    strcpy(mock_rows[1].min_stock, "10");
+        2:  149:    strcpy(mock_rows[1].unit_cost, "15.75");
+        2:  150:    strcpy(mock_rows[1].last_restocked, "2025-01-02");
+        2:  151:}
+        -:  152:
+        -:  153:/* ====================================================================
+        -:  154: * TEST CASES
+        -:  155: * ==================================================================== */
+        -:  156:
+function test_get_all_inventory_success called 1 returned 100% blocks executed 100%
+        1:  157:static void test_get_all_inventory_success(void **state) {
+        1:  158:    reset_mocks();
+call    0 returned 1
+        1:  159:    setup_test_data();
+call    0 returned 1
+        -:  160:    
+        -:  161:    InventoryItem items[5];
+        1:  162:    int count = get_all_inventory(items, 5);
+call    0 returned 1
+        -:  163:    
+        1:  164:    assert_int_equal(count, 2);
+call    0 returned 1
+        1:  165:    assert_int_equal(mock_acquire_called, 1);
+call    0 returned 1
+        1:  166:    assert_int_equal(mock_pqexec_called, 1);
+call    0 returned 1
+        -:  167:    
+        1:  168:    assert_int_equal(items[0].id, 1);
+call    0 returned 1
+        1:  169:    assert_string_equal(items[0].part_name, "Motor Oil");
+call    0 returned 1
+        1:  170:    assert_int_equal(items[0].quantity, 50);
+call    0 returned 1
+        1:  171:}
+        -:  172:
+function test_get_all_inventory_null_items called 1 returned 100% blocks executed 100%
+        1:  173:static void test_get_all_inventory_null_items(void **state) {
+        1:  174:    reset_mocks();
+call    0 returned 1
+        -:  175:    
+        1:  176:    int count = get_all_inventory(NULL, 5);
+call    0 returned 1
+        1:  177:    assert_int_equal(count, 0);
+call    0 returned 1
+        1:  178:    assert_int_equal(mock_acquire_called, 0);
+call    0 returned 1
+        1:  179:}
+        -:  180:
+function test_get_all_inventory_acquire_fails called 1 returned 100% blocks executed 100%
+        1:  181:static void test_get_all_inventory_acquire_fails(void **state) {
+        1:  182:    reset_mocks();
+call    0 returned 1
+        1:  183:    mock_acquire_success = 0;
+        -:  184:    
+        -:  185:    InventoryItem items[5];
+        1:  186:    int count = get_all_inventory(items, 5);
+call    0 returned 1
+        1:  187:    assert_int_equal(count, 0);
+call    0 returned 1
+        1:  188:}
+        -:  189:
+function test_update_inventory_success called 1 returned 100% blocks executed 100%
+        1:  190:static void test_update_inventory_success(void **state) {
+        1:  191:    reset_mocks();
+call    0 returned 1
+        1:  192:    mock_result_status = 1; // PGRES_COMMAND_OK
+        -:  193:    
+        1:  194:    bool result = update_inventory_quantity(1, 10);
+call    0 returned 1
+        1:  195:    assert_true(result);
+call    0 returned 1
+        1:  196:    assert_int_equal(mock_pqexec_called, 1);
+call    0 returned 1
+        1:  197:}
+        -:  198:
+function test_get_low_stock_success called 1 returned 100% blocks executed 100%
+        1:  199:static void test_get_low_stock_success(void **state) {
+        1:  200:    reset_mocks();
+call    0 returned 1
+        1:  201:    setup_test_data();
+call    0 returned 1
+        -:  202:    
+        -:  203:    InventoryItem items[5];
+        1:  204:    int count = get_low_stock_items(items, 5);
+call    0 returned 1
+        -:  205:    
+        1:  206:    assert_int_equal(count, 2);
+call    0 returned 1
+        1:  207:}
+        -:  208:
+        -:  209:/* ====================================================================
+        -:  210: * MAIN
+        -:  211: * ==================================================================== */
+        -:  212:
+function main called 1 returned 100% blocks executed 100%
+        1:  213:int main(void) {
+        1:  214:    const struct CMUnitTest tests[] = {
+        -:  215:        cmocka_unit_test(test_get_all_inventory_success),
+        -:  216:        cmocka_unit_test(test_get_all_inventory_null_items),
+        -:  217:        cmocka_unit_test(test_get_all_inventory_acquire_fails),
+        -:  218:        
+        -:  219:        cmocka_unit_test(test_update_inventory_success),
+        -:  220:        
+        -:  221:        cmocka_unit_test(test_get_low_stock_success),
+        -:  222:    };
+        -:  223:    
+        1:  224:    return cmocka_run_group_tests(tests, NULL, NULL);
+call    0 returned 1
+        -:  225:}

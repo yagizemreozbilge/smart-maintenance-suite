@@ -1,6 +1,6 @@
         -:    0:Source:src/backend/database/maintenance_service.c
-        -:    0:Graph:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_maintenance_service-maintenance_service.gcno
-        -:    0:Data:C:\Users\yagiz\Desktop\Project\smart-maintenance-suite\build_backend_tests\test_maintenance_service-maintenance_service.gcda
+        -:    0:Graph:build_backend_tests/test_maintenance_service_real-maintenance_service.gcno
+        -:    0:Data:build_backend_tests/test_maintenance_service_real-maintenance_service.gcda
         -:    0:Runs:1
         -:    1:#include "maintenance_service.h"
         -:    2:#include "db_connection.h"
@@ -9,297 +9,293 @@
         -:    5:#include <stdlib.h>
         -:    6:#include <string.h>
         -:    7:
+        -:    8:#ifndef TEST_MODE
+        -:    9:
 function add_maintenance_log called 0 returned 0% blocks executed 0%
-    #####:    8:bool add_maintenance_log(int machine_id, const char *technician, const char *description, double cost) {
-    #####:    9:  DBConnection *conn_wrapper = db_pool_acquire();
+    #####:   10:bool add_maintenance_log(int machine_id, const char *technician, const char *description, double cost) {
+    #####:   11:    DBConnection *conn_wrapper = db_pool_acquire();
 call    0 never executed
-        -:   10:
-    #####:   11:  if (!conn_wrapper) {
+        -:   12:    
+    #####:   13:    if (!conn_wrapper) {
 branch  0 never executed (fallthrough)
 branch  1 never executed
-    #####:   12:    LOG_ERROR("Could not acquire connection to add maintenance log.");
+    #####:   14:        LOG_ERROR("Could not acquire connection to add maintenance log.");
 call    0 never executed
 call    1 never executed
 call    2 never executed
 call    3 never executed
-    #####:   13:    return false;
-        -:   14:  }
-        -:   15:
-        -:   16:  char query[1024];
-    #####:   17:  snprintf(query, sizeof(query),
+    #####:   15:        return false;
+        -:   16:    }
+        -:   17:    
+        -:   18:    char query[1024];
+    #####:   19:    snprintf(query, sizeof(query),
 call    0 never executed
-        -:   18:           "INSERT INTO maintenance_logs (machine_id, performer, description, cost) "
-        -:   19:           "VALUES (%d, '%s', '%s', %.2f);",
-        -:   20:           machine_id, technician, description, cost);
-    #####:   21:  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+        -:   20:             "INSERT INTO maintenance_logs (machine_id, performer, description, cost) "
+        -:   21:             "VALUES (%d, '%s', '%s', %.2f);",
+        -:   22:             machine_id, technician, description, cost);
+    #####:   23:    PGresult *res = PQexec(conn_wrapper->pg_conn, query);
 call    0 never executed
-        -:   22:
-    #####:   23:  if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        -:   24:    
+    #####:   25:    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 call    0 never executed
 branch  1 never executed (fallthrough)
 branch  2 never executed
-    #####:   24:    LOG_ERROR("Failed to insert maintenance log: %s", PQerrorMessage(conn_wrapper->pg_conn));
+    #####:   26:        LOG_ERROR("Failed to insert maintenance log: %s", PQerrorMessage(conn_wrapper->pg_conn));
 call    0 never executed
 call    1 never executed
 call    2 never executed
 call    3 never executed
 call    4 never executed
-    #####:   25:    PQclear(res);
+    #####:   27:        PQclear(res);
 call    0 never executed
-    #####:   26:    db_pool_release(conn_wrapper);
+    #####:   28:        db_pool_release(conn_wrapper);
 call    0 never executed
-    #####:   27:    return false;
-        -:   28:  }
-        -:   29:
-    #####:   30:  PQclear(res);
+    #####:   29:        return false;
+        -:   30:    }
+        -:   31:    
+    #####:   32:    PQclear(res);
 call    0 never executed
-    #####:   31:  db_pool_release(conn_wrapper);
+    #####:   33:    db_pool_release(conn_wrapper);
 call    0 never executed
-    #####:   32:  LOG_INFO("Maintenance log added for Machine %d.", machine_id);
+    #####:   34:    LOG_INFO("Maintenance log added for Machine %d.", machine_id);
 call    0 never executed
-    #####:   33:  return true;
-        -:   34:}
-        -:   35:
+    #####:   35:    return true;
+        -:   36:}
+        -:   37:
 function get_maintenance_history called 0 returned 0% blocks executed 0%
-    #####:   36:int get_maintenance_history(int machine_id, MaintenanceLog *out_logs, int max_logs) {
-    #####:   37:  DBConnection *conn_wrapper = db_pool_acquire();
+    #####:   38:int get_maintenance_history(int machine_id, MaintenanceLog *out_logs, int max_logs) {
+    #####:   39:    DBConnection *conn_wrapper = db_pool_acquire();
 call    0 never executed
-        -:   38:
-    #####:   39:  if (!conn_wrapper) {
+        -:   40:    
+    #####:   41:    if (!conn_wrapper) {
 branch  0 never executed (fallthrough)
 branch  1 never executed
-    #####:   40:    LOG_ERROR("Could not acquire connection to fetch maintenance history.");
+    #####:   42:        LOG_ERROR("Could not acquire connection to fetch maintenance history.");
 call    0 never executed
 call    1 never executed
 call    2 never executed
 call    3 never executed
-    #####:   41:    return 0;
-        -:   42:  }
-        -:   43:
-        -:   44:  char query[256];
-    #####:   45:  snprintf(query, sizeof(query),
+    #####:   43:        return 0;
+        -:   44:    }
+        -:   45:    
+        -:   46:    char query[256];
+    #####:   47:    snprintf(query, sizeof(query),
 call    0 never executed
-        -:   46:           "SELECT id, machine_id, performer, to_char(ts, 'YYYY-MM-DD'), description, cost "
-        -:   47:           "FROM maintenance_logs WHERE machine_id = %d ORDER BY ts DESC;",
-        -:   48:           machine_id);
-    #####:   49:  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+        -:   48:             "SELECT id, machine_id, performer, to_char(ts, 'YYYY-MM-DD'), description, cost "
+        -:   49:             "FROM maintenance_logs WHERE machine_id = %d ORDER BY ts DESC;",
+        -:   50:             machine_id);
+    #####:   51:    PGresult *res = PQexec(conn_wrapper->pg_conn, query);
 call    0 never executed
-        -:   50:
-    #####:   51:  if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+        -:   52:    
+    #####:   53:    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 call    0 never executed
 branch  1 never executed (fallthrough)
 branch  2 never executed
-    #####:   52:    LOG_ERROR("Failed to fetch maintenance history: %s", PQerrorMessage(conn_wrapper->pg_conn));
+    #####:   54:        LOG_ERROR("Failed to fetch maintenance history: %s", PQerrorMessage(conn_wrapper->pg_conn));
 call    0 never executed
 call    1 never executed
 call    2 never executed
 call    3 never executed
 call    4 never executed
-    #####:   53:    PQclear(res);
+    #####:   55:        PQclear(res);
 call    0 never executed
-    #####:   54:    db_pool_release(conn_wrapper);
+    #####:   56:        db_pool_release(conn_wrapper);
 call    0 never executed
-    #####:   55:    return 0;
-        -:   56:  }
-        -:   57:
-    #####:   58:  int rows = PQntuples(res);
+    #####:   57:        return 0;
+        -:   58:    }
+        -:   59:    
+    #####:   60:    int rows = PQntuples(res);
 call    0 never executed
-    #####:   59:  int count = (rows < max_logs) ? rows : max_logs;
-        -:   60:
-    #####:   61:  for (int i = 0; i < count; i++) {
+    #####:   61:    int count = (rows < max_logs) ? rows : max_logs;
+        -:   62:    
+    #####:   63:    for (int i = 0; i < count; i++) {
 branch  0 never executed
 branch  1 never executed (fallthrough)
-    #####:   62:    out_logs[i].id = atoi(PQgetvalue(res, i, 0));
+    #####:   64:        out_logs[i].id = atoi(PQgetvalue(res, i, 0));
 call    0 never executed
 call    1 never executed
-    #####:   63:    out_logs[i].machine_id = atoi(PQgetvalue(res, i, 1));
+    #####:   65:        out_logs[i].machine_id = atoi(PQgetvalue(res, i, 1));
 call    0 never executed
 call    1 never executed
-    #####:   64:    strncpy(out_logs[i].technician_name, PQgetvalue(res, i, 2), 99);
+    #####:   66:        strncpy(out_logs[i].technician_name, PQgetvalue(res, i, 2), 99);
 call    0 never executed
-    #####:   65:    out_logs[i].technician_name[99] = '\0';
-    #####:   66:    strncpy(out_logs[i].log_date, PQgetvalue(res, i, 3), 31);
+    #####:   67:        out_logs[i].technician_name[99] = '\0';
+    #####:   68:        strncpy(out_logs[i].log_date, PQgetvalue(res, i, 3), 31);
 call    0 never executed
-    #####:   67:    out_logs[i].log_date[31] = '\0';
-    #####:   68:    strncpy(out_logs[i].description, PQgetvalue(res, i, 4), 511);
+    #####:   69:        out_logs[i].log_date[31] = '\0';
+    #####:   70:        strncpy(out_logs[i].description, PQgetvalue(res, i, 4), 511);
 call    0 never executed
-    #####:   69:    out_logs[i].description[511] = '\0';
-    #####:   70:    out_logs[i].cost = atof(PQgetvalue(res, i, 5));
+    #####:   71:        out_logs[i].description[511] = '\0';
+    #####:   72:        out_logs[i].cost = atof(PQgetvalue(res, i, 5));
 call    0 never executed
 call    1 never executed
-        -:   71:  }
-        -:   72:
-    #####:   73:  PQclear(res);
+        -:   73:    }
+        -:   74:    
+    #####:   75:    PQclear(res);
 call    0 never executed
-    #####:   74:  db_pool_release(conn_wrapper);
+    #####:   76:    db_pool_release(conn_wrapper);
 call    0 never executed
-    #####:   75:  LOG_INFO("Fetched %d maintenance logs for Machine %d.", count, machine_id);
+    #####:   77:    LOG_INFO("Fetched %d maintenance logs for Machine %d.", count, machine_id);
 call    0 never executed
-    #####:   76:  return count;
-        -:   77:}
-        -:   78:
-function get_all_maintenance_logs called 0 returned 0% blocks executed 0%
-    #####:   79:int get_all_maintenance_logs(MaintenanceLog *out_logs, int max_logs) {
-    #####:   80:  DBConnection *conn_wrapper = db_pool_acquire();
+    #####:   78:    return count;
+        -:   79:}
+        -:   80:
+function get_all_maintenance_logs called 1 returned 100% blocks executed 35%
+        1:   81:int get_all_maintenance_logs(MaintenanceLog *out_logs, int max_logs) {
+        1:   82:    DBConnection *conn_wrapper = db_pool_acquire();
+call    0 returned 1
+        -:   83:    
+       1*:   84:    if (!conn_wrapper) return 0;
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:   85:    
+        1:   86:    const char *query = "SELECT id, machine_id, performer, to_char(ts, 'YYYY-MM-DD'), description, cost "
+        -:   87:                        "FROM maintenance_logs ORDER BY ts DESC;";
+        1:   88:    PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+call    0 returned 1
+        -:   89:    
+        1:   90:    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:   91:        PQclear(res);
+call    0 returned 1
+        1:   92:        db_pool_release(conn_wrapper);
+call    0 returned 1
+        1:   93:        return 0;
+        -:   94:    }
+        -:   95:    
+    #####:   96:    int rows = PQntuples(res);
 call    0 never executed
-        -:   81:
-    #####:   82:  if (!conn_wrapper) return 0;
-branch  0 never executed (fallthrough)
-branch  1 never executed
-        -:   83:
-    #####:   84:  const char *query = "SELECT id, machine_id, performer, to_char(ts, 'YYYY-MM-DD'), description, cost "
-        -:   85:                      "FROM maintenance_logs ORDER BY ts DESC;";
-    #####:   86:  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
-call    0 never executed
-        -:   87:
-    #####:   88:  if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-call    0 never executed
-branch  1 never executed (fallthrough)
-branch  2 never executed
-    #####:   89:    PQclear(res);
-call    0 never executed
-    #####:   90:    db_pool_release(conn_wrapper);
-call    0 never executed
-    #####:   91:    return 0;
-        -:   92:  }
-        -:   93:
-    #####:   94:  int rows = PQntuples(res);
-call    0 never executed
-    #####:   95:  int count = (rows < max_logs) ? rows : max_logs;
-        -:   96:
-    #####:   97:  for (int i = 0; i < count; i++) {
+    #####:   97:    int count = (rows < max_logs) ? rows : max_logs;
+        -:   98:    
+    #####:   99:    for (int i = 0; i < count; i++) {
 branch  0 never executed
 branch  1 never executed (fallthrough)
-    #####:   98:    out_logs[i].id = atoi(PQgetvalue(res, i, 0));
+    #####:  100:        out_logs[i].id = atoi(PQgetvalue(res, i, 0));
 call    0 never executed
 call    1 never executed
-    #####:   99:    out_logs[i].machine_id = atoi(PQgetvalue(res, i, 1));
+    #####:  101:        out_logs[i].machine_id = atoi(PQgetvalue(res, i, 1));
 call    0 never executed
 call    1 never executed
-    #####:  100:    strncpy(out_logs[i].technician_name, PQgetvalue(res, i, 2), 99);
+    #####:  102:        strncpy(out_logs[i].technician_name, PQgetvalue(res, i, 2), 99);
 call    0 never executed
-    #####:  101:    out_logs[i].technician_name[99] = '\0';
-    #####:  102:    strncpy(out_logs[i].log_date, PQgetvalue(res, i, 3), 31);
+    #####:  103:        out_logs[i].technician_name[99] = '\0';
+    #####:  104:        strncpy(out_logs[i].log_date, PQgetvalue(res, i, 3), 31);
 call    0 never executed
-    #####:  103:    out_logs[i].log_date[31] = '\0';
-    #####:  104:    strncpy(out_logs[i].description, PQgetvalue(res, i, 4), 511);
+    #####:  105:        out_logs[i].log_date[31] = '\0';
+    #####:  106:        strncpy(out_logs[i].description, PQgetvalue(res, i, 4), 511);
 call    0 never executed
-    #####:  105:    out_logs[i].description[511] = '\0';
-    #####:  106:    out_logs[i].cost = atof(PQgetvalue(res, i, 5));
+    #####:  107:        out_logs[i].description[511] = '\0';
+    #####:  108:        out_logs[i].cost = atof(PQgetvalue(res, i, 5));
 call    0 never executed
 call    1 never executed
-        -:  107:  }
-        -:  108:
-    #####:  109:  PQclear(res);
+        -:  109:    }
+        -:  110:    
+    #####:  111:    PQclear(res);
 call    0 never executed
-    #####:  110:  db_pool_release(conn_wrapper);
+    #####:  112:    db_pool_release(conn_wrapper);
 call    0 never executed
-    #####:  111:  return count;
-        -:  112:}
-        -:  113:
+    #####:  113:    return count;
+        -:  114:}
+        -:  115:
 function update_maintenance_log called 0 returned 0% blocks executed 0%
-    #####:  114:bool update_maintenance_log(int log_id, const char *description, double cost) {
-    #####:  115:  DBConnection *conn_wrapper = db_pool_acquire();
+    #####:  116:bool update_maintenance_log(int log_id, const char *description, double cost) {
+    #####:  117:    DBConnection *conn_wrapper = db_pool_acquire();
 call    0 never executed
-        -:  116:
-    #####:  117:  if (!conn_wrapper) return false;
+        -:  118:    
+    #####:  119:    if (!conn_wrapper) return false;
 branch  0 never executed (fallthrough)
 branch  1 never executed
-        -:  118:
-        -:  119:  char query[1024];
-    #####:  120:  snprintf(query, sizeof(query),
+        -:  120:    
+        -:  121:    char query[1024];
+    #####:  122:    snprintf(query, sizeof(query),
 call    0 never executed
-        -:  121:           "UPDATE maintenance_logs SET description = '%s', cost = %.2f WHERE id = %d;",
-        -:  122:           description, cost, log_id);
-    #####:  123:  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+        -:  123:             "UPDATE maintenance_logs SET description = '%s', cost = %.2f WHERE id = %d;",
+        -:  124:             description, cost, log_id);
+    #####:  125:    PGresult *res = PQexec(conn_wrapper->pg_conn, query);
 call    0 never executed
-    #####:  124:  bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
+    #####:  126:    bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
 call    0 never executed
-        -:  125:
-    #####:  126:  if (!success) {
+        -:  127:    
+    #####:  128:    if (!success) {
 branch  0 never executed (fallthrough)
 branch  1 never executed
-    #####:  127:    LOG_ERROR("Failed to update log: %s", PQerrorMessage(conn_wrapper->pg_conn));
+    #####:  129:        LOG_ERROR("Failed to update log: %s", PQerrorMessage(conn_wrapper->pg_conn));
 call    0 never executed
 call    1 never executed
 call    2 never executed
 call    3 never executed
 call    4 never executed
-        -:  128:  } else {
-    #####:  129:    LOG_INFO("Maintenance log %d updated successfully.", log_id);
+        -:  130:    } else {
+    #####:  131:        LOG_INFO("Maintenance log %d updated successfully.", log_id);
 call    0 never executed
-        -:  130:  }
-        -:  131:
-    #####:  132:  PQclear(res);
+        -:  132:    }
+        -:  133:    
+    #####:  134:    PQclear(res);
 call    0 never executed
-    #####:  133:  db_pool_release(conn_wrapper);
+    #####:  135:    db_pool_release(conn_wrapper);
 call    0 never executed
-    #####:  134:  return success;
-        -:  135:}
-        -:  136:
+    #####:  136:    return success;
+        -:  137:}
+        -:  138:
 function delete_maintenance_log called 0 returned 0% blocks executed 0%
-    #####:  137:bool delete_maintenance_log(int log_id) {
-    #####:  138:  DBConnection *conn_wrapper = db_pool_acquire();
+    #####:  139:bool delete_maintenance_log(int log_id) {
+    #####:  140:    DBConnection *conn_wrapper = db_pool_acquire();
 call    0 never executed
-        -:  139:
-    #####:  140:  if (!conn_wrapper) return false;
+        -:  141:    
+    #####:  142:    if (!conn_wrapper) return false;
 branch  0 never executed (fallthrough)
 branch  1 never executed
-        -:  141:
-        -:  142:  char query[128];
-    #####:  143:  snprintf(query, sizeof(query), "DELETE FROM maintenance_logs WHERE id = %d;", log_id);
+        -:  143:    
+        -:  144:    char query[128];
+    #####:  145:    snprintf(query, sizeof(query), "DELETE FROM maintenance_logs WHERE id = %d;", log_id);
 call    0 never executed
-    #####:  144:  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+    #####:  146:    PGresult *res = PQexec(conn_wrapper->pg_conn, query);
 call    0 never executed
-    #####:  145:  bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
+    #####:  147:    bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
 call    0 never executed
-        -:  146:
-    #####:  147:  if (!success) {
+        -:  148:    
+    #####:  149:    if (!success) {
 branch  0 never executed (fallthrough)
 branch  1 never executed
-    #####:  148:    LOG_ERROR("Failed to delete log: %s", PQerrorMessage(conn_wrapper->pg_conn));
+    #####:  150:        LOG_ERROR("Failed to delete log: %s", PQerrorMessage(conn_wrapper->pg_conn));
 call    0 never executed
 call    1 never executed
 call    2 never executed
 call    3 never executed
 call    4 never executed
-        -:  149:  } else {
-    #####:  150:    LOG_INFO("Maintenance log %d deleted.", log_id);
+        -:  151:    } else {
+    #####:  152:        LOG_INFO("Maintenance log %d deleted.", log_id);
 call    0 never executed
-        -:  151:  }
-        -:  152:
-    #####:  153:  PQclear(res);
+        -:  153:    }
+        -:  154:    
+    #####:  155:    PQclear(res);
 call    0 never executed
-    #####:  154:  db_pool_release(conn_wrapper);
+    #####:  156:    db_pool_release(conn_wrapper);
 call    0 never executed
-    #####:  155:  return success;
-        -:  156:}
-        -:  157:
-        -:  158:// ====================================================================
-        -:  159:// MOCK IMPLEMENTATIONS FOR TESTING
-        -:  160:// ====================================================================
+    #####:  157:    return success;
+        -:  158:}
+        -:  159:
+        -:  160:#endif  // TEST_MODE
         -:  161:
         -:  162:#ifdef TEST_MODE
         -:  163:
-        -:  164:int get_all_maintenance_logs(MaintenanceLog *logs, int max_count) {
-        -:  165:  if (!logs || max_count <= 0) return 0;
-        -:  166:
-        -:  167:  logs[0].id = 1;
-        -:  168:  logs[0].machine_id = 1;
-        -:  169:  strcpy(logs[0].description, "Routine oil change");
-        -:  170:  strcpy(logs[0].status, "completed");
-        -:  171:  logs[0].cost = 150.50;
-        -:  172:  logs[1].id = 2;
-        -:  173:  logs[1].machine_id = 2;
-        -:  174:  strcpy(logs[1].description, "Belt replacement");
-        -:  175:  strcpy(logs[1].status, "scheduled");
-        -:  176:  logs[1].cost = 275.00;
-        -:  177:  logs[2].id = 3;
-        -:  178:  logs[2].machine_id = 3;
-        -:  179:  strcpy(logs[2].description, "Firmware update");
-        -:  180:  strcpy(logs[2].status, "in_progress");
-        -:  181:  logs[2].cost = 0.00;
-        -:  182:  return 3;
-        -:  183:}
-        -:  184:
-        -:  185:#endif /* TEST_MODE */
+        -:  164:// =====================================
+        -:  165:// MOCK IMPLEMENTATION
+        -:  166:// =====================================
+        -:  167:
+        -:  168:int get_all_maintenance_logs(MaintenanceLog *logs, int max_count) {
+        -:  169:    if (!logs || max_count <= 0) return 0;
+        -:  170:    
+        -:  171:    logs[0].id = 1;
+        -:  172:    logs[0].machine_id = 1;
+        -:  173:    strcpy(logs[0].technician_name, "Ali");
+        -:  174:    strcpy(logs[0].log_date, "2025-01-01");
+        -:  175:    strcpy(logs[0].description, "Routine oil change");
+        -:  176:    logs[0].cost = 150.5;
+        -:  177:    
+        -:  178:    return 1;
+        -:  179:}
+        -:  180:
+        -:  181:#endif  // TEST_MODE

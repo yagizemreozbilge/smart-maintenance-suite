@@ -1,0 +1,118 @@
+        -:    0:Source:src/backend/tests/unit/test_report_handler.c
+        -:    0:Graph:build_backend_tests/test_report_handler-test_report_handler.gcno
+        -:    0:Data:build_backend_tests/test_report_handler-test_report_handler.gcda
+        -:    0:Runs:1
+        -:    1:#include "../../api/handlers/report_handler.h"
+        -:    2:#include "../../api/http_server.h"
+        -:    3:
+        -:    4:#include <assert.h>
+        -:    5:#include <string.h>
+        -:    6:#include <stdio.h>
+        -:    7:#include <stdlib.h>
+        -:    8:
+function test_generate_maintenance_xml called 1 returned 100% blocks executed 78%
+        1:    9:void test_generate_maintenance_xml() {
+        1:   10:    char *xml = generate_maintenance_xml_report();
+call    0 returned 1
+        -:   11:
+       1*:   12:    assert(xml != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   13:    assert(strstr(xml, "Maintenance Report") != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:   14:
+        1:   15:    free(xml);
+        -:   16:
+        1:   17:    printf("[PASS] generate_maintenance_xml_report\n");
+call    0 returned 1
+        1:   18:}
+        -:   19:
+function test_generate_inventory_xml called 1 returned 100% blocks executed 78%
+        1:   20:void test_generate_inventory_xml() {
+        1:   21:    char *xml = generate_inventory_xml_report();
+call    0 returned 1
+        -:   22:
+       1*:   23:    assert(xml != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   24:    assert(strstr(xml, "Inventory Report") != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:   25:
+        1:   26:    free(xml);
+        -:   27:
+        1:   28:    printf("[PASS] generate_inventory_xml_report\n");
+call    0 returned 1
+        1:   29:}
+        -:   30:
+function test_handle_report_maintenance called 1 returned 100% blocks executed 75%
+        1:   31:void test_handle_report_maintenance() {
+        1:   32:    HttpRequest req = {0};
+        1:   33:    HttpResponse res = {0};
+        -:   34:
+        1:   35:    strcpy(req.path, "/api/report/maintenance");
+        -:   36:
+        1:   37:    handle_report_request(&req, &res);
+call    0 returned 1
+        -:   38:
+       1*:   39:    assert(res.status_code == 200);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   40:    assert(strcmp(res.content_type, "application/xml") == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   41:    assert(strstr(res.body, "Maintenance Report") != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:   42:
+        1:   43:    printf("[PASS] handle_report_request maintenance\n");
+call    0 returned 1
+        1:   44:}
+        -:   45:
+function test_handle_report_inventory called 1 returned 100% blocks executed 75%
+        1:   46:void test_handle_report_inventory() {
+        1:   47:    HttpRequest req = {0};
+        1:   48:    HttpResponse res = {0};
+        -:   49:
+        1:   50:    strcpy(req.path, "/api/report/inventory");
+        -:   51:
+        1:   52:    handle_report_request(&req, &res);
+call    0 returned 1
+        -:   53:
+       1*:   54:    assert(res.status_code == 200);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   55:    assert(strcmp(res.content_type, "application/xml") == 0);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+       1*:   56:    assert(strstr(res.body, "Inventory Report") != NULL);
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+call    2 never executed
+        -:   57:
+        1:   58:    printf("[PASS] handle_report_request inventory\n");
+call    0 returned 1
+        1:   59:}
+        -:   60:
+function main called 1 returned 100% blocks executed 100%
+        1:   61:int main() {
+        1:   62:    test_generate_maintenance_xml();
+call    0 returned 1
+        1:   63:    test_generate_inventory_xml();
+call    0 returned 1
+        1:   64:    test_handle_report_maintenance();
+call    0 returned 1
+        1:   65:    test_handle_report_inventory();
+call    0 returned 1
+        1:   66:    return 0;
+        -:   67:}
