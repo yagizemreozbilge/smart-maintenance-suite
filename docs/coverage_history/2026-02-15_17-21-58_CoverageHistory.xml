@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2026-02-15_17-21-58" tag="">
+  <assembly name="src.backend.api">
+    <class name="router_c" coveredlines="24" coverablelines="24" totallines="41" coveredbranches="14" totalbranches="14" coveredcodeelements="1" totalcodeelements="1" />
+  </assembly>
+  <assembly name="src.backend.api.handlers">
+    <class name="auth_handler_c" coveredlines="19" coverablelines="19" totallines="28" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="fault_handler_c" coveredlines="74" coverablelines="77" totallines="108" coveredbranches="12" totalbranches="14" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="inventory_handler_c" coveredlines="22" coverablelines="22" totallines="33" coveredbranches="2" totalbranches="2" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="machine_handler_c" coveredlines="23" coverablelines="23" totallines="38" coveredbranches="4" totalbranches="4" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="maintenance_handler_c" coveredlines="23" coverablelines="23" totallines="34" coveredbranches="2" totalbranches="2" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="report_handler_c" coveredlines="18" coverablelines="18" totallines="33" coveredbranches="2" totalbranches="2" coveredcodeelements="3" totalcodeelements="3" />
+  </assembly>
+  <assembly name="src.backend.core.data_structures">
+    <class name="bst_c" coveredlines="49" coverablelines="64" totallines="113" coveredbranches="20" totalbranches="24" coveredcodeelements="8" totalcodeelements="10" />
+    <class name="graph_c" coveredlines="36" coverablelines="55" totallines="105" coveredbranches="16" totalbranches="32" coveredcodeelements="6" totalcodeelements="7" />
+    <class name="heap_c" coveredlines="43" coverablelines="73" totallines="137" coveredbranches="16" totalbranches="44" coveredcodeelements="6" totalcodeelements="7" />
+    <class name="queue_c" coveredlines="42" coverablelines="51" totallines="108" coveredbranches="3" totalbranches="4" coveredcodeelements="9" totalcodeelements="11" />
+    <class name="stack_c" coveredlines="22" coverablelines="22" totallines="47" coveredbranches="3" totalbranches="4" coveredcodeelements="4" totalcodeelements="4" />
+  </assembly>
+  <assembly name="src.backend.database">
+    <class name="alert_service_c" coveredlines="47" coverablelines="82" totallines="188" coveredbranches="13" totalbranches="34" coveredcodeelements="4" totalcodeelements="5" />
+    <class name="db_connection_c" coveredlines="143" coverablelines="180" totallines="417" coveredbranches="40" totalbranches="65" coveredcodeelements="10" totalcodeelements="10" />
+    <class name="inventory_service_c" coveredlines="60" coverablelines="71" totallines="160" coveredbranches="16" totalbranches="24" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="machine_service_c" coveredlines="22" coverablelines="46" totallines="133" coveredbranches="5" totalbranches="12" coveredcodeelements="2" totalcodeelements="3" />
+    <class name="maintenance_service_c" coveredlines="9" coverablelines="92" totallines="223" coveredbranches="2" totalbranches="24" coveredcodeelements="1" totalcodeelements="5" />
+  </assembly>
+  <assembly name="src.backend.security">
+    <class name="jwt_c" coveredlines="6" coverablelines="29" totallines="62" coveredbranches="0" totalbranches="14" coveredcodeelements="1" totalcodeelements="3" />
+    <class name="rbac_c" coveredlines="12" coverablelines="12" totallines="26" coveredbranches="12" totalbranches="12" coveredcodeelements="4" totalcodeelements="4" />
+  </assembly>
+</coverage>
