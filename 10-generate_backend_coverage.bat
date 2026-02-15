@@ -314,8 +314,7 @@ src\backend\security\rbac.c
 
 call :run_test test_jwt ^
 src\backend\tests\unit\test_jwt_standalone.c ^
-src\backend\security\jwt.c ^
-src\backend\database\db_connection.c
+
 
 
 
