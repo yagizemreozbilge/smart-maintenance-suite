@@ -128,15 +128,11 @@ int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
  * JSON SERIALIZATION (API ENDPOINTS)
  * ------------------------------------------------------------------ */
 
-/**
- * Serializes alerts to JSON format for API responses.
- * Fetches recent alerts and converts them to JSON string.
- * Caller is responsible for freeing the returned string.
- */
+#ifndef TEST_MODE
+
 char *alert_service_serialize_alerts(void) {
   AlertInfo alerts[50];
   int count = get_recent_alerts(alerts, 50);
-  // JSON string için memory allocation
   char *json = (char *)malloc(4096);
 
   if (!json) return NULL;
@@ -169,14 +165,16 @@ char *alert_service_serialize_alerts(void) {
   return json;
 }
 
+#endif
+
+
+
 /* ------------------------------------------------------------------
  * TEST/MOCK VERSION (compile with -DTEST_MODE)
  * ------------------------------------------------------------------ */
 
 #ifdef TEST_MODE
-/**
- * Test version that doesn't require database connection.
- */
+
 char *alert_service_serialize_alerts(void) {
   char *json = (char *)malloc(256);
 
@@ -187,4 +185,4 @@ char *alert_service_serialize_alerts(void) {
   return json;
 }
 
-#endif /* TEST_MODE */
+#endif

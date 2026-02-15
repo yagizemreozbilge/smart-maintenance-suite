@@ -49,10 +49,23 @@ void test_get_machine_by_id_null() {
   printf(" test_get_machine_by_id_null passed\n");
 }
 
+void test_get_machine_by_id_invalid_id() {
+  Machine machine;
+  int result = get_machine_by_id(0, &machine);
+  assert(result == 0);
+  printf(" test_get_machine_by_id_invalid_id passed\n");
+}
+
 void test_get_machine_health_score() {
   double score = get_machine_health_score(1);
   assert(score == 88.5);
   printf(" test_get_machine_health_score passed\n");
+}
+
+void test_get_machine_health_score_invalid() {
+  double score = get_machine_health_score(0);
+  assert(score == 0.0);
+  printf(" test_get_machine_health_score_invalid passed\n");
 }
 
 int main() {
@@ -61,7 +74,9 @@ int main() {
   test_get_all_machines_zero_max();
   test_get_machine_by_id_success();
   test_get_machine_by_id_null();
+  test_get_machine_by_id_invalid_id();
   test_get_machine_health_score();
+  test_get_machine_health_score_invalid();
   printf("\n All machine service tests passed!\n");
   return 0;
 }

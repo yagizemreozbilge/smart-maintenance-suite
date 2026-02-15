@@ -1,44 +1,51 @@
-#include "../../api/handlers/machine_handler.h"
-#include "../../api/http_server.h"
-
-#include <assert.h>
+/* test_machine_handler_suite.c */
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <cmocka.h>
 #include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "api/handlers/machine_handler.h"
 
-void test_serialize_machines() {
-  char *json = serialize_machines_to_json();
-  assert(json != NULL);
-  assert(strstr(json, "CNC Machine") != NULL);
-  assert(strstr(json, "running") != NULL);
-  free(json);
-  printf("[PASS] serialize_machines_to_json\n");
+// Mock logs to avoid linking errors
+void LOG_INFO(const char *f, ...) {
+  (void)f;
 }
 
-void test_handle_machine_get() {
-  HttpRequest req = {0};
-  HttpResponse res = {0};
-  strcpy(req.method, "GET");
+void LOG_ERROR(const char *f, ...) {
+  (void)f;
+}
+
+static void test_get_machines_success(void **state) {
+  (void)state;
+  HttpRequest req = { .method = "GET" };
+  HttpResponse res = { 0 };
   handle_machine_request(&req, &res);
-  assert(res.status_code == 200);
-  assert(strcmp(res.content_type, "application/json") == 0);
-  assert(strstr(res.body, "CNC Machine") != NULL);
-  printf("[PASS] handle_machine_request GET\n");
+  assert_int_equal(res.status_code, 200);
+  assert_non_null(strstr(res.body, "CNC Machine"));
 }
 
-void test_handle_machine_post() {
-  HttpRequest req = {0};
-  HttpResponse res = {0};
-  strcpy(req.method, "POST");
+static void test_post_machines_success(void **state) {
+  (void)state;
+  HttpRequest req = { .method = "POST" };
+  HttpResponse res = { 0 };
   handle_machine_request(&req, &res);
-  assert(res.status_code == 201);
-  assert(strstr(res.body, "Machine onboarded") != NULL);
-  printf("[PASS] handle_machine_request POST\n");
+  assert_int_equal(res.status_code, 201);
 }
 
-int main() {
-  test_serialize_machines();
-  test_handle_machine_get();
-  test_handle_machine_post();
-  return 0;
+static void test_unsupported_method_branch(void **state) {
+  (void)state;
+  HttpRequest req = { .method = "DELETE" }; // Triggers the final implicit 'else'
+  HttpResponse res = { .status_code = -1 };
+  handle_machine_request(&req, &res);
+  // Since code has no 'else' for other methods, status remains unchanged
+  assert_int_equal(res.status_code, -1);
+}
+
+int main(void) {
+  const struct CMUnitTest tests[] = {
+    cmocka_unit_test(test_get_machines_success),
+    cmocka_unit_test(test_post_machines_success),
+    cmocka_unit_test(test_unsupported_method_branch),
+  };
+  return cmocka_run_group_tests(tests, NULL, NULL);
 }

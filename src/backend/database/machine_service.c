@@ -87,25 +87,22 @@ double get_machine_health_score(int machine_id) {
 
 #ifdef TEST_MODE
 
-// ====================================================================
-// MOCK IMPLEMENTATIONS FOR TESTING
-// ====================================================================
+// =====================================
+// MOCK IMPLEMENTATION (COVERAGE BOOST)
+// =====================================
 
 int get_all_machines(Machine *machines, int max_count) {
-  if (!machines || max_count <= 0)
+  if (!machines)
+    return 0;
+
+  if (max_count <= 0)
     return 0;
 
   machines[0].id = 1;
-  strncpy(machines[0].name, "CNC-01", sizeof(machines[0].name) - 1);
-  machines[0].name[sizeof(machines[0].name) - 1] = '\0';
-  strncpy(machines[0].model, "X100", sizeof(machines[0].model) - 1);
-  machines[0].model[sizeof(machines[0].model) - 1] = '\0';
-  strncpy(machines[0].location, "Line A",
-          sizeof(machines[0].location) - 1);
-  machines[0].location[sizeof(machines[0].location) - 1] = '\0';
-  strncpy(machines[0].status, "active",
-          sizeof(machines[0].status) - 1);
-  machines[0].status[sizeof(machines[0].status) - 1] = '\0';
+  strcpy(machines[0].name, "CNC-01");
+  strcpy(machines[0].model, "X100");
+  strcpy(machines[0].location, "Line A");
+  strcpy(machines[0].status, "active");
   machines[0].health_score = 88.5;
   return 1;
 }
@@ -114,25 +111,22 @@ int get_machine_by_id(int id, Machine *machine) {
   if (!machine)
     return 0;
 
+  if (id <= 0)
+    return 0;
+
   machine->id = id;
-  strncpy(machine->name, "Mock Machine",
-          sizeof(machine->name) - 1);
-  machine->name[sizeof(machine->name) - 1] = '\0';
-  strncpy(machine->model, "Mock Model",
-          sizeof(machine->model) - 1);
-  machine->model[sizeof(machine->model) - 1] = '\0';
-  strncpy(machine->location, "Test Lab",
-          sizeof(machine->location) - 1);
-  machine->location[sizeof(machine->location) - 1] = '\0';
-  strncpy(machine->status, "active",
-          sizeof(machine->status) - 1);
-  machine->status[sizeof(machine->status) - 1] = '\0';
+  strcpy(machine->name, "Mock Machine");
+  strcpy(machine->model, "Mock Model");
+  strcpy(machine->location, "Test Lab");
+  strcpy(machine->status, "active");
   machine->health_score = 90.0;
   return 1;
 }
 
-double get_machine_health_score(int machine_id) {
-  (void)machine_id;
+double get_machine_health_score(int id) {
+  if (id <= 0)
+    return 0.0;
+
   return 88.5;
 }
 

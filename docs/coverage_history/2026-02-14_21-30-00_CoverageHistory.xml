@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2026-02-14_21-30-00" tag="">
+  <assembly name="Default">
+    <class name="src/backend/api/handlers/auth_handler.c" coveredlines="0" coverablelines="19" totallines="28" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="1" />
+    <class name="src/backend/api/handlers/fault_handler.c" coveredlines="0" coverablelines="77" totallines="108" coveredbranches="0" totalbranches="14" coveredcodeelements="0" totalcodeelements="3" />
+    <class name="src/backend/api/handlers/inventory_handler.c" coveredlines="0" coverablelines="22" totallines="33" coveredbranches="0" totalbranches="2" coveredcodeelements="0" totalcodeelements="2" />
+    <class name="src/backend/api/handlers/machine_handler.c" coveredlines="0" coverablelines="23" totallines="38" coveredbranches="0" totalbranches="4" coveredcodeelements="0" totalcodeelements="2" />
+    <class name="src/backend/api/handlers/maintenance_handler.c" coveredlines="0" coverablelines="23" totallines="34" coveredbranches="0" totalbranches="2" coveredcodeelements="0" totalcodeelements="2" />
+    <class name="src/backend/api/handlers/report_handler.c" coveredlines="0" coverablelines="18" totallines="33" coveredbranches="0" totalbranches="2" coveredcodeelements="0" totalcodeelements="3" />
+    <class name="src/backend/api/http_server.c" coveredlines="0" coverablelines="64" totallines="160" coveredbranches="0" totalbranches="30" coveredcodeelements="0" totalcodeelements="6" />
+    <class name="src/backend/api/router.c" coveredlines="24" coverablelines="24" totallines="41" coveredbranches="14" totalbranches="14" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="src/backend/core/data_structures/bst.c" coveredlines="0" coverablelines="64" totallines="113" coveredbranches="0" totalbranches="24" coveredcodeelements="0" totalcodeelements="10" />
+    <class name="src/backend/core/data_structures/graph.c" coveredlines="0" coverablelines="55" totallines="105" coveredbranches="0" totalbranches="32" coveredcodeelements="0" totalcodeelements="7" />
+    <class name="src/backend/core/data_structures/heap.c" coveredlines="0" coverablelines="73" totallines="137" coveredbranches="0" totalbranches="44" coveredcodeelements="0" totalcodeelements="7" />
+    <class name="src/backend/core/data_structures/queue.c" coveredlines="0" coverablelines="51" totallines="108" coveredbranches="0" totalbranches="4" coveredcodeelements="0" totalcodeelements="11" />
+    <class name="src/backend/core/data_structures/stack.c" coveredlines="0" coverablelines="22" totallines="47" coveredbranches="0" totalbranches="4" coveredcodeelements="0" totalcodeelements="4" />
+    <class name="src/backend/database/alert_service.c" coveredlines="0" coverablelines="82" totallines="188" coveredbranches="0" totalbranches="34" coveredcodeelements="0" totalcodeelements="5" />
+    <class name="src/backend/database/db_connection.c" coveredlines="0" coverablelines="180" totallines="417" coveredbranches="0" totalbranches="65" coveredcodeelements="0" totalcodeelements="10" />
+    <class name="src/backend/database/inventory_service.c" coveredlines="60" coverablelines="71" totallines="160" coveredbranches="16" totalbranches="24" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="src/backend/database/machine_service.c" coveredlines="22" coverablelines="46" totallines="139" coveredbranches="5" totalbranches="12" coveredcodeelements="2" totalcodeelements="3" />
+    <class name="src/backend/database/maintenance_service.c" coveredlines="8" coverablelines="91" totallines="180" coveredbranches="2" totalbranches="24" coveredcodeelements="1" totalcodeelements="5" />
+    <class name="src/backend/security/jwt.c" coveredlines="0" coverablelines="29" totallines="62" coveredbranches="0" totalbranches="14" coveredcodeelements="0" totalcodeelements="3" />
+    <class name="src/backend/security/rbac.c" coveredlines="12" coverablelines="12" totallines="26" coveredbranches="12" totalbranches="12" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="src/backend/tests/integration/test_machine_module.c" coveredlines="6" coverablelines="6" totallines="11" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="src/backend/tests/unit/database/test_alert_service_real.c" coveredlines="106" coverablelines="109" totallines="221" coveredbranches="9" totalbranches="12" coveredcodeelements="17" totalcodeelements="19" />
+    <class name="src/backend/tests/unit/database/test_db_connection_real.c" coveredlines="84" coverablelines="89" totallines="177" coveredbranches="5" totalbranches="6" coveredcodeelements="11" totalcodeelements="14" />
+    <class name="src/backend/tests/unit/database/test_db_connection.c" coveredlines="131" coverablelines="134" totallines="252" coveredbranches="7" totalbranches="8" coveredcodeelements="16" totalcodeelements="18" />
+    <class name="src/backend/tests/unit/database/test_db_pool_basic.c" coveredlines="0" coverablelines="20" totallines="32" coveredbranches="0" totalbranches="4" coveredcodeelements="0" totalcodeelements="3" />
+    <class name="src/backend/tests/unit/database/test_db_pool_fifo.c" coveredlines="0" coverablelines="156" totallines="280" coveredbranches="0" totalbranches="80" coveredcodeelements="0" totalcodeelements="13" />
+    <class name="src/backend/tests/unit/database/test_db_pool_init.c" coveredlines="0" coverablelines="24" totallines="33" coveredbranches="0" totalbranches="8" coveredcodeelements="0" totalcodeelements="3" />
+    <class name="src/backend/tests/unit/database/test_inventory_service_real.c" coveredlines="107" coverablelines="110" totallines="228" coveredbranches="10" totalbranches="12" coveredcodeelements="15" totalcodeelements="16" />
+    <class name="src/backend/tests/unit/database/test_inventory_service.c" coveredlines="0" coverablelines="56" totallines="73" coveredbranches="0" totalbranches="24" coveredcodeelements="0" totalcodeelements="7" />
+    <class name="src/backend/tests/unit/database/test_machine_service_real.c" coveredlines="24" coverablelines="31" totallines="83" coveredbranches="1" totalbranches="2" coveredcodeelements="9" totalcodeelements="13" />
+    <class name="src/backend/tests/unit/database/test_machine_service.c" coveredlines="0" coverablelines="44" totallines="62" coveredbranches="0" totalbranches="14" coveredcodeelements="0" totalcodeelements="5" />
+    <class name="src/backend/tests/unit/database/test_maintenance_service_real.c" coveredlines="21" coverablelines="30" totallines="83" coveredbranches="1" totalbranches="2" coveredcodeelements="8" totalcodeelements="13" />
+    <class name="src/backend/tests/unit/database/test_maintenance_service.c" coveredlines="0" coverablelines="62" totallines="87" coveredbranches="0" totalbranches="28" coveredcodeelements="0" totalcodeelements="7" />
+    <class name="src/backend/tests/unit/test_alert_service.c" coveredlines="0" coverablelines="265" totallines="502" coveredbranches="0" totalbranches="12" coveredcodeelements="0" totalcodeelements="37" />
+    <class name="src/backend/tests/unit/test_api_handlers.c" coveredlines="0" coverablelines="100" totallines="124" coveredbranches="0" totalbranches="46" coveredcodeelements="0" totalcodeelements="10" />
+    <class name="src/backend/tests/unit/test_auth_handler.c" coveredlines="0" coverablelines="13" totallines="21" coveredbranches="0" totalbranches="8" coveredcodeelements="0" totalcodeelements="2" />
+    <class name="src/backend/tests/unit/test_bst.c" coveredlines="0" coverablelines="36" totallines="48" coveredbranches="0" totalbranches="26" coveredcodeelements="0" totalcodeelements="4" />
+    <class name="src/backend/tests/unit/test_fault_handler.c" coveredlines="0" coverablelines="59" totallines="72" coveredbranches="0" totalbranches="20" coveredcodeelements="0" totalcodeelements="7" />
+    <class name="src/backend/tests/unit/test_graph.c" coveredlines="0" coverablelines="26" totallines="39" coveredbranches="0" totalbranches="18" coveredcodeelements="0" totalcodeelements="4" />
+    <class name="src/backend/tests/unit/test_heap.c" coveredlines="0" coverablelines="32" totallines="46" coveredbranches="0" totalbranches="18" coveredcodeelements="0" totalcodeelements="4" />
+    <class name="src/backend/tests/unit/test_inventory_handler.c" coveredlines="0" coverablelines="20" totallines="29" coveredbranches="0" totalbranches="6" coveredcodeelements="0" totalcodeelements="3" />
+    <class name="src/backend/tests/unit/test_jwt_standalone.c" coveredlines="58" coverablelines="58" totallines="92" coveredbranches="14" totalbranches="22" coveredcodeelements="11" totalcodeelements="11" />
+    <class name="src/backend/tests/unit/test_maintenance_handler.c" coveredlines="0" coverablelines="32" totallines="44" coveredbranches="0" totalbranches="16" coveredcodeelements="0" totalcodeelements="4" />
+    <class name="src/backend/tests/unit/test_queue.c" coveredlines="0" coverablelines="33" totallines="44" coveredbranches="0" totalbranches="28" coveredcodeelements="0" totalcodeelements="4" />
+    <class name="src/backend/tests/unit/test_rbac.c" coveredlines="61" coverablelines="61" totallines="95" coveredbranches="13" totalbranches="26" coveredcodeelements="14" totalcodeelements="14" />
+    <class name="src/backend/tests/unit/test_report_handler.c" coveredlines="0" coverablelines="40" totallines="53" coveredbranches="0" totalbranches="20" coveredcodeelements="0" totalcodeelements="5" />
+    <class name="src/backend/tests/unit/test_router.c" coveredlines="253" coverablelines="259" totallines="453" coveredbranches="0" totalbranches="0" coveredcodeelements="31" totalcodeelements="32" />
+    <class name="src/backend/tests/unit/test_stack.c" coveredlines="0" coverablelines="32" totallines="43" coveredbranches="0" totalbranches="22" coveredcodeelements="0" totalcodeelements="4" />
+  </assembly>
+</coverage>

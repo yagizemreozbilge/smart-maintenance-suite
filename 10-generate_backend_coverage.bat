@@ -2,6 +2,8 @@
 setlocal EnableExtensions EnableDelayedExpansion
 cd /d "%~dp0"
 
+call venv_win\Scripts\activate.bat
+
 REM ------------------------------------------------------------
 REM Ensure MSYS2 MinGW64 tools are in PATH
 REM ------------------------------------------------------------
@@ -14,7 +16,7 @@ set "REPORT_DIR=docs\coverage_backend_report"
 set "HISTORY_DIR=docs\coverage_history"
 
 echo ============================================================
-echo   BACKEND GCC COVERAGE - FULL TEST SUITE (16 TESTS)
+echo   BACKEND GCC COVERAGE - FULL TEST SUITE (28 TESTS)
 echo ============================================================
 echo.
 
@@ -45,6 +47,7 @@ REM ============================================================
 echo [2/5] Checking required tools...
 
 where gcc >nul 2>&1 || (echo [ERROR] GCC not found & pause & exit /b 1)
+where gcovr >nul 2>&1 || (echo [ERROR] gcovr not found & pause & exit /b 1)
 where reportgenerator >nul 2>&1 || (echo [ERROR] ReportGenerator not found & pause & exit /b 1)
 
 echo [OK] All tools found
@@ -288,9 +291,15 @@ call :run_test test_db_connection_real ^
 src\backend\tests\unit\database\test_db_connection_real.c ^
 src\backend\database\db_connection.c
 
-REM --- HTTP Server Tests (ŞİMDİLİK DEVRE DIŞI - winsock çakışması nedeniyle) ---
-REM call :run_test test_http_server ^
-REM src\backend\tests\unit\test_http_server.c ^
+REM --- HTTP Server Tests  ---
+call :run_test test_http_server ^
+src\backend\tests\unit\test_http_server.c ^
+src\backend\api\http_server.c ^
+-DUNIT_TEST
+
+REM --- HTTP Server Minimal Test (YORUM SATIRI) ---
+REM call :run_test test_http_server_minimal ^
+REM src\backend\tests\unit\test_http_server_minimal.c ^
 REM src\backend\api\http_server.c
 
 REM --- DB Connection Tests ---
@@ -309,7 +318,10 @@ src\backend\tests\unit\test_rbac.c ^
 src\backend\security\rbac.c
 
 call :run_test test_jwt ^
-src\backend\tests\unit\test_jwt_standalone.c
+src\backend\tests\unit\test_jwt_standalone.c ^
+src\backend\security\jwt.c ^
+src\backend\database\db_connection.c ^
+src\backend\core\utils\logger.c
 
 
 
@@ -325,41 +337,44 @@ echo Tests Failed: %TEST_FAILED%
 echo.
 
 REM ============================================================
-REM COVERAGE (Branch enabled)
+REM COVERAGE XML (gcovr)
 REM ============================================================
 
-echo [4/5] Generating gcov files...
+echo [4/5] Generating coverage.xml with gcovr...
 
-REM Generate gcov files from coverage data
-for /R "%BUILD_DIR%" %%f in (*.gcno) do (
-    gcov -b -c -o "%BUILD_DIR%" "%%f" >nul 2>&1
-)
+gcovr ^
+  -r "%ROOT%" ^
+  --object-directory "%BUILD_DIR%" ^
+  --xml-pretty ^
+  --exclude-directories "%BUILD_DIR%" ^
+  --exclude "C:/msys64/*" ^
+  --merge-mode-functions=merge-use-line-0 ^
+  -o "%COV_DIR%\coverage.xml"
 
 if errorlevel 1 (
-    echo [ERROR] gcov generation failed!
+    echo [ERROR] gcovr generation failed!
     pause
     exit /b 1
 )
 
-echo [OK] gcov files generated
+echo [OK] coverage.xml created
 echo.
 
 REM ============================================================
 REM REPORT (Classic Dashboard + History)
 REM ============================================================
 
-echo [5/5] Generating HTML report...
+echo [5/5] Generating HTML report with ReportGenerator...
 
 reportgenerator ^
-    -reports:"**\*.gcov" ^
+    -reports:"%COV_DIR%\coverage.xml" ^
     -targetdir:"%REPORT_DIR%" ^
     -historydir:"%HISTORY_DIR%" ^
     -reporttypes:Html ^
     -title:"Backend C Tests - Coverage Report" ^
     -verbosity:Warning ^
     -filefilters:"-C:/msys64/mingw64/include/*" ^
-    -filefilters:"-*/mingw64/*" ^
-    -filefilters:"-*stdio.h*"
+    -filefilters:"-*/mingw64/*"
 
 if errorlevel 1 (
     echo [ERROR] Report generation failed!

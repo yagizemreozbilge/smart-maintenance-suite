@@ -7,8 +7,11 @@
 #include <stdint.h>
 
 #ifdef _WIN32
-  #include <winsock2.h>
-  #pragma comment(lib, "ws2_32.lib")
+  #ifndef UNIT_TEST
+    #include <winsock2.h>
+    #include <windows.h>
+    #pragma comment(lib, "ws2_32.lib")
+  #endif
   typedef int socklen_t;
 #else
   #include <unistd.h>

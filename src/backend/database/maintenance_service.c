@@ -165,8 +165,35 @@ bool delete_maintenance_log(int log_id) {
 // MOCK IMPLEMENTATION
 // =====================================
 
-int get_all_maintenance_logs(MaintenanceLog *logs, int max_count) {
-  if (!logs || max_count <= 0) return 0;
+bool add_maintenance_log(int machine_id,
+                         const char *technician,
+                         const char *description,
+                         double cost) {
+  if (machine_id <= 0 || !technician || !description)
+    return false;
+
+  return true;
+}
+
+int get_maintenance_history(int machine_id,
+                            MaintenanceLog *logs,
+                            int max_count) {
+  if (!logs || max_count <= 0)
+    return 0;
+
+  logs[0].id = 1;
+  logs[0].machine_id = machine_id;
+  strcpy(logs[0].technician_name, "TestTech");
+  strcpy(logs[0].log_date, "2025-01-01");
+  strcpy(logs[0].description, "Mock history");
+  logs[0].cost = 100.0;
+  return 1;
+}
+
+int get_all_maintenance_logs(MaintenanceLog *logs,
+                             int max_count) {
+  if (!logs || max_count <= 0)
+    return 0;
 
   logs[0].id = 1;
   logs[0].machine_id = 1;
@@ -175,6 +202,22 @@ int get_all_maintenance_logs(MaintenanceLog *logs, int max_count) {
   strcpy(logs[0].description, "Routine oil change");
   logs[0].cost = 150.5;
   return 1;
+}
+
+bool update_maintenance_log(int log_id,
+                            const char *description,
+                            double cost) {
+  if (log_id <= 0 || !description)
+    return false;
+
+  return true;
+}
+
+bool delete_maintenance_log(int log_id) {
+  if (log_id <= 0)
+    return false;
+
+  return true;
 }
 
 #endif  // TEST_MODE
