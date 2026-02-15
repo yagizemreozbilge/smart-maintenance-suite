@@ -16,7 +16,7 @@ set "REPORT_DIR=docs\coverage_backend_report"
 set "HISTORY_DIR=docs\coverage_history"
 
 echo ============================================================
-echo   BACKEND GCC COVERAGE - FULL TEST SUITE (28 TESTS)
+echo   BACKEND GCC COVERAGE - FULL TEST SUITE (29 TESTS)
 echo ============================================================
 echo.
 
@@ -101,8 +101,7 @@ REM ============================================================
 REM COMMON FLAGS (Branch coverage enabled)
 REM ============================================================
 
-REM Include paths
-set "CFLAGS=-Isrc\backend -Isrc\backend\database -Isrc\tests -Isrc\tests\mock_includes -IC:\msys64\mingw64\include -g -O0 --coverage"
+set "CFLAGS=-Isrc\backend -Isrc\backend\database -Isrc\backend\security -Isrc\backend\core\utils -Isrc\tests -Isrc\tests\mock_includes -IC:\msys64\mingw64\include -g -O0 --coverage"
 
 REM Linker flags - cJSON kütüphanesini EKLEDİM!
 set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq -lcjson -lcmocka"
@@ -315,6 +314,10 @@ src\backend\security\rbac.c
 
 call :run_test test_jwt ^
 src\backend\tests\unit\test_jwt_standalone.c ^
+src\backend\security\jwt.c ^
+src\backend\database\db_connection.c
+
+
 
 REM --Standalone Tests ---
 call :run_test test_maintenance_standalone ^

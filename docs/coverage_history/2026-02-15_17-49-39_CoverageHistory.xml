@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2026-02-15_17-49-39" tag="">
+  <assembly name="src.backend.api">
+    <class name="router_c" coveredlines="24" coverablelines="24" totallines="41" coveredbranches="14" totalbranches="14" coveredcodeelements="1" totalcodeelements="1" />
+  </assembly>
+  <assembly name="src.backend.api.handlers">
+    <class name="auth_handler_c" coveredlines="19" coverablelines="19" totallines="28" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="fault_handler_c" coveredlines="74" coverablelines="77" totallines="108" coveredbranches="12" totalbranches="14" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="inventory_handler_c" coveredlines="22" coverablelines="22" totallines="33" coveredbranches="2" totalbranches="2" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="machine_handler_c" coveredlines="23" coverablelines="23" totallines="38" coveredbranches="4" totalbranches="4" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="maintenance_handler_c" coveredlines="23" coverablelines="23" totallines="34" coveredbranches="2" totalbranches="2" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="report_handler_c" coveredlines="18" coverablelines="18" totallines="33" coveredbranches="2" totalbranches="2" coveredcodeelements="3" totalcodeelements="3" />
+  </assembly>
+  <assembly name="src.backend.core.data_structures">
+    <class name="bst_c" coveredlines="49" coverablelines="64" totallines="113" coveredbranches="20" totalbranches="24" coveredcodeelements="8" totalcodeelements="10" />
+    <class name="graph_c" coveredlines="36" coverablelines="55" totallines="105" coveredbranches="16" totalbranches="32" coveredcodeelements="6" totalcodeelements="7" />
+    <class name="heap_c" coveredlines="43" coverablelines="73" totallines="137" coveredbranches="16" totalbranches="44" coveredcodeelements="6" totalcodeelements="7" />
+    <class name="queue_c" coveredlines="42" coverablelines="51" totallines="108" coveredbranches="3" totalbranches="4" coveredcodeelements="9" totalcodeelements="11" />
+    <class name="stack_c" coveredlines="22" coverablelines="22" totallines="47" coveredbranches="3" totalbranches="4" coveredcodeelements="4" totalcodeelements="4" />
+  </assembly>
+  <assembly name="src.backend.database">
+    <class name="alert_service_c" coveredlines="47" coverablelines="82" totallines="188" coveredbranches="13" totalbranches="34" coveredcodeelements="4" totalcodeelements="5" />
+    <class name="db_connection_c" coveredlines="143" coverablelines="180" totallines="417" coveredbranches="40" totalbranches="65" coveredcodeelements="10" totalcodeelements="10" />
+    <class name="inventory_service_c" coveredlines="60" coverablelines="71" totallines="160" coveredbranches="16" totalbranches="24" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="machine_service_c" coveredlines="22" coverablelines="46" totallines="133" coveredbranches="5" totalbranches="12" coveredcodeelements="2" totalcodeelements="3" />
+    <class name="maintenance_service_c" coveredlines="9" coverablelines="92" totallines="223" coveredbranches="2" totalbranches="24" coveredcodeelements="1" totalcodeelements="5" />
+  </assembly>
+  <assembly name="src.backend.security">
+    <class name="jwt_c" coveredlines="6" coverablelines="29" totallines="62" coveredbranches="0" totalbranches="14" coveredcodeelements="1" totalcodeelements="3" />
+    <class name="rbac_c" coveredlines="12" coverablelines="12" totallines="26" coveredbranches="12" totalbranches="12" coveredcodeelements="4" totalcodeelements="4" />
+  </assembly>
+  <assembly name="src.backend.tests.integration">
+    <class name="test_machine_module_c" coveredlines="6" coverablelines="6" totallines="11" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+  </assembly>
+  <assembly name="src.backend.tests.unit">
+    <class name="test_auth_handler_c" coveredlines="13" coverablelines="13" totallines="21" coveredbranches="4" totalbranches="8" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="test_bst_c" coveredlines="36" coverablelines="36" totallines="48" coveredbranches="13" totalbranches="26" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="test_fault_handler_c" coveredlines="59" coverablelines="59" totallines="72" coveredbranches="10" totalbranches="20" coveredcodeelements="7" totalcodeelements="7" />
+    <class name="test_graph_c" coveredlines="26" coverablelines="26" totallines="39" coveredbranches="9" totalbranches="18" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="test_heap_c" coveredlines="32" coverablelines="32" totallines="46" coveredbranches="9" totalbranches="18" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="test_inventory_handler_c" coveredlines="20" coverablelines="20" totallines="29" coveredbranches="3" totalbranches="6" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="test_jwt_standalone_c" coveredlines="0" coverablelines="264" totallines="415" coveredbranches="0" totalbranches="76" coveredcodeelements="0" totalcodeelements="29" />
+    <class name="test_machine_handler_c" coveredlines="22" coverablelines="26" totallines="51" coveredbranches="0" totalbranches="0" coveredcodeelements="4" totalcodeelements="6" />
+    <class name="test_machine_standalone_c" coveredlines="197" coverablelines="197" totallines="332" coveredbranches="37" totalbranches="54" coveredcodeelements="23" totalcodeelements="23" />
+    <class name="test_maintenance_handler_c" coveredlines="32" coverablelines="32" totallines="44" coveredbranches="8" totalbranches="16" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="test_maintenance_standalone_c" coveredlines="220" coverablelines="229" totallines="397" coveredbranches="41" totalbranches="60" coveredcodeelements="23" totalcodeelements="23" />
+    <class name="test_queue_c" coveredlines="33" coverablelines="33" totallines="44" coveredbranches="14" totalbranches="28" coveredcodeelements="4" totalcodeelements="4" />
+    <class name="test_rbac_c" coveredlines="76" coverablelines="76" totallines="95" coveredbranches="15" totalbranches="30" coveredcodeelements="14" totalcodeelements="14" />
+    <class name="test_report_handler_c" coveredlines="40" coverablelines="40" totallines="53" coveredbranches="10" totalbranches="20" coveredcodeelements="5" totalcodeelements="5" />
+    <class name="test_router_c" coveredlines="253" coverablelines="259" totallines="453" coveredbranches="0" totalbranches="0" coveredcodeelements="31" totalcodeelements="32" />
+    <class name="test_stack_c" coveredlines="32" coverablelines="32" totallines="43" coveredbranches="11" totalbranches="22" coveredcodeelements="4" totalcodeelements="4" />
+  </assembly>
+  <assembly name="src.backend.tests.unit.database">
+    <class name="test_alert_service_real_c" coveredlines="106" coverablelines="109" totallines="221" coveredbranches="9" totalbranches="12" coveredcodeelements="17" totalcodeelements="19" />
+    <class name="test_db_connection_c" coveredlines="131" coverablelines="134" totallines="254" coveredbranches="7" totalbranches="8" coveredcodeelements="16" totalcodeelements="18" />
+    <class name="test_db_connection_real_c" coveredlines="84" coverablelines="89" totallines="177" coveredbranches="5" totalbranches="6" coveredcodeelements="11" totalcodeelements="14" />
+    <class name="test_db_pool_basic_c" coveredlines="20" coverablelines="20" totallines="32" coveredbranches="2" totalbranches="4" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="test_db_pool_fifo_c" coveredlines="156" coverablelines="156" totallines="280" coveredbranches="46" totalbranches="80" coveredcodeelements="13" totalcodeelements="13" />
+    <class name="test_db_pool_init_c" coveredlines="24" coverablelines="24" totallines="33" coveredbranches="4" totalbranches="8" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="test_inventory_service_c" coveredlines="56" coverablelines="56" totallines="73" coveredbranches="12" totalbranches="24" coveredcodeelements="7" totalcodeelements="7" />
+    <class name="test_inventory_service_real_c" coveredlines="107" coverablelines="110" totallines="228" coveredbranches="10" totalbranches="12" coveredcodeelements="15" totalcodeelements="16" />
+    <class name="test_machine_service_c" coveredlines="44" coverablelines="44" totallines="62" coveredbranches="7" totalbranches="14" coveredcodeelements="5" totalcodeelements="5" />
+    <class name="test_machine_service_real_c" coveredlines="24" coverablelines="31" totallines="83" coveredbranches="1" totalbranches="2" coveredcodeelements="9" totalcodeelements="13" />
+    <class name="test_maintenance_service_c" coveredlines="62" coverablelines="62" totallines="87" coveredbranches="16" totalbranches="28" coveredcodeelements="7" totalcodeelements="7" />
+    <class name="test_maintenance_service_real_c" coveredlines="21" coverablelines="30" totallines="83" coveredbranches="1" totalbranches="2" coveredcodeelements="8" totalcodeelements="13" />
+  </assembly>
+</coverage>
