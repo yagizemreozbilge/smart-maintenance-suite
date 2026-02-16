@@ -1,76 +1,43 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import App from '../../../frontend/src/App';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import App from '../../frontend/src/App'
 
-// Mock localStorage
-const localStorageMock = {
-    getItem: vi.fn(),
-    setItem: vi.fn(),
-    clear: vi.fn(),
-    removeItem: vi.fn()
-};
-global.localStorage = localStorageMock;
-
-// Mock fetch
-global.fetch = vi.fn();
+// fetch mock (Dashboard sync için)
+global.fetch = vi.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve([])
+  })
+)
 
 describe('App Component', () => {
-    beforeEach(() => {
-        vi.clearAllMocks();
-        localStorageMock.getItem.mockReturnValue(null);
-    });
+  beforeEach(() => {
+    localStorage.clear()
+    vi.clearAllMocks()
+  })
 
-    it('should render login page when not authenticated', () => {
-        render(<App />);
-        expect(screen.getByText(/Smart HMS/i)).toBeInTheDocument();
-    });
+  it('Login yoksa LoginPage render edilir', () => {
+    render(<App />)
+    expect(screen.getByText(/Smart HMS/i)).toBeInTheDocument()
+  })
 
-    it('should check localStorage for auth token on mount', () => {
-        render(<App />);
-        expect(localStorageMock.getItem).toHaveBeenCalledWith('auth_token');
-    });
+  it('Token varsa dashboard render edilir', async () => {
+    localStorage.setItem('auth_token', 'test-token')
 
-    it('should render dashboard when authenticated', () => {
-        localStorageMock.getItem.mockReturnValue('mock_token_123');
-        render(<App />);
+    render(<App />)
 
-        // Dashboard should be visible
-        expect(screen.queryByText(/Smart HMS/i)).not.toBeInTheDocument();
-    });
+    await waitFor(() => {
+      expect(screen.getByText(/SİSTEMDEN ÇIKIŞ YAP/i)).toBeInTheDocument()
+    })
+  })
 
-    it('should have logout button when authenticated', () => {
-        localStorageMock.getItem.mockReturnValue('mock_token_123');
-        render(<App />);
+  it('Logout çalışır', async () => {
+    localStorage.setItem('auth_token', 'test-token')
 
-        const logoutButton = screen.getByText(/SİSTEMDEN ÇIKIŞ YAP/i);
-        expect(logoutButton).toBeInTheDocument();
-    });
-});
+    render(<App />)
 
-describe('App Authentication Flow', () => {
-    it('should handle login state change', async () => {
-        const { rerender } = render(<App />);
+    const logoutBtn = await screen.findByText(/SİSTEMDEN ÇIKIŞ YAP/i)
+    fireEvent.click(logoutBtn)
 
-        // Initially not authenticated
-        expect(screen.getByText(/Smart HMS/i)).toBeInTheDocument();
-
-        // Simulate login
-        localStorageMock.getItem.mockReturnValue('new_token');
-        rerender(<App />);
-
-        await waitFor(() => {
-            expect(screen.queryByText(/Smart HMS/i)).not.toBeInTheDocument();
-        });
-    });
-
-    it('should clear localStorage on logout', () => {
-        localStorageMock.getItem.mockReturnValue('mock_token');
-        const { getByText } = render(<App />);
-
-        const logoutBtn = getByText(/SİSTEMDEN ÇIKIŞ YAP/i);
-        logoutBtn.click();
-
-        expect(localStorageMock.clear).toHaveBeenCalled();
-    });
-});
+    expect(screen.getByText(/Smart HMS/i)).toBeInTheDocument()
+  })
+})

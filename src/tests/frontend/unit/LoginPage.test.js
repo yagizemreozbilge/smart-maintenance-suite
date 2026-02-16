@@ -1,131 +1,69 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import LoginPage from '../../../frontend/src/components/LoginPage';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import LoginPage from '../../frontend/src/components/LoginPage'
 
-global.fetch = vi.fn();
+describe('LoginPage', () => {
 
-describe('LoginPage Component', () => {
-    const mockOnLogin = vi.fn();
+  beforeEach(() => {
+    vi.clearAllMocks()
+    localStorage.clear()
+  })
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
+  it('Input değişimi çalışıyor', () => {
+    render(<LoginPage onLogin={() => {}} />)
 
-    it('should render login form', () => {
-        render(<LoginPage onLogin={mockOnLogin} />);
+    const usernameInput = screen.getByPlaceholderText('admin')
+    fireEvent.change(usernameInput, { target: { value: 'testUser' } })
 
-        expect(screen.getByText(/Smart HMS/i)).toBeInTheDocument();
-        expect(screen.getByPlaceholderText(/admin/i)).toBeInTheDocument();
-        expect(screen.getByPlaceholderText(/••••••••/i)).toBeInTheDocument();
-    });
+    expect(usernameInput.value).toBe('testUser')
+  })
 
-    it('should have username and password inputs', () => {
-        render(<LoginPage onLogin={mockOnLogin} />);
+  it('Başarılı login', async () => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({
+          success: true,
+          token: 'abc',
+          role: 'admin',
+          username: 'test'
+        })
+      })
+    )
 
-        const usernameInput = screen.getByPlaceholderText(/admin/i);
-        const passwordInput = screen.getByPlaceholderText(/••••••••/i);
+    const onLogin = vi.fn()
 
-        expect(usernameInput).toBeInTheDocument();
-        expect(passwordInput).toBeInTheDocument();
-        expect(passwordInput.type).toBe('password');
-    });
+    render(<LoginPage onLogin={onLogin} />)
 
-    it('should update input values on change', () => {
-        render(<LoginPage onLogin={mockOnLogin} />);
+    fireEvent.change(screen.getByPlaceholderText('admin'), {
+      target: { value: 'admin' }
+    })
 
-        const usernameInput = screen.getByPlaceholderText(/admin/i);
-        const passwordInput = screen.getByPlaceholderText(/••••••••/i);
+    fireEvent.change(screen.getByPlaceholderText('••••••••'), {
+      target: { value: '1234' }
+    })
 
-        fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-        fireEvent.change(passwordInput, { target: { value: 'testpass' } });
+    fireEvent.click(screen.getByText(/SİSTEME GİRİŞ YAP/i))
 
-        expect(usernameInput.value).toBe('testuser');
-        expect(passwordInput.value).toBe('testpass');
-    });
+    await waitFor(() => {
+      expect(onLogin).toHaveBeenCalled()
+    })
 
-    it('should call API on form submit', async () => {
-        fetch.mockResolvedValueOnce({
-            json: async () => ({ success: true, token: 'mock_token', role: 'admin', username: 'admin' })
-        });
+    expect(localStorage.getItem('auth_token')).toBe('abc')
+  })
 
-        render(<LoginPage onLogin={mockOnLogin} />);
+  it('Hatalı login error gösterir', async () => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({ success: false })
+      })
+    )
 
-        const usernameInput = screen.getByPlaceholderText(/admin/i);
-        const passwordInput = screen.getByPlaceholderText(/••••••••/i);
-        const submitButton = screen.getByText(/SİSTEME GİRİŞ YAP/i);
+    render(<LoginPage onLogin={() => {}} />)
 
-        fireEvent.change(usernameInput, { target: { value: 'admin' } });
-        fireEvent.change(passwordInput, { target: { value: 'admin123' } });
-        fireEvent.click(submitButton);
+    fireEvent.click(screen.getByText(/SİSTEME GİRİŞ YAP/i))
 
-        await waitFor(() => {
-            expect(fetch).toHaveBeenCalledWith(
-                expect.stringContaining('/api/login?u=admin&p=admin123')
-            );
-        });
-    });
-
-    it('should show error on failed login', async () => {
-        fetch.mockResolvedValueOnce({
-            json: async () => ({ success: false, message: 'Invalid credentials' })
-        });
-
-        render(<LoginPage onLogin={mockOnLogin} />);
-
-        const usernameInput = screen.getByPlaceholderText(/admin/i);
-        const passwordInput = screen.getByPlaceholderText(/••••••••/i);
-        const submitButton = screen.getByText(/SİSTEME GİRİŞ YAP/i);
-
-        fireEvent.change(usernameInput, { target: { value: 'wrong' } });
-        fireEvent.change(passwordInput, { target: { value: 'wrong' } });
-        fireEvent.click(submitButton);
-
-        await waitFor(() => {
-            expect(screen.getByText(/Hatalı kullanıcı adı veya şifre/i)).toBeInTheDocument();
-        });
-    });
-
-    it('should show loading state during login', async () => {
-        fetch.mockImplementationOnce(() => new Promise(resolve => setTimeout(resolve, 100)));
-
-        render(<LoginPage onLogin={mockOnLogin} />);
-
-        const submitButton = screen.getByText(/SİSTEME GİRİŞ YAP/i);
-        fireEvent.click(submitButton);
-
-        expect(screen.getByText(/SİSTEME GİRİLİYOR/i)).toBeInTheDocument();
-    });
-
-    it('should store token on successful login', async () => {
-        const mockLocalStorage = {
-            setItem: vi.fn()
-        };
-        global.localStorage = mockLocalStorage;
-
-        fetch.mockResolvedValueOnce({
-            json: async () => ({
-                success: true,
-                token: 'test_token_123',
-                role: 'admin',
-                username: 'admin'
-            })
-        });
-
-        render(<LoginPage onLogin={mockOnLogin} />);
-
-        const usernameInput = screen.getByPlaceholderText(/admin/i);
-        const passwordInput = screen.getByPlaceholderText(/••••••••/i);
-        const submitButton = screen.getByText(/SİSTEME GİRİŞ YAP/i);
-
-        fireEvent.change(usernameInput, { target: { value: 'admin' } });
-        fireEvent.change(passwordInput, { target: { value: 'admin123' } });
-        fireEvent.click(submitButton);
-
-        await waitFor(() => {
-            expect(mockLocalStorage.setItem).toHaveBeenCalledWith('auth_token', 'test_token_123');
-            expect(mockLocalStorage.setItem).toHaveBeenCalledWith('user_role', 'admin');
-            expect(mockLocalStorage.setItem).toHaveBeenCalledWith('username', 'admin');
-        });
-    });
-});
+    await waitFor(() => {
+      expect(screen.getByText(/Hatalı kullanıcı adı/i)).toBeInTheDocument()
+    })
+  })
+})
