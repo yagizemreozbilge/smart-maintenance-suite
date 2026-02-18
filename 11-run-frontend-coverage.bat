@@ -1,111 +1,81 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
+
 cd /d "%~dp0"
 
 echo ============================================================
 echo   FRONTEND REACT TEST COVERAGE
 echo ============================================================
 echo.
+echo Current Directory: %cd%
+echo.
 
-REM ============================================================
-REM PATHS
-REM ============================================================
+:: Tool checks
+echo [DEBUG] Checking npm...
+call npm --version >nul 2>&1
+if %errorlevel% neq 0 (
+    echo [ERROR] npm not found! Is Node.js installed?
+    pause
+    exit /b 1
+)
 
-set "FRONTEND_DIR=src\frontend"
+echo [DEBUG] Checking ReportGenerator...
+where reportgenerator >nul 2>&1
+if %errorlevel% neq 0 (
+    echo [ERROR] ReportGenerator not found! 
+    echo Please install with: dotnet tool install -g dotnet-reportgenerator-globaltool
+    pause
+    exit /b 1
+)
+
+set "ROOT_DIR=%~dp0"
+set "FRONTEND_DIR=%ROOT_DIR%src\frontend"
 set "COV_DIR=%FRONTEND_DIR%\coverage"
-set "REPORT_DIR=docs\coverage_frontend_report"
-set "HISTORY_DIR=docs\coverage_history_frontend"
+set "REPORT_DIR=%ROOT_DIR%docs\coverage_frontend_report"
 
-REM ============================================================
-REM CLEAN
-REM ============================================================
-
-echo [1/5] Cleaning old coverage...
-
+echo [1/3] Cleaning old reports...
 if exist "%COV_DIR%" rd /S /Q "%COV_DIR%"
-if exist "%REPORT_DIR%" rd /S /Q "%REPORT_DIR%"
-
 if not exist "%REPORT_DIR%" mkdir "%REPORT_DIR%"
-if not exist "%HISTORY_DIR%" mkdir "%HISTORY_DIR%"
 
-echo [OK] Clean complete
-echo.
-
-REM ============================================================
-REM CHECK TOOLS
-REM ============================================================
-
-echo [2/5] Checking required tools...
-
-where npm >nul 2>&1 || (echo [ERROR] npm not found & pause & exit /b 1)
-where reportgenerator >nul 2>&1 || (echo [ERROR] ReportGenerator not found & pause & exit /b 1)
-
-echo [OK] All tools found
-echo.
-
-REM ============================================================
-REM INSTALL DEPENDENCIES
-REM ============================================================
-
-echo [3/5] Installing frontend dependencies...
-cd "%FRONTEND_DIR%"
-
-call npm install
-if errorlevel 1 (
-    echo [ERROR] npm install failed
-    pause
-    exit /b 1
-)
-
-echo [OK] Dependencies installed
-echo.
-
-REM ============================================================
-REM RUN TESTS WITH COVERAGE
-REM ============================================================
-
-echo [4/5] Running Vitest with coverage...
-
+echo [2/3] Running Tests and Coverage...
+cd /d "%FRONTEND_DIR%"
 call npm run test:coverage
-if errorlevel 1 (
-    echo [ERROR] Tests failed
+set "EXIT_CODE=%errorlevel%"
+
+echo.
+echo [DEBUG] Vitest Exit Code: %EXIT_CODE%
+echo.
+
+if not exist "%COV_DIR%\lcov.info" (
+    echo [ERROR] lcov.info was not generated! 
+    echo Path: %COV_DIR%
+    dir "%COV_DIR%" 2>nul
+    echo.
+    echo Please check Vitest configuration.
     pause
     exit /b 1
 )
 
-echo [OK] Tests completed
-echo.
-
-cd ..
-
-REM ============================================================
-REM GENERATE REPORT
-REM ============================================================
-
-echo [5/5] Generating HTML report with ReportGenerator...
-
+echo [3/3] Generating Report...
+cd /d "%ROOT_DIR%"
 reportgenerator ^
     -reports:"%COV_DIR%\lcov.info" ^
     -targetdir:"%REPORT_DIR%" ^
-    -historydir:"%HISTORY_DIR%" ^
     -reporttypes:Html ^
-    -title:"Frontend React Tests - Coverage Report" ^
-    -verbosity:Warning
+    -title:"Frontend Coverage Report"
 
-if errorlevel 1 (
-    echo [ERROR] Report generation failed!
+if %errorlevel% neq 0 (
+    echo [ERROR] ReportGenerator failed.
     pause
     exit /b 1
 )
 
 echo.
 echo ============================================================
-echo   FRONTEND COVERAGE REPORT GENERATED SUCCESSFULLY
+echo   PROCESS COMPLETED SUCCESSFULLY
 echo ============================================================
-echo.
-echo %cd%\%REPORT_DIR%\index.html
+echo Report: %REPORT_DIR%\index.html
 echo.
 
-start "" "%cd%\%REPORT_DIR%\index.html"
-
+start "" "%REPORT_DIR%\index.html"
 pause

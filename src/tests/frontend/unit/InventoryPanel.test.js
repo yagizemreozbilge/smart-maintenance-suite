@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import { InventoryPanel } from '../../frontend/src/components/InventoryPanel'
+import { InventoryPanel } from '../../../frontend/src/components/InventoryPanel'
+import * as MaintenanceContext from '../../../frontend/src/context/MaintenanceContext'
 
-vi.mock('../../frontend/src/context/MaintenanceContext', () => ({
+vi.mock('../../../frontend/src/context/MaintenanceContext', () => ({
   useMaintenance: () => ({
     inventory: []
   })
@@ -16,7 +17,7 @@ describe('InventoryPanel', () => {
   })
 
   it('Inventory data render edilir', () => {
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenance')
+    vi.spyOn(MaintenanceContext, 'useMaintenance')
       .mockReturnValue({
         inventory: [
           {

@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import LoginPage from '../../frontend/src/components/LoginPage'
+import LoginPage from '../../../frontend/src/components/LoginPage'
 
 describe('LoginPage', () => {
 
@@ -10,7 +10,7 @@ describe('LoginPage', () => {
   })
 
   it('Input değişimi çalışıyor', () => {
-    render(<LoginPage onLogin={() => {}} />)
+    render(<LoginPage onLogin={() => { }} />)
 
     const usernameInput = screen.getByPlaceholderText('admin')
     fireEvent.change(usernameInput, { target: { value: 'testUser' } })
@@ -58,12 +58,36 @@ describe('LoginPage', () => {
       })
     )
 
-    render(<LoginPage onLogin={() => {}} />)
+    render(<LoginPage onLogin={() => { }} />)
 
+    fireEvent.change(screen.getByPlaceholderText('admin'), {
+      target: { value: 'wronguser' }
+    })
+    fireEvent.change(screen.getByPlaceholderText('••••••••'), {
+      target: { value: 'wrongpass' }
+    })
     fireEvent.click(screen.getByText(/SİSTEME GİRİŞ YAP/i))
 
     await waitFor(() => {
       expect(screen.getByText(/Hatalı kullanıcı adı/i)).toBeInTheDocument()
+    })
+  })
+
+  it('Network hatası durumunda error gösterir', async () => {
+    global.fetch = vi.fn().mockRejectedValue(new Error('Network failure'))
+
+    render(<LoginPage onLogin={() => { }} />)
+
+    fireEvent.change(screen.getByPlaceholderText('admin'), {
+      target: { value: 'admin' }
+    })
+    fireEvent.change(screen.getByPlaceholderText('••••••••'), {
+      target: { value: 'password' }
+    })
+    fireEvent.click(screen.getByText(/SİSTEME GİRİŞ YAP/i))
+
+    await waitFor(() => {
+      expect(screen.getByText(/Sunucuya bağlanılamadı/i)).toBeInTheDocument()
     })
   })
 })

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import { AnalyticsPanel } from '../../frontend/src/components/AnalyticsPanel'
+import { AnalyticsPanel } from '../../../frontend/src/components/AnalyticsPanel'
+import * as MaintenanceContext from '../../../frontend/src/context/MaintenanceContext'
 
 vi.mock('recharts', () => ({
   ResponsiveContainer: ({ children }) => <div>{children}</div>,
@@ -16,7 +17,7 @@ vi.mock('recharts', () => ({
   CartesianGrid: () => <div />
 }))
 
-vi.mock('../../frontend/src/context/MaintenanceContext', () => ({
+vi.mock('../../../frontend/src/context/MaintenanceContext', () => ({
   useMaintenance: () => ({
     machines: [],
     inventory: []
@@ -32,7 +33,7 @@ describe('AnalyticsPanel', () => {
   })
 
   it('Data varsa render edilir', () => {
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenance')
+    vi.spyOn(MaintenanceContext, 'useMaintenance')
       .mockReturnValue({
         machines: [
           { status: 'operational' },

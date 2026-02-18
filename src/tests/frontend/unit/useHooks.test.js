@@ -1,7 +1,7 @@
-import { renderHook } from '@testing-library/react'
+import { renderHook, act } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { MaintenanceProvider } from '../../frontend/src/context/MaintenanceContext'
-import { useMachineStats, useLiveSearch } from '../../frontend/src/context/useHooks'
+import { MaintenanceProvider } from '../../../frontend/src/context/MaintenanceContext'
+import { useMachineStats, useLiveSearch } from '../../../frontend/src/context/useHooks'
 
 describe('useMachineStats', () => {
 
@@ -29,7 +29,9 @@ describe('useLiveSearch', () => {
       useLiveSearch(items, 'name')
     )
 
-    result.current.setQuery('pump')
+    act(() => {
+      result.current.setQuery('pump')
+    })
 
     expect(result.current.filteredItems.length).toBe(1)
   })

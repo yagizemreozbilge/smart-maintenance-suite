@@ -1,10 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import { MaintenanceForm } from '../../frontend/src/components/MaintenanceForm'
-import { MaintenanceProvider } from '../../frontend/src/context/MaintenanceContext'
+import { MaintenanceForm } from '../../../frontend/src/components/MaintenanceForm'
+import { MaintenanceProvider } from '../../../frontend/src/context/MaintenanceContext'
+import * as MaintenanceContext from '../../../frontend/src/context/MaintenanceContext'
 
 // dispatch mocklamak için context override
-vi.mock('../../frontend/src/context/MaintenanceContext', async (orig) => {
+vi.mock('../../../frontend/src/context/MaintenanceContext', async (orig) => {
   const actual = await orig()
   return {
     ...actual,
@@ -29,7 +30,7 @@ describe('MaintenanceForm', () => {
   it('Boş submit dispatch çağırmaz', () => {
     const dispatchMock = vi.fn()
 
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenanceDispatch')
+    vi.spyOn(MaintenanceContext, 'useMaintenanceDispatch')
       .mockReturnValue(dispatchMock)
 
     render(<MaintenanceForm />)
@@ -42,7 +43,7 @@ describe('MaintenanceForm', () => {
   it('Doğru submit dispatch çağırır', () => {
     const dispatchMock = vi.fn()
 
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenanceDispatch')
+    vi.spyOn(MaintenanceContext, 'useMaintenanceDispatch')
       .mockReturnValue(dispatchMock)
 
     render(<MaintenanceForm />)

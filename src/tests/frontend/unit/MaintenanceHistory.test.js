@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import { MaintenanceHistory } from '../../frontend/src/components/MaintenanceHistory'
+import { MaintenanceHistory } from '../../../frontend/src/components/MaintenanceHistory'
+import * as MaintenanceContext from '../../../frontend/src/context/MaintenanceContext'
 
-vi.mock('../../frontend/src/context/MaintenanceContext', () => ({
+vi.mock('../../../frontend/src/context/MaintenanceContext', () => ({
   useMaintenance: () => ({
     maintenanceLogs: []
   })
@@ -16,7 +17,7 @@ describe('MaintenanceHistory', () => {
   })
 
   it('Log varsa render edilir', () => {
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenance')
+    vi.spyOn(MaintenanceContext, 'useMaintenance')
       .mockReturnValue({
         maintenanceLogs: [
           {

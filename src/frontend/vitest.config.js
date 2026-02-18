@@ -5,32 +5,35 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
 
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.js$|tests\/.*\.js$/,
+    exclude: [],
+  },
+
+  server: {
+    fs: {
+      allow: [
+        path.resolve(__dirname, '../../'),
+      ]
+    }
+  },
+
   test: {
     globals: true,
     environment: 'jsdom',
-
-    pool: 'threads',
-    poolOptions: {
-      threads: {
-        singleThread: true
-      }
-    },
-
-    
     include: [
       '../tests/frontend/unit/**/*.{test,spec}.{js,jsx}'
     ],
-
-    
-    setupFiles: path.resolve(__dirname, '../../tests/frontend/setup.js'),
+    setupFiles: './test-setup.js',
 
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
-      reportsDirectory: './coverage',
-
+      // Dışarıdaki .bat dosyasının lcov.info'yu bulabilmesi için dizini netleştiriyoruz
+      reportsDirectory: path.resolve(__dirname, 'coverage'),
+      all: true,
       include: ['src/**/*.{js,jsx}'],
-
       exclude: [
         'node_modules/',
         'src/main.js',
@@ -42,7 +45,11 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'),
+      '@testing-library/react': path.resolve(__dirname, 'node_modules/@testing-library/react'),
+      '@testing-library/jest-dom': path.resolve(__dirname, 'node_modules/@testing-library/jest-dom'),
+      '@testing-library/user-event': path.resolve(__dirname, 'node_modules/@testing-library/user-event'),
+      'vitest': path.resolve(__dirname, 'node_modules/vitest')
     }
   }
 })

@@ -17,6 +17,7 @@ export function MachineList() {
 
     return (
         <div className="machine-list">
+            <h2 style={{ marginBottom: '15px' }}>Assets Inventory</h2>
             <div style={{ marginBottom: '20px' }}>
                 <input
                     type="text"

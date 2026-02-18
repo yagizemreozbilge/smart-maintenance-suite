@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
-import { AlertsPanel } from '../../frontend/src/components/AlertsPanel'
+import { AlertsPanel } from '../../../frontend/src/components/AlertsPanel'
+import * as MaintenanceContext from '../../../frontend/src/context/MaintenanceContext'
 
-vi.mock('../../frontend/src/context/MaintenanceContext', () => ({
+vi.mock('../../../frontend/src/context/MaintenanceContext', () => ({
   useMaintenance: () => ({
     alerts: []
   })
@@ -11,7 +12,7 @@ vi.mock('../../frontend/src/context/MaintenanceContext', () => ({
 describe('AlertsPanel', () => {
 
   it('Alert varsa render edilir', () => {
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenance')
+    vi.spyOn(MaintenanceContext, 'useMaintenance')
       .mockReturnValue({
         alerts: [
           {
@@ -30,7 +31,7 @@ describe('AlertsPanel', () => {
   })
 
   it('Severity CRITICAL style branch çalışır', () => {
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenance')
+    vi.spyOn(MaintenanceContext, 'useMaintenance')
       .mockReturnValue({
         alerts: [
           {
@@ -49,7 +50,7 @@ describe('AlertsPanel', () => {
   })
 
   it('INFO severity branch çalışır', () => {
-    vi.spyOn(require('../../frontend/src/context/MaintenanceContext'), 'useMaintenance')
+    vi.spyOn(MaintenanceContext, 'useMaintenance')
       .mockReturnValue({
         alerts: [
           {

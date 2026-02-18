@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
-import { MaintenanceProvider, useMaintenance, useMaintenanceDispatch } from '../../frontend/src/context/MaintenanceContext'
+import { MaintenanceProvider, useMaintenance, useMaintenanceDispatch } from '../../../frontend/src/context/MaintenanceContext'
 
 describe('MaintenanceContext', () => {
 
