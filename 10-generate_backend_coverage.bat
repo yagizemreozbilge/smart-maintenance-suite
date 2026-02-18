@@ -36,8 +36,10 @@ mkdir "%REPORT_DIR%"
 if not exist "%HISTORY_DIR%" mkdir "%HISTORY_DIR%"
 
 for /R %%f in (*.gcda *.gcno *.gcov) do del /Q "%%f" >nul 2>&1
+del /Q *.gcda *.gcno *.gcov >nul 2>&1
 
-echo [OK] Clean complete
+echo [OK] Clean complete (Cleaned all stale coverage data)
+
 echo.
 
 REM ============================================================
@@ -312,8 +314,14 @@ call :run_test test_rbac ^
 src\backend\tests\unit\test_rbac.c ^
 src\backend\security\rbac.c
 
+call :run_test test_logger ^
+src\backend\tests\unit\test_logger.c ^
+src\backend\core\utils\logger.c
+
 call :run_test test_jwt ^
 src\backend\tests\unit\test_jwt_standalone.c ^
+src\backend\security\jwt.c ^
+src\backend\database\db_connection.c
 
 
 
@@ -349,8 +357,9 @@ gcovr ^
   -r "%ROOT%" ^
   --object-directory "%BUILD_DIR%" ^
   --xml-pretty ^
-  --exclude-directories "%BUILD_DIR%" ^
-   --exclude "src/backend/tests/unit/test_api_handlers.c" ^
+  --exclude-directories "build_backend_tests_linux" ^
+  --exclude-directories "coverage_backend_linux" ^
+  --exclude "src/backend/tests/unit/test_api_handlers.c" ^
   --exclude "C:/msys64/*" ^
   --exclude "src/backend/api/http_server.c" ^
   --merge-mode-functions=merge-use-line-0 ^

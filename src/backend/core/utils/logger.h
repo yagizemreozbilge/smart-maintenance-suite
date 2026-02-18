@@ -3,20 +3,41 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <stdarg.h>
 
-// ============= DOĞRUDAN ÇALIŞAN MAKROLAR =============
-// Bu makrolar fonksiyon çağırmadan direkt çalışır!
+/**
+ * @brief Log levels for the application
+ */
+typedef enum {
+  LOG_LEVEL_NONE = 0,
+  LOG_LEVEL_ERROR,
+  LOG_LEVEL_WARN,
+  LOG_LEVEL_INFO,
+  LOG_LEVEL_DEBUG
+} LogLevel;
 
-#define LOG_ERROR(fmt, ...) \
-  fprintf(stderr, "[ERROR] " fmt "\n", ##__VA_ARGS__)
+/**
+ * @brief Set the current log level
+ */
+void logger_set_level(LogLevel level);
 
-#define LOG_WARN(fmt, ...) \
-  fprintf(stderr, "[WARN] " fmt "\n", ##__VA_ARGS__)
+/**
+ * @brief Get the current log level
+ */
+LogLevel logger_get_level(void);
 
-#define LOG_INFO(fmt, ...) \
-  printf("[INFO] " fmt "\n", ##__VA_ARGS__)
+/**
+ * @brief Log functions for different levels
+ */
+void log_error(const char *format, ...);
+void log_warn(const char *format, ...);
+void log_info(const char *format, ...);
+void log_debug(const char *format, ...);
 
-#define LOG_DEBUG(fmt, ...) \
-  do { if (0) {} } while(0)  /* DEBUG kapalı, hiçbir şey yapma */
+// Legacy macro support for existing code
+#define LOG_ERROR(fmt, ...) log_error(fmt, ##__VA_ARGS__)
+#define LOG_WARN(fmt, ...) log_warn(fmt, ##__VA_ARGS__)
+#define LOG_INFO(fmt, ...) log_info(fmt, ##__VA_ARGS__)
+#define LOG_DEBUG(fmt, ...) log_debug(fmt, ##__VA_ARGS__)
 
 #endif

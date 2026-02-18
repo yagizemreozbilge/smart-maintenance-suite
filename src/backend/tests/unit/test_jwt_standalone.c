@@ -4,89 +4,59 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
-// Standalone JWT functions (no database dependency)
-char *generate_auth_token_standalone(int user_id, const char *username, const char *role) {
-  char *token = (char *)malloc(128);
-  time_t now = time(NULL);
-  long expires = (long)now + (3600 * 24);
-  snprintf(token, 128, "token_%d_%ld_%s", user_id, expires, role);
-  return token;
-}
+// Note: This test links against the REAL jwt.c and db_connection.c
+// We focus on the JSON/Token logic which doesn't require a live DB for the most part.
 
-bool validate_auth_token_standalone(const char *token) {
-  if (!token || strlen(token) < 10) return false;
-
-  if (strstr(token, "token_") != token) return false;
-
-  return true;
-}
-
-void test_generate_auth_token() {
-  char *token = generate_auth_token_standalone(1, "admin", "admin");
+void test_jwt_lifecycle() {
+  printf("Testing JWT Generate/Validate/Extract lifecycle...\n");
+  int user_id = 42;
+  const char *user = "testadmin";
+  const char *role = "superadmin";
+  // 1. Generate
+  char *token = generate_auth_token(user_id, user, role);
   assert(token != NULL);
-  assert(strlen(token) > 0);
-  assert(strstr(token, "token_") != NULL);
-  printf("[PASS] generate_auth_token: token created\n");
+  assert(strncmp(token, "simple_jwt:", 11) == 0);
+  printf("Generated Token: %s\n", token);
+  // 2. Validate
+  assert(validate_auth_token(token) == true);
+  // 3. Extract User ID
+  int extracted_id = get_user_id_from_token(token);
+  assert(extracted_id == user_id);
+  // 4. Extract Role
+  char *extracted_role = get_role_from_token(token);
+  assert(extracted_role != NULL);
+  assert(strcmp(extracted_role, role) == 0);
+  free(extracted_role);
+  // 5. Cleanup
   free(token);
+  printf("[PASS] test_jwt_lifecycle\n");
 }
 
-void test_generate_auth_token_different_users() {
-  char *token1 = generate_auth_token_standalone(1, "admin", "admin");
-  char *token2 = generate_auth_token_standalone(2, "teknisyen", "teknisyen");
-  assert(strcmp(token1, token2) != 0);
-  printf("[PASS] generate_auth_token: different tokens for different users\n");
-  free(token1);
-  free(token2);
-}
-
-void test_validate_auth_token_valid() {
-  char *token = generate_auth_token_standalone(1, "admin", "admin");
-  assert(validate_auth_token_standalone(token) == true);
-  printf("[PASS] validate_auth_token: valid token accepted\n");
-  free(token);
-}
-
-void test_validate_auth_token_invalid() {
-  assert(validate_auth_token_standalone("invalid_token") == false);
-  printf("[PASS] validate_auth_token: invalid token rejected\n");
-}
-
-void test_validate_auth_token_null() {
-  assert(validate_auth_token_standalone(NULL) == false);
-  printf("[PASS] validate_auth_token: NULL token rejected\n");
-}
-
-void test_validate_auth_token_empty() {
-  assert(validate_auth_token_standalone("") == false);
-  printf("[PASS] validate_auth_token: empty token rejected\n");
-}
-
-void test_validate_auth_token_short() {
-  assert(validate_auth_token_standalone("tok") == false);
-  printf("[PASS] validate_auth_token: short token rejected\n");
-}
-
-void test_token_format() {
-  char *token = generate_auth_token_standalone(42, "testuser", "operator");
-  assert(strstr(token, "token_42_") != NULL);
-  assert(strstr(token, "_operator") != NULL);
-  printf("[PASS] generate_auth_token: correct format\n");
-  free(token);
+void test_jwt_errors() {
+  printf("Testing JWT error cases...\n");
+  // Null inputs
+  assert(generate_auth_token(1, NULL, "admin") == NULL);
+  assert(generate_auth_token(1, "admin", NULL) == NULL);
+  // Invalid validation
+  assert(validate_auth_token(NULL) == false);
+  assert(validate_auth_token("") == false);
+  assert(validate_auth_token("not_a_jwt") == false);
+  assert(validate_auth_token("simple_jwt:invalid_json") == false);
+  assert(validate_auth_token("simple_jwt:{\"no_exp\":1}") == false);
+  // Invalid extraction
+  assert(get_user_id_from_token(NULL) == -1);
+  assert(get_user_id_from_token("invalid") == -1);
+  assert(get_role_from_token(NULL) == NULL);
+  assert(get_role_from_token("invalid") == NULL);
+  printf("[PASS] test_jwt_errors\n");
 }
 
 int main() {
-  printf("=== JWT Unit Tests (Standalone) ===\n");
-  printf("Note: These tests don't require database connection.\n");
-  printf("Database integration tests should be run separately.\n\n");
-  test_generate_auth_token();
-  test_generate_auth_token_different_users();
-  test_validate_auth_token_valid();
-  test_validate_auth_token_invalid();
-  test_validate_auth_token_null();
-  test_validate_auth_token_empty();
-  test_validate_auth_token_short();
-  test_token_format();
-  printf("\n✅ All JWT standalone tests passed!\n");
+  printf("=== Real JWT Unit Tests ===\n");
+  test_jwt_lifecycle();
+  test_jwt_errors();
+  printf("\n✅ All JWT tests passed!\n");
   return 0;
 }

@@ -62,6 +62,7 @@ reportgenerator ^
     -reports:"%COV_DIR%\lcov.info" ^
     -targetdir:"%REPORT_DIR%" ^
     -reporttypes:Html ^
+    -sourcedirs:"src\frontend" ^
     -title:"Frontend Coverage Report"
 
 if %errorlevel% neq 0 (
