@@ -63,7 +63,7 @@ reportgenerator ^
     -targetdir:"%REPORT_DIR%" ^
     -reporttypes:Html ^
     -sourcedirs:"src\frontend" ^
-    -title:"Frontend Coverage Report"
+    -title:"Frontend Coverage Report (Windows)"
 
 if %errorlevel% neq 0 (
     echo [ERROR] ReportGenerator failed.

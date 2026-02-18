@@ -1,5 +1,5 @@
 TN:
-SF:src\App.js
+SF:src/App.js
 FN:13,Dashboard
 FN:19,syncWithBackend
 FN:61,onClick
@@ -232,7 +232,7 @@ BRF:22
 BRH:18
 end_of_record
 TN:
-SF:src\components\AlertsPanel.js
+SF:src/components/AlertsPanel.js
 FN:5,AlertsPanel
 FNF:1
 FNH:1
@@ -302,7 +302,7 @@ BRF:10
 BRH:10
 end_of_record
 TN:
-SF:src\components\AnalyticsPanel.js
+SF:src/components/AnalyticsPanel.js
 FN:10,AnalyticsPanel
 FNF:1
 FNH:1
@@ -401,7 +401,7 @@ BRF:5
 BRH:5
 end_of_record
 TN:
-SF:src\components\Header.js
+SF:src/components/Header.js
 FN:4,WelcomeMessage
 FN:25,Header
 FNF:2
@@ -504,7 +504,7 @@ BRF:7
 BRH:7
 end_of_record
 TN:
-SF:src\components\InventoryPanel.js
+SF:src/components/InventoryPanel.js
 FN:5,InventoryPanel
 FNF:1
 FNH:1
@@ -573,7 +573,7 @@ BRF:5
 BRH:2
 end_of_record
 TN:
-SF:src\components\LoginPage.js
+SF:src/components/LoginPage.js
 FN:4,LoginPage
 FN:10,handleSubmit
 FN:50,onChange
@@ -678,7 +678,7 @@ BRF:10
 BRH:10
 end_of_record
 TN:
-SF:src\components\MachineList.js
+SF:src/components/MachineList.js
 FN:5,MachineList
 FN:26,onChange
 FN:33,onClick
@@ -873,7 +873,7 @@ BRF:28
 BRH:23
 end_of_record
 TN:
-SF:src\components\MaintenanceForm.js
+SF:src/components/MaintenanceForm.js
 FN:4,MaintenanceForm
 FN:13,handleSubmit
 FN:42,onChange
@@ -974,7 +974,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:src\components\MaintenanceHistory.js
+SF:src/components/MaintenanceHistory.js
 FN:5,MaintenanceHistory
 FNF:1
 FNH:1
@@ -1040,7 +1040,7 @@ BRF:5
 BRH:4
 end_of_record
 TN:
-SF:src\components\StatusCard.js
+SF:src/components/StatusCard.js
 FN:4,StatusCard
 FNF:1
 FNH:1
@@ -1113,7 +1113,7 @@ BRF:4
 BRH:1
 end_of_record
 TN:
-SF:src\context\MaintenanceContext.js
+SF:src/context/MaintenanceContext.js
 FN:5,maintenanceReducer
 FN:42,MaintenanceProvider
 FN:55,useMaintenance
@@ -1205,7 +1205,7 @@ BRF:14
 BRH:11
 end_of_record
 TN:
-SF:src\context\useHooks.js
+SF:src/context/useHooks.js
 FN:6,useMachineStats
 FN:31,useSystemClock
 FN:48,useLiveSearch

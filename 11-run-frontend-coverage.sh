@@ -8,8 +8,8 @@ set -e # Hata durumunda scripti durdur
 
 ROOT_DIR="$(pwd)"
 FRONTEND_DIR="$ROOT_DIR/src/frontend"
-COV_DIR="$FRONTEND_DIR/coverage"
-REPORT_DIR="$ROOT_DIR/docs/coverage_frontend_report"
+COV_DIR="$FRONTEND_DIR/coverage_linux"
+REPORT_DIR="$ROOT_DIR/docs/coverage_frontend_report_linux"
 
 echo "Current Directory: $(pwd)"
 
@@ -34,8 +34,8 @@ mkdir -p "$REPORT_DIR"
 
 echo "[2/3] Running Tests and Coverage..."
 cd "$FRONTEND_DIR"
-npm install # Bağımlılıkların WSL'de yüklü olduğundan emin olalım
-npm run test:coverage
+npm install
+npm run test:coverage -- --coverage.reportsDirectory="coverage_linux"
 
 echo "[3/3] Generating Report..."
 cd "$ROOT_DIR"
@@ -44,7 +44,7 @@ reportgenerator \
     -targetdir:"$REPORT_DIR" \
     -reporttypes:Html \
     -sourcedirs:"src/frontend" \
-    -title:"Frontend Coverage Report"
+    -title:"Frontend Coverage Report (WSL)"
 
 echo "============================================================"
 echo "   PROCESS COMPLETED SUCCESSFULLY"
