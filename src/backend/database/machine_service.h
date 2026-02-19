@@ -2,6 +2,7 @@
 #define MACHINE_SERVICE_H
 
 #include <stddef.h>
+#include <stdbool.h>
 
 /** Machine status representation */
 typedef struct {

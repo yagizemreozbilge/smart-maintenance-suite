@@ -52,6 +52,16 @@ void test_fault_put_resolve() {
   assert(strstr(res.body, "resolved") != NULL);
 }
 
+void test_fault_put_invalid() {
+  HttpRequest req = {0};
+  HttpResponse res = {0};
+  strcpy(req.method, "PUT");
+  strcpy(req.path, "/api/faults/1/invalid");
+  handle_fault_request(&req, &res);
+  assert(res.status_code == 400);
+  assert(strstr(res.body, "Invalid fault operation") != NULL);
+}
+
 void test_fault_invalid_method() {
   HttpRequest req = {0};
   HttpResponse res = {0};
@@ -66,6 +76,7 @@ int main() {
   test_fault_post();
   test_fault_put_ack();
   test_fault_put_resolve();
+  test_fault_put_invalid();
   test_fault_invalid_method();
   printf("[PASS] Fault handler\n");
   return 0;

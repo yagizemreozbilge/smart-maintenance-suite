@@ -18,6 +18,9 @@ set "HISTORY_DIR=docs\coverage_history"
 echo ============================================================
 echo   BACKEND GCC COVERAGE - FULL TEST SUITE (29 TESTS)
 echo ============================================================
+echo [0/5] Killing any stale test processes...
+taskkill /F /IM "test_*.exe" /T >nul 2>&1
+timeout /t 1 /nobreak >nul
 echo.
 
 REM ============================================================
@@ -26,12 +29,28 @@ REM ============================================================
 
 echo [1/5] Cleaning old build and coverage data...
 
-if exist "%BUILD_DIR%" rd /S /Q "%BUILD_DIR%"
-if exist "%COV_DIR%" rd /S /Q "%COV_DIR%"
-if exist "%REPORT_DIR%" rd /S /Q "%REPORT_DIR%"
-
+:retry_clean
+if exist "%BUILD_DIR%" (
+    rd /S /Q "%BUILD_DIR%" >nul 2>&1
+    if exist "%BUILD_DIR%" (
+        echo [WARNING] Could not delete build directory. Files might be locked.
+        echo Trying to force kill any remaining test processes...
+        taskkill /F /IM "test_*.exe" /T >nul 2>&1
+        timeout /t 2 /nobreak >nul
+        rd /S /Q "%BUILD_DIR%" >nul 2>&1
+        if exist "%BUILD_DIR%" (
+            echo [ERROR] Build directory is STILL locked. Please close any open test terminals!
+            pause
+            goto :retry_clean
+        )
+    )
+)
 mkdir "%BUILD_DIR%"
+
+if exist "%COV_DIR%" rd /S /Q "%COV_DIR%"
 mkdir "%COV_DIR%"
+
+if exist "%REPORT_DIR%" rd /S /Q "%REPORT_DIR%"
 mkdir "%REPORT_DIR%"
 if not exist "%HISTORY_DIR%" mkdir "%HISTORY_DIR%"
 
@@ -103,7 +122,7 @@ REM ============================================================
 REM COMMON FLAGS (Branch coverage enabled)
 REM ============================================================
 
-set "CFLAGS=-Isrc\backend -Isrc\backend\database -Isrc\backend\security -Isrc\backend\core\utils -Isrc\tests -Isrc\tests\mock_includes -IC:\msys64\mingw64\include -g -O0 --coverage"
+set "CFLAGS=-Isrc\backend -Isrc\backend\api\handlers -Isrc\backend\database -Isrc\backend\security -Isrc\backend\core\utils -Isrc\tests -Isrc\tests\mock_includes -IC:\msys64\mingw64\include -g -O0 --coverage"
 
 REM Linker flags - cJSON kütüphanesini EKLEDİM!
 set "LDFLAGS=--coverage -mconsole -Wl,-subsystem,console -lws2_32 -lpq -lcjson -lcmocka"
@@ -138,12 +157,30 @@ echo ------------------------------------------------------------
 echo Running: %TEST_NAME%
 echo ------------------------------------------------------------
 
-REM cJSON kaynak dosyasını gerektiğinde EKLE
+REM Nuclear Windows Cleanup: Rename then Delete (Handles locked files)
+set "RETRY_COUNT=0"
+:retry_del
+if exist "%BUILD_DIR%\%TEST_NAME%.exe" (
+    del /F /Q "%BUILD_DIR%\%TEST_NAME%.exe" >nul 2>&1
+    if exist "%BUILD_DIR%\%TEST_NAME%.exe" (
+        set /a RETRY_COUNT+=1
+        if !RETRY_COUNT! geq 5 (
+            echo [WARNING] Could not delete %TEST_NAME%.exe, attempting rename...
+            ren "%BUILD_DIR%\%TEST_NAME%.exe" "%TEST_NAME%.exe.old_%RANDOM%" >nul 2>&1
+        ) else (
+            taskkill /F /IM "%TEST_NAME%.exe" /T >nul 2>&1
+            timeout /t 1 /nobreak >nul
+            goto :retry_del
+        )
+    )
+)
+del /F /Q "%BUILD_DIR%\%TEST_NAME%.gc*" >nul 2>&1
+
 if "%USE_CJSON_SOURCE%"=="1" (
     echo [INFO] Adding cJSON.c to compilation
-    gcc %CFLAGS% %SOURCE_FILES% src\backend\database\cJSON.c -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
+    gcc %CFLAGS% %EXTRA_CFLAGS% %SOURCE_FILES% src\backend\database\cJSON.c -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
 ) else (
-    gcc %CFLAGS% %SOURCE_FILES% -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
+    gcc %CFLAGS% %EXTRA_CFLAGS% %SOURCE_FILES% -o "%BUILD_DIR%\%TEST_NAME%.exe" %LDFLAGS%
 )
 
 if errorlevel 1 (
@@ -165,6 +202,8 @@ set /a TEST_COUNT+=1
 goto :eof
 
 :RUN_TESTS
+
+set "EXTRA_CFLAGS=-DTEST_MODE"
 
 REM --- Data Structure Tests (Console Apps) ---
 call :run_test test_queue ^
@@ -212,6 +251,9 @@ REM src\backend\core\utils\time_utils.c
 
 REM --- Individual Handler Unit Tests ---
 
+REM Ensure cmocka is linked for these tests
+set "LDFLAGS=%LDFLAGS% -lcmocka"
+
 call :run_test test_auth_handler ^
 src\backend\tests\unit\test_auth_handler.c ^
 src\backend\api\handlers\auth_handler.c ^
@@ -220,7 +262,14 @@ src\backend\database\db_connection.c
 
 call :run_test test_inventory_handler ^
 src\backend\tests\unit\test_inventory_handler.c ^
-src\backend\api\handlers\inventory_handler.c
+src\backend\api\handlers\inventory_handler.c ^
+src\backend\database\api_handlers.c ^
+src\backend\database\inventory_service.c ^
+src\backend\database\machine_service.c ^
+src\backend\database\sensor_service.c ^
+src\backend\database\alert_service.c ^
+src\backend\database\maintenance_service.c ^
+src\backend\database\db_connection.c
 
 call :run_test test_fault_handler ^
 src\backend\tests\unit\test_fault_handler.c ^
@@ -228,11 +277,18 @@ src\backend\api\handlers\fault_handler.c
 
 call :run_test test_machine_handler ^
 src\backend\tests\unit\test_machine_handler.c ^
-src\backend\api\handlers\machine_handler.c      
+src\backend\api\handlers\machine_handler.c
 
 call :run_test test_report_handler ^
 src\backend\tests\unit\test_report_handler.c ^
-src\backend\api\handlers\report_handler.c
+src\backend\api\handlers\report_handler.c ^
+src\backend\database\report_service.c ^
+src\backend\database\maintenance_service.c ^
+src\backend\database\inventory_service.c ^
+src\backend\database\machine_service.c ^
+src\backend\database\sensor_service.c ^
+src\backend\database\alert_service.c ^
+src\backend\database\db_connection.c
 
 call :run_test test_maintenance_handler ^
 src\backend\tests\unit\test_maintenance_handler.c ^
@@ -269,6 +325,11 @@ src\backend\database\maintenance_service.c ^
 src\backend\database\db_connection.c
 
 
+set "EXTRA_CFLAGS="
+
+call :run_test test_sensor_service ^
+src\backend\tests\unit\database\test_sensor_service.c ^
+src\backend\database\sensor_service.c
 
 REM --- REAL Service Tests (TEST_MODE OLMADAN) ---
 call :run_test test_alert_service_real ^
@@ -290,6 +351,10 @@ src\backend\database\maintenance_service.c
 call :run_test test_db_connection_real ^
 src\backend\tests\unit\database\test_db_connection_real.c ^
 src\backend\database\db_connection.c
+
+call :run_test test_sensor_service_real ^
+src\backend\tests\unit\database\test_sensor_service_real.c ^
+src\backend\database\sensor_service.c
 
 REM --- HTTP Server Tests  ---
 REM  call :run_test test_http_server ^
@@ -360,6 +425,7 @@ gcovr ^
   --exclude-directories "build_backend_tests_linux" ^
   --exclude-directories "coverage_backend_linux" ^
   --exclude "src/backend/tests/unit/test_api_handlers.c" ^
+  --exclude "src/backend/database/api_handlers.c" ^
   --exclude "C:/msys64/*" ^
   --exclude "src/backend/api/http_server.c" ^
   --merge-mode-functions=merge-use-line-0 ^

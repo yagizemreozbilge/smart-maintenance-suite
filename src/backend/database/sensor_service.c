@@ -7,7 +7,6 @@
 #include "alert_service.h"
 
 int get_machine_sensor_stats(int machine_id, SensorStatus *out_stats, int max_sensors) {
-  // 1. Acquire a connection from the pool
   DBConnection *conn_wrapper = db_pool_acquire();
 
   if (!conn_wrapper) {
@@ -15,7 +14,6 @@ int get_machine_sensor_stats(int machine_id, SensorStatus *out_stats, int max_se
     return 0;
   }
 
-  // 2. Prepare the SQL query
   char query[512];
   snprintf(query, sizeof(query),
            "SELECT DISTINCT ON (s.id) "
@@ -26,17 +24,14 @@ int get_machine_sensor_stats(int machine_id, SensorStatus *out_stats, int max_se
            "WHERE s.machine_id = %d "
            "ORDER BY s.id, sd.timestamp DESC;",
            machine_id);
-  // 3. Execute the query
   PGresult *res = PQexec(conn_wrapper->pg_conn, query);
 
   if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-    LOG_ERROR("Health check query failed for machine %d: %s", machine_id, PQerrorMessage(conn_wrapper->pg_conn));
     PQclear(res);
     db_pool_release(conn_wrapper);
     return 0;
   }
 
-  // 4. Map DB results to our C struct array
   int rows = PQntuples(res);
   int count = (rows < max_sensors) ? rows : max_sensors;
 
@@ -51,30 +46,25 @@ int get_machine_sensor_stats(int machine_id, SensorStatus *out_stats, int max_se
     out_stats[i].recorded_at[31] = '\0';
   }
 
-  // 5. Cleanup
   PQclear(res);
   db_pool_release(conn_wrapper);
-  LOG_INFO("Fetched health data for machine %d (%d sensors found).", machine_id, count);
   return count;
 }
 
 bool add_sensor_reading(int sensor_id, const char *sensor_type, double value) {
-  // 1. Havuzdan bağlantı al
   DBConnection *conn_wrapper = db_pool_acquire();
 
   if (!conn_wrapper) {
-    LOG_ERROR("Could not acquire connection to add sensor reading.");
     return false;
   }
 
-  // 2. Query hazırla
   char query[256];
-  snprintf(query, sizeof(query), "INSERT INTO sensor_data (sensor_id, value) VALUES (%d, %.2f);", sensor_id, value);
-  // 3. Çalıştır
+  snprintf(query, sizeof(query),
+           "INSERT INTO sensor_data (sensor_id, value) VALUES (%d, %.2f);",
+           sensor_id, value);
   PGresult *res = PQexec(conn_wrapper->pg_conn, query);
 
   if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-    LOG_ERROR("Failed to insert sensor data: %s", PQerrorMessage(conn_wrapper->pg_conn));
     PQclear(res);
     db_pool_release(conn_wrapper);
     return false;
@@ -82,7 +72,6 @@ bool add_sensor_reading(int sensor_id, const char *sensor_type, double value) {
 
   PQclear(res);
   db_pool_release(conn_wrapper);
-  // 4. Kural Motorunu Tetikle (Alert Engine)
   check_and_trigger_alerts(sensor_id, sensor_type, value);
   return true;
 }

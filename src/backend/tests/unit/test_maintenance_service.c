@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "maintenance_service.h"
+#include "../../api/handlers/maintenance_handler.h"
 
 void test_get_all_maintenance_logs_success() {
   MaintenanceLog logs[5];

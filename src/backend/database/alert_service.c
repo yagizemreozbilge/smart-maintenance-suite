@@ -28,6 +28,7 @@ const char *severity_to_str(AlertSeverity severity) {
 /* ------------------------------------------------------------------
  * PUBLIC API
  * ------------------------------------------------------------------ */
+#ifndef TEST_MODE
 
 bool create_alert(int sensor_id, AlertSeverity severity, const char *message) {
   DBConnection *conn_wrapper = db_pool_acquire();
@@ -124,6 +125,8 @@ int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
   return count;
 }
 
+#endif // TEST_MODE
+
 /* ------------------------------------------------------------------
  * JSON SERIALIZATION (API ENDPOINTS)
  * ------------------------------------------------------------------ */
@@ -183,6 +186,32 @@ char *alert_service_serialize_alerts(void) {
   }
 
   return json;
+}
+
+bool create_alert(int sensor_id, AlertSeverity severity, const char *message) {
+  (void)sensor_id;
+  (void)severity;
+  (void)message;
+  return true;
+}
+
+void check_and_trigger_alerts(int sensor_id, const char *sensor_type, double value) {
+  (void)sensor_id;
+  (void)sensor_type;
+  (void)value;
+}
+
+int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
+  if (out_alerts && max_alerts > 0) {
+    out_alerts[0].id = 1;
+    out_alerts[0].sensor_id = 1;
+    strcpy(out_alerts[0].severity, "CRITICAL");
+    strcpy(out_alerts[0].message, "Mock critical alert");
+    strcpy(out_alerts[0].created_at, "2025-01-01 10:00:00");
+    return 1;
+  }
+
+  return 0;
 }
 
 #endif
