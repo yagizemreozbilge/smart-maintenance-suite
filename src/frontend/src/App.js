@@ -93,8 +93,8 @@ function Dashboard() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', margin: '20px 0' }}>
                 <StatTile label="Total Assets" value={stats?.total || 0} color="#3498db" />
                 <StatTile label="Healthy" value={stats?.operational || 0} color="#2ecc71" />
-                <StatTile label="Critical Issues" value={alerts.filter(a => a.severity === 'CRITICAL').length} color="#e74c3c" />
-                <StatTile label="Recent Logs" value={maintenanceLogs.length} color="#9b59b6" />
+                <StatTile label="Critical Issues" value={(alerts && Array.isArray(alerts) ? alerts : []).filter(a => a.severity === 'CRITICAL').length} color="#e74c3c" />
+                <StatTile label="Recent Logs" value={(maintenanceLogs || []).length} color="#9b59b6" />
             </div>
 
             <AnalyticsPanel />

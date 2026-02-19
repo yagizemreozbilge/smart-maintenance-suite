@@ -13,6 +13,7 @@ void handle_auth_request(HttpRequest *req, HttpResponse *res) {
   // jwt.h'daki orijinal generate_auth_token fonksiyonunu çağır
   char *token = generate_auth_token(user_id, username, role);
   cJSON *root = cJSON_CreateObject();
+  cJSON_AddBoolToObject(root, "success", true);
   cJSON_AddStringToObject(root, "status", "authenticated");
   cJSON_AddStringToObject(root, "token", token);
   cJSON_AddStringToObject(root, "role", role);

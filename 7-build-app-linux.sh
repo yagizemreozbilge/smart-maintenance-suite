@@ -146,14 +146,17 @@ echo "...................."
 BACKEND_PATH="src/backend"
 # Linux'ta PostgreSQL genellikle standart yollardadır (/usr/include/postgresql)
 # Bu yüzden ek yol belirtmemize gerek kalmayabilir ama standart bayrakları ekliyoruz.
-DB_FILES="database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c security/jwt.c security/rbac.c database/report_service.c"
+API_FILES="api/http_server.c api/router.c api/handlers/auth_handler.c api/handlers/machine_handler.c api/handlers/inventory_handler.c api/handlers/maintenance_handler.c api/handlers/report_handler.c api/handlers/fault_handler.c"
+DB_CORE_FILES="database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c security/jwt.c security/rbac.c database/report_service.c"
 
 pushd $BACKEND_PATH > /dev/null
 echo "[BUILD] Compiling C source files for Linux..."
-# Linux'ta -lpq postgres kütüphanesidir, -lpthread ise iş parçacıkları için.
-gcc main.c $DB_FILES \
+gcc main.c $API_FILES $DB_CORE_FILES \
+    -I. \
     -I./database \
     -I./security \
+    -I./api \
+    -I./api/handlers \
     -I/usr/include/postgresql \
     -lpq -lpthread -lm \
     -o app_linux

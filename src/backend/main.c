@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "database/cJSON.h"
 #include <libpq-fe.h>
 
 /* ANSI Color Codes - High Intensity for that "Electric" Look */
@@ -99,7 +100,7 @@ int main() {
         printf("Enter Machine ID: ");
         scanf("%d", &mid);
         SensorStatus sensors[10];
-        int s_count = get_machine_health(mid, sensors, 10);
+        int s_count = get_machine_sensor_stats(mid, sensors, 10);
 
         if (s_count > 0) {
           printf("\n%s--- HEALTH REPORT (Machine %d) ---%s\n", B_MAGENTA, mid, RESET);

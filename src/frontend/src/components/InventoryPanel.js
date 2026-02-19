@@ -13,7 +13,7 @@ export function InventoryPanel() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {inventory.map((item) => {
+                {(inventory || []).map((item) => {
                     const isCritical = item.quantity <= item.min_stock;
                     return (
                         <div key={item.id} style={{

@@ -904,13 +904,13 @@
 <codeline lineno="161"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"></highlight></codeline>
 <codeline lineno="163" refid="smart__maintenance__suite__test_8cpp_1a89e8b9f2d10a6af53627cce6e4e70c03" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateTotalCost_ZeroPeriod)<sp/>{</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateTotalCost(3.0,<sp/>0.0,<sp/>500.0);</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateTotalCost(3.0,<sp/>0.0,<sp/>500.0);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
 <codeline lineno="166"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"></highlight></codeline>
 <codeline lineno="168" refid="smart__maintenance__suite__test_8cpp_1a5561cb9f60137e3c121bfdbb6ddf9f9f" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>CalculateTotalCost_ZeroCost)<sp/>{</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateTotalCost(3.0,<sp/>12.0,<sp/>0.0);</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>MaintenanceScheduler::calculateTotalCost(3.0,<sp/>12.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>EXPECT_DOUBLE_EQ(result,<sp/>0.0);</highlight></codeline>
 <codeline lineno="171"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"></highlight></codeline>
 <codeline lineno="173" refid="smart__maintenance__suite__test_8cpp_1a2ce7a76e09045497af1222cdec63a0ff" refkind="member"><highlight class="normal"><ref refid="smart__maintenance__suite__test_8cpp_1a900e571509f7fa6daec248c56bd9c81e" kindref="member">TEST_F</ref>(<ref refid="class_maintenance_scheduler_test" kindref="compound">MaintenanceSchedulerTest</ref>,<sp/>AssessMaintenancePriority_Normal)<sp/>{</highlight></codeline>

@@ -155,7 +155,8 @@ echo  Build Backend API
 echo ....................
 set BACKEND_PATH=src\backend
 set PG_PATH=C:\Program Files\PostgreSQL\17
-set DB_FILES=database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c database/http_server.c security/jwt.c security/rbac.c database/report_service.c
+set API_FILES=api/http_server.c api/router.c api/handlers/auth_handler.c api/handlers/machine_handler.c api/handlers/inventory_handler.c api/handlers/maintenance_handler.c api/handlers/report_handler.c api/handlers/fault_handler.c
+set DB_CORE_FILES=database/db_connection.c database/machine_service.c database/sensor_service.c database/alert_service.c database/maintenance_service.c database/inventory_service.c database/api_handlers.c database/cJSON.c security/jwt.c security/rbac.c database/report_service.c
 
 pushd %BACKEND_PATH%
 echo [CLEAN] Closing any running instances of app.exe...
@@ -165,20 +166,15 @@ timeout /t 2 /nobreak >nul
 
 if exist app.exe (
     del /F /Q app.exe
-    if exist app.exe (
-        echo [ERROR] Could not delete existing app.exe. It might be in use or requires Admin privileges.
-        echo ACTION: Please manually close 'app.exe' via Task Manager or run this script as Administrator.
-        popd
-        pause
-        exit /b 1
-    )
 )
 
 echo [BUILD] Compiling C source files...
-gcc main.c %DB_FILES% ^
+gcc main.c %API_FILES% %DB_CORE_FILES% ^
     -I. ^
     -I./database ^
     -I./security ^
+    -I./api ^
+    -I./api/handlers ^
     -I"%PG_PATH%\include" ^
     "%PG_PATH%\lib\libpq.lib" ^
     -lws2_32 -lsecur32 -ladvapi32 -lshell32 -lpthread ^

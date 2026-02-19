@@ -31,4 +31,9 @@ int get_machine_by_id(int id, Machine *machine);
  */
 double get_machine_health_score(int machine_id);
 
+/**
+ * Adds a new machine to the database.
+ */
+bool add_machine(const char *name, const char *model, const char *location, const char *status);
+
 #endif

@@ -1,6 +1,6 @@
 #include "jwt.h"
 #include "db_connection.h"
-#include <cjson/cJSON.h>
+#include "../database/cJSON.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

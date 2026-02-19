@@ -8,11 +8,11 @@ export function useMachineStats() {
 
     // useMemo: Only recalculate stats if the machines array changes
     const stats = useMemo(() => {
-        console.log("Re-calculating machine stats...");
-        const total = machines.length;
-        const operational = machines.filter(m => m.status === 'Operational').length;
-        const warning = machines.filter(m => m.status === 'Warning').length;
-        const maintenance = machines.filter(m => m.status === 'Maintenance').length;
+        const machineList = machines || [];
+        const total = machineList.length;
+        const operational = machineList.filter(m => m.status === 'operational').length;
+        const warning = machineList.filter(m => m.status === 'warning').length;
+        const maintenance = machineList.filter(m => m.status === 'maintenance').length;
 
         return {
             total,

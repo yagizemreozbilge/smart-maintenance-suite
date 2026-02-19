@@ -118,6 +118,23 @@ int get_low_stock_items(InventoryItem *out_items, int max_items) {
   return count;
 }
 
+bool add_inventory_item(const char *name, const char *sku, int quantity, int min_stock, double cost) {
+  DBConnection *conn_wrapper = db_pool_acquire();
+
+  if (!conn_wrapper) return false;
+
+  char query[1024];
+  snprintf(query, sizeof(query),
+           "INSERT INTO inventory (part_name, sku, quantity, min_stock_level, unit_cost) "
+           "VALUES ('%s', '%s', %d, %d, %.2f);",
+           name, sku, quantity, min_stock, cost);
+  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+  bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
+  PQclear(res);
+  db_pool_release(conn_wrapper);
+  return success;
+}
+
 #endif  // TEST_MODE
 
 
@@ -155,6 +172,15 @@ int get_low_stock_items(InventoryItem *items, int max_count) {
   items[0].quantity = 5;
   items[0].min_stock_level = 10;
   return 1;
+}
+
+bool add_inventory_item(const char *name, const char *sku, int quantity, int min_stock, double cost) {
+  (void)name;
+  (void)sku;
+  (void)quantity;
+  (void)min_stock;
+  (void)cost;
+  return true;
 }
 
 #endif

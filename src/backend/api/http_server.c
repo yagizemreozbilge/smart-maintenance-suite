@@ -52,6 +52,7 @@ static void send_modular_response(SOCKET client, HttpResponse *res) {
           "Content-Length: %zu\r\n"
           "Access-Control-Allow-Origin: *\r\n"
           "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n"
+          "Access-Control-Allow-Headers: Content-Type, Authorization\r\n"
           "Connection: close\r\n\r\n",
           res->status_code, status_text, res->content_type, strlen(res->body));
   send(client, header, (int)strlen(header), 0);

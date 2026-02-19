@@ -81,6 +81,33 @@ double get_machine_health_score(int machine_id) {
   return 94.7;
 }
 
+bool add_machine(const char *name, const char *model, const char *location, const char *status) {
+  DBConnection *conn_wrapper = db_pool_acquire();
+
+  if (!conn_wrapper) {
+    printf("[DATABASE ERROR] Could not acquire connection to add machine!\n");
+    return false;
+  }
+
+  char query[1024];
+  snprintf(query, sizeof(query),
+           "INSERT INTO machines (name, model, location, status) VALUES ('%s', '%s', '%s', '%s');",
+           name, model, location, status);
+  printf("[DATABASE DEBUG] Executing: %s\n", query);
+  PGresult *res = PQexec(conn_wrapper->pg_conn, query);
+  bool success = (PQresultStatus(res) == PGRES_COMMAND_OK);
+
+  if (!success) {
+    printf("[DATABASE ERROR] INSERT failed: %s\n", PQerrorMessage(conn_wrapper->pg_conn));
+  } else {
+    printf("[DATABASE SUCCESS] Machine '%s' added to DB.\n", name);
+  }
+
+  PQclear(res);
+  db_pool_release(conn_wrapper);
+  return success;
+}
+
 #endif  // TEST_MODE
 
 
@@ -128,6 +155,14 @@ double get_machine_health_score(int id) {
     return 0.0;
 
   return 88.5;
+}
+
+bool add_machine(const char *name, const char *model, const char *location, const char *status) {
+  (void)name;
+  (void)model;
+  (void)location;
+  (void)status;
+  return true;
 }
 
 #endif

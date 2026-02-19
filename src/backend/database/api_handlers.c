@@ -78,7 +78,7 @@ char *serialize_alerts_to_json() {
 // Let's assume for now we provide health for machine ID 1 as a placeholder or we can add a global fetcher.
 char *serialize_sensors_to_json(int machine_id) {
   SensorStatus stats[50];
-  int count = get_machine_health(machine_id, stats, 50);
+  int count = get_machine_sensor_stats(machine_id, stats, 50);
   cJSON *root = cJSON_CreateArray();
 
   for (int i = 0; i < count; i++) {

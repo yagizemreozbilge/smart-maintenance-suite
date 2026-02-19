@@ -13,7 +13,7 @@ export function AlertsPanel() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {alerts.map((alert) => (
+                {(alerts && Array.isArray(alerts) ? alerts : []).map((alert) => (
                     <div key={alert.id} style={{
                         padding: '12px',
                         borderRadius: '8px',

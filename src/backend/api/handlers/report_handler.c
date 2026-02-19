@@ -1,20 +1,11 @@
 #include "report_handler.h"
+#include "../../database/report_service.h"
 #include "../../database/cJSON.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-char *generate_maintenance_xml_report(void) {
-  char *xml = (char *)malloc(512);
-  strcpy(xml, "<?xml version=\"1.0\"?><report><maintenance><log>Maintenance Report - All equipment running normally</log></maintenance></report>");
-  return xml;
-}
-
-char *generate_inventory_xml_report(void) {
-  char *xml = (char *)malloc(512);
-  strcpy(xml, "<?xml version=\"1.0\"?><report><inventory><item>Inventory Report - Stock levels normal</item></inventory></report>");
-  return xml;
-}
+// Original mock functions removed. Using real service implementations from database/report_service.c
 
 void handle_report_request(HttpRequest *req, HttpResponse *res) {
   char *xml;

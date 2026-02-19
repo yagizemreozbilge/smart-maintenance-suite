@@ -13,7 +13,7 @@ export function MaintenanceHistory() {
             </div>
 
             <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-                {(maintenanceLogs || []).length > 0 ? (
+                {(maintenanceLogs && Array.isArray(maintenanceLogs) && maintenanceLogs.length > 0) ? (
                     maintenanceLogs.map((log) => (
                         <div key={log.id} style={{
                             padding: '12px',

@@ -37,4 +37,9 @@ bool update_inventory_quantity(int part_id, int change);
  */
 int get_low_stock_items(InventoryItem *out_items, int max_items);
 
+/**
+ * Adds a new item to the inventory.
+ */
+bool add_inventory_item(const char *name, const char *sku, int quantity, int min_stock, double cost);
+
 #endif

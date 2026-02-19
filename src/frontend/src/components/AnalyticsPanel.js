@@ -11,8 +11,9 @@ export function AnalyticsPanel() {
     const { machines, inventory } = useMaintenance();
 
     // 1. Prepare Machine Status Data for Pie Chart
-    const statusCounts = machines.reduce((acc, m) => {
-        const status = m.status.charAt(0).toUpperCase() + m.status.slice(1);
+    const statusCounts = (machines || []).reduce((acc, m) => {
+        const rawStatus = m.status || 'unknown';
+        const status = rawStatus.charAt(0).toUpperCase() + rawStatus.slice(1);
         acc[status] = (acc[status] || 0) + 1;
         return acc;
     }, {});

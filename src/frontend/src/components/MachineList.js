@@ -9,7 +9,7 @@ export function MachineList() {
 
     // Point 5: Using Custom Hook for search logic
     // Point 4: Inside useLiveSearch, useMemo is handling expensive filtering
-    const { query, setQuery, filteredItems } = useLiveSearch(machines, 'name');
+    const { query, setQuery, filteredItems } = useLiveSearch(machines || [], 'name');
 
     const finalItems = filterStatus === 'All'
         ? filteredItems
