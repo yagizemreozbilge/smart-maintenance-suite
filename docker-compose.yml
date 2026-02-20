@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: smart_maintenance
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: grup7_123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/backend/database/migrations:/docker-entrypoint-initdb.d
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=smart_maintenance
+      - DB_USER=postgres
+      - DB_PASSWORD=grup7_123
+      - DB_SSLMODE=disable
+      - DB_CONNECT_TIMEOUT=5
+      - POOL_MIN=2
+      - POOL_MAX=5
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
