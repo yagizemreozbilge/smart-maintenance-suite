@@ -48,17 +48,17 @@ void show_menu() {
 }
 
 int main() {
-  DatabaseConfig cfg = {
-    .host = getenv("DB_HOST") ? getenv("DB_HOST") : "localhost",
-    .port = getenv("DB_PORT") ? atoi(getenv("DB_PORT")) : 5432,
-    .dbname = getenv("DB_NAME") ? getenv("DB_NAME") : "smart_maintenance",
-    .user = getenv("DB_USER") ? getenv("DB_USER") : "postgres",
-    .password = getenv("DB_PASSWORD") ? getenv("DB_PASSWORD") : "grup7_123",
-    .sslmode = getenv("DB_SSLMODE") ? getenv("DB_SSLMODE") : "disable",
-    .connect_timeout = getenv("DB_CONNECT_TIMEOUT") ? atoi(getenv("DB_CONNECT_TIMEOUT")) : 5,
-    .pool_min = getenv("POOL_MIN") ? atoi(getenv("POOL_MIN")) : 2,
-    .pool_max = getenv("POOL_MAX") ? atoi(getenv("POOL_MAX")) : 5
-  };
+  DatabaseConfig cfg = {0}; // Initialize to zero
+  // Set string fields with strcpy
+  strcpy(cfg.host, getenv("DB_HOST") ? getenv("DB_HOST") : "localhost");
+  cfg.port = getenv("DB_PORT") ? atoi(getenv("DB_PORT")) : 5432;
+  strcpy(cfg.dbname, getenv("DB_NAME") ? getenv("DB_NAME") : "smart_maintenance");
+  strcpy(cfg.user, getenv("DB_USER") ? getenv("DB_USER") : "postgres");
+  strcpy(cfg.password, getenv("DB_PASSWORD") ? getenv("DB_PASSWORD") : "grup7_123");
+  strcpy(cfg.sslmode, getenv("DB_SSLMODE") ? getenv("DB_SSLMODE") : "disable");
+  cfg.connect_timeout = getenv("DB_CONNECT_TIMEOUT") ? atoi(getenv("DB_CONNECT_TIMEOUT")) : 5;
+  cfg.pool_min = getenv("POOL_MIN") ? atoi(getenv("POOL_MIN")) : 2;
+  cfg.pool_max = getenv("POOL_MAX") ? atoi(getenv("POOL_MAX")) : 5;
 
   if (!db_pool_init(&cfg, BLOCK_WITH_TIMEOUT, 2000)) {
     LOG_ERROR("System failure: Pool initialization failed.");
