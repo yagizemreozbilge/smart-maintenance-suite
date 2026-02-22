@@ -65,7 +65,7 @@ function MachineCard({ machine }) {
         if (!showSensors) {
             setLoading(true);
             try {
-                const res = await fetch(`http://localhost:8080/api/sensors?id=${machine.id}`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/sensors?id=${machine.id}`);
                 const data = await res.json();
                 setSensors(data);
             } catch (err) {

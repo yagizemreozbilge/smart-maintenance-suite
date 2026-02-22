@@ -15,7 +15,7 @@ const LoginPage = ({ onLogin }) => {
         try {
             // Backend'deki yeni API'mize istek atıyoruz
             // Not: Basitlik için GET kullanıyoruz, gerçekte POST olmalı
-            const response = await fetch(`http://localhost:8080/api/login?u=${username}&p=${password}`);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login?u=${username}&p=${password}`);
             const data = await response.json();
 
             if (data.success) {
