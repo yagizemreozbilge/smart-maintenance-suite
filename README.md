@@ -225,13 +225,19 @@ All backend endpoints were manually tested using Postman and automatically valid
 
 ```bash
 docker compose up --build
-Frontend:
-http://localhost:5173
+```
 
-Backend:
-http://localhost:8080
+Frontend: http://localhost:5173  
+Backend: http://localhost:8080  
 
-```md
+To stop containers:
+
+```bash
+docker compose down
+```
+
+---
+
 ## 🔑 Demo Credentials
 
 Default development users:
@@ -242,11 +248,5 @@ Default development users:
 | Technician  | tech     | tech123  |
 | Operator    | operator | op123    |
 
-
-
 > Development only.
-
-```bash
-docker compose down
-
 $End-Of-File$
