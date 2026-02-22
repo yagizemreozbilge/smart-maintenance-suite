@@ -1,73 +1,191 @@
-# Calculator Project Library Generation and Testing Template
+# Smart Maintenance Suite
 
 ## Overview
 
-**Smart Maintenance Suite** is an industrial IoT-based predictive maintenance system with a C backend and React frontend. The system monitors machine health, manages inventory, tracks maintenance logs, and provides real-time alerts.
+**Smart Maintenance Suite**  is an IoT-based industrial maintenance management platform that digitalizes and optimizes factory machinery operations. It enables real-time equipment monitoring, predictive maintenance planning, and downtime reduction to improve production efficiency.
 
+The system is built with a React frontend, a high-performance C backend, and PostgreSQL database integration. It follows modern software architecture principles, utilizes efficient data structures for real-time processing, maintains 90%+ backend and 96%+ frontend test coverage, and is containerized with Docker and deployed on Google Cloud for scalability and reliability.
 ### Key Features
-- 🏭 **Machine Monitoring**: Real-time sensor data processing and health tracking
-- 📊 **Analytics Dashboard**: Interactive charts and visualizations
-- 🔐 **Role-Based Access Control**: Admin, Technician, and Operator roles
-- 📦 **Inventory Management**: Stock tracking with low-stock alerts
-- 🔧 **Maintenance Logging**: Comprehensive maintenance history
-- 📄 **Report Generation**: XML/CSV/PDF export capabilities
-- 🧪 **Comprehensive Testing**: 100+ unit tests with >80% coverage target
+-  **Machine Monitoring**: Real-time sensor data processing and health tracking
+- **Analytics Dashboard**: Interactive charts and visualizations
+-  **Role-Based Access Control**: Admin, Technician, and Operator roles
+-  **Inventory Management**: Stock tracking with low-stock alerts
+-  **Maintenance Logging**: Comprehensive maintenance history
+-  **Report Generation**: XML/CSV/PDF export capabilities
+-  **Comprehensive Testing**: 100+ unit tests with >80% coverage target
 
 ## Requirements
 
-- CMake >= 3.12
-- C++ Standard >= 11
-- GoogleTest (for testing modules)
-- Visual Studio Communit Edition for Windows Generator
-- Ninja for WSL/Linux
+- CMake >= 4.2.3
+- GCC 15.2.0 (MinGW x86_64)
+- Docker 29.1.2
+- Node.js / npx 11.8.0
+- WSL 2 (Windows Subsystem for Linux)
+- React 18.2.0
+
+## 📂 Project Structure
+
+```bash
+smart-maintenance-suite/
+│
+├── .github/                     # CI/CD workflows
+├── assets/                      # Coverage badges, static assets
+├── diagrams/                    # UML & architecture diagrams
+├── docs/                        # Documentation & coverage reports
+│
+├── backend/                     # Core C backend application
+│   ├── api/                     # HTTP handlers & routing
+│   ├── core/                    # Core logic & constants
+│   ├── data_structures/         # BST, Graph, Heap, Queue, Stack
+│   ├── database/                # DB connection & migrations
+│   ├── models/                  # Domain models
+│   ├── modules/                 # Fault, Inventory, Machine, Maintenance
+│   ├── report/                  # PDF & report services
+│   ├── security/                # JWT, RBAC, Encryption
+│   ├── integration/             # Azure IoT & Blob integration
+│   ├── utils/                   # Logger, memory, config
+│   └── main.c                   # Application entry point
+│
+├── frontend/                    # React + Vite application
+│   ├── src/
+│   │   ├── components/          # UI components
+│   │   ├── context/             # React context
+│   │   └── App.js
+│   └── tests/                   # Frontend unit tests (Vitest)
+│
+├── tests/                       # Backend unit & integration tests
+│   ├── unit/
+│   ├── integration/
+│   └── runners/
+│
+├── scripts/                     # Build, coverage & automation scripts
+│
+├── docker-compose.yml
+├── Dockerfile.backend
+├── Dockerfile.frontend
+├── CMakeLists.txt
+├── Doxyfile*
+└── README.md
+
+## 📂 Scripts & Automation
+
+```bash
+smart-maintenance-suite/
+│
+├── scripts/
+│   ├── build.sh
+│   ├── deploy.sh
+│   ├── docker_build.sh
+│   ├── run_tests.sh
+│   ├── coverage_report.sh
+│   ├── memory_check.sh
+│
+├── 0-init-submodules.bat
+├── 0-update-submodules.bat
+├── 1-configure-git-hooks.bat
+├── 2-create-git-ignore.bat
+├── 3-install-package-manager.bat
+├── 4-install-windows-enviroment.bat
+├── 4-install-wsl-environment.sh
+├── 5-format-code.bat
+├── 6_download_plantuml.bat
+├── 7-build-app-linux.sh
+├── 7-build-app-windows.bat
+├── 7-build-doc-windows.bat
+├── 8-build-test-windows.bat
+├── 9-clean-configure-app-windows.bat
+├── 9-clean-project.bat
+├── 10-generate_backend_coverage.bat
+├── 10-generate_backend_coverage.sh
+├── 11-run-frontend-coverage.bat
+├── 11-run-frontend-coverage.sh
+├── delete_desktop_ini.bat
+├── delete_desktop_ini.sh
+├── pre-commit
+└── pre-push
+
+
+
+
+
+
+
+```
 
 ## Setup Development Environment
 
-### Step-1 (Run on Windows, Can Effect on WSL)
+### Step 1 (Windows)
 
-Run 1-configure-pre-commit.bat file to copy 1-pre-commit script to .git/hooks that checkes. README.md, gitignore and doxygenfiles. Also format code with astyle tool
+Run:
 
-### Step-2 (Run on Windows, Can Effect on WSL)
+```bat
+1-configure-pre-commit.bat
+```
 
-If gitignore missing then you can create gitignore with 2-create-git-ignore.bat file run this file.
+---
 
-### Step-3 (Only Windows)
+### Step 2 (Windows)
 
-Install package managers that we will use to install applications. Run 3-install-package-manager.bat to install choco and scoop package managers
+If `.gitignore` is missing:
 
-### Step-4 (Only Windows)
+```bat
+2-create-git-ignore.bat
+```
 
-Run 4-install-windows-enviroment.bat to install required applications. 
+---
 
-### Step-5 (Only WSL)
+### Step 3 (Windows)
 
-Open powershell as admin and enter WSL then goto project folder and run 4-install-wsl-environment.sh to setup WSL environment
+Install package managers:
 
+```bat
+3-install-package-manager.bat
+```
 
+---
 
-## Generate Development Environment
+### Step 4 (Windows)
 
-You can run 9-clean-configure-app-windows.bat to generate Visual Studio Communit Edition Project of this file. Or You can use Cmake project development with Visual Studio Community Edition
+Install required applications:
 
+```bat
+4-install-windows-enviroment.bat
+```
 
+---
 
-## Build, Test and Package Application on Windows
+### Step 5 (WSL)
 
-Run 7-build-app-windows.bat to build, test and generate packed binaries for your application on windows.
+Enter WSL and run:
 
+```bash
+./4-install-wsl-environment.sh
+```
 
+---
 
-Also you can run 7-build-doc-windows.bat to only generate documentation and 8-build-test-windows.bat to only test application. 
+# 📊 Generate Coverage
 
-## Build, Test and Package Application on WSL
+## Windows
 
-Run 7-build-app-linux.sh to build, test and generate packed binaries for your application on WSL environment.
+```bat
+10-generate_backend_coverage.bat
+11-run-frontend-coverage.bat
+```
 
+---
 
+## WSL
 
-## Clean Project
+```bash
+sed -i 's/\r$//' 10-generate_backend_coverage.sh
+chmod +x 10-generate_backend_coverage.sh
+./10-generate_backend_coverage.sh
 
-You can run 9-clean-project.bat to clean project outputs. 
+sed -i 's/\r$//' 11-run-frontend-coverage.sh
+chmod +x 11-run-frontend-coverage.sh
+./11-run-frontend-coverage.sh
+```
 
 
 
@@ -79,15 +197,17 @@ You can run 9-clean-project.bat to clean project outputs.
 
 ![Windows badge](assets/badge-windows.svg)
 
-### Test Coverage Ratios
+### Cross-Platform Test Coverage
 
 > **Note** : There is a known bug on doxygen following badges are in different folder but has same name for this reason in doxygen html report use same image for all content [Images with same name overwrite each other in output directory · Issue #8362 · doxygen/doxygen · GitHub](https://github.com/doxygen/doxygen/issues/8362). README.md and WebPage show correct badges.
 
-| Coverage Type | Windows OS                                                             | Linux OS (WSL-Ubuntu 20.04)                                              |
-| ------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Line Based    | ![Line Coverage](assets/codecoveragelibwin/badge_linecoverage.svg)     | ![Line Coverage](assets/codecoverageliblinux/badge_linecoverage.svg)     |
-| Branch Based  | ![Branch Coverage](assets/codecoveragelibwin/badge_branchcoverage.svg) | ![Branch Coverage](assets/codecoverageliblinux/badge_branchcoverage.svg) |
-| Method Based  | ![Method Coverage](assets/codecoveragelibwin/badge_methodcoverage.svg) | ![Method Coverage](assets/codecoverageliblinux/badge_methodcoverage.svg) |
+| Application Layer | Metric | Windows OS | Linux OS (WSL-Ubuntu 20.04) |
+|-------------------|--------|------------|-----------------------------|
+| Backend (C) | Line | [![90%](assets/codecoveragelibwin/badge_linecoverage.svg)](docs/coverage_backend_report/index.html) | [![90%](assets/codecoverageliblinux/badge_linecoverage.svg)](docs/coverage_backend_report_linux/index.html) |
+| Backend (C) | Branch | [![88%](assets/codecoveragelibwin/badge_branchcoverage.svg)](docs/coverage_backend_report/index.html) | [![87%](assets/codecoverageliblinux/badge_branchcoverage.svg)](docs/coverage_backend_report_linux/index.html) |
+| Frontend (React) | Line | [![96%](assets/codecoveragelibwin/frontend_badge_linecoverage.svg)](docs/coverage_frontend_report/index.html) | [![96%](assets/codecoverageliblinux/frontend_badge_linecoverage.svg)](docs/coverage_frontend_report_linux/index.html) |
+| Frontend (React) | Branch | [![94%](assets/codecoveragelibwin/frontend_badge_branchcoverage.svg)](docs/coverage_frontend_report/index.html) | [![94%](assets/codecoverageliblinux/frontend_badge_branchcoverage.svg)](docs/coverage_frontend_report_linux/index.html) |
+
 
 ### Documentation Coverage Ratios
 
@@ -95,157 +215,62 @@ You can run 9-clean-project.bat to clean project outputs.
 | ------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | **Coverage Ratio** | ![Line Coverage](assets/doccoveragelibwin/badge_linecoverage.svg) | ![Line Coverage](assets/doccoverageliblinux/badge_linecoverage.svg) |
 
+## 📡 API Testing
+
+All backend endpoints were manually tested using Postman and automatically validated through unit and integration tests.
+
+### Example Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|------------|
+| POST   | /api/login | Authenticate user |
+| GET    | /api/machines | Retrieve machine list |
+| GET    | /api/inventory | Retrieve inventory status |
+| GET    | /api/alerts | Retrieve active alerts |
+| POST   | /api/maintenance | Create maintenance record |
 
 
-#### Install Test Results to HTML Converter
 
-We are using [GitHub - inorton/junit2html: Turn Junit XML reports into self contained HTML reports](https://github.com/inorton/junit2html) to convert junit xml formatted test results to HTML page for reporting also we store logs during test. Use following commands to install this module with pip
 
-```bash
-pip install junit2html
-```
+## UML Diagrams
+### System Architecture
+![System Architecture](diagrams/system_architecture.png)
 
-### Github Actions
+### Backend Class Diagram
+![Backend Class Diagram](diagrams/detailed_class_diagram.png)
 
-This project also compiled and tested with Github Actions. If there is a missing setup or problem follow github action script for both Windows and WSL under
+### Database Schema
+![Database Schema](diagrams/database_schema.png)
 
-`.github/workflows/cpp.yml`
+### Maintenance Scheduling Sequence
+![Maintenance Scheduling Sequence](diagrams/maintenance_scheduling_sequence.png)
 
-Github actions take too much time more than 1 hour take to complete build for Windows, MacOS and Linux. Also its paid operation for this reason we use offline batch scripts easy to use. 
-
-### Build App on Windows
-
-We have already configured script for build operations. `7-build-app-windows.bat` have complete all required tasks and copy outputs to release folder.  
-
-**Operation Completed in 11-15 minutes.**
-
-- Clean project outputs
-
-- Create required folders
-
-- Run doxygen for documentation
-
-- Run coverxygen for document coverage report
-
-- Run Report Generator for Documentation Coverage Report
-
-- Configure project for Visual Studio Community Edition
-
-- Build Project Debug and Release
-
-- Install/Copy Required Library and Headers
-
-- Run Tests 
-
-- Run OpeCppCoverage for Coverage Data Collection
-
-- Run Reportgenerator for Test Coverage Report
-
-- Copy output report to webpage folder
-
-- Run mkdocs to build webpage
-
-- Compress outputs to release folder, everything is ready for deployment. 
-
-### Build App on WSL/Linux
-
-We are running WSL on Windows 10 and solve our virtual machine problem. We make cross-platform development. After development before commit we run and test app on Windows and WSL with this scripts. To run on WSL you need to install WSL first. 
-
-you can use our public notes
-
-- https://github.com/coruhtech/vs-docker-wsl-cpp-development
-
-- [GitHub - ucoruh/ns3-wsl-win10-setup: ns3 windows 10 WSL2 setup and usage](https://github.com/ucoruh/ns3-wsl-win10-setup)
-
-## 🧪 Testing
-
-The project includes comprehensive unit tests for both backend and frontend with >80% coverage target.
-
-### Quick Start
+## 🚀 Quick Start
 
 ```bash
-# Run all tests (backend + frontend)
-run-all-tests.bat
-
-# Run backend tests only
-run-backend-tests.bat
-
-# Run frontend tests only
-run-frontend-tests.bat
-
-# Generate professional unified coverage report (like the image)
-10-professional-coverage-report.bat
+docker compose up --build
 ```
 
-### Professional Coverage Report
+Frontend: http://localhost:5173  
+Backend: http://localhost:8080  
 
-Generate a **unified HTML coverage report** for all modules (Backend, Frontend, Data Structures, Security, Database, API) in one professional dashboard:
+To stop containers:
 
 ```bash
-# Step 1: Compile and run tests
-run-backend-tests.bat
-
-# Step 2: Generate unified coverage report
-10-professional-coverage-report.bat
+docker compose down
 ```
 
-This creates a ReportGenerator HTML report with:
-- ✅ Combined coverage for all modules
-- ✅ Coverage history and trends
-- ✅ Interactive file-level details
-- ✅ Coverage badges
-- ✅ Summary dashboard (like the screenshot)
+---
 
-**Report Location**: `coverage_professional/combined/index.html`
+## 🔑 Demo Credentials
 
-For detailed instructions, see **[COVERAGE_REPORT_GUIDE.md](COVERAGE_REPORT_GUIDE.md)**.
+Default development users:
 
-### Test Coverage
+| Role        | Username | Password  |
+|-------------|----------|----------|
+| Admin       | admin    | admin123 |
+| Technician  | tech     | tech123  |
+| Operator    | operator | op123    |
 
-| Module | Test Files | Coverage Target |
-|--------|-----------|-----------------|
-| Data Structures | 5 | >90% |
-| Security (RBAC, JWT) | 2 | >85% |
-| Database Services | 3 | >75% |
-| API Handlers | 1 | >80% |
-| Frontend Components | 3 | >80% |
-| **Total** | **14** | **>80%** |
-
-### Documentation
-
-- **[TEST_SUMMARY.md](TEST_SUMMARY.md)** - Complete test suite overview
-- **[TESTING.md](TESTING.md)** - Detailed testing guide
-- **Coverage Reports**:
-  - Backend: `build_tests/*.gcda` (use ReportGenerator)
-  - Frontend: `src/tests/frontend/coverage/index.html`
-
-### Test Structure
-
-```
-src/
-├── backend/tests/unit/          # Backend unit tests (C)
-│   ├── test_rbac.c
-│   ├── test_jwt.c
-│   ├── test_api_handlers.c
-│   ├── test_queue.c, test_stack.c, test_heap.c
-│   ├── test_bst.c, test_graph.c
-│   └── database/
-│       ├── test_machine_service.c
-│       ├── test_inventory_service.c
-│       └── test_maintenance_service.c
-│
-└── tests/frontend/unit/         # Frontend unit tests (Vitest)
-    ├── App.test.js
-    ├── LoginPage.test.js
-    └── MaintenanceContext.test.js
-```
-
-For more details, see [TEST_SUMMARY.md](TEST_SUMMARY.md).
-
-After WSL installation, right click and open WSL bash and run `7-build-app-linux.sh` this will provide similart task with windows and will generate report and libraries on release folder. 
-
-
-
-----
-
+> Development only.
 $End-Of-File$
