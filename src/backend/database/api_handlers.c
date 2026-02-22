@@ -8,7 +8,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+char *serialize_machines_to_json() {
+  Machine list[20];
+  int count = get_all_machines(list, 20);
+  // 1. Yeni bir JSON Dizisi (Array) oluştur: [ ]
+  cJSON *root = cJSON_CreateArray();
 
+  for (int i = 0; i < count; i++) {
+    // 2. Her makine için bir JSON Objesi oluştur: { }
+    cJSON *machine = cJSON_CreateObject();
+    // 3. Bilgileri objeye ekle
+    cJSON_AddNumberToObject(machine, "id", list[i].id);
+    cJSON_AddStringToObject(machine, "name", list[i].name);
+    cJSON_AddStringToObject(machine, "status", list[i].status);
+    cJSON_AddStringToObject(machine, "location", list[i].location);
+    // 4. Objeyi ana dizinin içine at
+    cJSON_AddItemToArray(root, machine);
+  }
+
+  // 5. JSON yapısını string (metin) formatına çevir
+  char *json_output = cJSON_Print(root);
+  // 6. Belleği temizle (JSON objesini sil, string kalır)
+  cJSON_Delete(root);
+  return json_output;
+}
 
 char *serialize_inventory_to_json() {
   InventoryItem items[50];
@@ -66,26 +89,6 @@ char *serialize_sensors_to_json(int machine_id) {
     cJSON_AddStringToObject(s, "unit", stats[i].unit);
     cJSON_AddStringToObject(s, "timestamp", stats[i].recorded_at);
     cJSON_AddItemToArray(root, s);
-  }
-
-  char *json_output = cJSON_Print(root);
-  cJSON_Delete(root);
-  return json_output;
-}
-
-char *serialize_maintenance_to_json() {
-  MaintenanceLog logs[50];
-  int count = get_all_maintenance_logs(logs, 50);
-  cJSON *root = cJSON_CreateArray();
-
-  for (int i = 0; i < count; i++) {
-    cJSON *log = cJSON_CreateObject();
-    cJSON_AddNumberToObject(log, "id", logs[i].id);
-    cJSON_AddNumberToObject(log, "machine_id", logs[i].machine_id);
-    cJSON_AddStringToObject(log, "performer", logs[i].technician_name);
-    cJSON_AddStringToObject(log, "description", logs[i].description);
-    cJSON_AddStringToObject(log, "date", logs[i].log_date);
-    cJSON_AddItemToArray(root, log);
   }
 
   char *json_output = cJSON_Print(root);
