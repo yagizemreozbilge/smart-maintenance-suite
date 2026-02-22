@@ -106,65 +106,89 @@ smart-maintenance-suite/
 
 
 
+
+
+
+
+
+
 ## Setup Development Environment
 
-### Step-1 (Run on Windows, Can Effect on WSL)
+### Step 1 (Windows)
 
-Run 1-configure-pre-commit.bat file to copy 1-pre-commit script to .git/hooks that checkes. README.md, gitignore and doxygenfiles. Also format code with astyle tool
+Run:
 
-### Step-2 (Run on Windows, Can Effect on WSL)
+```bat
+1-configure-pre-commit.bat
+```
 
-If gitignore missing then you can create gitignore with 2-create-git-ignore.bat file run this file.
+---
 
-### Step-3 (Only Windows)
+### Step 2 (Windows)
 
-Install package managers that we will use to install applications. Run 3-install-package-manager.bat to install choco and scoop package managers
+If `.gitignore` is missing:
 
-### Step-4 (Only Windows)
+```bat
+2-create-git-ignore.bat
+```
 
-Run 4-install-windows-enviroment.bat to install required applications. 
+---
 
-### Step-5 (Only WSL)
+### Step 3 (Windows)
 
-Open powershell as admin and enter WSL then goto project folder and run 4-install-wsl-environment.sh to setup WSL environment
+Install package managers:
 
+```bat
+3-install-package-manager.bat
+```
 
+---
 
-## Generate Development Environment
+### Step 4 (Windows)
 
-You can run 9-clean-configure-app-windows.bat to generate Visual Studio Communit Edition Project of this file. Or You can use Cmake project development with Visual Studio Community Edition
+Install required applications:
 
+```bat
+4-install-windows-enviroment.bat
+```
 
+---
 
-## Build, Test and Package Application on Windows
+### Step 5 (WSL)
 
-Run 7-build-app-windows.bat to build, test and generate packed binaries for your application on windows.
+Enter WSL and run:
 
+```bash
+./4-install-wsl-environment.sh
+```
 
+---
 
-Also you can run 7-build-doc-windows.bat to only generate documentation and 8-build-test-windows.bat to only test application. 
+# 📊 Generate Coverage
 
-## Build, Test and Package Application on WSL
+## Windows
 
-Run 7-build-app-linux.sh to build, test and generate packed binaries for your application on WSL environment.
+```bat
+10-generate_backend_coverage.bat
+11-run-frontend-coverage.bat
+```
 
+---
 
+## WSL
 
-## Clean Project
-
-You can run 9-clean-project.bat to clean project outputs. 
-
-## Generate Coverage in Backend and Frontend
-Run 10-generate_backend_coverage.bat
-Run 11-run-frontend-coverage.bat
-
-## Generate Coverage in Backend and Frontend in WSL
+```bash
 sed -i 's/\r$//' 10-generate_backend_coverage.sh
 chmod +x 10-generate_backend_coverage.sh
 ./10-generate_backend_coverage.sh
+
 sed -i 's/\r$//' 11-run-frontend-coverage.sh
 chmod +x 11-run-frontend-coverage.sh
 ./11-run-frontend-coverage.sh
+```
+
+
+
 ## Supported Platforms
 
 ![Ubuntu badge](assets/badge-ubuntu.svg)
