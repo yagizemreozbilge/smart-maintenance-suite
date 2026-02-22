@@ -201,10 +201,10 @@ chmod +x 11-run-frontend-coverage.sh
 
 > **Note** : There is a known bug on doxygen following badges are in different folder but has same name for this reason in doxygen html report use same image for all content [Images with same name overwrite each other in output directory · Issue #8362 · doxygen/doxygen · GitHub](https://github.com/doxygen/doxygen/issues/8362). README.md and WebPage show correct badges.
 
-- Backend (Windows): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_backend_report/)
-- Backend (Linux): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_backend_report_linux/)
-- Frontend (Windows): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_frontend_report/)
-- Frontend (Linux): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_frontend_report_linux/)
+- Backend (Windows): ![Coverage](https://img.shields.io/badge/Coverage-90%25-brightgreen) [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_backend_report/)
+- Backend (Linux): ![Coverage](https://img.shields.io/badge/Coverage-94%25-brightgreen) [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_backend_report_linux/)
+- Frontend (Windows): ![Coverage](https://img.shields.io/badge/Coverage-96%25-brightgreen) [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_frontend_report/)
+- Frontend (Linux): ![Coverage](https://img.shields.io/badge/Coverage-96%25-brightgreen) [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_frontend_report_linux/)
 
 
 ### Documentation Coverage Ratios
