@@ -14,7 +14,7 @@ WORKDIR /app
 COPY src src
 
 RUN gcc -o smart_maintenance_backend \
-    src/backend/main.c \
+    src/backend/cloud_main.c \
     src/backend/api/http_server.c \
     src/backend/api/router.c \
     src/backend/api/handlers/auth_handler.c \
