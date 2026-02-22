@@ -201,12 +201,10 @@ chmod +x 11-run-frontend-coverage.sh
 
 > **Note** : There is a known bug on doxygen following badges are in different folder but has same name for this reason in doxygen html report use same image for all content [Images with same name overwrite each other in output directory · Issue #8362 · doxygen/doxygen · GitHub](https://github.com/doxygen/doxygen/issues/8362). README.md and WebPage show correct badges.
 
-| Application Layer | Metric | Windows OS | Linux OS (WSL-Ubuntu 20.04) |
-|-------------------|--------|------------|-----------------------------|
-| Backend (C) | Line | [![90%](assets/codecoveragelibwin/badge_linecoverage.svg)](docs/coverage_backend_report/index.html) | [![90%](assets/codecoverageliblinux/badge_linecoverage.svg)](docs/coverage_backend_report_linux/index.html) |
-| Backend (C) | Branch | [![88%](assets/codecoveragelibwin/badge_branchcoverage.svg)](docs/coverage_backend_report/index.html) | [![87%](assets/codecoverageliblinux/badge_branchcoverage.svg)](docs/coverage_backend_report_linux/index.html) |
-| Frontend (React) | Line | [![96%](assets/codecoveragelibwin/frontend_badge_linecoverage.svg)](docs/coverage_frontend_report/index.html) | [![96%](assets/codecoverageliblinux/frontend_badge_linecoverage.svg)](docs/coverage_frontend_report_linux/index.html) |
-| Frontend (React) | Branch | [![94%](assets/codecoveragelibwin/frontend_badge_branchcoverage.svg)](docs/coverage_frontend_report/index.html) | [![94%](assets/codecoverageliblinux/frontend_badge_branchcoverage.svg)](docs/coverage_frontend_report_linux/index.html) |
+- Backend (Windows): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_backend_report/)
+- Backend (Linux): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_backend_report_linux/)
+- Frontend (Windows): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_frontend_report/)
+- Frontend (Linux): [View Report](https://yagizemreozbilge.github.io/smart-maintenance-suite/coverage_frontend_report_linux/)
 
 
 ### Documentation Coverage Ratios
