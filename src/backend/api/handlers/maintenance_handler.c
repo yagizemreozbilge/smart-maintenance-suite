@@ -14,7 +14,7 @@ char *serialize_maintenance_to_json(void) {
     cJSON *log_item = cJSON_CreateObject();
     cJSON_AddNumberToObject(log_item, "id", logs[i].id);
     cJSON_AddNumberToObject(log_item, "machine_id", logs[i].machine_id);
-    cJSON_AddStringToObject(log_item, "technician", logs[i].technician_name);
+    cJSON_AddStringToObject(log_item, "performer", logs[i].technician_name);
     cJSON_AddStringToObject(log_item, "description", logs[i].description);
     cJSON_AddNumberToObject(log_item, "cost", logs[i].cost);
     cJSON_AddStringToObject(log_item, "date", logs[i].log_date);

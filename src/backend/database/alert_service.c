@@ -1,6 +1,7 @@
 #include "alert_service.h"
 #include "db_connection.h"
 #include "logger.h"
+#include "cJSON.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -136,35 +137,20 @@ int get_recent_alerts(AlertInfo *out_alerts, int max_alerts) {
 char *alert_service_serialize_alerts(void) {
   AlertInfo alerts[50];
   int count = get_recent_alerts(alerts, 50);
-  char *json = (char *)malloc(4096);
-
-  if (!json) return NULL;
-
-  char *ptr = json;
-  ptr += sprintf(ptr, "{\"alerts\":[");
+  cJSON *root = cJSON_CreateArray();
 
   for (int i = 0; i < count; i++) {
-    if (i > 0) {
-      ptr += sprintf(ptr, ",");
-    }
-
-    ptr += sprintf(ptr,
-                   "{"
-                   "\"id\":%d,"
-                   "\"sensor_id\":%d,"
-                   "\"severity\":\"%s\","
-                   "\"message\":\"%s\","
-                   "\"created_at\":\"%s\""
-                   "}",
-                   alerts[i].id,
-                   alerts[i].sensor_id,
-                   alerts[i].severity,
-                   alerts[i].message,
-                   alerts[i].created_at
-                  );
+    cJSON *alert = cJSON_CreateObject();
+    cJSON_AddNumberToObject(alert, "id", alerts[i].id);
+    cJSON_AddNumberToObject(alert, "sensor_id", alerts[i].sensor_id);
+    cJSON_AddStringToObject(alert, "severity", alerts[i].severity);
+    cJSON_AddStringToObject(alert, "message", alerts[i].message);
+    cJSON_AddStringToObject(alert, "created_at", alerts[i].created_at);
+    cJSON_AddItemToArray(root, alert);
   }
 
-  ptr += sprintf(ptr, "]}");
+  char *json = cJSON_Print(root);
+  cJSON_Delete(root);
   return json;
 }
 
