@@ -25,7 +25,7 @@ typedef struct {
 typedef struct {
   int status_code;
   char content_type[64];
-  char body[8192];
+  char body[65536]; // Increased from 8192 to 64KB
 } HttpResponse;
 
 /**

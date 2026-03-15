@@ -31,8 +31,8 @@ void handle_maintenance_request(HttpRequest *req, HttpResponse *res) {
     char *json = serialize_maintenance_to_json();
     res->status_code = 200;
     strcpy(res->content_type, "application/json");
-    strncpy(res->body, json ? json : "[]", 8191);
-    res->body[8191] = '\0';
+    strncpy(res->body, json ? json : "[]", sizeof(res->body) - 1);
+    res->body[sizeof(res->body) - 1] = '\0';
 
     if (json) free(json);
   } else {

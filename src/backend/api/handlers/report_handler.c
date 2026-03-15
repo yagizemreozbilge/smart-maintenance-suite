@@ -34,8 +34,8 @@ void handle_report_request(HttpRequest *req, HttpResponse *res) {
   }
 
   if (data) {
-    strncpy(res->body, data, 8191);
-    res->body[8191] = '\0';
+    strncpy(res->body, data, sizeof(res->body) - 1);
+    res->body[sizeof(res->body) - 1] = '\0';
     free(data);
   } else {
     res->status_code = 500;
