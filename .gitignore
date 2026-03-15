@@ -967,3 +967,5 @@ coverage*[.json, .xml, .info]
 # Virtual environments
 venv/
 venv_win/
+.vercel
+.env*.local

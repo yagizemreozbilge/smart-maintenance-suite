@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Smart Maintenance Suite - Interview Notes</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Smart Maintenance Suite - Interview Notes</h1>
+</header>
+<h1 id="smart-maintenance-suite---interview-master-notes">🎯 Smart
+Maintenance Suite - Interview Master Notes</h1>
+<p>Bu belge, <strong>Smart Maintenance Suite</strong> projenizi bir iş
+görüşmesinde en profesyonel şekilde anlatabilmeniz ve projenin her
+detayına hakim olduğunuzu gösterebilmeniz için hazırlanmıştır.</p>
+<hr />
+<h2 id="proje-özeti-elevator-pitch">🚀 1. Proje Özeti (Elevator
+Pitch)</h2>
+<p><strong>Smart Maintenance Suite</strong>, endüstriyel tesislerdeki
+makinelerin durumunu gerçek zamanlı izleyen, kestirimci bakım
+(predictive maintenance) planlayan ve duruş sürelerini minimize eden bir
+<strong>Endüstriyel IoT (IIoT)</strong> yönetim platformudur. *
+<strong>Backend:</strong> Yüksek performans ve düşük gecikme için
+<strong>C</strong> dili ile geliştirildi. * <strong>Frontend:</strong>
+Dinamik ve kullanıcı dostu bir arayüz için <strong>React</strong>
+kullanıldı. * <strong>Veri Yönetimi:</strong>
+<strong>PostgreSQL</strong> veritabanı, özel bir bağlantı havuzu
+(connection pool) ile optimize edildi. * <strong>Altyapı:</strong>
+<strong>Docker</strong> konteynerizasyonu, <strong>GitHub
+Actions</strong> CI/CD süreçleri ve <strong>Doxygen</strong> tabanlı
+teknik dokümantasyon.</p>
+<hr />
+<h2 id="teknik-derinlik-backend---c">🏗️ 2. Teknik Derinlik (Backend -
+C)</h2>
+<h3 id="a.-neden-c-dili">A. Neden C Dili?</h3>
+<ul>
+<li><strong>Performans:</strong> Gerçek zamanlı sensör verilerinin
+(sıcaklık, titreşim vb.) milisaniyeler seviyesinde işlenmesi gerekir. C,
+donanıma yakınlığıyla bu hızı sağlar.</li>
+<li><strong>IoT Uyumluluğu:</strong> IIoT cihazları genellikle kısıtlı
+kaynaklara sahiptir. C dili, bellek ve CPU yönetimini manuel yapmamıza
+olanak tanıyarak verimliliği artırır.</li>
+</ul>
+<h3 id="b.-veri-yapıları-ve-kullanım-amaçları">B. Veri Yapıları ve
+Kullanım Amaçları</h3>
+<p>Mülakatta “Neden bu veri yapılarını kullandın?” sorusuna hazır olun:
+* <strong>Heap (Yığın):</strong> Bakım görevleri için bir
+<strong>Priority Queue (Öncelikli Kuyruk)</strong> oluşturmakta
+kullanıldı. Kritik durumdaki makineler (yüksek sıcaklık uyarısı
+verenler) listenin en başına alınır. * <strong>BST (İkili Arama
+Ağacı):</strong> On binlerce makine veya yedek parça arasında ID bazlı
+hızlı arama (O(log n)) yapmak için. * <strong>Graph (Çizge):</strong>
+Fabrika yerleşimi veya makine bağımlılıklarını modellemek için. Bir
+makine durduğunda hangi üretim hattının etkileneceğini tespit eder. *
+<strong>Queue/Stack (Kuyruk/Yığın):</strong> Sensör verilerinin sıra ile
+işlenmesi (FIFO) ve işlem geçmişinin (Undo/Redo veya Transaction Log)
+tutulması (LIFO) için.</p>
+<h3 id="c.-veri-yönetimi-ve-performans-database-connection-pooling">C.
+Veri Yönetimi ve Performans (Database Connection Pooling)</h3>
+<ul>
+<li><strong>Bağlantı Havuzu (Connection Pool):</strong> Her veritabanı
+isteği için yeni bir TCP bağlantısı açmak maliyetlidir. Projede,
+uygulama başlangıcında belirli sayıda bağlantıyı hazırda tutan ve istek
+bittiğinde bunları havuza geri bırakan (<code>db_pool_acquire</code> /
+<code>db_pool_release</code>) özel bir yapı kuruldu. Bu, uygulamanın
+ölçeklenebilirliğini (scalability) artırır.</li>
+<li><strong>PostgreSQL Entegrasyonu:</strong> <code>libpq</code>
+kütüphanesi kullanılarak ham SQL sorguları ile veritabanı yönetildi. Bu,
+ORM’lerin getirdiği overhead’den kaçınarak maksimum hıza ulaşmamızı
+sağladı.</li>
+</ul>
+<h3 id="d.-güvenerlik-ve-yetkilendirme-security">D. Güvenerlik ve
+Yetkilendirme (Security)</h3>
+<ul>
+<li><strong>JWT (JSON Web Token):</strong> C dilinde standart bir JWT
+kütüphanesi hazır gelmez. Bu projede <strong>özel bir JWT üretici ve
+doğrulayıcı</strong> yazıldı (HMAC-SHA256).</li>
+<li><strong>RBAC (Rol Bazlı Erişim Kontrolü):</strong> Admin (Tam
+yetki), Technician (Bakım girişi), Operator (Gözlemci) rolleri veri
+katmanında sıkı bir şekilde kontrol edilir.</li>
+</ul>
+<h3 id="e.-test-stratejisi-mocking-unit-testing">E. Test Stratejisi
+(Mocking &amp; Unit Testing)</h3>
+<ul>
+<li>Veritabanına bağımlı kalmadan iş mantığını (business logic) test
+edebilmek için <code>#ifdef TEST_MODE</code> makroları kullanıldı.</li>
+<li>Gerçek veritabanı yerine <strong>Mock</strong> (taklit) verilerle
+çalışan fonksiyonlar yazılarak CI/CD süreçlerinde testlerin
+milisaniyeler içinde tamamlanması sağlandı.</li>
+</ul>
+<hr />
+<h2 id="frontend-mimarisi-react">💻 3. Frontend Mimarisi (React)</h2>
+<ul>
+<li><strong>State Management:</strong> Verilerin bileşenler arasında
+temiz bir şekilde paylaşılması için <strong>React Context API</strong>
+kullanıldı.</li>
+<li><strong>Veri Görselleştirme:</strong> Sensör verileri anlık
+grafiklere (Analytics Panel) döküldü.</li>
+<li><strong>Responsive Design:</strong> Fabrika ortamında tablet veya
+telefon üzerinden de kullanılabilmesi için CSS Media Queries ile esnek
+tasarım sağlandı.</li>
+</ul>
+<hr />
+<h2 id="mühendislik-standartları-ve-kalite-the-wow-factors">🛠️ 4.
+Mühendislik Standartları ve Kalite (The “Wow” Factors)</h2>
+<p>Bir mülakatta sizi diğerlerinden ayıracak özellikler: 1.
+<strong>Yüksek Test Kapsamı (Test Coverage):</strong> Backend’de %90,
+Frontend’de %96 koruma sağlandı. Sadece kod yazmakla kalmayıp, kodun
+sağlamlığını da garanti altına aldınız. 2. <strong>Bellek
+Yönetimi:</strong> C kısmında <code>valgrind</code> ve özel log
+mekanizmalarıyla bellek sızıntıları (memory leaks) sıfıra indirildi. 3.
+<strong>Cross-Platform Destek:</strong> Projenin hem
+<strong>Windows</strong> hem de <strong>Linux (WSL)</strong> üzerinde
+sorunsuz derlenip çalışması için kompleks CMake konfigürasyonları ve
+otomasyon scriptleri yazıldı. 4. <strong>Dokümantasyon:</strong> Kodun
+her satırı doxygen standartlarında dökümante edildi, teknik tasarım
+şemaları (UML) PlantUML ile otomatik oluşturuldu.</p>
+<hr />
+<h2 id="olası-mülakat-soruları-ve-örnek-cevaplar">❓ 5. Olası Mülakat
+Soruları ve Örnek Cevaplar</h2>
+<p><strong>S1: C backend ile React frontend’i nasıl
+haberleştirdin?</strong> * <strong>Cevap:</strong> Backend tarafında
+<strong>Mongoose</strong> (veya benzeri bir HTTP modülü) kullanarak bir
+REST API sunucusu ayağa kaldırdım. Verileri <strong>JSON (cJSON
+kütüphanesi)</strong> formatında seriye bağlayıp (serialization),
+React’in <code>fetch</code> veya <code>axios</code> ile bu endpoint’leri
+tüketmesini sağladım.</p>
+<p><strong>S2: Projede karşılaştığın en büyük teknik zorluk
+neydi?</strong> * <strong>Cevap:</strong> C dilinde bellek güvenliğini
+(memory safety) sağlamak ve veritabanı bağlantılarını yönetmekti.
+Özellikle yüksek yük altında veritabanının tıkanmaması için bir
+<strong>Bağlantı Havuzu (Connection Pool)</strong> tasarımı uyguladım.
+Bu sayede her istekte yeni bağlantı açmak yerine var olanları verimli
+kullandım.</p>
+<p><strong>S3: Neden PostgreSQL tercih ettin?</strong> *
+<strong>Cevap:</strong> Endüstriyel veriler yapılandırılmıştır. ACID
+prensiplerine tam uyum, karmaşık sorgulardaki (JOIN işlemleri)
+performansı ve JSONB desteği sayesinde PostgreSQL, IIoT verileri için en
+güvenilir tercihti.</p>
+<p><strong>S4: Docker neden gerekliydi?</strong> *
+<strong>Cevap:</strong> “Benim makinemde çalışıyor” sorununu çözmek
+için. Backend (C derleyicisi, libpq) ve Frontend (Node.js)
+bağımlılıklarını izole ederek, projenin herhangi bir sunucuda tek
+komutla (<code>docker-compose up</code>) ayağa kalkmasını sağladım.</p>
+<hr />
+<h2 id="proje-istatistikleri-akılda-kalıcı-rakamlar">📈 6. Proje
+İstatistikleri (Akılda Kalıcı Rakamlar)</h2>
+<ul>
+<li><strong>100+</strong> Unit Test</li>
+<li><strong>%90+</strong> Kod Kapsamı (Coverage)</li>
+<li><strong>3</strong> Farklı Kullanıcı Rolü</li>
+<li><strong>5</strong> Temel Veri Yapısı (Implementasyonu size ait)</li>
+<li><strong>Full Dockerized</strong> Dağıtım</li>
+</ul>
+<hr />
+<h3 id="son-tavsiye">💡 Son Tavsiye</h3>
+<p>Mülakatta ekran paylaşımı istenirse,
+<code>10-generate_backend_coverage.bat</code> gibi scriptlerinizi ve
+oluşturduğunuz profesyonel HTML raporlarını gösterin. Bir yazılımcı için
+“çalışan kod” kadar, o kodu nasıl “test ettiği ve dökümante ettiği” de
+önemlidir.</p>
+<p><strong>Başarılar dilerim!</strong></p>
+</body>
+</html>

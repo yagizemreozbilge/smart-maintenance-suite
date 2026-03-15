@@ -16,14 +16,16 @@ function Dashboard() {
     const stats = useMachineStats();
     const [isSyncing, setIsSyncing] = useState(false);
 
+    const API_URL = import.meta.env.VITE_API_URL || 'https://smart-maintenance-suite-app-658105739625.europe-west1.run.app';
+
     const syncWithBackend = async () => {
         setIsSyncing(true);
         try {
             const [mRes, iRes, aRes, maintRes] = await Promise.all([
-                fetch('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/machines'),
-                fetch('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/inventory'),
-                fetch('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/alerts'),
-                fetch('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/maintenance')
+                fetch(`${API_URL}/api/machines`),
+                fetch(`${API_URL}/api/inventory`),
+                fetch(`${API_URL}/api/alerts`),
+                fetch(`${API_URL}/api/maintenance`)
             ]);
 
             const machinesData = await mRes.json();
@@ -58,25 +60,25 @@ function Dashboard() {
             {localStorage.getItem('user_role') === 'admin' && (
                 <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
                     <button
-                        onClick={() => window.open('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/reports/maintenance')}
+                        onClick={() => window.open(`${API_URL}/api/reports/maintenance`)}
                         style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
                     >
                         📊 MAINTENANCE (CSV)
                     </button>
                     <button
-                        onClick={() => window.open('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/reports/maintenance/xml')}
+                        onClick={() => window.open(`${API_URL}/api/reports/maintenance/xml`)}
                         style={{ backgroundColor: '#34495e', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
                     >
                         📂 MAINTENANCE (XML)
                     </button>
                     <button
-                        onClick={() => window.open('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/reports/inventory')}
+                        onClick={() => window.open(`${API_URL}/api/reports/inventory`)}
                         style={{ backgroundColor: '#2c3e50', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
                     >
                         📦 INVENTORY (CSV)
                     </button>
                     <button
-                        onClick={() => window.open('https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/reports/inventory/xml')}
+                        onClick={() => window.open(`${API_URL}/api/reports/inventory/xml`)}
                         style={{ backgroundColor: '#34495e', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.75rem' }}
                     >
                         📄 INVENTORY (XML)

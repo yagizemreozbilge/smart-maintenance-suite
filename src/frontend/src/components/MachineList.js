@@ -65,7 +65,8 @@ function MachineCard({ machine }) {
         if (!showSensors) {
             setLoading(true);
             try {
-               const res = await fetch(`https://smart-maintenance-suite-app-658105739625.europe-west1.run.app/api/sensors?id=${machine.id}`);
+                const API_URL = import.meta.env.VITE_API_URL || 'https://smart-maintenance-suite-app-658105739625.europe-west1.run.app';
+                const res = await fetch(`${API_URL}/api/sensors?id=${machine.id}`);
                 const data = await res.json();
                 setSensors(data);
             } catch (err) {
