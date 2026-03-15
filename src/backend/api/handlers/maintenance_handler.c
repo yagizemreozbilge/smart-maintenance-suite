@@ -8,8 +8,7 @@
 char *serialize_maintenance_to_json(void) {
   MaintenanceLog logs[50];
   int count = get_all_maintenance_logs(logs, 50);
-  cJSON *root = cJSON_CreateObject();
-  cJSON *log_array = cJSON_CreateArray();
+  cJSON *root = cJSON_CreateArray(); // Artık bir obje değil, doğrudan bir dizi (array) dönüyoruz.
 
   for (int i = 0; i < count; i++) {
     cJSON *log_item = cJSON_CreateObject();
@@ -19,10 +18,9 @@ char *serialize_maintenance_to_json(void) {
     cJSON_AddStringToObject(log_item, "description", logs[i].description);
     cJSON_AddNumberToObject(log_item, "cost", logs[i].cost);
     cJSON_AddStringToObject(log_item, "date", logs[i].log_date);
-    cJSON_AddItemToArray(log_array, log_item);
+    cJSON_AddItemToArray(root, log_item);
   }
 
-  cJSON_AddItemToObject(root, "maintenance_logs", log_array);
   char *json = cJSON_Print(root);
   cJSON_Delete(root);
   return json;
@@ -33,12 +31,12 @@ void handle_maintenance_request(HttpRequest *req, HttpResponse *res) {
     char *json = serialize_maintenance_to_json();
     res->status_code = 200;
     strcpy(res->content_type, "application/json");
-    strncpy(res->body, json ? json : "{\"maintenance_logs\":[]}", 8191);
+    strncpy(res->body, json ? json : "[]", 8191);
     res->body[8191] = '\0';
 
     if (json) free(json);
   } else {
     res->status_code = 405;
-    strcpy(res->body, "{\"error\": \"Only GET supported for maintenance via modular API currently\"}");
+    strcpy(res->body, "{\"error\": \"Only GET supported for maintenance\"}");
   }
 }

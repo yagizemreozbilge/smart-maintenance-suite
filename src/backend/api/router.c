@@ -6,6 +6,7 @@
 #include "handlers/report_handler.h"
 #include "handlers/fault_handler.h"
 #include "../database/alert_service.h"
+#include "../database/api_handlers.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +31,21 @@ void handle_route(HttpRequest *req, HttpResponse *res) {
     handle_report_request(req, res);
   } else if (strstr(req->path, "/api/faults")) {
     handle_fault_request(req, res);
+  } else if (strstr(req->path, "/api/sensors")) {
+    // Sensör verilerini getiren rota
+    int mid = 1;
+
+    if (req->query_params[0] != '\0') {
+      sscanf(req->query_params, "id=%d", &mid);
+    }
+
+    char *json = serialize_sensors_to_json(mid);
+    res->status_code = 200;
+    strcpy(res->content_type, "application/json");
+    strncpy(res->body, json ? json : "[]", 8191);
+    res->body[8191] = '\0';
+
+    if (json) free(json);
   } else if (strstr(req->path, "/api/alerts")) {
     res->status_code = 200;
     strcpy(res->content_type, "application/json");
